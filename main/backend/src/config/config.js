@@ -1,4 +1,4 @@
-export const adatbázis = {
+export const db_config = {
     username: 'root',
     password: '',
     dialect: 'mysql',

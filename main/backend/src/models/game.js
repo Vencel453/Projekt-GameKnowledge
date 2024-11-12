@@ -1,5 +1,5 @@
-export default (sequelize, DataTypes) => {
-    const Game = sequelize.define(
+export default (Sequelize, DataTypes) => {
+    const Game = Sequelize.define(
         'Game', {
             id: {
                 type: DataTypes.INTEGER,
