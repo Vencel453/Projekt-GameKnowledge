@@ -10,5 +10,7 @@ export default (Sequelize, DataTypes) => {
                 primaryKey: true,
             },
         }
-    )
+    );
+
+return Agerating;
 }
