@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-    const Acting = sequelize.define(
-        'Acting',{
+    const Favourite = sequelize.define(
+        'Favourite', {
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -8,40 +8,33 @@ export default (sequelize, DataTypes) => {
                 primaryKey: true,
             },
 
+            userId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'User',
+                    key: "id",
+                },
+            },
+
             gameId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
                     model: 'Game',
-                    key: 'id'
+                    key: 'id',
                 },
-                onDelete: 'CASCADE',
-            },
-
-            actorId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Actor',
-                    key: 'id'
-                },
-            },
-
-            role: {
-                type: DataTypes.STRING,
             },
         }
     );
 
-    Games.hasMany(Acting, {
-        foreignKey: 'gameId',
+    Game.HasMany(Favourite, {
+        foreignKey: 'gameId'
     });
-    Acting.belongsTo(Games);
+    Favourite.belongsTo(Game);
 
-    Actor.hasMany(Acting, {
-        foreignKey: 'actorId',
+    User.HasMany(Favourite, {
+        foreignKey: 'userId'
     });
-    Acting.belongsTo(Actor);
-
-return Acting;
+    Favourite.belongsTo(User);
 }

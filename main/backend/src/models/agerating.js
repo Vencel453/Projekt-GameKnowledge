@@ -1,7 +1,5 @@
-import { DataTypes, Sequelize } from "sequelize";
-
-export default (Sequelize, DataTypes) => {
-    const Agerating = Sequelize.define(
+export default (sequelize, DataTypes) => {
+    const Agerating = sequelize.define(
         'Agerating', {
             id: {
                 type: DataTypes.INTEGER,
@@ -9,8 +7,32 @@ export default (Sequelize, DataTypes) => {
                 autoIncrement: true,
                 primaryKey: true,
             },
+
+            gameId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'Game',
+                    key: 'id',
+                },
+            },
+
+            rating: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+
+            institution: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
         }
     );
+
+    Game.HasMany(Agerating, {
+        foreignKey: "gameId",
+    });
+    Agerating.BelongsTo(Game);
 
 return Agerating;
 }

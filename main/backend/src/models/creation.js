@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-    const Acting = sequelize.define(
-        'Acting',{
+    const Creation = sequelize.define(
+        'Creation', {
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -13,35 +13,33 @@ export default (sequelize, DataTypes) => {
                 allowNull: false,
                 references: {
                     model: 'Game',
-                    key: 'id'
+                    key: 'id',
                 },
-                onDelete: 'CASCADE',
             },
 
-            actorId: {
+            creatorId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'Actor',
+                    model: 'Creator',
                     key: 'id'
                 },
             },
 
-            role: {
+            field: {
                 type: DataTypes.STRING,
             },
         }
     );
-
-    Games.hasMany(Acting, {
+    Game.HasMany(Creation, {
         foreignKey: 'gameId',
     });
-    Acting.belongsTo(Games);
+    Creation.belongTo(Game);
 
-    Actor.hasMany(Acting, {
-        foreignKey: 'actorId',
+    Creator.HasMany(Creation, {
+        foreignKey: 'creatorId',
     });
-    Acting.belongsTo(Actor);
+    Creation.belongsTo(Creator);
 
-return Acting;
+return Creation;
 }

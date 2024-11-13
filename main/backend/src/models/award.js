@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-    const Acting = sequelize.define(
-        'Acting',{
+    const Award = sequelize.define(
+        'Award', {
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -13,35 +13,36 @@ export default (sequelize, DataTypes) => {
                 allowNull: false,
                 references: {
                     model: 'Game',
-                    key: 'id'
+                    key: 'id',
                 },
-                onDelete: 'CASCADE',
             },
 
-            actorId: {
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+
+            organizer: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+
+            year: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                references: {
-                    model: 'Actor',
-                    key: 'id'
-                },
             },
 
-            role: {
-                type: DataTypes.STRING,
+            result: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
             },
         }
     );
 
-    Games.hasMany(Acting, {
+    Game.hasMany(Award, {
         foreignKey: 'gameId',
-    });
-    Acting.belongsTo(Games);
+    })
+    Award.belongsTo(Game);
 
-    Actor.hasMany(Acting, {
-        foreignKey: 'actorId',
-    });
-    Acting.belongsTo(Actor);
-
-return Acting;
+return Award;
 }

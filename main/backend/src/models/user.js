@@ -1,5 +1,5 @@
-export default (Sequelize, DataTypes) => {
-    const User = Sequelize.define(
+export default (sequelize, DataTypes) => {
+    const User = sequelize.define(
         'User',{
             id: {
                 type: DataTypes.INTEGER,

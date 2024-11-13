@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-    const Actor = sequelize.define(
-        'Actor', {
+    const Creator = sequelize.define(
+        'Creator', {
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -12,11 +12,8 @@ export default (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-
-            profilePicture: {
-                type: DataTypes.STRING,
-            },
         }
     );
-return Actor;
+
+return Creator;
 }
