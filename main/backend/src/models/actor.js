@@ -8,9 +8,12 @@ export default (sequelize, DataTypes) => {
                 primaryKey: true,
             },
 
-            name: {
+            firstName: {
                 type: DataTypes.STRING,
-                allowNull: false,
+            },
+
+            lastNameName: {
+                type: DataTypes.STRING,
             },
 
             profilePicture: {

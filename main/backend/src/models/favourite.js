@@ -37,4 +37,6 @@ export default (sequelize, DataTypes) => {
         foreignKey: 'userId'
     });
     Favourite.belongsTo(User);
+
+return Favourite;
 }

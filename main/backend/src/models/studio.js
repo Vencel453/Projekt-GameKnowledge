@@ -1,22 +1,24 @@
 export default (sequelize, DataTypes) => {
-    const Creator = sequelize.define(
-        'Creator', {
+    const Studio = sequelize.define(
+        'Studio', {
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                autoIncrement: true,
+                autoIncrement: false,
                 primaryKey: true,
             },
 
-            firstName: {
+            name: {
                 type: DataTypes.STRING,
+                allowNull: false,
             },
 
-            lasttName: {
+            logo: {
                 type: DataTypes.STRING,
+                allowNull: false,
             },
         }
     );
 
-return Creator;
+return Studio;
 }
