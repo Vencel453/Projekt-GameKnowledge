@@ -8,41 +8,16 @@ export default (sequelize, DataTypes) => {
                 primaryKey: true,
             },
 
-            gameId: {
-                type: DataTypes.INTEGER,
+            organizer: {
+                type: DataTypes.STRING,
                 allowNull: false,
-                references: {
-                    model: 'Game',
-                    key: 'id',
-                },
             },
 
             name: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-
-            organizer: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-
-            year: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-            },
-
-            result: {
-                type: DataTypes.BOOLEAN,
-                allowNull: false,
-            },
         }
     );
-
-    Game.hasMany(Award, {
-        foreignKey: 'gameId',
-    })
-    Award.belongsTo(Game);
-
 return Award;
 }

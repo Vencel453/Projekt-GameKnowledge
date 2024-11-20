@@ -15,7 +15,6 @@ export default (sequelize, DataTypes) => {
                     model: 'Game',
                     key: 'id'
                 },
-                onDelete: 'CASCADE',
             },
 
             actorId: {
@@ -25,21 +24,24 @@ export default (sequelize, DataTypes) => {
                     model: 'Actor',
                     key: 'id'
                 },
+                
             },
 
             role: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(100),
             },
         }
     );
 
     Games.hasMany(Acting, {
         foreignKey: 'gameId',
+        onDelete: 'CASCADE',
     });
     Acting.belongsTo(Games);
 
     Actor.hasMany(Acting, {
         foreignKey: 'actorId',
+        onDelete: 'CASCADE',
     });
     Acting.belongsTo(Actor);
 

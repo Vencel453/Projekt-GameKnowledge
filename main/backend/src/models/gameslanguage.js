@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-    const Forumcomment = sequelize.define(
-        'Forumcomment', {
+    const Gameslanguage = sequelize.define(
+        'Gameslanguage', {
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -8,46 +8,43 @@ export default (sequelize, DataTypes) => {
                 primaryKey: true,
             },
 
-            postId: {
+            gameId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'Forumpost',
+                    model: 'Game',
                     key: 'id',
                 },
             },
 
-            userId: {
+            languageId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'User',
+                    model: 'Language',
                     key: 'id',
                 },
             },
 
-            content: {
-                type: DataTypes.TEXT,
+            dub: {
+                type: DataTypes.BOOLEAN,
                 allowNull: false,
+                defaultValue: 0,
             },
 
-            creation: {
-                type: DataTypes.DATETIME,
-                allowNull: false,
-            },
         }
     );
-    Forumpost.HasMany(Forumcomment, {
-        foreignKey: 'forumId',
+    Game.hasMany(Gameslanguage, {
+        foreignKey: 'gameId',
         onDelete: 'CASCADE',
     });
-    Forumcomment.belongsTo(Forumpost);
+    Gameslanguage.belongTo(Game);
 
-    User.HasMany(Forumcomment, {
-        foreignKey: 'userId',
+    Language.hasMany(Gameslanguage, {
+        foreignKey: 'languageId',
         onDelete: 'CASCADE',
     });
-    Forumcomment.belongsTo(User);
+    Gameslanguage.belongTo(Language);
 
-return Forumcomment;
+return Gameslanguage;
 }

@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-    const Forumcomment = sequelize.define(
-        'Forumcomment', {
+    const Gamesonlineplatform = sequelize.define(
+        'Gamesonlineplatform', {
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -8,46 +8,36 @@ export default (sequelize, DataTypes) => {
                 primaryKey: true,
             },
 
-            postId: {
+            gameId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'Forumpost',
+                    model: 'Game',
                     key: 'id',
                 },
             },
 
-            userId: {
+            platformId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'User',
+                    model: 'Onlineplatform',
                     key: 'id',
                 },
-            },
-
-            content: {
-                type: DataTypes.TEXT,
-                allowNull: false,
-            },
-
-            creation: {
-                type: DataTypes.DATETIME,
-                allowNull: false,
             },
         }
     );
-    Forumpost.HasMany(Forumcomment, {
-        foreignKey: 'forumId',
+    Game.hasMany(Gamesonlineplatform, {
+        foreignKey: 'gameId',
         onDelete: 'CASCADE',
     });
-    Forumcomment.belongsTo(Forumpost);
+    Gamesonlineplatform.belongTo(Game);
 
-    User.HasMany(Forumcomment, {
-        foreignKey: 'userId',
+    Onlineplatform.hasMany(Gamesonlineplatform, {
+        foreignKey: 'platformId',
         onDelete: 'CASCADE',
     });
-    Forumcomment.belongsTo(User);
-
-return Forumcomment;
+    Gamesonlineplatform.belongTo(Onlineonlineplatform);
+    
+return Gamesonlineplatform;
 }

@@ -33,11 +33,13 @@ export default (sequelize, DataTypes) => {
     );
     Game.HasMany(Creation, {
         foreignKey: 'gameId',
+        onDelete: 'CASCADE',
     });
     Creation.belongTo(Game);
 
     Creator.HasMany(Creation, {
         foreignKey: 'creatorId',
+        onDelete: 'CASCADE',
     });
     Creation.belongsTo(Creator);
 

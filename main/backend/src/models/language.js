@@ -8,25 +8,12 @@ export default (sequelize, DataTypes) => {
                 primaryKey: true,
             },
 
-            gameId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Game',
-                    key: 'Id',
-                },
-            },
-
             language: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: true,
             },
         }
     );
-Game.haveMany(Language, {
-    foreignKey: "gameId",
-});
-Language.belongTo(Game);
-
 return Language;
 }

@@ -29,12 +29,14 @@ export default (sequelize, DataTypes) => {
     );
 
     Game.HasMany(Favourite, {
-        foreignKey: 'gameId'
+        foreignKey: 'gameId',
+        onDelete: 'CASCADE',
     });
     Favourite.belongsTo(Game);
 
     User.HasMany(Favourite, {
-        foreignKey: 'userId'
+        foreignKey: 'userId',
+        onDelete: 'CASCADE',
     });
     Favourite.belongsTo(User);
 

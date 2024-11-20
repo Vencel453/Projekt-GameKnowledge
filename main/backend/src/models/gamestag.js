@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-    const Gamepicture = sequelize.define(
-        'GamePicture', {
+    const Gamestag = sequelize.define(
+        'Gamestag', {
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -10,24 +10,34 @@ export default (sequelize, DataTypes) => {
 
             gameId: {
                 type: DataTypes.INTEGER,
-                allowNull:false,
+                allowNull: false,
                 references: {
                     model: 'Game',
                     key: 'id',
                 },
             },
 
-            url: {
-                types: DataTypes.STRING,
+            tagId: {
+                type: DataTypes.INTEGER,
                 allowNull: false,
-            }
+                references: {
+                    model: 'Tag',
+                    key: 'id',
+                },
+            },
         }
     );
-    Game.hasMany(Gamepicture, {
+    Game.hasMany(Gamestag, {
         foreignKey: 'gameId',
         onDelete: 'CASCADE',
     });
-    Gamepicture.belongsTo(Game);
+    Gamestag.belongTo(Game);
 
-return Gamepicture;
+    Tag.hasMany(Gamestag, {
+        foreignKey: 'tagId',
+        onDelete: 'CASCADE',
+    });
+    Gamestag.belongTo(Tag);
+    
+return Gamestag;
 }

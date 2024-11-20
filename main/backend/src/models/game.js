@@ -19,10 +19,12 @@ export default (sequelize, DataTypes) => {
 
             description: {
                 type: DataTypes.TEXT,
+                allowNull: false,
             },
 
             release: {
                 type: DataTypes.DATEONLY,
+                allowNull: false,
             },
 
             boxart: {
@@ -31,6 +33,8 @@ export default (sequelize, DataTypes) => {
 
             controllerSupport: {
                 type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 0,
             },
 
             crossplatform: {

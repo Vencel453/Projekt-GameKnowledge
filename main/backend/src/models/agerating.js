@@ -18,12 +18,12 @@ export default (sequelize, DataTypes) => {
             },
 
             rating: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(10),
                 allowNull: false,
             },
 
             institution: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(4),
                 allowNull: false,
             },
         }
@@ -31,6 +31,7 @@ export default (sequelize, DataTypes) => {
 
     Game.HasMany(Agerating, {
         foreignKey: "gameId",
+        onDelete: 'CASCADE',
     });
     Agerating.BelongsTo(Game);
 

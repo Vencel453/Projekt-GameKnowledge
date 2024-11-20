@@ -1,4 +1,3 @@
-import { request } from "express";
 import { Sequelize, DataTypes } from "sequelize";
 
 const config = require('../config/config.js');
@@ -16,8 +15,13 @@ const Favourite = require('./favourite').default(sequelize, DataTypes);
 const Forumcomment = require('./forumcomment').default(sequelize, DataTypes);
 const Forumpost = require('./forumpost').default(sequelize, DataTypes);
 const Gamepicture = require('./gamepicture').default(sequelize, DataTypes);
+const Gameslanguage = require('./gameslanguage').default(sequelize, DataTypes);
+const Gamesonlineplatform = require('./gamesonlineplatform').default(sequelize, DataTypes);
+const Gamesplatform = require('./gamesplatform').default(sequelize, DataTypes);
+const Gamestag = require('./gamestag').default(sequelize, DataTypes);
 const Language = require('./language').default(sequelize, DataTypes);
 const Onlineplatform = require('./onlineplatform').default(sequelize, DataTypes);
+const Pcspec = require("./pcspec").default(sequelize, DataTypes);
 const Platform = require('./platform').default(sequelize, DataTypes);
 const Rating = require('./rating').default(sequelize, DataTypes);
 const Studio = require('./studio').default(sequelize, DataTypes);
@@ -28,4 +32,5 @@ const Tag = require('./tag').default(sequelize, DataTypes);
 sequelize.sync();
 
 export default {sequelize, User, Game, Actor, Acting, Agerating, Award, Creation, Creator, Favourite, Forumcomment, Forumpost,
-    Gamepicture, Language, Onlineplatform, Platform, Rating, Studio, Studiosgame, Tag};
+    Gamepicture, Gamesaward, Gameslanguage, Gamesonlineplatform, Gamesplatform, Gamestag, Language, Onlineplatform, Pcspec,
+    Platform, Rating, Studio, Studiosgame, Tag};

@@ -31,18 +31,33 @@ export default (sequelize, DataTypes) => {
                 allowNull: false,
             },
 
+            story: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: 0,
+            },
+
+            gameplay: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: 0,
+            },
+
             creation: {
                 type: DataTypes.DATETIME,
+                allowNull: false,
             },
         }
     );
     User.HasMany(Forumpost, {
         foreignKey: 'userId',
+        onDelete: 'CASCADE',
     });
     Forumcomment.belongsTo(User);
 
     Game.HasMany(Forumcomment, {
         foreignKey: 'gameId',
+        onDelete: 'CASCADE',
     });
     Forumcomment.belongsTo(Game);
 

@@ -36,11 +36,13 @@ export default (sequelize, DataTypes) => {
 
 Game.haveMany(Rating, {
     foreignKey: "gameId",
+    onDelete: 'CASCADE',
 });
 Rating.belongTo(Game);
 
 User.haveMany(Rating, {
     foreignKey: "userId",
+    onDelete: 'CASCADE',
 });
 Rating.belongTo(User);
 

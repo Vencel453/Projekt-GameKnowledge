@@ -8,25 +8,11 @@ export default (sequelize, DataTypes) => {
                 primaryKey: true,
             },
 
-            gameId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Game',
-                    key: 'Id',
-                },
-            },
-
             platform: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
         }
     );
-Game.haveMany(Platform, {
-    foreignKey: "gameId",
-});
-Platform.belongTo(Game);
-
 return Platform;
 }

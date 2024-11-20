@@ -8,15 +8,6 @@ export default (sequelize, DataTypes) => {
                 primaryKey: true,
             },
 
-            gameId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Game',
-                    key: 'Id',
-                },
-            },
-
             tag: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -25,6 +16,7 @@ export default (sequelize, DataTypes) => {
     );
 Game.haveMany(Tag, {
     foreignKey: "gameId",
+    onDelete: 'CASCADE'
 });
 Tag.belongTo(Game);
 

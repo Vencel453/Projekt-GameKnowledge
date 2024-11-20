@@ -9,15 +9,15 @@ export default (sequelize, DataTypes) => {
             },
 
             firstName: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(100),
             },
 
             lastNameName: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(100),
             },
 
             profilePicture: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(100),
             },
         }
     );

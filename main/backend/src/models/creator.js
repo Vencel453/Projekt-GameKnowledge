@@ -9,11 +9,11 @@ export default (sequelize, DataTypes) => {
             },
 
             firstName: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(100),
             },
 
             lasttName: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(100),
             },
         }
     );
