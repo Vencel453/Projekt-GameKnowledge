@@ -3,7 +3,7 @@ import { DATE, HasOne } from "sequelize"
 export default (sequelize, DataTypes) => {
     const Pcspec = sequelize.define(
         'Pcspec', {
-            op: {
+            minop: {
                 type: DataTypes.STRING(50),
             },
 
@@ -17,6 +17,11 @@ export default (sequelize, DataTypes) => {
 
             mingpu: {
                 type: DataTypes.STRING(100),
+            },
+
+            mindirectx: {
+                type: DataTypes.STRING(20),
+                allowNul: false,
             },
 
             cpu: {
@@ -37,6 +42,10 @@ export default (sequelize, DataTypes) => {
             directx: {
                 type: DataTypes.STRING(20),
                 allowNul: false,
+            },
+
+            op: {
+                type: DataTypes.STRING(50),
             },
 
             storage: {
