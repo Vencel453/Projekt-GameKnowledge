@@ -1,10 +1,10 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { KezdolapComponent } from './kezdolap/kezdolap.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 export const routes: Routes = [
-    {path: '', component: KezdolapComponent},
+    {path: '', component: HomepageComponent},
 
 ];
 

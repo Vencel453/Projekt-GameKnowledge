@@ -1,1 +1,10 @@
 /* Általános stilusok amelyek az összes oldalra érvényesek*/
+#logomain{
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+}
+
+.container-fluid{
+    background-color: #A0B6F7;
+}
