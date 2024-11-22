@@ -1,8 +1,8 @@
 /* Általános stilusok amelyek az összes oldalra érvényesek*/
 #logomain{
     cursor: pointer;
-    width: 25%;
-    height: 25%;
+    width: 15%;
+    height: 15%;
 }
 
 .container-fluid{
@@ -15,6 +15,26 @@ body{
 
 #magnifiersearchglass{
     cursor: pointer;
-    width: 42%;
-    height: 42%;
+    width: 29%;
+    height: 29%;
+}
+
+#globeicon{
+    cursor: pointer;
+    width: 7%;
+    height: 7%;
+    display: flex;
+}
+
+.search-container{
+    display: flex;
+    align-items: center;
+}
+
+.link{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    display: flex;
 }

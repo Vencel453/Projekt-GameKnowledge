@@ -8,14 +8,18 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <div class="d-flex align-items-center">
-        <a class="navbar-brand" routerLink="" routerLinkActive="active"><img id="logomain" src="/logomain.png" alt="logo"></a>
-        <form class="container-fluid d-flex" role="search">
-            <input class="form-control-sm" type="search" placeholder="Search" aria-label="Search">
+    <div class="container-fluid d-flex align-items-center">
+        <div class="hstack d-flex align-items-center">
+            <a class="p-2 navbar-brand d-flex align-items-center" routerLink="" routerLinkActive="active"><img id="logomain" src="/logomain.png" alt="logo"></a>
+            <div class="p-2 search-container d-flex align-items-center">
+            <form class="search-form d-flex" role="search">
+            <input class="form-control-sm search-input" type="search" placeholder="Search" aria-label="Search">
         </form>
-        <a class="nav-item"><img id="magnifiersearchglass" src="/magnifying-glass.png" alt="searchIcon"></a>
+        <a class="nav-item d-flex ms-2"><img id="magnifiersearchglass" src="/magnifying-glass.png" alt="searchIcon"></a>
     </div>
+<a class="nav-item d-flex"><img id="globeicon" src="/globe.png" alt="forumIcon"></a>
+<a class="link nav-item d-flex" routerlink="">Forum</a>
+</div>
 </div>
 </nav>
 
