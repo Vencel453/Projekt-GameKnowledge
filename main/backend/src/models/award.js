@@ -1,6 +1,9 @@
-export default (sequelize, DataTypes) => {
-    const Award = sequelize.define(
-        'Award', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Award extends Model {};
+Award.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -17,7 +20,10 @@ export default (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+        },
+        {
+            sequelize,
+            modelName: "Award"
         }
     );
-return Award;
-}
+export default Award;

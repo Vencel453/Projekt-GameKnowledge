@@ -1,15 +1,20 @@
-export default (sequelize, Datatypes) => {
-    const Gamesaward = sequelize.define(
-        'Gamesaward', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import { db_config } from "../config/config.js";
+import Game from "./game.js";
+import Award from "./award.js";
+const sequelize = new Sequelize(db_config)
+
+class Gamesaward extends Model {};
+Gamesaward.init ({
             id: {
-                type: Datatypes.INTEGER,
+                type: DataTypes.INTEGER,
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
             },
 
             gameId: {
-                type: Datatypes.INTEGER,
+                type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
                     model: 'Game',
@@ -18,7 +23,7 @@ export default (sequelize, Datatypes) => {
             },
 
             awardId: {
-                type: Datatypes.INTEGER,
+                type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
                     modul: 'Award',
@@ -27,28 +32,31 @@ export default (sequelize, Datatypes) => {
             },
 
             year: {
-                type: Datatypes.INTEGER,
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
 
             result: {
-                type: Datatypes.BOOLEAN,
+                type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: 0,
             },
+        },
+        {
+            sequelize,
+            modelName: "Gamesaward"
         }
     );
     Game.hasMany(Gamesaward, {
-        foreignKey: gameId,
+        foreignKey: "gameId",
         onDelete: 'CASCADE'
     });
-    Gamesaward.belongTo(Game);
+    Gamesaward.belongsTo(Game);
 
     Award.hasMany(Gamesaward, {
         foreignKey: 'awardId',
         onDelete: 'CASCADE',
     });
-    Gamesaward.belongTo(Award);
+    Gamesaward.belongsTo(Award);
 
-return Gamesaward;
-}
+export default Gamesaward;

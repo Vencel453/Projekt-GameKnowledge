@@ -1,10 +1,13 @@
-export default (sequelize, DataTypes) => {
-    const User = sequelize.define(
-        'User',{
+import {Sequelize, DataTypes, Model} from "sequelize";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class User extends Model {};
+User.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                primary: true,
+                primaryKey: true,
                 autoIncrement: true,
             },
 
@@ -30,7 +33,16 @@ export default (sequelize, DataTypes) => {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
             },
-    }
-);
-return User;
-}
+
+            creation: {
+                type: DataTypes.DATEONLY,
+                allowNull: false,
+            },
+        },
+        {
+            sequelize,
+            modelName: "User"
+        }
+    );
+
+export default User;

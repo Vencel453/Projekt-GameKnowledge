@@ -1,6 +1,9 @@
-export default (sequelize, DataTypes) => {
-    const Onlineplatform = sequelize.define(
-        'Onlineplatform', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Onlineplatform extends Model {};
+Onlineplatform.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -12,7 +15,10 @@ export default (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+        },
+        {
+            sequelize,
+            modelName: "Onlineplatform"
         }
     );
-return Onlineplatform;
-}
+export default Onlineplatform;

@@ -1,6 +1,11 @@
-export default (sequelize, DataTypes) => {
-    const Gameslanguage = sequelize.define(
-        'Gameslanguage', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import Game from "./game.js";
+import Language from "./language.js";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Gameslanguage extends Model {};
+Gameslanguage.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -32,19 +37,22 @@ export default (sequelize, DataTypes) => {
                 defaultValue: 0,
             },
 
+        },
+        {
+            sequelize,
+            modelName: "Gameslanguage"
         }
     );
     Game.hasMany(Gameslanguage, {
         foreignKey: 'gameId',
         onDelete: 'CASCADE',
     });
-    Gameslanguage.belongTo(Game);
+    Gameslanguage.belongsTo(Game);
 
     Language.hasMany(Gameslanguage, {
         foreignKey: 'languageId',
         onDelete: 'CASCADE',
     });
-    Gameslanguage.belongTo(Language);
+    Gameslanguage.belongsTo(Language);
 
-return Gameslanguage;
-}
+export default Gameslanguage;

@@ -1,6 +1,9 @@
-export default (sequelize, DataTypes) => {
-    const Actor = sequelize.define(
-        'Actor', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Actor extends Model {};
+Actor.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -19,7 +22,10 @@ export default (sequelize, DataTypes) => {
             profilePicture: {
                 type: DataTypes.STRING(100),
             },
-        }
-    );
-return Actor;
-}
+        },
+        {
+            sequelize,
+            modelName: "Actor"
+        });
+
+export default Actor;

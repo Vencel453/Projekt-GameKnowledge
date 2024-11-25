@@ -1,6 +1,11 @@
-export default (sequelize, DataTypes) => {
-    const Forumcomment = sequelize.define(
-        'Forumcomment', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import User from "./user.js";
+import Forumpost from "./forumpost.js";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Forumcomment extends Model {};
+Forumcomment.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -32,22 +37,25 @@ export default (sequelize, DataTypes) => {
             },
 
             creation: {
-                type: DataTypes.DATETIME,
+                type: DataTypes.DATE,
                 allowNull: false,
             },
+        },
+        {
+            sequelize,
+            modelName: "Forumcomment"
         }
     );
-    Forumpost.HasMany(Forumcomment, {
+    Forumpost.hasMany(Forumcomment, {
         foreignKey: 'forumId',
         onDelete: 'CASCADE',
     });
     Forumcomment.belongsTo(Forumpost);
 
-    User.HasMany(Forumcomment, {
+    User.hasMany(Forumcomment, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
     });
     Forumcomment.belongsTo(User);
 
-return Forumcomment;
-}
+export default Forumcomment;

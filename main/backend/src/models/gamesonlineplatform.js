@@ -1,6 +1,11 @@
-export default (sequelize, DataTypes) => {
-    const Gamesonlineplatform = sequelize.define(
-        'Gamesonlineplatform', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import Game from "./game.js";
+import Onlineplatform from "./onlineplatform.js";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Gamesonlineplatform extends Model {};
+Gamesonlineplatform.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -25,19 +30,22 @@ export default (sequelize, DataTypes) => {
                     key: 'id',
                 },
             },
+        },
+        {
+            sequelize,
+            modelName: "Gamesonlineplatform"
         }
     );
     Game.hasMany(Gamesonlineplatform, {
         foreignKey: 'gameId',
         onDelete: 'CASCADE',
     });
-    Gamesonlineplatform.belongTo(Game);
+    Gamesonlineplatform.belongsTo(Game);
 
     Onlineplatform.hasMany(Gamesonlineplatform, {
         foreignKey: 'platformId',
         onDelete: 'CASCADE',
     });
-    Gamesonlineplatform.belongTo(Onlineonlineplatform);
+    Gamesonlineplatform.belongsTo(Onlineplatform);
     
-return Gamesonlineplatform;
-}
+export default Gamesonlineplatform;

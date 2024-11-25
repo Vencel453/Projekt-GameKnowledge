@@ -1,6 +1,11 @@
-export default (sequelize, DataTypes) => {
-    const Creation = sequelize.define(
-        'Creation', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import Game from "./game.js";
+import Creator from "./creator.js";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Creation extends Model {};
+Creation.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -29,19 +34,22 @@ export default (sequelize, DataTypes) => {
             field: {
                 type: DataTypes.STRING,
             },
+        },
+        {
+            sequelize,
+            modelName: "Creation"
         }
     );
-    Game.HasMany(Creation, {
+    Game.hasMany(Creation, {
         foreignKey: 'gameId',
         onDelete: 'CASCADE',
     });
-    Creation.belongTo(Game);
+    Creation.belongsTo(Game);
 
-    Creator.HasMany(Creation, {
+    Creator.hasMany(Creation, {
         foreignKey: 'creatorId',
         onDelete: 'CASCADE',
     });
     Creation.belongsTo(Creator);
 
-return Creation;
-}
+export default Creation;

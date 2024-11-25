@@ -1,6 +1,11 @@
-export default (sequelize, DataTypes) => {
-    const Studiosgame = sequelize.define(
-        'Studiosgame', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import Game from "./game.js";
+import Studio from "./studio.js";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Studiosgame extends Model {};
+Studiosgame.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -38,18 +43,21 @@ export default (sequelize, DataTypes) => {
                 defaultValue: 0,
             },
 
+        },
+        {
+            sequelize,
+            modelName: "Studiosgame"
         }
     );
 
-Game.haveMany(Studiosgame, {
+Game.hasMany(Studiosgame, {
     foreignKey: "gameId",
 });
-Studiosgame.belongTo(Game);
+Studiosgame.belongsTo(Game);
 
-Studio.haveMany(Studiosgame, {
+Studio.hasMany(Studiosgame, {
     foreignKey: "userId",
 });
-Studiosgame.belongTo(Studio);
+Studiosgame.belongsTo(Studio);
 
-return Studiosgame;
-} 
+export default Studiosgame;

@@ -1,6 +1,10 @@
-export default (sequelize, DataTypes) => {
-    const Agerating = sequelize.define(
-        'Agerating', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import Game from "./game.js";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Agerating extends Model {};
+Agerating.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -26,14 +30,17 @@ export default (sequelize, DataTypes) => {
                 type: DataTypes.STRING(4),
                 allowNull: false,
             },
+        },
+        {
+            sequelize,
+            modelName: "Agerating"
         }
     );
 
-    Game.HasMany(Agerating, {
+    Game.hasMany(Agerating, {
         foreignKey: "gameId",
         onDelete: 'CASCADE',
     });
-    Agerating.BelongsTo(Game);
+    Agerating.belongsTo(Game);
 
-return Agerating;
-}
+export default Agerating;

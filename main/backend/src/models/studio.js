@@ -1,6 +1,9 @@
-export default (sequelize, DataTypes) => {
-    const Studio = sequelize.define(
-        'Studio', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Studio extends Model {};
+Studio.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -17,8 +20,11 @@ export default (sequelize, DataTypes) => {
             logo: {
                 type: DataTypes.STRING,
             },
+        },
+        {
+            sequelize,
+            modelName: "Studio"
         }
     );
 
-return Studio;
-}
+export default Studio;

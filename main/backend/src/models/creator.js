@@ -1,6 +1,9 @@
-export default (sequelize, DataTypes) => {
-    const Creator = sequelize.define(
-        'Creator', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Creator extends Model {};
+Creator.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -15,8 +18,11 @@ export default (sequelize, DataTypes) => {
             lasttName: {
                 type: DataTypes.STRING(100),
             },
+        },
+        {
+            sequelize,
+            modelName: "Creator"
         }
     );
 
-return Creator;
-}
+export default Creator;

@@ -1,6 +1,9 @@
-export default (sequelize, DataTypes) => {
-    const Game = sequelize.define(
-        'Game', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Game extends Model {};
+Game.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -48,7 +51,10 @@ export default (sequelize, DataTypes) => {
             steamdeckComp: {
                 type: DataTypes.INTEGER,
             },
+        },
+        {
+            sequelize,
+            modelName: "Game"
         }
     );
-    return Game;
-}
+export default Game;

@@ -1,35 +1,41 @@
-import { Sequelize, DataTypes } from "sequelize";
+import { Sequelize} from "sequelize";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config);
 
-const config = require('../config/config.js');
-const sequelize = new Sequelize(config.db_config);
-
-const User = require('./user').default(sequelize, DataTypes);
-const Game = require('./game').default(sequelize, DataTypes);
-const Actor = require('./actor').default(sequelize, DataTypes);
-const Acting = require('./acting').default(sequelize, DataTypes);
-const Agerating = require('./agerating').default(sequelize, DataTypes);
-const Award = require('./award').default(sequelize, DataTypes);
-const Creation = require('./creation').default(sequelize, DataTypes);
-const Creator = require('./creator').default(sequelize, DataTypes);
-const Favourite = require('./favourite').default(sequelize, DataTypes);
-const Forumcomment = require('./forumcomment').default(sequelize, DataTypes);
-const Forumpost = require('./forumpost').default(sequelize, DataTypes);
-const Gamepicture = require('./gamepicture').default(sequelize, DataTypes);
-const Gameslanguage = require('./gameslanguage').default(sequelize, DataTypes);
-const Gamesonlineplatform = require('./gamesonlineplatform').default(sequelize, DataTypes);
-const Gamesplatform = require('./gamesplatform').default(sequelize, DataTypes);
-const Gamestag = require('./gamestag').default(sequelize, DataTypes);
-const Language = require('./language').default(sequelize, DataTypes);
-const Onlineplatform = require('./onlineplatform').default(sequelize, DataTypes);
-const Pcspec = require("./pcspec").default(sequelize, DataTypes);
-const Platform = require('./platform').default(sequelize, DataTypes);
-const Rating = require('./rating').default(sequelize, DataTypes);
-const Studio = require('./studio').default(sequelize, DataTypes);
-const Studiosgame = require('./studiosgames').default(sequelize, DataTypes);
-const Tag = require('./tag').default(sequelize, DataTypes);
+import Acting from "./acting.js"
+import Actor from "./actor.js"
+import Agerating from "./agerating.js";
+import Award from "./award.js";
+import Creation from "./creation.js";
+import Creator from "./creator.js"
+import Favourite from "./favourite.js";
+import Forumcomment from "./forumcomment.js";
+import Forumpost from "./forumpost.js";
+import Game from "./game.js";
+import Gamepicture from "./gamepicture.js";
+import Gamesaward from "./gamesaward.js";
+import Gameslanguage from "./gameslanguage.js";
+import Gamesonlineplatform from "./gamesonlineplatform.js";
+import Gamesplatform from "./gamesplatform.js";
+import Gamestag from "./gamestag.js";
+import Language from "./language.js";
+import Onlineplatform from "./onlineplatform.js";
+import Pcspec from "./pcspec.js";
+import Platform from "./platform.js";
+import Rating from "./rating.js";
+import Studio from "./studio.js";
+import Studiosgame from "./studiosgame.js";
+import Tag from "./tag.js";
+import User from "./user.js";
 
 
-sequelize.sync();
+
+
+sequelize.sync().then(() => {
+    console.log("The database sync was succesfull!");
+}).catch((error) => {
+    console.log("The database sync failed", error);
+});
 
 export default {sequelize, User, Game, Actor, Acting, Agerating, Award, Creation, Creator, Favourite, Forumcomment, Forumpost,
     Gamepicture, Gamesaward, Gameslanguage, Gamesonlineplatform, Gamesplatform, Gamestag, Language, Onlineplatform, Pcspec,

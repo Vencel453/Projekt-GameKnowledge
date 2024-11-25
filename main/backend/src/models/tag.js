@@ -1,6 +1,10 @@
-export default (sequelize, DataTypes) => {
-    const Tag = sequelize.define(
-        'Tag', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import Game from "./game.js";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Tag extends Model {};
+Tag.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -12,13 +16,16 @@ export default (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+        },
+        {
+            sequelize,
+            modelName: "Tag"
         }
     );
-Game.haveMany(Tag, {
+Game.hasMany(Tag, {
     foreignKey: "gameId",
     onDelete: 'CASCADE'
 });
-Tag.belongTo(Game);
+Tag.belongsTo(Game);
 
-return Tag;
-}
+export default Tag;

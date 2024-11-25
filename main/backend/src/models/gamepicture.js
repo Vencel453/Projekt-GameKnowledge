@@ -1,6 +1,10 @@
-export default (sequelize, DataTypes) => {
-    const Gamepicture = sequelize.define(
-        'GamePicture', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import Game from "./game.js";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Gamepicture extends Model {};
+Gamepicture.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -18,9 +22,13 @@ export default (sequelize, DataTypes) => {
             },
 
             url: {
-                types: DataTypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false,
             }
+        },
+        {
+            sequelize,
+            modelName: "Gamepicture"
         }
     );
     Game.hasMany(Gamepicture, {
@@ -29,5 +37,4 @@ export default (sequelize, DataTypes) => {
     });
     Gamepicture.belongsTo(Game);
 
-return Gamepicture;
-}
+export default Gamepicture;

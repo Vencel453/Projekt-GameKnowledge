@@ -1,8 +1,10 @@
-import { DATE, HasOne } from "sequelize"
+import {Sequelize, DataTypes, Model} from "sequelize";
+import Game from "./game.js";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
 
-export default (sequelize, DataTypes) => {
-    const Pcspec = sequelize.define(
-        'Pcspec', {
+class Pcspec extends Model {};
+Pcspec.init ({
             minop: {
                 type: DataTypes.STRING(50),
             },
@@ -72,14 +74,17 @@ export default (sequelize, DataTypes) => {
                     key: 'id',
                 },
             },
+        },
+        {
+            sequelize,
+            modelName: "Pcspec"
         }
     );
 
-    Gama.hasOne(Pcspec, {
+    Game.hasOne(Pcspec, {
         foreignKey: 'gameId',
         onDelete: 'CASCADE',
     });
     Pcspec.belongsTo(Game);
 
-return Pcspec;
-}
+export default Pcspec;

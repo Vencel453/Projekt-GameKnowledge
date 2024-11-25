@@ -1,6 +1,11 @@
-export default (sequelize, DataTypes) => {
-    const Gamestag = sequelize.define(
-        'Gamestag', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import Game from "./game.js";
+import Tag from "./tag.js";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Gamestag extends Model {};
+Gamestag.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -25,19 +30,22 @@ export default (sequelize, DataTypes) => {
                     key: 'id',
                 },
             },
+        },
+        {
+            sequelize,
+            modelName: "Gamestag"
         }
     );
     Game.hasMany(Gamestag, {
         foreignKey: 'gameId',
         onDelete: 'CASCADE',
     });
-    Gamestag.belongTo(Game);
+    Gamestag.belongsTo(Game);
 
     Tag.hasMany(Gamestag, {
         foreignKey: 'tagId',
         onDelete: 'CASCADE',
     });
-    Gamestag.belongTo(Tag);
+    Gamestag.belongsTo(Tag);
     
-return Gamestag;
-}
+export default Gamestag;

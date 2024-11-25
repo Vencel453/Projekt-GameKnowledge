@@ -1,6 +1,11 @@
-export default (sequelize, DataTypes) => {
-    const Favourite = sequelize.define(
-        'Favourite', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import Game from "./game.js";
+import User from "./user.js";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Favourite extends Model {};
+Favourite.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -25,20 +30,23 @@ export default (sequelize, DataTypes) => {
                     key: 'id',
                 },
             },
+        },
+        {
+            sequelize,
+            modelName: "Favourite"
         }
     );
 
-    Game.HasMany(Favourite, {
+    Game.hasMany(Favourite, {
         foreignKey: 'gameId',
         onDelete: 'CASCADE',
     });
     Favourite.belongsTo(Game);
 
-    User.HasMany(Favourite, {
+    User.hasMany(Favourite, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
     });
     Favourite.belongsTo(User);
 
-return Favourite;
-}
+export default Favourite;

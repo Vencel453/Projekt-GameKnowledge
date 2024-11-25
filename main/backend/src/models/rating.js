@@ -1,6 +1,11 @@
-export default (sequelize, DataTypes) => {
-    const Rating = sequelize.define(
-        'Rating', {
+import {Sequelize, DataTypes, Model} from "sequelize";
+import Game from "./game.js";
+import User from "./user.js";
+import { db_config } from "../config/config.js";
+const sequelize = new Sequelize(db_config)
+
+class Rating extends Model {};
+Rating.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -31,20 +36,23 @@ export default (sequelize, DataTypes) => {
                     key: 'Id',
                 },
             },
+        },
+        {
+            sequelize,
+            modelName: "Rating"
         }
     );
 
-Game.haveMany(Rating, {
+Game.hasMany(Rating, {
     foreignKey: "gameId",
     onDelete: 'CASCADE',
 });
-Rating.belongTo(Game);
+Rating.belongsTo(Game);
 
-User.haveMany(Rating, {
+User.hasMany(Rating, {
     foreignKey: "userId",
     onDelete: 'CASCADE',
 });
-Rating.belongTo(User);
+Rating.belongsTo(User);
 
-return Rating;
-} 
+export default Rating;
