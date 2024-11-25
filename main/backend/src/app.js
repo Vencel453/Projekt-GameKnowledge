@@ -2,13 +2,11 @@ import express from "express";
 import { Sequelize } from "sequelize";
 import RegistRouter from "./routes/regist.router.js";
 import MainPageRouter from "./routes/mainpage.router.js";
+import { db_config } from "./config/config.js";
 
 const PORT = 3000;
 const app = express();
-const sequelize = new Sequelize('game_knowledge', 'root', '', {
-    host: 'localhost',
-    dialect: "mysql"
-});
+const sequelize = new Sequelize(db_config);
 
 app.use(express.json());
 

@@ -1,5 +1,6 @@
 import {Sequelize, DataTypes, Model} from "sequelize";
 import { db_config } from "../config/config.js";
+
 const sequelize = new Sequelize(db_config)
 
 class User extends Model {};
@@ -15,6 +16,10 @@ User.init ({
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique: true,
+                validate: {
+                    max: 20,
+                    min: 5
+                }
             },
 
             password: {
@@ -32,6 +37,7 @@ User.init ({
             admin: {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
+                defaultValue: 0,
             },
 
             creation: {

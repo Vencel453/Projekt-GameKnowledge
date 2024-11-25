@@ -13,7 +13,7 @@
   "description": "A Game Knowledge weboldal backend része",
   "type": "module",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "bcrypt": "^5.1.1",
     "express": "^4.21.1",
     "mariadb": "^3.4.0",
     "mysql2": "^3.11.4",
