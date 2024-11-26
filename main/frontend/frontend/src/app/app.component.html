@@ -1,9 +1,12 @@
 <!--Általános dolgok, amik az összes oldalon látszanak-->
+
+<!--HTML basic structure-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="windowicon" type="image/png" href="/logomain.png">           <!--For now, not working properly-->
     <title>Homepage</title>
 </head>
 <body>
@@ -28,17 +31,19 @@
         
         <a><img class="align-items-center d-flex nav-item ms-2" id="loginicon" src="/user.png" alt="loginIcon">
         </a>
-        <a class="link" routerlink="">Login</a>
+        <a class="link" routerlink="/login">Login</a>
 
         <a><img class="align-items-center d-flex nav-item ms-2" id="registicon" src="/registicon.png" alt="registIcon">
         </a>
-        <a class="link" routerlink="">Regist</a>
+        <a class="link" routerlink="/regist">Regist</a>
     </div>
-    <div class="menu-toggle">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-    </div>
+    <button class="menu">
+       <i class="fa fa-bars"></i>
+    </button>
+    <ul class="menucontent">
+        <!--Menu contents-->
+        <li>Minimenu</li>
+    </ul>
 </nav>
 </div>
 
