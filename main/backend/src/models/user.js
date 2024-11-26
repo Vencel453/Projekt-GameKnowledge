@@ -16,10 +16,6 @@ User.init ({
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique: true,
-                validate: {
-                    max: 20,
-                    min: 5
-                }
             },
 
             password: {
