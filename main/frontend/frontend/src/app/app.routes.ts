@@ -8,10 +8,9 @@ import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
     {path: '', component: HomepageComponent},
-    {path: '**', component: PageNotFoundComponent},         /// Unknown routes redirection
     {path: 'regist', component: RegistrationComponent},
     {path: 'login', component: LoginComponent},
-
+    {path: '**', component: PageNotFoundComponent},         /// Unknown routes redirection
 ];
 
 @NgModule({

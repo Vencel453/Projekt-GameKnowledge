@@ -12,7 +12,7 @@
 <body>
 <div class="container-fluid d-flex align-items-center">
     <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand d-flex" routerLink="" routerLinkActive="active">
+            <a class="navbar-brand d-flex" href="" routerLinkActive="active">
                 <img id="logomain" src="/logomain.png" alt="logo">
             </a>
                 <div class="nav-item search-container d-flex align-items-center">
@@ -27,15 +27,15 @@
     <div class="nav-item d-flex align-items-center">
         <a><img class="align-items-center d-flex nav-item ms-2" id="globeicon" src="/globe.png" alt="forumIcon">
         </a>
-        <a class="link" routerlink="">Forum</a>
+        <a class="link" routerLink="">Forum</a>
         
-        <a><img class="align-items-center d-flex nav-item ms-2" id="loginicon" src="/user.png" alt="loginIcon">
+        <a routerLink="/login"><img class="align-items-center d-flex nav-item ms-2" id="loginicon" src="/user.png" alt="loginIcon">
         </a>
-        <a class="link" routerlink="/login">Login</a>
+        <a class="link" routerLink="/login">Login</a>
 
-        <a><img class="align-items-center d-flex nav-item ms-2" id="registicon" src="/registicon.png" alt="registIcon">
+        <a routerLink="/regist"><img class="align-items-center d-flex nav-item ms-2" id="registicon" src="/registicon.png" alt="registIcon">
         </a>
-        <a class="link" routerlink="/regist">Regist</a>
+        <a class="link" routerLink="/regist">Regist</a>
     </div>
     <button class="menu">
        <i class="fa fa-bars"></i>
@@ -46,8 +46,8 @@
     </ul>
 </nav>
 </div>
+<router-outlet></router-outlet>
 
 </body>
 
 </html>
-<router-outlet></router-outlet>
