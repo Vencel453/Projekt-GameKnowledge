@@ -1,4 +1,4 @@
-import { errors } from "jose";
+import jwtHandler from "../jwt/jwtHandler.js";
 import bcryptMethods from "../bcrypt-methods/bcrypt.methods.js";
 import models from "../models/index.js";
 
@@ -15,27 +15,18 @@ export default {
         }
 
         try {
-            const correctUser =
-                await models.User.findOne({
-                    where: {
-                        username: loginUsername
-                    }
-                })
-                &&
-                bcryptMethods.Comparing(loginPassword, models.User.findOne({
-                    where: {
-                        username: loginUsername
-                    }, 
-                    
-                    attributes: 
-                        ['password']
-                    })
-                );
 
-            if (correctUser) {
+            const correctUser = await models.User.findOne({where: {username: loginUsername}});
+            const correctPassword = bcryptMethods.Comparing(loginPassword, correctUser.password);
+
+            if (correctUser && correctPassword) {
+                const token = await jwtHandler.CreatingToken(correctUser.username, correctUser.admin);
+
                 res.status(200).json({
                     error: "false",
-                    message: "Login succesfull!"
+                    message: "Succefull login",
+                    isAdmin: correctUser.admin,
+                    token: token
                 });
                 return;
             } 
