@@ -5,5 +5,6 @@ import MainpageController from "../controllers/mainpage.controller.js";
 const MainPageRouter = Router();
 
 MainPageRouter.get("/", jwtHandler.Authenticating, MainpageController.MainpageGetController);
+MainPageRouter.post("/", jwtHandler.Authenticating, MainpageController.MainpagePostController);
 
 export default MainPageRouter;

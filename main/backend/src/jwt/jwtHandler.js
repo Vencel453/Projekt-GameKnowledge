@@ -2,6 +2,7 @@ import { jwtVerify } from "jose";
 import { SignJWT } from "jose";
 
 const key = "GameKnowledgeSuperSecretDecoder58739";
+const tokenBlacklist = [];
 
 export default {
     Authenticating: async (req, res, next) => {
@@ -11,6 +12,14 @@ export default {
             res.status(403).json({
                 error: "true",
                 message: "A valid token is required!"
+            });
+            return;
+        }
+
+        if (tokenBlacklist.includes(token)) {
+            res.status(401).json({
+                error: "true",
+                message: "The token is invalid or expired!"
             });
             return;
         }
@@ -44,5 +53,13 @@ export default {
             .sign(new TextEncoder().encode(key));
 
         return token;
+    },
+
+    LoggingOut: (req, res, next) => {
+        console.log(req.headers);
+        
+        const token = req.headers['authorization']?.split(' ')[1];
+        tokenBlacklist.push(token);
+        return;
     }
 }
