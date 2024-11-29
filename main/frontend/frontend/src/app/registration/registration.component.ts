@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { response } from 'express';
 
 @Component({
   selector: 'app-registration',
@@ -14,18 +12,5 @@ export class RegistrationComponent {
   password: string = '';
   passagain: string = '';
   email: string = '';
-
-  constructor(private authservice: AuthService){ }
-
-  onsub(): void {
-    const userData = { username: this.username, password: this.password, passagain: this.passagain, email: this.email};
-
-    this.authservice.regist(userData).subscribe({
-      next: (response) => {
-        console.log('Registration Success', response);
-        alert()
-      }
-    })
-  }
 }
 
