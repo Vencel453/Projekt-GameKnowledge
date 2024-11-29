@@ -2,10 +2,12 @@ import { Sequelize} from "sequelize";
 import { db_config } from "../config/config.js";
 const sequelize = new Sequelize(db_config);
 
+// Minden modelt be importálunk ide
 import Acting from "./acting.js"
 import Actor from "./actor.js"
 import Agerating from "./agerating.js";
 import Award from "./award.js";
+import Blacklistedtoken from "./blacklistedtoken.js";
 import Creation from "./creation.js";
 import Creator from "./creator.js"
 import Favourite from "./favourite.js";
@@ -30,13 +32,14 @@ import User from "./user.js";
 
 
 
-
+// Szinkronizáljuk a modeleket az adatbázissal
 sequelize.sync().then(() => {
     console.log("The database sync was succesfull!");
 }).catch((error) => {
     console.log("The database sync failed", error);
 });
 
-export default {sequelize, User, Game, Actor, Acting, Agerating, Award, Creation, Creator, Favourite, Forumcomment, Forumpost,
+// Itt exportáljuk az összes modelt és innen fogjuk importálni a controller fájlokba
+export default {sequelize, User, Game, Actor, Acting, Agerating, Award, Blacklistedtoken, Creation, Creator, Favourite, Forumcomment, Forumpost,
     Gamepicture, Gamesaward, Gameslanguage, Gamesonlineplatform, Gamesplatform, Gamestag, Language, Onlineplatform, Pcspec,
     Platform, Rating, Studio, Studiosgame, Tag};

@@ -7,7 +7,7 @@ Studio.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                autoIncrement: false,
+                autoIncrement: true,
                 primaryKey: true,
             },
 

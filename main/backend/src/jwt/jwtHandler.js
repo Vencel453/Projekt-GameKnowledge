@@ -1,14 +1,22 @@
+import { jwtDecrypt, SignJWT } from "jose";
 import { jwtVerify } from "jose";
-import { SignJWT } from "jose";
+import models from "../models/index.js";
+import { Op } from "sequelize";
+import { error } from "console";
 
+// A token létrehozásához használt kulcs, ezt a végső programban érdemes egy helyi változóban tárolni, de jelenleg egy konstansként
+// tároljuk a hordozhatóság érdekében
 const key = "GameKnowledgeSuperSecretDecoder58739";
-const tokenBlacklist = [];
 
+// Ezeket a metódusokat külön fájlba hozzuk létre majd exportáljuk őket, így a kód átláthatóbb, és a token hítelesítés esetén így csak
+// egyszerkell megírni a kódot
 export default {
+    // Ez a metódus a tokent hítelesíti, kedzve azzal hogy a headers-ből lekéri és eltárolja a tokent
     Authenticating: async (req, res, next) => {
-        const token = req.headers['authorization']?.split(' ')[1];
+        const newToken = req.headers['authorization']?.split(' ')[1];
 
-        if (!token) {
+        // Ha nincs token, akkor írja ki ezt a hiba üzenetet
+        if (!newToken) {
             res.status(403).json({
                 error: "true",
                 message: "A valid token is required!"
@@ -16,16 +24,18 @@ export default {
             return;
         }
 
-        if (tokenBlacklist.includes(token)) {
-            res.status(401).json({
-                error: "true",
-                message: "The token is invalid or expired!"
-            });
-            return;
-        }
-
         try {
-            const { payload } = await jwtVerify(token, new TextEncoder().encode(key));
+            const invalidToken = await models.Blacklistedtoken.findOne({where: {token: newToken}});
+
+            if (invalidToken) {
+                res.status(403).json({
+                    error: "true",
+                    message: "The token is invalid or expired!"
+                });
+                return;
+            }
+
+            const { payload } = await jwtVerify(newToken, new TextEncoder().encode(key));
 
             req.user = payload;
             next();
@@ -55,11 +65,49 @@ export default {
         return token;
     },
 
-    LoggingOut: (req, res, next) => {
-        console.log(req.headers);
+    ExntendingToken: async (req, res, next) => {
+        const currentToken = req.headers['authorization']?.split(' ')[1];
+
+        const decodedToken = jwtDecrypt(currentToken, key, (error) => {
+            if (error) {
+                console.log("An erroc occured: " + error)
+                return;
+            }
+        });
+
+        const expire = (await decodedToken).payload.exp * 1000;
+        const currentDate = new Date();
+
+        const timeLeft = currentDate - expire;
+
+        if (timeLeft < 1200000) {
+            
+        }
         
-        const token = req.headers['authorization']?.split(' ')[1];
-        tokenBlacklist.push(token);
+        
+    },
+
+    LoggingOut: (req) => {
+        const logOutToken = req.headers['authorization']?.split(' ')[1];
+        const currentDate = new Date();
+        models.Blacklistedtoken.create({
+            token: logOutToken,
+            date: currentDate
+        });
+
+        const datecheck = new Date(Date.now() - 1000 * 60 * 60)
+        models.Blacklistedtoken.destroy({
+            where: {
+                date: {
+                    [Op.lt]: datecheck
+                }
+            }
+        }).then(
+            console.log("Old tokens succesfully deleted")
+        )
+        .catch(error => {
+            console.log("There was an error: " + error);
+        })
         return;
     }
 }

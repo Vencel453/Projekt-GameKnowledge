@@ -1,9 +1,10 @@
 import {Sequelize, DataTypes, Model} from "sequelize";
 import { db_config } from "../config/config.js";
+
 const sequelize = new Sequelize(db_config)
 
-class Platform extends Model {};
-Platform.init ({
+class Blacklistedtoken extends Model {};
+Blacklistedtoken.init ({
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -11,14 +12,20 @@ Platform.init ({
                 primaryKey: true,
             },
 
-            platform: {
-                type: DataTypes.STRING,
+            token: {
+                type: DataTypes.TEXT,
                 allowNull: false,
             },
+
+            date: {
+                type: DataTypes.DATE,
+                allowNull: false,
+            }
         },
         {
             sequelize,
-            modelName: "Platform"
+            modelName: "Blacklistedtokens"
         }
     );
-export default Platform;
+
+export default Blacklistedtoken;

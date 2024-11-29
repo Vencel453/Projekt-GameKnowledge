@@ -2,6 +2,7 @@ import express from "express";
 import fs from "fs";
 import https from "https"
 import path from "path";
+import cors from "cors"
 import { fileURLToPath } from "url";
 import { Sequelize } from "sequelize";
 import { db_config } from "./config/config.js";
@@ -9,10 +10,12 @@ import RegistRouter from "./routes/regist.router.js";
 import MainPageRouter from "./routes/mainpage.router.js";
 import LoginRouter from "./routes/login.router.js";
 
-
 const PORT = 3000;
 const app = express();
 const sequelize = new Sequelize(db_config);
+
+// A frontend elérése a 4200-as porton
+app.use(cors({origin: 4200}));
 
 app.use(express.json());
 
@@ -36,6 +39,7 @@ app.use("/", MainPageRouter);
 app.use("/", RegistRouter);
 app.use("/", LoginRouter);
 
+// A szerver indítása
 try {
     await sequelize.authenticate();
     console.log('Az adatbázishoz való csatlakozás sikeres!');

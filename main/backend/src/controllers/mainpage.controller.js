@@ -4,11 +4,11 @@ export default {
     MainpageGetController: (req, res) => {
         res.sendStatus(501);
     },
+    // Ez a metódus kijelentkezteti a felhasználót, ehhez a 'jwtHandler' fájl egy metódusát hívja meg és küldi ki a megfelelő kódot és
+    // üzenetet, ha valami hiba történik akkor hiba üznetet ki írja a konzolra
     MainpagePostController: async (req, res) => {
-        // Kijelentkezés meghívása
-        console.log("Cső!")
         try {
-            jwtHandler.LoggingOut(req, res);
+            jwtHandler.LoggingOut(req);
             res.status(200).json({
                 error: "false",
                 message: "The users token has been invalidated!"
