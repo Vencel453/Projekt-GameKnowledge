@@ -12,6 +12,15 @@ Blacklistedtoken.init ({
                 primaryKey: true,
             },
 
+            userId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: "User",
+                    key: "id",
+                },
+            },
+
             token: {
                 type: DataTypes.TEXT,
                 allowNull: false,

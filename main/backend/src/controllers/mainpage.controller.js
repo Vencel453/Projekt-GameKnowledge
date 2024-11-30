@@ -8,7 +8,7 @@ export default {
     // üzenetet, ha valami hiba történik akkor hiba üznetet ki írja a konzolra
     MainpagePostController: async (req, res) => {
         try {
-            jwtHandler.LoggingOut(req);
+            jwtHandler.Blacklisting(req);
             res.status(200).json({
                 error: "false",
                 message: "The users token has been invalidated!"

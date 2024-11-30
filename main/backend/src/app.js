@@ -42,13 +42,12 @@ app.use("/", LoginRouter);
 // A szerver indítása
 try {
     await sequelize.authenticate();
-    console.log('Az adatbázishoz való csatlakozás sikeres!');
+    console.log('The test connection to the server was succesfull!');
     https.createServer(verify, app).listen(PORT, () => {
-        console.log(`A backend szerver elindult a következő címen: https://localhost:${PORT}/`);
-        console.log(`A regisztráció oldala: https://localhost:${PORT}/registration`);
+        console.log(`The backend server is running on: https://localhost:${PORT}/`);
     });
     
 } catch (error) {
-    console.error('Nem sikerült csatlakozni a szerverhez!');
+    console.error('Can not connect to the server!');
     sequelize.close();
 }

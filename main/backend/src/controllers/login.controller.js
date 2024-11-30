@@ -27,7 +27,7 @@ export default {
             // Ha a felhasználónév és a jelszó is helyesen van megadva akkor a felhasználóhoz készül egy token és beengedi az oldalra
             // Más esetben hiba üzenetet küld, hogy a felhasználónév vagy a jelszó helytelen
             if (correctUser && correctPassword) {
-                const token = await jwtHandler.CreatingToken(correctUser.username);
+                const token = await jwtHandler.CreatingToken(correctUser.username, correctUser.email);
 
                 res.status(200).json({
                     error: "false",

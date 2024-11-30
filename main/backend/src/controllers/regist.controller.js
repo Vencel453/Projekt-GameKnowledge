@@ -13,7 +13,7 @@ export default {
             res.status(400).json({
                 error: "true",
                 message: "Not every parameter was filled!"
-            })
+            });
             return;
         }
         
@@ -35,7 +35,7 @@ export default {
                 res.status(409).json({
                     error: "true",
                     message: "There's already an user with this username or email address!"
-                })
+                });
                 return;
             }
 
@@ -52,7 +52,7 @@ export default {
                 res.status(400).json({
                     error: "true",
                     message: "The username is not in the correct length!"
-                })
+                });
                 return;
             }
 
@@ -61,7 +61,7 @@ export default {
                 res.status(400).json({
                     error: "true",
                     message: "The passwords don't match!"
-                })
+                });
                 return;
             }
 
@@ -78,7 +78,7 @@ export default {
                 res.status(400).json({
                     error: "true",
                     message: "The password isn't in a correct form!"
-                })
+                });
                 return;
             }
 
@@ -126,7 +126,6 @@ export default {
             res.status(500).json({
                 error: "true",
                 message: "Something went wrong while creating an user!",
-                errorCode: error,
             });
             return;
             }
