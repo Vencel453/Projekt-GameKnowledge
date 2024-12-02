@@ -1,0 +1,43 @@
+.Rlogo{
+    text-align: center;
+}
+
+.Rlogo #Rlogo{
+    width: 10%;
+    height: 10%;
+}
+
+#title{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.form{
+    text-align: center;
+}
+
+.form-label{
+    font-weight: bold;
+    color: white;
+}
+
+.RegContent{
+    padding-top: 5%;
+}
+
+
+.Regbutton{
+    background-color: #A0B6F7;
+    border-style: double;
+    font-weight: bold;
+}
+
+.form-control-sm{
+    background-color: #A0B6F7;
+}
+
+input::placeholder{
+    color: rgba(0, 0, 0, 0.551);
+}
+
