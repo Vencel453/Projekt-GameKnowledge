@@ -3,6 +3,6 @@ import RegistController from "../controllers/regist.controller.js";
 
 const RegistRouter = Router();
 
-RegistRouter.put("/registration", RegistController.RegistPutController);
+RegistRouter.post("/registration", RegistController.RegistPostController);
 
 export default RegistRouter;
