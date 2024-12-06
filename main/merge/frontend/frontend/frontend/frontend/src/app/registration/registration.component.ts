@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { HttpClient, HttpClientModule ,HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { json } from 'stream/consumers';
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [CommonModule, RouterModule, HttpClientModule],
+  imports: [CommonModule, RouterModule, HttpClientModule, ReactiveFormsModule],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss'
 })
@@ -33,12 +32,14 @@ export class RegistrationComponent {
   }
 
   onSubmit(){
+    console.log('NAAAH: ', this.registForm.value)
     if (this.registForm.valid){
-      this.http.post('https://localhost:3000/registration', this.registForm.value)
+      this.http2.post('https://localhost:3000/registration', this.registForm.value, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      })
       .subscribe({
-        Headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        }),
         next: (response: any) =>{
           if(response.status === 201 && response.body.error === 'false'){
             this.successmess = response.message;
@@ -47,8 +48,9 @@ export class RegistrationComponent {
               this.router.navigate(['/login']);
             }, 2000);
             this.registForm.reset();
-          }else{
-            (err: HttpErrorResponse) =>{
+          }
+        },
+        error:(err: HttpErrorResponse) =>{
               if(err.status === 400){
                 switch(err.error.message){
                   case "Not every parameter was filled!":
@@ -76,9 +78,7 @@ export class RegistrationComponent {
               }
               this.successmess = null;
             }
-          }
-        }
-      })
+      });
     }
   }
 }

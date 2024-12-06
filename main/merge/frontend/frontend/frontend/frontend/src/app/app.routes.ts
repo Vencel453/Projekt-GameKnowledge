@@ -10,7 +10,7 @@ export const routes: Routes = [
     {path: '', component: HomepageComponent},
     {path: 'regist', component: RegistrationComponent},
     {path: 'login', component: LoginComponent},
-    {path: '**', component: PageNotFoundComponent},         /// Unknown routes redirection
+    {path: '**', component: PageNotFoundComponent},         /// Ismeretlen útvonalak kezelése
 ];
 
 @NgModule({

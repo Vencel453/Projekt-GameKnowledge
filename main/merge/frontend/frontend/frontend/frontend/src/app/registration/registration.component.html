@@ -5,25 +5,25 @@
 <h2 id="title">Registration</h2>
 <br>
 <div class="form">
-<form action="https://localhost:3000/registration" method="post">
+<form [formGroup]="registForm" (ngSubmit)="onSubmit()">
     <div class="mb-3">
-        <label for="Input1" class="form-label">Username</label><br>
-        <input class="form-control-sm" form="Input1" type="text" placeholder="Grimlock55" required>
+        <label for="username" class="form-label">Username</label><br>
+        <input name="username" id="username" class="form-control-sm" form="Input1" formControlName="username" type="text" placeholder="Grimlock55" required>
     </div>
 
     <div class="mb-3">
-        <label for="Input2" class="form-label">Password</label><br>
-        <input class="form-control-sm" form="Input2" type="password" placeholder="Password" required>
+        <label for="password" class="form-label">Password</label><br>
+        <input name="password" id="password" class="form-control-sm" form="Input2" formControlName="password" type="password" placeholder="Password" required>
     </div>
 
     <div class="mb-3">
-        <label for="Input3" class="form-label">Password again</label><br>
-        <input class="form-control-sm" form="Input3" type="password" placeholder="Password again" required>
+        <label for="passwordAgain" class="form-label">Password again</label><br>
+        <input name="passwordAgain" id="passwordAgain" class="form-control-sm" form="Input3" formControlName="passwordAgain" type="password" placeholder="Password again" required>
     </div>
 
     <div class="mb-3">
-        <label for="Input4" class="form-label">E-mail</label><br>
-        <input class="form-control-sm" form="Input4" type="email" placeholder="grimlock341@gmail.com" required>
+        <label for="email" class="form-label">E-mail</label><br>
+        <input name="email" id="email" class="form-control-sm" form="Input4" formControlName="email" type="email" placeholder="grimlock341@gmail.com" required>
     </div>
 
     <br>
