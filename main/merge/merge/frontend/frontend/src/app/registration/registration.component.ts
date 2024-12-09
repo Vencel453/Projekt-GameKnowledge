@@ -15,18 +15,18 @@ import { CommonModule } from '@angular/common';
 })
 export class RegistrationComponent {
   registForm: FormGroup;
-  successmess: string | null = null;
-  failuremess: string | null = null;
+  success: string | null = null;
+  failure: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router){
     this.registForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(5)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(10)]],
-      passwordAgain: ['', [Validators.required, Validators.minLength(10)]]
+      username: [''],
+      email: [''],
+      password: [''],
+      passwordAgain: ['']
     });
   }
 
@@ -35,51 +35,51 @@ export class RegistrationComponent {
     if (this.registForm.valid){
       this.http.post('https://localhost:3000/registration', this.registForm.value, {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        observe: 'response'
+        'Content-Type': 'application/json'
       }),
+      observe: 'response' as 'body'
       })
       .subscribe({
         next: (response: any) =>{
           if(response.error === "false"){
-            this.successmess = response.message;
-            this.failuremess === null;
+            this.success = response.message;
+            this.failure === null;
             setTimeout(() =>{
               this.router.navigate(['/login']);
             }, 2000);
           }
         },
         error:(err: HttpErrorResponse) =>{
-            this.successmess = null;
+            this.success = null;
     if(err.status === 400){
       switch (err.error.message){
         case "Not every parameter was filled!":
-          this.failuremess = "Not every parameter was filled!";
+          this.failure = "Not every parameter was filled!";
           break;
-        case "The username is not in the correct lenght!":
-          this.failuremess = "The username is not in the correct lenght!";
+        case "The username is not in the correct length!":
+          this.failure = "The username is not in the correct length!";
           break;
         case "The passwords don't match!":
-          this.failuremess = "The passwords don't match!";
+          this.failure = "The passwords don't match!";
           break;
         case "The password isn't in a correct form!":
-          this.failuremess = "The password isn't in the correct form!";
+          this.failure = "The password isn't in the correct form!";
           break;
         case "The email is in incorrect form!":
-          this.failuremess = "The email is in incorrect form!";
+          this.failure = "The email is in incorrect form!";
           break;
         default:
-          this.failuremess = "An unexpected error occured. Please try again later.";
+          this.failure = "An unexpected error occured. Please try again later.";
       }
     }else if(err.status === 409){
-      this.failuremess = "A user with this username or email already exist!";
+      this.failure = "A user with this username or email already exist!";
     }else if(err.status === 500){
-      this.failuremess = "A server error occured. Please try again later.";
+      this.failure = "A server error occured. Please try again later.";
     }else{
-      this.failuremess = "An unexpected error occured.";
+      this.failure = "An unexpected error occured.";
     }
 
-    console.error('Error-t megkaptam:', err);
+    console.error('Error:', err);
   }
 });
     }

@@ -15,7 +15,9 @@ const app = express();
 const sequelize = new Sequelize(db_config);
 
 // A frontend elérése a 4200-as porton
-app.use(cors({origin: 4200}));
+app.use(cors({
+    origin: "https://localhost:4200"
+}));
 
 app.use(express.json());
 
