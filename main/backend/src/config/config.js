@@ -2,7 +2,7 @@
 export const db_config = {
     username: 'root',
     password: '',
-    dialect: "mariadb",
+    dialect: 'mysql',
     // Így a createdAt és updatedAt táblák automatikus létrehozását kikapcsoljuk, mert nincs rá szükségünk
     define: {
         timestamps: false,

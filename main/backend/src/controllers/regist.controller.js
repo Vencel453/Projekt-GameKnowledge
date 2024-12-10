@@ -3,9 +3,10 @@ import { Op } from 'sequelize';
 import bcryptMethods from '../bcrypt-methods/bcrypt.methods.js';
 
 export default {
-    RegistPutController: async (req, res) => {
+    RegistPostController: async (req, res) => {
         // Konstansként elmentjük azokat az adatokat amelyeket bekérünk a felhasználótól, mert ezek nem változnak
         const { username: registUsername, password: registPassword, passwordAgain: registPasswordAgain, email: registEmail} = req.body;
+        console.log(req.body);
 
         // Ha a valamelyik mező nincs kitöltve akkor akkor 400-as hibával visszaküldi, hogy hiba történt, 
         // mert nem volt minden mező kötöltve és ezeket kötelező kitölteni
@@ -28,7 +29,7 @@ export default {
                     ]
                 }
             });
-
+            
             // Ha van egyező akkor küldjön vissza egy 409 http kódot és egy üzenetet, hogy valamelyik már létezik
             // Csak a felhasználónév és az email cím egyedi oszlop, ezért csak ezeket ellenőrizzük
             if (conflictingDatas) {
