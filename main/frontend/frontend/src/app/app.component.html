@@ -1,0 +1,53 @@
+<!--Általános dolgok, amik az összes oldalon látszanak-->
+
+<!--HTML basic structure-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="windowicon" type="image/png" href="/logomain.png">           <!--For now, not working properly-->
+    <title>Homepage</title>
+</head>
+<body>
+<div class="container-fluid d-flex align-items-center">
+    <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand d-flex" href="" routerLinkActive="active">
+                <img id="logomain" src="/logomain.png" alt="logo">
+            </a>
+                <div class="nav-item search-container d-flex align-items-center">
+                    <form class="search-form d-flex" role="search">
+                     <input class="form-control-sm search-input" type="search" placeholder="Search" aria-label="Search">
+                     </form>
+                     <a>
+                        <img class="align-items-center nav-item ms-2 magnifiersearchglass" src="/magnifying-glass.png" alt="searchIcon">
+                    </a>
+                    </div>
+                
+    <div class="nav-item d-flex align-items-center">
+        <a><img class="align-items-center d-flex nav-item ms-2" id="globeicon" src="/globe.png" alt="forumIcon">
+        </a>
+        <a class="link" routerLink="">Forum</a>
+        
+        <a routerLink="/login"><img class="align-items-center d-flex nav-item ms-2" id="loginicon" src="/user.png" alt="loginIcon">
+        </a>
+        <a class="link" routerLink="/login">Login</a>
+
+        <a routerLink="/regist"><img class="align-items-center d-flex nav-item ms-2" id="registicon" src="/registicon.png" alt="registIcon">
+        </a>
+        <a class="link" routerLink="/regist">Regist</a>
+    </div>
+    <button class="menu">
+       <i class="fa fa-bars"></i>
+    </button>
+    <ul class="menucontent">
+        <!--Menu contents-->
+        <li>Minimenu</li>
+    </ul>
+</nav>
+</div>
+<router-outlet></router-outlet>
+
+</body>
+
+</html>
