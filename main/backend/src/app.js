@@ -19,6 +19,16 @@ app.use(cors({
     origin: "https://localhost:4200"
 }));
 
+app.use((req, res, next) => {
+    if(req.method === "OPTIONS") {
+        res.header("Access-Control-Allow-Origin", "GET, POST, PUT, DELETE, OPTIONS");
+        res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        res.header("Access-Control-Allow-Credentials", "true");
+        return res.status(204).end()
+    }
+    next();
+})
+
 app.use(express.json());
 
 
