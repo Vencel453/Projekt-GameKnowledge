@@ -70,6 +70,11 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "ssl": true,
+            "sslKey": "C:/Users/user/Downloads/merge/merge/backend/src/certs/gameknowledge.key",
+            "sslCert": "C:/Users/user/Downloads/merge/merge/backend/src/certs/gameknowledge.crt"
+          },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {

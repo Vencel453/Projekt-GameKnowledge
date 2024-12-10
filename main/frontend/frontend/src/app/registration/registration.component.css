@@ -41,3 +41,9 @@ input::placeholder{
     color: rgba(0, 0, 0, 0.551);
 }
 
+.reportmess{
+    color: #A0B6F7;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5%;
+}
