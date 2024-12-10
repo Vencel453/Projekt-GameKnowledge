@@ -29,7 +29,7 @@ export default {
                     ]
                 }
             });
-
+            
             // Ha van egyező akkor küldjön vissza egy 409 http kódot és egy üzenetet, hogy valamelyik már létezik
             // Csak a felhasználónév és az email cím egyedi oszlop, ezért csak ezeket ellenőrizzük
             if (conflictingDatas) {
