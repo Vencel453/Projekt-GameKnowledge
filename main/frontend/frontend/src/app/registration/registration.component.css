@@ -45,5 +45,6 @@ input::placeholder{
     color: #A0B6F7;
     font-weight: bold;
     text-align: center;
-    padding-top: 5%;
+    padding-top: 2%;
+    font-size: larger;
 }

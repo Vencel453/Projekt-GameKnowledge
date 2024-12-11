@@ -4,7 +4,7 @@ import models from "../models/index.js";
 
 export default {
     // A bejelentkezés kezelő metódus
-    LoginPutController: async (req, res) => {
+    LoginPostController: async (req, res) => {
         // Mivel ezeknek az értéke nem változik, konstansként mentjük el hogy tovább dolgozzunk vele
         const {username: loginUsername, password: loginPassword} = req.body;
 

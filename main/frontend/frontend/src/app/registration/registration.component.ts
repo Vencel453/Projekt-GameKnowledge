@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { Validators } from '@angular/forms';
 import { HttpClient,HttpErrorResponse, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -85,17 +84,4 @@ export class RegistrationComponent {
     }
   }
 }
-  /*private handleError(err: HttpErrorResponse){
-    if(err.status === 400){
-      this.failuremess = err.error.message || 'Validation error occured.';
-  }else if(err.status === 409){
-    this.failuremess = "There's already a user with this username or email address!";
-  }else if(err.status === 500){
-    this.failuremess = "Something went wrong while creating an user!";
-  }else{
-    this.failuremess = 'Unexpected error occured.';
-  }
-  this.successmess = null;      
-    }
-  }*/
 

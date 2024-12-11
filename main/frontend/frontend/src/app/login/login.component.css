@@ -1,8 +1,8 @@
+
 #textblock{
     font-weight: bold;
     text-decoration: underline;
     font-style: italic;
-    -moz-text-align-last: auto;
 }
 
 .LogContent{
@@ -29,6 +29,10 @@
     color: white;
     font-weight: bold;
     cursor: pointer;
+}
+
+.form{
+    text-align: center;
 }
 
 .Logbutton{
