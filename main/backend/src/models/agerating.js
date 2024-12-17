@@ -1,5 +1,4 @@
 import {Sequelize, DataTypes, Model} from "sequelize";
-import Game from "./game.js";
 import { db_config } from "../config/config.js";
 const sequelize = new Sequelize(db_config)
 
@@ -36,11 +35,5 @@ Agerating.init ({
             modelName: "Agerating"
         }
     );
-
-    Game.hasMany(Agerating, {
-        foreignKey: "gameId",
-        onDelete: 'CASCADE',
-    });
-    Agerating.belongsTo(Game);
 
 export default Agerating;

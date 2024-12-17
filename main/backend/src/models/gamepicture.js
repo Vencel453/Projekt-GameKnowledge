@@ -1,5 +1,4 @@
 import {Sequelize, DataTypes, Model} from "sequelize";
-import Game from "./game.js";
 import { db_config } from "../config/config.js";
 const sequelize = new Sequelize(db_config)
 
@@ -31,10 +30,5 @@ Gamepicture.init ({
             modelName: "Gamepicture"
         }
     );
-    Game.hasMany(Gamepicture, {
-        foreignKey: 'gameId',
-        onDelete: 'CASCADE',
-    });
-    Gamepicture.belongsTo(Game);
 
 export default Gamepicture;

@@ -1,6 +1,4 @@
 import {Sequelize, DataTypes, Model} from "sequelize";
-import Game from "./game.js";
-import Language from "./language.js";
 import { db_config } from "../config/config.js";
 const sequelize = new Sequelize(db_config)
 
@@ -43,16 +41,5 @@ Gameslanguage.init ({
             modelName: "Gameslanguage"
         }
     );
-    Game.hasMany(Gameslanguage, {
-        foreignKey: 'gameId',
-        onDelete: 'CASCADE',
-    });
-    Gameslanguage.belongsTo(Game);
-
-    Language.hasMany(Gameslanguage, {
-        foreignKey: 'languageId',
-        onDelete: 'CASCADE',
-    });
-    Gameslanguage.belongsTo(Language);
 
 export default Gameslanguage;

@@ -40,6 +40,7 @@ export default {
             // más esetben visszaküldük a megfelelő http kódot és üzenetet
             await compactDecrypt(newToken, securekey)
                 .then(() => {
+                    this.ExntendingToken(req, res, next);
                     next();
                 })
                 .catch((error) => {
@@ -49,7 +50,7 @@ export default {
                         message: "The token is invalid or expired!"
                     });
                     return;
-                })
+                });
         } 
         catch (error) {
             console.log(error);
