@@ -1,46 +1,54 @@
+import { NgFor } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { Router, RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { response } from 'express';
+import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, RouterModule, FormsModule],
+  imports: [FormsModule, HttpClientModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  username = '';
-  password = '';
-  errormes = '';
+errormess: string = '';
+successmess: string = '';
+username: string = '';
+password: string = '';
 
-  constructor(private authservice: AuthService, private router: Router){}
+constructor(private http: HttpClient, private router: Router){
 
-  onLogin(): void{
-    this.authservice.login(this.username, this.password).subscribe({
-      next: (response) => {
-        if(!response.error){
-          this.authservice.saveToken(response.token);
+}
+
+onSubmit(): void {
+    this.http.post<any>(`http://localhost:3000/login`, {
+      username: this.username,
+      password: this.password
+    })
+    .subscribe({
+      next: (response) =>{
+        if(response.error === 'false'){
+          this.successmess = response.message;
+
+          localStorage.setItem('token', response.token);
+
           this.router.navigate(['/']);
-      }
-    },
-    error: (error) =>{
-      if(error.status === 400){
-          if(error.error.message === 'The username or password is incorrect'){
-            this.errormes = 'The username or password is incorrect!';
-          }else if(error.error.message === 'Not every field is filed'){
-            this.errormes = 'Not every field is filled!';
-          }
-      }else if(error.status === 500){
-        this.errormes = 'An error occured during the login. Please try again later!';
-      }else{
-        this.errormes = 'An unknown error occured.';
-      }
-    }
-  });
+        }
+      },
+      error: (err) => {
+        if(err.status === 400){
+          this.errormess = err.error.message;
+        }else if(err.status === 500){
+          this.errormess = err.error.message
+        }else{
+          this.errormess = 'An unknown error occured!';
+        }
+        console.error(err);
+      },
+    });
   }
 }

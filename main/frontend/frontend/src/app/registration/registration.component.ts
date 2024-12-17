@@ -32,7 +32,7 @@ export class RegistrationComponent {
   onSubmit(){
     console.log('Form adatok:', this.registForm.value);
     if (this.registForm.valid){
-      this.http.post('https://localhost:3000/registration', this.registForm.value, {
+      this.http.post('http://localhost:3000/registration', this.registForm.value, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
@@ -84,4 +84,17 @@ export class RegistrationComponent {
     }
   }
 }
+  /*private handleError(err: HttpErrorResponse){
+    if(err.status === 400){
+      this.failuremess = err.error.message || 'Validation error occured.';
+  }else if(err.status === 409){
+    this.failuremess = "There's already a user with this username or email address!";
+  }else if(err.status === 500){
+    this.failuremess = "Something went wrong while creating an user!";
+  }else{
+    this.failuremess = 'Unexpected error occured.';
+  }
+  this.successmess = null;      
+    }
+  }*/
 

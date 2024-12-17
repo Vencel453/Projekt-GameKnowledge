@@ -16,18 +16,8 @@ const sequelize = new Sequelize(db_config);
 
 // A frontend elérése a 4200-as porton
 app.use(cors({
-    origin: "https://localhost:4200"
+    origin: "http://localhost:4200"
 }));
-
-app.use((req, res, next) => {
-    if(req.method === "OPTIONS") {
-        res.header("Access-Control-Allow-Origin", "GET, POST, PUT, DELETE, OPTIONS");
-        res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-        res.header("Access-Control-Allow-Credentials", "true");
-        return res.status(204).end()
-    }
-    next();
-})
 
 app.use(express.json());
 
@@ -55,9 +45,9 @@ app.use("/", LoginRouter);
 try {
     await sequelize.authenticate();
     console.log('The test connection to the server was succesfull!');
-    https.createServer(verify, app).listen(PORT, () => {
+    app.listen(PORT, () => {
         console.log(`The backend server is running on: https://localhost:${PORT}/`);
-    });
+    })
     
 } catch (error) {
     console.error('Can not connect to the server!');
