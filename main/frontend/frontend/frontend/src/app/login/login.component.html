@@ -1,0 +1,31 @@
+<div class="LogContent">
+    <h1 class="Llogo">
+        <img id="Llogo" src="/logomain.png" alt="Logo">
+    </h1>
+    <h2 id="title">Login</h2>
+    <br>
+    <div class="form">
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <div class="mb-3">
+                <label for="Input1" class="form-label">Username</label><br>
+                <input class="form-control-sm" [(ngModel)]="username" name="username" form="Input1" type="text" placeholder="Grimlock55">
+            </div>
+
+            <div class="mb-3">
+                <label for="Input2" class="form-label">Password</label><br>
+                <input class="form-control-sm" [(ngModel)]="password" name="password" form="Input2" type="password" placeholder="Password">
+                <div class="form-text" id="textblock">
+                   <a>Forget your password?</a>
+                </div>
+            </div>     
+            
+            <br>
+
+            <div class="d-grid gap-2 d-md-block">
+                <button class="Logbutton btn btn-lg" type="submit">Login</button>
+            </div>
+            <br>
+        </form>
+        <div *ngIf="errormess" class="error">{{errormess}}</div>
+        <div *ngIf="successmess" class="error">{{successmess}}</div>
+    </div>
