@@ -1,0 +1,48 @@
+
+.carousel-item img{
+    height: auto;
+    object-fit: cover;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carousel-control-prev{
+    margin-left: 18%;
+    color: #A0B6F7;
+}
+
+.carousel-control-next{
+    margin-right: 18%;
+    color: #A0B6F7;
+}
+
+.release{
+    color: #5980f8;
+    font-weight: bold;
+    padding-left: 65%;
+    font-size: larger;
+}
+
+#Coming{
+    color: #A0B6F7;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    font-size: xx-large;
+}
+
+#splitter1{
+    border: 3px solid black;
+}
+
+.splitter2{
+    border: 2px solid black;
+}
+
+.titles{
+    color: white;
+    font-weight: bold;
+    font-size: x-large;
+    padding-left: 2%;
+}

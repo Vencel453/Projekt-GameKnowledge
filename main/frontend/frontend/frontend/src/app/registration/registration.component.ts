@@ -52,8 +52,8 @@ export class RegistrationComponent {
             this.success = null;
     if(err.status === 400){
       switch (err.error.message){
-        case "Not every parameter was filled!":
-          this.failure = "Not every parameter was filled!";
+        case "Not every field was filled!":
+          this.failure = "Not every field was filled!";
           break;
         case "The username is not in the correct length!":
           this.failure = "The username is not in the correct length!";
@@ -62,7 +62,7 @@ export class RegistrationComponent {
           this.failure = "The passwords don't match!";
           break;
         case "The password isn't in a correct form!":
-          this.failure = "The password isn't in the correct form!";
+          this.failure = "The password is in incorrect form!";
           break;
         case "The email is in incorrect form!":
           this.failure = "The email is in incorrect form!";
