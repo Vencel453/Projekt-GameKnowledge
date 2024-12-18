@@ -2,7 +2,6 @@ import { Op } from "sequelize";
 import Game from "../models/game.js";
 import Tag from "../models/tag.js";
 import Gamestag from "../models/gamestag.js";
-import Gamepicture from "../models/gamepicture.js";
 import jweMethods from "../utilities/jwe.methods.js";
 
 export default {
@@ -22,7 +21,6 @@ export default {
                     }
                 }
             });
-            const jsonUpComingGames = JSON.stringify(upcomingGames, null, 2);
 
             // Most azokat a játékokat kérjük le amelyek 1 hónapon belül jelentek meg
             const oneMonthBack = new Date();
@@ -36,163 +34,86 @@ export default {
                     }
                 }
             });
-            const jsonNewReleasesGames = JSON.stringify(newReleaseGames, null, 2);
 
             // Itt 5 játék kategóriát küldünk le amik: Shooter, Adventure, RPG, Racing, Strategy
             // Egy kategóriához maximum 15 játék tartozik és ABC sorrendben jelennek meg, képpekkel együtt
 
             // 15 Shooter/lövöldözős játék
             const shooters = await Game.findAll({
-                attributes: ["gameTitle"],
-                include: [
-                    {
+                attributes: ["gameTitle", "boxart"],
+                limit: 15,
+                include: [{
                         model: Tag,
+                        through: Gamestag,
                         where: { tag: "Shooter" },
                         attributes: [],
-                    },
-                    {
-                        model: Gamepicture,
-                        attributes: ["url"],
-                    }
-                ]
+                        required: true,
+                    }],
             });
-            const tempShooters = shooters.map(game => {
-                return {
-                    title: game.gameTitle,
-                    boxart: game.Games[0]?.Gamepictures[0]?.url || null
-                }
-            });
-            const jsonShooters = JSON.stringify(tempShooters, null, 2);
-
+            
             // '15 Adventure/Kaland játék
             const adventures = await Game.findAll({
-                include: [
-                    {
-                        model: Tag,
-                        through: {
-                            model: Gamestag,
-                            where: { tag: "Adventure" }
-                        },
-                        attributes: [],
-                        include: [{
-                            model: Gamepicture,
-                            attributes: ["url"],
-                        }],
-                    }
-                ],
+                attributes: ["gameTitle", "boxart"],
                 limit: 15,
-                attributes: ["gameTitle", ""]
+                include: [{
+                        model: Tag,
+                        through: Gamestag,
+                        where: { tag: "Adventure" },
+                        attributes: [],
+                        required: true,
+                    }],
             });
-            const jsonAdventures = JSON.stringify(adventures.map(game => {
-                return {
-                    title: game.gameTitle,
-                    boxart: game.Games[0]?.Gamepictures[0]?.url || null
-                }
-            }), null, 2);
 
             // 15 RPG/Szerep játék
             const rpgs = await Game.findAll({
-                include: [
-                    {
-                        model: Tag,
-                        through: {
-                            model: Gamestag,
-                            where: { tag: "RPG" }
-                        },
-                        attributes: [],
-                        include: [{
-                            model: Gamepicture,
-                            attributes: ["url"],
-                        }],
-                    }
-                ],
+                attributes: ["gameTitle", "boxart"],
                 limit: 15,
-                attributes: ["gameTitle", ""]
+                include: [{
+                        model: Tag,
+                        through: Gamestag,
+                        where: { tag: "RPG" },
+                        attributes: [],
+                        required: true,
+                    }],
             });
-            const jsonRpgs = JSON.stringify(rpgs.map(game => {
-                return {
-                    title: game.gameTitle,
-                    boxart: game.Games[0]?.Gamepictures[0]?.url || null
-                }
-            }), null, 2);
 
             // 15 Racing/Versenyzős játék
             const racings = await Game.findAll({
-                include: [
-                    {
-                        model: Tag,
-                        through: {
-                            model: Gamestag,
-                            where: { tag: "Racing" }
-                        },
-                        attributes: [],
-                        include: [{
-                            model: Gamepicture,
-                            attributes: ["url"],
-                        }],
-                    }
-                ],
+                attributes: ["gameTitle", "boxart"],
                 limit: 15,
-                attributes: ["gameTitle", ""]
+                include: [{
+                        model: Tag,
+                        through: Gamestag,
+                        where: { tag: "Racing" },
+                        attributes: [],
+                        required: true,
+                    }]
             });
-            const jsonRacings = JSON.stringify(racings.map(game => {
-                return {
-                    title: game.gameTitle,
-                    boxart: game.Games[0]?.Gamepictures[0]?.url || null
-                }
-            }), null, 2);
 
             // 15 Strategy/Stratégiai játékok
             const strategies = await Game.findAll({
-                include: [
-                    {
-                        model: Tag,
-                        through: {
-                            model: Gamestag,
-                            where: { tag: "Strategy" }
-                        },
-                        attributes: [],
-                        include: [{
-                            model: Gamepicture,
-                            attributes: ["url"],
-                        }],
-                    }
-                ],
+                attributes: ["gameTitle", "boxart"],
                 limit: 15,
-                attributes: ["gameTitle", ""]
+                include: [{
+                        model: Tag,
+                        through: Gamestag,
+                        where: { tag: "Strategy" },
+                        attributes: [],
+                        required: true
+                    }],
             });
-            const jsonStrategies = JSON.stringify(strategies.map(game => {
-                return {
-                    title: game.gameTitle,
-                    boxart: game.Games[0]?.Gamepictures[0]?.url || null
-                }
-            }), null, 2);
 
             res.status(200).json({
-                error: true,
+                error: false,
                 message: "Game datas successfully fetched!",
                 datas: {
-                    upComings: {
-                        jsonUpComingGames
-                    },
-                    newReleases: {
-                        jsonNewReleasesGames
-                    },
-                    shooterGames: {
-                        jsonShooters
-                    },
-                    adventuresGames: {
-                        jsonAdventures
-                    },
-                    rpgGames: {
-                        jsonRpgs
-                    },
-                    racingGames: {
-                        jsonRacings
-                    },
-                    strategyGames: {
-                        jsonStrategies
-                    }
+                    upcomingGames,
+                    newReleaseGames,
+                    shooters,
+                    adventures,
+                    rpgs,
+                    racings,
+                    strategies
                 }
             });
             return;

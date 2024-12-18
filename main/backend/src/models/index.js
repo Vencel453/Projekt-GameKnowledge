@@ -126,7 +126,7 @@ Game.hasMany(Gamepicture, {
 });
 Gamepicture.belongsTo(Game);
 
-// Nyelv játék kapcsolat
+// Nyelv - játék kapcsolat
 Language.belongsToMany(Game, {
     through: Gameslanguage,
     foreignKey: "languageId",
@@ -203,8 +203,6 @@ Game.belongsToMany(Tag, {
     foreignKey: "gameId",
     otherKey: "tagId",
 });
-
-
 
 // Szinkronizáljuk a modeleket az adatbázissal
 sequelize.sync()

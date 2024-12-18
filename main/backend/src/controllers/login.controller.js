@@ -13,7 +13,7 @@ export default {
             (loginUsername == "" || loginPassword == "")) {
             res.status(400).json({
                 error: "true",
-                message: "Not every field were filled!"
+                message: "Not every field was filled!"
             });
             return;
         }

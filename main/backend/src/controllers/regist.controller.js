@@ -82,7 +82,7 @@ export default {
             if (!correctPassword) {
                 res.status(400).json({
                     error: "true",
-                    message: "The password isn't in a correct form!"
+                    message: "The password is in incorrect form!"
                 });
                 return;
             }
@@ -130,7 +130,7 @@ export default {
             console.log(error);
             res.status(500).json({
                 error: "true",
-                message: "Something went wrong while creating an user!",
+                message: "Something went wrong creating an user!",
             });
             return;
             }
