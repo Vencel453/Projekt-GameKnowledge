@@ -53,3 +53,13 @@
 <br>
 <p class="titles">New releases</p>
 <hr class="splitter2">
+<div class="gamelist-container">
+    <button class="arrow arrow-left" (click)="leftscroll()">&#9664;</button>
+    <div class="gamelist" #gamelist>
+        <div class="item" *ngFor="let game of games">
+            <img [src]="game.boxart" [alt]="game.name" />
+            <p id="gamename">{{game.name}}</p>
+        </div>
+    </div>
+    <button class="arrow arrow-right" (click)="rightscroll()">&#9654;</button>
+</div>

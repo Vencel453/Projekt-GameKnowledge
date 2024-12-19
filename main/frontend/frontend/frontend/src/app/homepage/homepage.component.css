@@ -43,6 +43,84 @@
 .titles{
     color: white;
     font-weight: bold;
-    font-size: x-large;
+    font-size: xx-large;
     padding-left: 2%;
+}
+
+.game-list-container{
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.gamelist{
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.item{
+    flex-shrink: 0;
+    width: 150px;
+    text-align: center;
+    margin-right: 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.item img{
+    width: 130%;
+    height: 90%;
+    object-fit: fill;
+    border-radius: 8px;
+    image-rendering: pixelated;
+}
+
+.item p{
+    text-align: center;
+}
+
+.arrow{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+}
+
+.arrow-left{
+    left: 10px;
+}
+
+.arrow-right{
+    right: 10px;
+}
+
+.arrow:focus{
+    outline: none;
+}
+
+@media (max-width: 600px){
+    .item{
+        width: 100px;
+    }
+    .arrow{
+        padding: 8px;
+    }
+}
+
+#gamename{
+    color:white;
+    font-size: large;
+    font-weight: bold;
 }
