@@ -9,11 +9,13 @@
 .carousel-control-prev{
     margin-left: 18%;
     color: #A0B6F7;
+    z-index: 5;
 }
 
 .carousel-control-next{
     margin-right: 18%;
     color: #A0B6F7;
+    z-index: 5;
 }
 
 .release{
@@ -61,7 +63,13 @@
     display: flex;
     gap: 16px;
     overflow-x: auto;
-    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-left: 25px;
+}
+
+.gamelist::-webkit-scrollbar {
+    display: none;
 }
 
 .item{
@@ -71,6 +79,8 @@
     margin-right: 5%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .item img{
