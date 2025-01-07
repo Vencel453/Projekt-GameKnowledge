@@ -8,10 +8,10 @@ export default {
     MainpageGetController: async(req, res) => {
         // Ez a főoldalhoz kéri le az adatbázisból az adatokat, így egyből try catch párban kezdjük a kódot
         try {
-            // Először azokat a játékokat kérjük le amelyek az elkövetkező 1 hónapban megjelennek
+            // Először azokat a játékokat kérjük le amelyek az elkövetkező 6 hónapban megjelennek
             const currentDate = new Date();
             const oneMonthForward = new Date();
-            oneMonthForward.setMonth(currentDate.getMonth() + 1)
+            oneMonthForward.setMonth(currentDate.getMonth() + 6);
 
             const upcomingGames = await Game.findAll({
                 attributes: ['gameTitle', 'boxart'],
@@ -22,15 +22,15 @@ export default {
                 }
             });
 
-            // Most azokat a játékokat kérjük le amelyek 1 hónapon belül jelentek meg
+            // Most azokat a játékokat kérjük le amelyek 6 hónapon belül jelentek meg
             const oneMonthBack = new Date();
-            oneMonthBack.setMonth(currentDate.getMonth() - 1)
+            oneMonthBack.setMonth(currentDate.getMonth() - 6);
 
             const newReleaseGames = await Game.findAll({
                 attributes: ['gameTitle', 'boxart'],
                 where: {
                     release: {
-                        [Op.between]: [currentDate, oneMonthBack]
+                        [Op.between]: [oneMonthBack, currentDate]
                     }
                 }
             });
@@ -42,6 +42,9 @@ export default {
             const shooters = await Game.findAll({
                 attributes: ["gameTitle", "boxart"],
                 limit: 15,
+                where: {release: {
+                    [Op.lte]: currentDate
+                }},
                 include: [{
                         model: Tag,
                         through: Gamestag,
@@ -55,6 +58,9 @@ export default {
             const adventures = await Game.findAll({
                 attributes: ["gameTitle", "boxart"],
                 limit: 15,
+                where: {release: {
+                    [Op.lte]: currentDate
+                }},
                 include: [{
                         model: Tag,
                         through: Gamestag,
@@ -68,6 +74,9 @@ export default {
             const rpgs = await Game.findAll({
                 attributes: ["gameTitle", "boxart"],
                 limit: 15,
+                where: {release: {
+                    [Op.lte]: currentDate
+                }},
                 include: [{
                         model: Tag,
                         through: Gamestag,
@@ -81,6 +90,9 @@ export default {
             const racings = await Game.findAll({
                 attributes: ["gameTitle", "boxart"],
                 limit: 15,
+                where: {release: {
+                    [Op.lte]: currentDate
+                }},
                 include: [{
                         model: Tag,
                         through: Gamestag,
@@ -94,6 +106,9 @@ export default {
             const strategies = await Game.findAll({
                 attributes: ["gameTitle", "boxart"],
                 limit: 15,
+                where: {release: {
+                    [Op.lte]: currentDate
+                }},
                 include: [{
                         model: Tag,
                         through: Gamestag,
