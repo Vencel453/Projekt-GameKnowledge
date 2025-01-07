@@ -20,12 +20,12 @@ export class HomepageComponent {
       {name: 'Antonblast', boxart: './antonblast.png'},
     ];
 
-    leftscroll() {
+    leftscroll(listID: string) {
       const gamelist = document.querySelector('.gamelist') as HTMLElement;
       gamelist.scrollBy({left: -300, behavior: 'smooth'});
     }
 
-    rightscroll(){
+    rightscroll(listID: string){
       const gamelist = document.querySelector('.gamelist') as HTMLElement;
       gamelist.scrollBy({left: 300, behavior: 'smooth'});
     }

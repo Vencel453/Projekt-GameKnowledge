@@ -53,13 +53,18 @@
 <br>
 <p class="titles">New releases</p>
 <hr class="splitter2">
-<div class="gamelist-container">
-    <div class="arrow arrow-left" id="list1" (click)="leftscroll()">&lt;</div>
+<div class="gamelist-container position-relative">
+    <button class="carousel-control-prev" type="button" (click)="leftscroll('list1')"></button>
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
     <div class="gamelist" id="gamelist1" #gamelist>
         <div class="item" *ngFor="let game of games">
             <img [src]="game.boxart" [alt]="game.name" />
             <p id="gamename">{{game.name}}</p>
         </div>
     </div>
-    <div class="arrow arrow-right" id="list1" (click)="rightscroll()">&gt;</div>
+    <button class="carousel-control-next" type="button" (click)="rightscroll('list1')"></button>
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
 </div>
+<hr class="splitter2">
