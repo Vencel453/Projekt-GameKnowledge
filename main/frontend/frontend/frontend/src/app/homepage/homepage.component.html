@@ -49,22 +49,33 @@
         </button>
 </div>
 <br>
-<hr id="splitter1">
+    <hr class="splitter1">
+    <br>
+        <p class="titles">New releases</p>
+        <hr class="splitter2">
+            <div class="gamelist-container position-relative">
+                <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll('gamelist')"></button>
+                    <div class="gamelist" id="gamelist" #gamelist>
+                        <div class="item" *ngFor="let game of games1">
+                            <img [src]="game.boxart" [alt]="game.name" />
+                             <p id="gamename">{{game.name}}</p>
+                         </div>
+                    </div>
+    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll('gamelist')"></button>
+            </div>
+<hr class="splitter1">
 <br>
-<p class="titles">New releases</p>
-<hr class="splitter2">
-<div class="gamelist-container position-relative">
-    <button class="carousel-control-prev" type="button" (click)="leftscroll('list1')"></button>
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-    <div class="gamelist" id="gamelist1" #gamelist>
-        <div class="item" *ngFor="let game of games">
-            <img [src]="game.boxart" [alt]="game.name" />
-            <p id="gamename">{{game.name}}</p>
-        </div>
-    </div>
-    <button class="carousel-control-next" type="button" (click)="rightscroll('list1')"></button>
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-</div>
-<hr class="splitter2">
+<p class="titles">JRPG's</p>
+    <hr class="splitter2">
+            <div class="gamelist-container position-relative">
+                <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll('gamelist2')"></button>
+                    <div class="gamelist" id="gamelist2" #gamelist>
+                        <div class="item" *ngFor="let game of games2">
+                            <img [src]="game.boxart" [alt]="game.name" />
+                            <p id="gamename">{{game.name}}</p>
+                        </div>
+                    </div>
+                    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll('gamelist2')"></button>
+            </div>
+    <hr class="splitter2">
+

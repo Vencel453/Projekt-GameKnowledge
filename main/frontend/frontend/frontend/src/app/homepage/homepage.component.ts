@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,7 +9,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './homepage.component.css'
 })
 export class HomepageComponent {
-    games = [
+
+    @ViewChildren('gamelist') gamelists!: QueryList<ElementRef>;
+
+    games1 = [
       {name: 'Indiana Jones and the Great Circle', boxart: './indiana.jpg'},
       {name: 'Alien: Rouge Incursion', boxart: './alien.avif'},
       {name: 'Farming Simulator 25', boxart: './farming.avif'},
@@ -19,14 +22,28 @@ export class HomepageComponent {
       {name: 'FairyTail 2', boxart: './fairytail2.png'},
       {name: 'Antonblast', boxart: './antonblast.png'},
     ];
+    games2 = [
+      {name: 'Final Fantasy VII Remake', boxart: './finalfantasy.jpg'},
+      {name: 'Metaphor ReFantazio', boxart: './metaphor.jpg'},
+      {name: 'Monster Hunter Rise', boxart: './monsterhunter.jpg'},
+      {name: 'Persona 3: Reload', boxart: './persona3.png'},
+      {name: 'Persona 5 Royale', boxart: './persona5.jpg'},
+      {name: 'Pirate Yakuza in Hawaii', boxart: './pirateyakuza.png'},
+      {name: 'Shin Megami Tensei 3: Nocturne', boxart: './smtnocturne.png'},
+      {name: 'Shin Megami Tensei Vengance', boxart: './smtveng.jpg'},
+    ]
 
     leftscroll(listID: string) {
-      const gamelist = document.querySelector('.gamelist') as HTMLElement;
-      gamelist.scrollBy({left: -300, behavior: 'smooth'});
+      const gamelist1 = document.getElementById('gamelist');
+      if(gamelist1){
+        gamelist1.scrollBy({left: -300, behavior: 'smooth'});
+      }
     }
 
     rightscroll(listID: string){
-      const gamelist = document.querySelector('.gamelist') as HTMLElement;
-      gamelist.scrollBy({left: 300, behavior: 'smooth'});
+      const gamelist1 = document.getElementById('gamelist');
+      if(gamelist1){
+        gamelist1.scrollBy({left: 300, behavior: 'smooth'});
+      }
     }
 }
