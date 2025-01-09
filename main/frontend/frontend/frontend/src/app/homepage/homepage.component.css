@@ -97,8 +97,8 @@
 }
 
 .item img{
-    width: 130%;
-    height: 90%;
+    width: 140%;
+    height: 80%;
     object-fit: fill;
     border-radius: 8px;
     image-rendering: pixelated;

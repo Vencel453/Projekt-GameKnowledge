@@ -100,4 +100,12 @@ body{
     display: flex;
 }
 
+.divider{
+    width: 1px;
+    background-color: white;
+    height: 100%;
+}
 
+.flex-grow-1{
+    flex-grow: 1;
+}

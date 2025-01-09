@@ -33,17 +33,22 @@ export class HomepageComponent {
       {name: 'Shin Megami Tensei Vengance', boxart: './smtveng.jpg'},
     ]
 
-    leftscroll(listID: string) {
-      const gamelist1 = document.getElementById('gamelist');
-      if(gamelist1){
-        gamelist1.scrollBy({left: -300, behavior: 'smooth'});
+    leftscroll(listID: number) {
+      const gamelist = this.getgamelistByIndex(listID);
+      if(gamelist){
+        gamelist.scrollBy({left: -300, behavior: 'smooth'});
       }
     }
 
-    rightscroll(listID: string){
-      const gamelist1 = document.getElementById('gamelist');
-      if(gamelist1){
-        gamelist1.scrollBy({left: 300, behavior: 'smooth'});
+    rightscroll(listID: number){
+      const gamelist = this.getgamelistByIndex(listID);
+      if(gamelist){
+        gamelist.scrollBy({left: 300, behavior: 'smooth'});
       }
+    }
+
+    private getgamelistByIndex(index: number): HTMLElement | null {
+      const gamelistArray = this.gamelists.toArray();
+      return gamelistArray[index]?.nativeElement || null;
     }
 }
