@@ -37,40 +37,43 @@
         </a>
         <a class="link" routerLink="/regist">Regist</a>
     </div>
-    <button class="menu">
-       <i class="fa fa-bars"></i>
+    <button class="menu" (click)="menutoggle()">
+       <i class="fa fa-bars" [ngClass] = "{'rotate-icon': ismenuopen}"></i>
     </button>
-    <ul class="menucontent">
+    <ul class="menucontent" *ngIf="ismenuopen">
         <!--Menu contents-->
-        <li>Minimenu</li>
+        <li>Favourites</li>
+        <li>My account</li>
+        <li>My forum posts</li>
     </ul>
 </nav>
 </div>
-<footer class="footer bg-#A0B6F7 text-black py-4">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-3 text-center">
-                    <img class="socialmedia" src="/facebook.png" alt="facebook logo">
-                    <img class="socialmedia" src="/instagram.png" alt="instagram logo">
-                    <img class="socialmedia" src="/discord.png" alt="discord logo">
-                </div>
-                <div class="col-1 d-flex justify-content-center">
-                    <div class="divider"></div>
-                </div>
-                <div class="col-4 text-center">
-                    Tartalom
-                </div>
-                <div class="col-1 d-flex justify-content-center">
-                    <div class="divider"></div>
-                </div>
-                <div class="col-3 text-center">
-                    Tartalom
-                </div>
+<router-outlet></router-outlet>
+<hr id="footerdivider">
+<footer class="footer text-black py-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-3 text-center d-flex justify-content-center align-items-center gap-4">
+                <img class="socialmedia" src="/facebook.png" alt="facebook logo">
+                <img class="socialmedia" src="/instagram.png" alt="instagram logo">
+                <img class="socialmedia" src="/discord.png" alt="discord logo">
+            </div>
+            <div class="col-1 d-flex justify-content-center">
+                <div class="divider"></div>
+            </div>
+            <div class="col-4 text-center">
+                <p id="copyright">&copy; 2025 Copyright</p>
+            </div>
+            <div class="col-1 d-flex justify-content-center">
+                <div class="divider"></div>
+            </div>
+            <div class="col-3 text-center">
+                <p class="thirdpart">Data Protection</p>
+                <p class="thirdpart">User Terms</p>
             </div>
         </div>
+    </div>
 </footer>
-<router-outlet></router-outlet>
-
 </body>
 
 </html>

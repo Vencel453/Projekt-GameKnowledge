@@ -75,6 +75,14 @@ body{
     height: 15%;
 }
 
+.menu i{
+    transition: transform 0.3s ease;
+}
+
+.rotate-icon{
+    transform: rotate(90deg);
+}
+
 .menu span{
     display: block;
     background-color: #A0B6F7;
@@ -84,8 +92,8 @@ body{
 }
 
 .menucontent{
-    list-style: none;
-    display: none;
+    list-style-type: none;
+    display: block;
     flex-direction: column;
     margin: 0;
     padding: 0;
@@ -94,6 +102,18 @@ body{
     top: 30%;
     right: 5%;
     border-radius: 3%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.menucontent li{
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.menucontent li:hover{
+    background-color: #7999f8;
 }
 
 .menu.active{
@@ -102,10 +122,34 @@ body{
 
 .divider{
     width: 1px;
-    background-color: white;
     height: 100%;
 }
 
 .flex-grow-1{
     flex-grow: 1;
+}
+
+.socialmedia{
+    display: flex;
+    height: 50px;
+    width: 50px;
+}
+
+.footer{
+    background-color: #A0B6F7;
+}
+
+#copyright{
+    padding-top: 10px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#footerdivider{
+    border: none;
+    height: 50px;
+}
+
+.thirdpart{
+    font-weight: bold;
 }
