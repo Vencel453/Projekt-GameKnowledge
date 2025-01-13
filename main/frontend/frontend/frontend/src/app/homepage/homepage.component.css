@@ -61,23 +61,13 @@
     padding-left: 2%;
 }
 
-.game-list-container{
-    position: relative;
-    width: 90%;
-    max-width: 1200px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-}
-
 .gamelist{
     display: flex;
     gap: 16px;
     overflow-x: auto;
     scrollbar-width: none;
-    margin-left: 60px;
-    margin-right: 60px;
+    margin-left: 70px;
+    margin-right: 70px;
     -ms-overflow-style: none;
 }
 

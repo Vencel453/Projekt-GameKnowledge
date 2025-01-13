@@ -65,7 +65,7 @@
             </div>
 <hr class="splitter1">
 <br>
-<p class="titles">JRPG's</p>
+<p class="titles">Shooters</p>
     <hr class="splitter2">
             <div class="gamelist-container position-relative">
                 <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(1)"></button>
@@ -77,5 +77,66 @@
                     </div>
                     <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(1)"></button>
             </div>
-    <hr class="splitter2">
+    <hr class="splitter1">
+    <br>
 
+
+<p class="titles">Adventures</p>
+    <hr class="splitter2">
+    <div class="gamelist-container position-relative">
+        <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(2)"></button>
+            <div class="gamelist" id="gamelist3" #gamelist>
+                <div class="item" *ngFor="let game of games3">
+                    <img [src]="game.boxart" [alt]="game.name" />
+                    <p id="gamename">{{game.name}}</p>
+                </div>
+            </div>
+            <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(2)"></button>
+    </div>
+    <hr class="splitter1">
+    <br>
+
+    <p class="titles">Adventures</p>
+    <hr class="splitter2">
+    <div class="gamelist-container position-relative">
+        <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(3)"></button>
+            <div class="gamelist" id="gamelist4" #gamelist>
+                <div class="item" *ngFor="let game of games4">
+                    <img [src]="game.boxart" [alt]="game.name" />
+                    <p id="gamename">{{game.name}}</p>
+                </div>
+            </div>
+            <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(3)"></button>
+    </div>
+    <hr class="splitter1">
+    <br>
+
+    <p class="titles">Adventures</p>
+    <hr class="splitter2">
+    <div class="gamelist-container position-relative">
+        <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(4)"></button>
+            <div class="gamelist" id="gamelist5" #gamelist>
+                <div class="item" *ngFor="let game of games5">
+                    <img [src]="game.boxart" [alt]="game.name" />
+                    <p id="gamename">{{game.name}}</p>
+                </div>
+            </div>
+            <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(4)"></button>
+    </div>
+    <hr class="splitter1">
+    <br>
+
+    <p class="titles">Adventures</p>
+    <hr class="splitter2">
+    <div class="gamelist-container position-relative">
+        <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(5)"></button>
+            <div class="gamelist" id="gamelist6" #gamelist>
+                <div class="item" *ngFor="let game of games6">
+                    <img [src]="game.boxart" [alt]="game.name" />
+                    <p id="gamename">{{game.name}}</p>
+                </div>
+            </div>
+            <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(5)"></button>
+    </div>
+    <hr class="splitter1">
+    <br>
