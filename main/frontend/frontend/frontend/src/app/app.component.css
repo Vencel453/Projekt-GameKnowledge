@@ -120,6 +120,11 @@ body{
     display: flex;
 }
 
+.menucontenticons{
+    width: 25px;
+    height: 25px;
+}
+
 .divider{
     width: 1px;
     height: 100%;
