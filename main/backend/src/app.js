@@ -5,6 +5,7 @@ import { db_config } from "./config/config.js";
 import RegistRouter from "./routes/regist.router.js";
 import MainPageRouter from "./routes/mainpage.router.js";
 import LoginRouter from "./routes/login.router.js";
+import GamepageRouter from "./routes/gamepage.router.js";
 
 const PORT = 3000;
 const app = express();
@@ -21,16 +22,17 @@ app.use(express.json());
 app.use("/", MainPageRouter);
 app.use("/", RegistRouter);
 app.use("/", LoginRouter);
+app.use("/", GamepageRouter);
 
 // Egy csatkalozás kisérlet után ha sikeres akkor elindítjuk a szervert
 await sequelize.authenticate()
     .then(() => {
-        console.log('The test connection to the server was succesfull!');
+        console.log("The test connection to the server was succesfull!");
         app.listen(PORT, () => {
             console.log(`The backend server is running on: https://localhost:${PORT}/`);
         })
     })
     .catch((error) => {
-        console.error('Can not connect to the server!' + error);
+        console.error("Can't connect to the server!" + error);
         sequelize.close();
     });

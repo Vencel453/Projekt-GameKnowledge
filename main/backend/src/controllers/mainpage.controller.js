@@ -14,7 +14,7 @@ export default {
             oneMonthForward.setMonth(currentDate.getMonth() + 6);
 
             const upcomingGames = await Game.findAll({
-                attributes: ['gameTitle', 'boxart'],
+                attributes: ["id", "promoArt"],
                 where: {
                     release: {
                         [Op.between]: [currentDate, oneMonthForward]
@@ -27,7 +27,7 @@ export default {
             oneMonthBack.setMonth(currentDate.getMonth() - 6);
 
             const newReleaseGames = await Game.findAll({
-                attributes: ['gameTitle', 'boxart'],
+                attributes: ["id", "gameTitle", "boxart"],
                 where: {
                     release: {
                         [Op.between]: [oneMonthBack, currentDate]
@@ -40,7 +40,7 @@ export default {
 
             // 15 Shooter/lövöldözős játék
             const shooters = await Game.findAll({
-                attributes: ["gameTitle", "boxart"],
+                attributes: ["id", "gameTitle", "boxart"],
                 limit: 15,
                 where: {release: {
                     [Op.lte]: currentDate
@@ -56,7 +56,7 @@ export default {
             
             // '15 Adventure/Kaland játék
             const adventures = await Game.findAll({
-                attributes: ["gameTitle", "boxart"],
+                attributes: ["id", "gameTitle", "boxart"],
                 limit: 15,
                 where: {release: {
                     [Op.lte]: currentDate
@@ -72,7 +72,7 @@ export default {
 
             // 15 RPG/Szerep játék
             const rpgs = await Game.findAll({
-                attributes: ["gameTitle", "boxart"],
+                attributes: ["id", "gameTitle", "boxart"],
                 limit: 15,
                 where: {release: {
                     [Op.lte]: currentDate
@@ -88,7 +88,7 @@ export default {
 
             // 15 Racing/Versenyzős játék
             const racings = await Game.findAll({
-                attributes: ["gameTitle", "boxart"],
+                attributes: ["id","gameTitle", "boxart"],
                 limit: 15,
                 where: {release: {
                     [Op.lte]: currentDate
@@ -104,7 +104,7 @@ export default {
 
             // 15 Strategy/Stratégiai játékok
             const strategies = await Game.findAll({
-                attributes: ["gameTitle", "boxart"],
+                attributes: ["id", "gameTitle", "boxart"],
                 limit: 15,
                 where: {release: {
                     [Op.lte]: currentDate
