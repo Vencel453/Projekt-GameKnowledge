@@ -1,6 +1,4 @@
 import {Sequelize, DataTypes, Model} from "sequelize";
-import Game from "./game.js";
-import User from "./user.js";
 import { db_config } from "../config/config.js";
 const sequelize = new Sequelize(db_config)
 
@@ -58,15 +56,5 @@ Forumpost.init ({
             modelName: "Forumpost"
         }
     );
-    User.hasMany(Forumpost, {
-        foreignKey: 'userId',
-        onDelete: 'CASCADE',
-    });
-    Forumpost.belongsTo(User);
-
-    Game.hasMany(Forumpost, {
-        foreignKey: 'gameId',
-        onDelete: 'CASCADE'
-    })
 
 export default Forumpost;

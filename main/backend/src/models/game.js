@@ -34,6 +34,10 @@ Game.init ({
                 type: DataTypes.STRING,
             },
 
+            promoArt: {
+                type: DataTypes.STRING,
+            },
+
             controllerSupport: {
                 type: DataTypes.INTEGER,
                 allowNull: false,

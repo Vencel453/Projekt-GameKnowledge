@@ -1,6 +1,6 @@
 import models from '../models/index.js';
 import { Op } from 'sequelize';
-import bcryptMethods from '../bcrypt-methods/bcrypt.methods.js';
+import bcryptMethods from '../utilities/bcrypt.methods.js';
 
 export default {
     RegistPostController: async (req, res) => {
@@ -9,11 +9,15 @@ export default {
         console.log(req.body);
 
         // Ha a valamelyik mező nincs kitöltve akkor akkor 400-as hibával visszaküldi, hogy hiba történt, 
-        // mert nem volt minden mező kötöltve és ezeket kötelező kitölteni
-        if (registUsername === undefined || registPassword === undefined || registEmail === undefined || registPasswordAgain === undefined) {
+        // mert nem volt minden mező kitöltve és ezeket kötelező kitölteni
+        if ((registUsername === undefined || registPassword === undefined ||
+            registEmail === undefined || registPasswordAgain === undefined) || 
+            (registUsername == "" || registPassword == "" ||
+            registEmail == "" || registPasswordAgain == ""))
+             {
             res.status(400).json({
                 error: "true",
-                message: "Not every parameter was filled!"
+                message: "Not every field was filled!"
             });
             return;
         }
@@ -78,7 +82,7 @@ export default {
             if (!correctPassword) {
                 res.status(400).json({
                     error: "true",
-                    message: "The password isn't in a correct form!"
+                    message: "The password is in incorrect form!"
                 });
                 return;
             }
@@ -126,7 +130,7 @@ export default {
             console.log(error);
             res.status(500).json({
                 error: "true",
-                message: "Something went wrong while creating an user!",
+                message: "Something went wrong creating an user!",
             });
             return;
             }

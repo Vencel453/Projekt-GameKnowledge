@@ -1,7 +1,5 @@
 import {Sequelize, DataTypes, Model} from "sequelize";
 import { db_config } from "../config/config.js";
-import Game from "./game.js";
-import Award from "./award.js";
 const sequelize = new Sequelize(db_config)
 
 class Gamesaward extends Model {};
@@ -47,16 +45,5 @@ Gamesaward.init ({
             modelName: "Gamesaward"
         }
     );
-    Game.hasMany(Gamesaward, {
-        foreignKey: "gameId",
-        onDelete: 'CASCADE'
-    });
-    Gamesaward.belongsTo(Game);
-
-    Award.hasMany(Gamesaward, {
-        foreignKey: 'awardId',
-        onDelete: 'CASCADE',
-    });
-    Gamesaward.belongsTo(Award);
 
 export default Gamesaward;

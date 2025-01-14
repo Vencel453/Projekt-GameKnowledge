@@ -8,7 +8,7 @@ import crypto from "crypto";
 const securekey = new Uint8Array(32);
 crypto.randomFillSync(securekey);
 
-// Ezeket a metódusokat külön fájlba hozzuk létre majd exportáljuk őket, így a kód átláthatóbb, és a token hítelesítés esetén így csak
+// Ezeket a metódusokat külön fájlba hozzuk létre majd exportáljuk őket, így a kód átláthatóbb és a token hítelesítés esetén így csak
 // egyszerkell megírni a kódot
 export default {
     // Ez a metódus a tokent hítelesíti, 
@@ -40,6 +40,7 @@ export default {
             // más esetben visszaküldük a megfelelő http kódot és üzenetet
             await compactDecrypt(newToken, securekey)
                 .then(() => {
+                    this.ExntendingToken(req, res, next);
                     next();
                 })
                 .catch((error) => {
@@ -49,7 +50,7 @@ export default {
                         message: "The token is invalid or expired!"
                     });
                     return;
-                })
+                });
         } 
         catch (error) {
             console.log(error);

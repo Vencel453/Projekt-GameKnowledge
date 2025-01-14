@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Dec 01. 13:12
+-- Létrehozás ideje: 2025. Jan 14. 08:50
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -107,7 +107,11 @@ INSERT INTO `actors` (`id`, `firstName`, `lastName`, `profilePicture`) VALUES
 (19, 'Dominic', 'Allen', NULL),
 (20, 'Dennis', 'Falt', NULL),
 (21, 'Ward', 'Sexton', NULL),
-(22, 'Florence', 'Minowa', NULL);
+(22, 'Florence', 'Minowa', NULL),
+(23, 'Alix', 'Wilton Regan', NULL),
+(24, 'Anna', 'Skellern', NULL),
+(25, 'Anthon', 'Welsh', NULL),
+(26, 'Jane', 'Perry', NULL);
 
 -- --------------------------------------------------------
 
@@ -188,6 +192,30 @@ CREATE TABLE `creations` (
   `creatorId` int(11) DEFAULT NULL,
   `field` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `creations`
+--
+
+INSERT INTO `creations` (`id`, `gameId`, `creatorId`, `field`) VALUES
+(1, 1, 1, 'director'),
+(2, 1, 2, 'story director'),
+(3, 1, 3, 'lead writer'),
+(4, 1, 4, 'principal writer'),
+(5, 1, 5, 'creator'),
+(6, 2, 6, 'lead writer'),
+(7, 2, 7, 'narrative designer'),
+(8, 2, 8, 'original scenerio'),
+(9, 2, 9, 'original concept'),
+(10, 3, 10, 'director'),
+(11, 3, 11, 'director'),
+(12, 3, 8, 'scenerio writer'),
+(13, 4, 12, 'director'),
+(14, 4, 13, 'director'),
+(15, 4, 14, 'director'),
+(16, 4, 15, 'story plan'),
+(17, 5, 16, 'creator'),
+(18, 5, 17, 'music');
 
 -- --------------------------------------------------------
 
@@ -293,7 +321,8 @@ CREATE TABLE `games` (
   `description` text NOT NULL,
   `release` date NOT NULL,
   `boxart` varchar(255) DEFAULT NULL,
-  `controllerSupport` int(11) NOT NULL DEFAULT 0,
+  `promoArt` varchar(255) DEFAULT NULL,
+  `controllerSupport` int(11) DEFAULT NULL,
   `crossplatform` int(11) DEFAULT NULL,
   `crossPlatformException` text DEFAULT NULL,
   `steamdeckComp` int(11) DEFAULT NULL
@@ -303,12 +332,20 @@ CREATE TABLE `games` (
 -- A tábla adatainak kiíratása `games`
 --
 
-INSERT INTO `games` (`id`, `gameTitle`, `altGameTitle`, `description`, `release`, `boxart`, `controllerSupport`, `crossplatform`, `crossPlatformException`, `steamdeckComp`) VALUES
-(1, 'Cyberpunk 2077', 'サイバーパンク2077', 'Cyberpunk 2077 is an open-world, action-adventure RPG set in the dark future of Night City — a dangerous megalopolis obsessed with power, glamor, and ceaseless body modification.', '2020-12-10', NULL, 2, NULL, NULL, 2),
-(2, 'Silent Hill 2', 'Silent Hill 2 Remake', 'Having received a letter from his deceased wife, James heads to where they shared so many memories, in the hope of seeing her one more time: Silent Hill.', '2024-10-08', NULL, 2, NULL, NULL, 0),
-(3, 'Silent Hill 2', NULL, 'After receiving a letter from his late wife, from Silent Hill, James Sunderland heads towards the town to search for her, only to come across a terrifying road of truth and redemption.', '2001-09-24', NULL, 0, NULL, NULL, NULL),
-(4, 'Chrono Trigger', 'Kurono toriga', 'Crono, a young boy, is thrust to adventure by destiny to destroy an oncoming threat that will destroy the world in 1999.', '1995-05-11', NULL, 1, NULL, NULL, 1),
-(5, 'Forager', NULL, 'The highly popular and quirky \"idle game that you want to actively keep playing\". Explore, craft, gather & manage resources, find secrets and build your base out of nothing! Buy land to explore and expand!', '2019-06-18', NULL, 1, NULL, NULL, 2);
+INSERT INTO `games` (`id`, `gameTitle`, `altGameTitle`, `description`, `release`, `boxart`, `promoArt`, `controllerSupport`, `crossplatform`, `crossPlatformException`, `steamdeckComp`) VALUES
+(1, 'Cyberpunk 2077', 'サイバーパンク2077', 'Cyberpunk 2077 is an open-world, action-adventure RPG set in the dark future of Night City — a dangerous megalopolis obsessed with power, glamor, and ceaseless body modification.', '2020-12-10', NULL, NULL, 2, NULL, NULL, 2),
+(2, 'Silent Hill 2', 'Silent Hill 2 Remake', 'Having received a letter from his deceased wife, James heads to where they shared so many memories, in the hope of seeing her one more time: Silent Hill.', '2024-10-08', NULL, NULL, 2, NULL, NULL, 0),
+(3, 'Silent Hill 2', NULL, 'After receiving a letter from his late wife, from Silent Hill, James Sunderland heads towards the town to search for her, only to come across a terrifying road of truth and redemption.', '2001-09-24', NULL, NULL, 0, NULL, NULL, NULL),
+(4, 'Chrono Trigger', 'Kurono toriga', 'Crono, a young boy, is thrust to adventure by destiny to destroy an oncoming threat that will destroy the world in 1999.', '1995-05-11', NULL, NULL, 1, NULL, NULL, 1),
+(5, 'Forager', NULL, 'The highly popular and quirky \"idle game that you want to actively keep playing\". Explore, craft, gather & manage resources, find secrets and build your base out of nothing! Buy land to explore and expand!', '2019-06-18', NULL, NULL, 1, NULL, NULL, 2),
+(6, 'Forza Horizon', NULL, 'Celebrate speed, music and style at the Forza Horizon Festival. From the makers of the highest-rated racing franchise of this generation, Forza Horizon combines legendary Forza authenticity with the freedom of the open road.', '2012-10-23', NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'StarCraft 2', NULL, 'Four years after the events of StarCraft: Brood War (1998), Jim Raynor fights against the Dominion and begins a search for artifacts when at the same time the Zerg attack once again.', '2010-07-27', NULL, NULL, 0, NULL, NULL, NULL),
+(8, 'A Like a Dragon: Pirate Yakuza in Hawaii', NULL, 'Embark on an over-the-top, modern-day pirate adventure with an ex-yakuza, now pirate captain & his crew. Engage in exhilarating combat on land and sea in the hunt for lost memories and treasure.', '2025-06-23', NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 'Metal Gear Solid Delta: Snake Eater', NULL, 'Discover the origin story of iconic military operative Snake and begin to unravel the plot of the legendary METAL GEAR series.', '2025-06-11', NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 'Doom: The Dark Ages', NULL, 'DOOM: The Dark Ages is the single-player, action FPS prequel to the critically acclaimed DOOM (2016) and DOOM Eternal. You are the DOOM Slayer, the legendary demon-killing warrior fighting endlessly against Hell. Experience the epic cinematic origin story of the DOOM Slayer\'s rage in 2025.', '2025-06-20', NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 'Death Stranding 2: On The Beach', NULL, 'Embark on an inspiring mission of human connection beyond the UCA. Sam—with companions by his side—sets out on a new journey to save humanity from extinction. Join them as they traverse a world beset by otherworldly enemies, obstacles and a haunting question: should we have connected?', '2025-06-17', NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 'Clair Obscur: Expedition 33', NULL, 'Lead the members of Expedition 33 on their quest to destroy the Paintress so that she can never paint death again. Explore a world of wonders inspired by Belle Époque France and battle unique enemies in this turn-based RPG with real-time mechanics.', '2025-06-02', NULL, NULL, NULL, NULL, NULL, NULL),
+(13, 'Indiana Jones and the Great Circle', NULL, 'Uncover one of history’s greatest mysteries in a first-person, single-player adventure. The year is 1937, sinister forces are scouring the globe for the secret to an ancient power connected to the Great Circle, and only one person can stop them - Indiana Jones™', '2024-12-09', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -383,6 +420,35 @@ CREATE TABLE `gamestags` (
   `tagId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `gamestags`
+--
+
+INSERT INTO `gamestags` (`id`, `gameId`, `tagId`) VALUES
+(1, 2, 2),
+(2, 2, 5),
+(3, 2, 11),
+(4, 2, 20),
+(5, 1, 1),
+(6, 1, 2),
+(7, 1, 7),
+(8, 1, 10),
+(9, 1, 21),
+(10, 3, 5),
+(11, 3, 11),
+(12, 3, 12),
+(13, 3, 20),
+(14, 4, 2),
+(15, 4, 8),
+(16, 4, 20),
+(17, 5, 6),
+(18, 5, 13),
+(19, 5, 12),
+(20, 6, 3),
+(21, 6, 21),
+(22, 7, 4),
+(23, 7, 13);
+
 -- --------------------------------------------------------
 
 --
@@ -439,6 +505,29 @@ CREATE TABLE `platforms` (
   `platform` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `platforms`
+--
+
+INSERT INTO `platforms` (`id`, `platform`) VALUES
+(13, 'Game Boy'),
+(15, 'Game Boy Advance'),
+(17, 'Nintendo 3DS'),
+(16, 'Nintendo DS'),
+(11, 'Nintendo Enterteinment System'),
+(14, 'Nintendo Switch'),
+(1, 'PC'),
+(2, 'Playstation 1'),
+(3, 'Playstation 2'),
+(4, 'Playstation 3'),
+(5, 'Playstation 4'),
+(6, 'Playstation 5'),
+(12, 'Super Nintendo Enterteinment System'),
+(8, 'Xbox'),
+(7, 'Xbox 360'),
+(9, 'Xbox One'),
+(10, 'Xbox SeriesX/S');
+
 -- --------------------------------------------------------
 
 --
@@ -469,13 +558,15 @@ CREATE TABLE `studios` (
 --
 
 INSERT INTO `studios` (`id`, `name`, `logo`) VALUES
-(1, 'CD Projekt RED', 'publishers/logos/cd_projekt_red'),
+(1, 'CD Projekt RED', NULL),
 (2, 'Blooper Team', NULL),
 (3, 'Konami', NULL),
 (4, 'Square', NULL),
 (5, 'Square Enix', NULL),
 (6, 'HopFrog', NULL),
-(7, 'Humble Bundle', NULL);
+(7, 'Humble Bundle', NULL),
+(8, 'Playground Games', NULL),
+(9, 'Microsoft Studios', NULL);
 
 -- --------------------------------------------------------
 
@@ -516,6 +607,33 @@ CREATE TABLE `tags` (
   `tag` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `tags`
+--
+
+INSERT INTO `tags` (`id`, `tag`) VALUES
+(6, 'Action'),
+(2, 'Adventure'),
+(18, 'Beat\'em up'),
+(15, 'Boomer Shooter'),
+(17, 'Fighting'),
+(10, 'FPS'),
+(16, 'Hack & Slash'),
+(5, 'Horror'),
+(8, 'JRPG'),
+(20, 'Linear'),
+(14, 'MMORPG'),
+(21, 'Open World'),
+(3, 'Racing'),
+(9, 'Romance'),
+(7, 'RPG'),
+(19, 'Sandbox'),
+(1, 'Shooter'),
+(4, 'Strategy'),
+(12, 'Survival'),
+(13, 'Top-Down'),
+(11, 'TPS');
+
 -- --------------------------------------------------------
 
 --
@@ -537,7 +655,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `admin`, `creation`) VALUES
 (1, 'Vencel453', '$2b$10$lU.v7i55wiLeE7gAUh51VOU00LXy1FpLvPtBKMKYObZMLBiGoSM8i', 'email@address.com', 1, '2024-11-27'),
-(2, 'BunyósPityu', '$2b$10$jEhSTQxawR1FDJ74oKdhdOAL5WD2GglD32wAKNBYNShBhFdK79C92', 'pityu@lopo.com', 0, '2024-11-27');
+(2, 'BunyósPityu', '$2b$10$jEhSTQxawR1FDJ74oKdhdOAL5WD2GglD32wAKNBYNShBhFdK79C92', 'pityu@lopo.com', 0, '2024-11-27'),
+(3, 'Grimlock', '$2b$10$IgGkBIQzOSfnzEoFyNA8..o/brsN0X.5SOHDlLmsHntFh2vEFced2', 'citadel.gd@olal.co', 0, '2024-12-03'),
+(4, 'PLSPLSPLS', '$2b$10$AlzVnSAboaS55N3SLlxk.emCX4qpojrOSyH.2bOaJUEtRCQtTo9hi', 'plspls@pls.pls', 0, '2024-12-09'),
+(5, 'PLSPLSPLSa', '$2b$10$6YsUYuPQ6hYOD1LtD3vDDOGzTKvuQJp08Rywghuc20UuJlENahbVC', 'plsplsa@pls.pls', 0, '2024-12-09');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -748,7 +869,7 @@ ALTER TABLE `actings`
 -- AUTO_INCREMENT a táblához `actors`
 --
 ALTER TABLE `actors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT a táblához `ageratings`
@@ -772,7 +893,7 @@ ALTER TABLE `blacklistedtokens`
 -- AUTO_INCREMENT a táblához `creations`
 --
 ALTER TABLE `creations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT a táblához `creators`
@@ -808,7 +929,7 @@ ALTER TABLE `gamepictures`
 -- AUTO_INCREMENT a táblához `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT a táblához `gamesawards`
@@ -838,7 +959,7 @@ ALTER TABLE `gamesplatforms`
 -- AUTO_INCREMENT a táblához `gamestags`
 --
 ALTER TABLE `gamestags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT a táblához `languages`
@@ -862,7 +983,7 @@ ALTER TABLE `pcspecs`
 -- AUTO_INCREMENT a táblához `platforms`
 --
 ALTER TABLE `platforms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT a táblához `ratings`
@@ -874,7 +995,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT a táblához `studios`
 --
 ALTER TABLE `studios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT a táblához `studiosgames`
@@ -886,13 +1007,13 @@ ALTER TABLE `studiosgames`
 -- AUTO_INCREMENT a táblához `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Megkötések a kiírt táblákhoz

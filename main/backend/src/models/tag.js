@@ -26,6 +26,6 @@ Game.hasMany(Tag, {
     foreignKey: "gameId",
     onDelete: 'CASCADE'
 });
-Tag.belongsTo(Game);
+Tag.belongsTo(Game, { through: 'gamestag' });
 
 export default Tag;

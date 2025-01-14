@@ -1,5 +1,5 @@
-import jwtHandler from "../jwt/jwtHandler.js";
-import bcryptMethods from "../bcrypt-methods/bcrypt.methods.js";
+import jwtHandler from "../utilities/jwe.methods.js";
+import bcryptMethods from "../utilities/bcrypt.methods.js";
 import models from "../models/index.js";
 
 export default {
@@ -8,11 +8,12 @@ export default {
         // Mivel ezeknek az értéke nem változik, konstansként mentjük el hogy tovább dolgozzunk vele
         const {username: loginUsername, password: loginPassword} = req.body;
 
-        // Ha bármelyik mező üres, akkor az ahhoz megfelelő hiba kódot és üzenetet
-        if (loginUsername === undefined || loginPassword === undefined) {
+        // Ha bármelyik mező üres, akkor az ahhoz megfelelő hiba kódot és üzenetet küldük
+        if ((loginUsername === undefined || loginPassword === undefined) ||
+            (loginUsername == "" || loginPassword == "")) {
             res.status(400).json({
                 error: "true",
-                message: "Not every field is filed!"
+                message: "Not every field was filled!"
             });
             return;
         }
@@ -20,13 +21,19 @@ export default {
         // Try catch párban írjuk a következő részeket ahol az adatbázist el kell érnünk
         try {
             // Konstansként elmentjük azt a felhasználót az adatbázisból amelyik neve megegyezik a megadottal
-            const correctUser = await models.User.findOne({where: {username: loginUsername}});
+            const correctUser = await models.User.findOne({where: {username: loginUsername}})
+                .catch(() => {
+                    res.status(400).json({
+                        error: true,
+                        message: "The username or password is incorrect!"
+                    })
+                });
             // Itt ellenőrizzük hogy a felhasználó titkosított jelszava visszafejtve megegyezik-e a felhasználóval megadott jelszóval
             const correctPassword = bcryptMethods.Comparing(loginPassword, correctUser.password);
 
-            // Ha a felhasználónév és a jelszó is helyesen van megadva akkor a felhasználóhoz készül egy token és beengedi az oldalra
+            // Ha a jelszó helyesen van megadva akkor a felhasználóhoz készül egy token és beengedi az oldalra
             // Más esetben hiba üzenetet küld, hogy a felhasználónév vagy a jelszó helytelen
-            if (correctUser && correctPassword) {
+            if (correctPassword) {
                 const token = await jwtHandler.CreatingToken(correctUser.username, correctUser.email);
 
                 res.status(200).json({
@@ -40,7 +47,7 @@ export default {
             else {
                 res.status(400).json({
                     error: "true",
-                    message: "The username or password is incorrect"
+                    message: "The username or password is incorrect!"
                 });
                 return;
             }
