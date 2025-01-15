@@ -1,6 +1,4 @@
 import {Sequelize, DataTypes, Model} from "sequelize";
-import Game from "./game.js";
-import Studio from "./studio.js";
 import { db_config } from "../config/config.js";
 const sequelize = new Sequelize(db_config)
 
@@ -49,15 +47,5 @@ Studiosgame.init ({
             modelName: "Studiosgame"
         }
     );
-
-Game.hasMany(Studiosgame, {
-    foreignKey: "gameId",
-});
-Studiosgame.belongsTo(Game);
-
-Studio.hasMany(Studiosgame, {
-    foreignKey: "userId",
-});
-Studiosgame.belongsTo(Studio);
 
 export default Studiosgame;

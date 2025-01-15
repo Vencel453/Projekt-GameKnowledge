@@ -21,4 +21,5 @@ Platform.init ({
             modelName: "Platform"
         }
     );
+    
 export default Platform;

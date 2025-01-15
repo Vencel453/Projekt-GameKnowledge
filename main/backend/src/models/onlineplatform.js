@@ -21,4 +21,5 @@ Onlineplatform.init ({
             modelName: "Onlineplatform"
         }
     );
+    
 export default Onlineplatform;

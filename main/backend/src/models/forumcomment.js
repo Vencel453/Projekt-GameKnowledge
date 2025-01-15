@@ -46,16 +46,5 @@ Forumcomment.init ({
             modelName: "Forumcomment"
         }
     );
-    Forumpost.hasMany(Forumcomment, {
-        foreignKey: 'forumId',
-        onDelete: 'CASCADE',
-    });
-    Forumcomment.belongsTo(Forumpost);
-
-    User.hasMany(Forumcomment, {
-        foreignKey: 'userId',
-        onDelete: 'CASCADE',
-    });
-    Forumcomment.belongsTo(User);
 
 export default Forumcomment;

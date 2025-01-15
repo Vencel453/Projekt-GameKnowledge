@@ -81,10 +81,4 @@ Pcspec.init ({
         }
     );
 
-    Game.hasOne(Pcspec, {
-        foreignKey: 'gameId',
-        onDelete: 'CASCADE',
-    });
-    Pcspec.belongsTo(Game);
-
 export default Pcspec;

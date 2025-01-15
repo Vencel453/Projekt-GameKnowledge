@@ -40,16 +40,5 @@ Creation.init ({
             modelName: "Creation"
         }
     );
-    Game.hasMany(Creation, {
-        foreignKey: 'gameId',
-        onDelete: 'CASCADE',
-    });
-    Creation.belongsTo(Game);
-
-    Creator.hasMany(Creation, {
-        foreignKey: 'creatorId',
-        onDelete: 'CASCADE',
-    });
-    Creation.belongsTo(Creator);
 
 export default Creation;

@@ -14,7 +14,7 @@ export default {
             oneMonthForward.setMonth(currentDate.getMonth() + 6);
 
             const upcomingGames = await Game.findAll({
-                attributes: ["id", "promoArt"],
+                attributes: ["id", "promoArt", "release"],
                 where: {
                     release: {
                         [Op.between]: [currentDate, oneMonthForward]

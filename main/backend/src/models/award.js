@@ -26,4 +26,5 @@ Award.init ({
             modelName: "Award"
         }
     );
+    
 export default Award;

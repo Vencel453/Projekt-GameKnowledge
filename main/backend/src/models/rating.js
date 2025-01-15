@@ -43,16 +43,4 @@ Rating.init ({
         }
     );
 
-Game.hasMany(Rating, {
-    foreignKey: "gameId",
-    onDelete: 'CASCADE',
-});
-Rating.belongsTo(Game);
-
-User.hasMany(Rating, {
-    foreignKey: "userId",
-    onDelete: 'CASCADE',
-});
-Rating.belongsTo(User);
-
 export default Rating;
