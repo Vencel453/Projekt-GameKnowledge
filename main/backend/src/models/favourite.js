@@ -37,16 +37,4 @@ Favourite.init ({
         }
     );
 
-    Game.hasMany(Favourite, {
-        foreignKey: 'gameId',
-        onDelete: 'CASCADE',
-    });
-    Favourite.belongsTo(Game);
-
-    User.hasMany(Favourite, {
-        foreignKey: 'userId',
-        onDelete: 'CASCADE',
-    });
-    Favourite.belongsTo(User);
-
 export default Favourite;

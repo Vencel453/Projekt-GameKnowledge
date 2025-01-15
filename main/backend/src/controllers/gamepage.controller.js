@@ -1,7 +1,12 @@
+import { Op } from "sequelize";
 import Game from "../models/game.js";
 import Gamepicture from "../models/gamepicture.js";
 import Studio from "../models/studio.js";
 import Studiosgame from "../models/studiosgame.js";
+import Rating from "../models/rating.js";
+import Agerating from "../models/agerating.js";
+import Tag from "../models/tag.js";
+import Gamestag from "../models/gamestag.js";
 
 export default {
     GamepageGetController: async (req, res) => {
@@ -21,18 +26,51 @@ export default {
                 }
             });
 
-            const developers = await Game.findAll({
+            const developers = await Studiosgame.findAll({
                 attributes: [],
                 where: {
-                    id: gameid
+                    gameId: gameid,
+                    isDeveloper: true
                 },
-                include: [{
+                include: {
                     model: Studio,
-                    through: Studiosgame,
-                    attributes: ['name'],
-                    required: true,
-                }]
-            })
+                    attributes: ["name"],
+                },
+                raw: true
+            });
+
+            const publishers = await Studiosgame.findAll({
+                attributes: [],
+                where: {
+                    gameId: gameid,
+                    isPublisher: true
+                },
+                include: {
+                    model: Studio,
+                    attributes: ["name"],
+                },
+                raw: true
+            });
+
+            const rating = await Rating.count({where: {gameId: gameid, positive: true}}) - await Rating.count({where: {gameId: gameid}}) * 100;
+
+            const agerating = await Agerating.findAll({
+                attributes: ["rating", "institution"],
+                where: {
+                    gameId: gameid
+                }
+            });
+
+            const genres = await Gamestag.findAll({
+                attributes: [],
+                where: {
+                    gameId: gameid
+                },
+                include: {
+                    model: Tag,
+                    attributes: ["tag"],
+                }
+            });
 
             res.status(200).json({
                 error: false,
@@ -45,7 +83,10 @@ export default {
                     gallery: pictures,
                     release: game.release,
                     developers: developers,
-                    publishers
+                    publishers: publishers,
+                    rating: rating,
+                    agerating: agerating,
+                    genres: genres,
                 }
             })
         }

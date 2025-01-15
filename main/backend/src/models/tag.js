@@ -1,5 +1,4 @@
 import {Sequelize, DataTypes, Model} from "sequelize";
-import Game from "./game.js";
 import { db_config } from "../config/config.js";
 const sequelize = new Sequelize(db_config)
 
@@ -22,10 +21,5 @@ Tag.init ({
             modelName: "Tag"
         }
     );
-Game.hasMany(Tag, {
-    foreignKey: "gameId",
-    onDelete: 'CASCADE'
-});
-Tag.belongsTo(Game, { through: 'gamestag' });
 
 export default Tag;
