@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { GameDataService } from '../services/game-data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css'
 })
@@ -26,6 +28,7 @@ export class HomepageComponent implements OnInit {
 
     ngOnInit(): void {
       this.gamedataservice.getGameData().subscribe((data) =>{
+        console.log(data);
         this.upcomingGames = data.datas.upcomingGames;
         this.newReleasedGames = data.datas.newReleasedGames;
         this.shooters = data.datas.shooters;
