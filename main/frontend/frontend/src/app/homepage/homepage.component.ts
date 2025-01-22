@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { GameDataService } from '../services/game-data.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 
 @Component({
   selector: 'app-homepage',
@@ -28,7 +28,7 @@ export class HomepageComponent implements OnInit {
 
     ngOnInit(): void {
       this.gamedataservice.getGameData().subscribe((data) =>{
-        console.log(data);
+        if(data){
         this.upcomingGames = data.datas.upcomingGames;
         this.newReleasedGames = data.datas.newReleasedGames;
         this.shooters = data.datas.shooters;
@@ -36,6 +36,9 @@ export class HomepageComponent implements OnInit {
         this.rpgs = data.datas.rpgs;
         this.racings = data.datas.racings;
         this.strategies = data.datas.strategies;
+        }else{
+          console.error('No data recieved!!');
+        }
       });
 
       this.startAutoSlide();

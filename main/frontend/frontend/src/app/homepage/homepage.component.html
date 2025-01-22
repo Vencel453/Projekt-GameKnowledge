@@ -92,7 +92,7 @@
         <button class="scroll" (click)="scrollLeft(liststrategies)">&#9664;</button>
         <div class="gamelist" #liststrategies>
             <div class="gamecard" *ngFor="let game of strategies">
-                <img [src]="game.boxart" [alt]="'Boxart for ' + game.gameTitle"/>
+                <img src="../../../../../backend/pictures/boxarts/cyberpunk_2077_2020_boxart.png" [alt]="'Boxart for ' + game.gameTitle"/>
                 <p>{{game.gameTitle}}</p>
             </div>
         </div>
