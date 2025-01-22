@@ -63,8 +63,9 @@ export default {
     },
 
     // Ez a metődus a token-t hozza létre a felhasználónév és email alapján
-    CreatingToken: async (loginUsername, loginEmail) => {
+    CreatingToken: async (loginId, loginUsername, loginEmail) => {
         const payload = {
+            id: loginId,
             username: loginUsername,
             email: loginEmail,
         };
@@ -98,9 +99,9 @@ export default {
             // majd tovább lépünk, más esetben vissza küldjük hogy még nincs szükség új tokenre
             if (timeLeft < 1200000) {
                 this.Blacklisting(req);
-                const newToken = await this.CreatingToken(currentPayload.username, currentPayload.email);
+                const newToken = await this.CreatingToken(currentPayload.id, currentPayload.username, currentPayload.email);
                 res.status(201).json({
-                    error: "true",
+                    error: "false",
                     message: "The token was about to expire, so a new one was created",
                     token: newToken,
                 });
@@ -159,4 +160,20 @@ export default {
         })
         return;
     },
+
+    GetUserId: async (req) => {
+        const token = req.headers['authorization']?.split(' ')[1];
+        console.log(token);
+        const decodedToken = await compactDecrypt(token, securekey)
+            .catch((error) => {
+                console.log(error);
+            })
+        const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
+        console.log(decodedToken.plaintext);
+        console.log(currentPayload);
+        const returnValue = currentPayload.id;
+        console.log(currentPayload.id);
+        return currentPayload.id;
+        
+    }
 }
