@@ -98,7 +98,7 @@ export default {
             // Ha a maradék idő kevesebb mint 20 perc akkor a felhasználónak adunk egy új token-t  és a régi tokent fekete listázzuk
             // majd tovább lépünk, más esetben vissza küldjük hogy még nincs szükség új tokenre
             if (timeLeft < 1200000) {
-                this.Blacklisting(req);
+                const tmp = this.Blacklisting(req, res);
                 const newToken = await this.CreatingToken(currentPayload.id, currentPayload.username, currentPayload.email);
                 res.status(201).json({
                     error: "false",
@@ -126,9 +126,14 @@ export default {
     },
 
     // Ez a metódus a fekete listázásért felel
-    Blacklisting: async (req) => {
+    Blacklisting: async (req, res) => {
         // Visszafejtjük a token-t hogy kinyerjük a szükséges adatokat
         const logOutToken = req.headers['authorization']?.split(' ')[1];
+
+        if (logOutToken === undefined) {
+            return false;
+        }
+
         const decodedToken = await compactDecrypt(logOutToken, securekey);
         const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
 
@@ -158,21 +163,24 @@ export default {
         .catch(error => {
             console.log("There was an error: " + error);
         })
-        return;
+        return true;
     },
 
+    // Ez a metódus a token-ből kinyeri a felhasználó azonosítóját
     GetUserId: async (req) => {
+        // A token lekérjük, de utána ellenőrizzük hogy van e tényleges token, ha nincs akkor vissza küldünk egy undefined
+        // eredményt, amit a fő program majd kezel 
         const token = req.headers['authorization']?.split(' ')[1];
-        console.log(token);
+        if (!token) {
+            return undefined;
+        }
+
+        // Dekódoljuk a token-t majd az abból szükszéges adatot, vagyis az azonosítót visszaküldjük
         const decodedToken = await compactDecrypt(token, securekey)
             .catch((error) => {
                 console.log(error);
-            })
+            });
         const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
-        console.log(decodedToken.plaintext);
-        console.log(currentPayload);
-        const returnValue = currentPayload.id;
-        console.log(currentPayload.id);
         return currentPayload.id;
         
     }

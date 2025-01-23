@@ -146,12 +146,20 @@ export default {
     // üzenetet, ha valami hiba történik akkor hiba üznetet ki írja a konzolra
     MainpagePostController: async (req, res) => {
         try {
-            jweMethods.Blacklisting(req);
-            res.status(200).json({
-                error: false,
-                message: "The users token has been invalidated!"
-            });
-            return;
+            const success = jweMethods.Blacklisting(req, res);
+            if (success === true) {
+                res.status(200).json({
+                    error: false,
+                    message: "The users token has been invalidated!"
+                });
+                return;
+            }
+            else {
+                res.status(400).json({
+                    error: true,
+                    message: "No token is provided!"
+                });
+            }
         }
         catch (error) {
             console.log(error);

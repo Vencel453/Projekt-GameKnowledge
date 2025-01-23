@@ -1,4 +1,3 @@
-import { Op } from "sequelize";
 import Game from "../models/game.js";
 import Gamepicture from "../models/gamepicture.js";
 import Studio from "../models/studio.js";
@@ -22,9 +21,11 @@ import Favourite from "../models/favourite.js";
 import jweMethods from "../utilities/jwe.methods.js";
 
 export default {
+    // Ez a metódus egy adott játéknak az összes adatát lekérdezi 
     GamepageGetController: async (req, res) => {
-        const gameid = req.params.gameid;
 
+        // Az url paramétere tartalmazza a játék azonosítóját, ezt elmentjük és megkeressük az adott játékot 
+        const gameid = req.params.gameid;
         try {
             const game = await Game.findOne({
                 where: {
@@ -204,7 +205,6 @@ export default {
     },
     GamepagePostController: async (req, res) => {
         try {
-            const gameid = req.params.gameid;
 
             const userid = await jweMethods.GetUserId(req);
 
@@ -213,7 +213,9 @@ export default {
                     error: true,
                     message: "The user is not logged in or the token is faulty!"
                 })
-            }
+            };
+
+            const gameid = req.params.gameid;
 
             const conflict = await Favourite.findOne({
                 where: {
@@ -251,8 +253,54 @@ export default {
             return;
         }
     },
-    GamepagePutController: (req, res) => {
-        res.status(501);
+    GamepagePutController: async (req, res) => {
+        const userid = await jweMethods.GetUserId(req);
+
+        if (userid === undefined) {
+            res.status(401).json({
+                error: true,
+                message: "The user is not logged in or the token is faulty!"
+            });
+            return;
+        };
+
+        const gameid = req.params.gameid;
+
+        const conflict = await Rating.findOne({
+            where: {
+                userId: userid,
+                gameId: gameid
+            }
+        });
+
+        if (conflict) {
+            res.status(403).json({
+                error: true,
+                message: "The user has already rated the game!"
+            });
+            return;
+        }
+
+        const isPositive = req.body.isPositive;
+
+        if (isPositive === undefined || isPositive == "") {
+            res.status(400).json({
+                error: true,
+                message: "The rating is missing!"
+            });
+            return;
+        }
+
+        await Rating.create({
+            gameId: gameid,
+            positive: isPositive,
+            userId: userid
+        });
+
+        res.status(201).json({
+            error: false,
+            message: "The rating has been saved!"
+        })
         return;
     }
 }
