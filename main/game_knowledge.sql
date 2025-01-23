@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Jan 15. 09:23
+-- Létrehozás ideje: 2025. Jan 22. 11:13
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -177,8 +177,7 @@ CREATE TABLE `blacklistedtokens` (
 --
 
 INSERT INTO `blacklistedtokens` (`id`, `userId`, `token`, `date`) VALUES
-(4, 2, 'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..foeoWBSh--JXBGj-.Hc0cbhTc6mDRUYG9BjOmiM_M9_iSKZv9kTCclwZ58EknRV9qEiJR-8KeW4KnRRWRgAoOPEVmi2thVWMtKkjO1PV-sy-zEFt2MGp3nADFu17Ozup1M1E.epHdN2uc28bPLBTY0iafrQ', '2024-11-30 16:24:05'),
-(5, 1, 'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..OEyKaydAsotxJjdK.qUWfFxVRTkjaHSKWpQAf5eqgZlTiYRMwDuRkCrLmC7c5fWtuqucBr9-89XzqzAgdrrkT64wEuQ8Ic8ciAwdGrXIodgoo.9lvjdY8UQr6_bprO3k9opg', '2024-11-30 16:59:10');
+(6, 1, 'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..LbpAGMVIGTQElwhg.hrYGj-fTDZajzpqj8AkylPOhkXVEzSESp3TIjk-IrCRlW81_WPdD12Y9w1VtrWuViPhkxZgnw4-2QlAe71LGV7dw2w3bSAbcajjwDw.ajciVncbxeYubzCeHto8_Q', '2025-01-22 09:43:47');
 
 -- --------------------------------------------------------
 
@@ -384,6 +383,31 @@ CREATE TABLE `gameslanguages` (
   `dub` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `gameslanguages`
+--
+
+INSERT INTO `gameslanguages` (`id`, `gameId`, `languageId`, `dub`) VALUES
+(1, 1, 1, 0),
+(2, 1, 2, 1),
+(3, 1, 3, 1),
+(4, 1, 4, 1),
+(5, 1, 5, 1),
+(6, 1, 6, 1),
+(7, 1, 7, 0),
+(8, 1, 8, 0),
+(9, 1, 9, 1),
+(10, 1, 10, 1),
+(11, 1, 11, 1),
+(12, 1, 12, 1),
+(13, 1, 13, 1),
+(14, 1, 14, 1),
+(15, 1, 15, 0),
+(16, 1, 16, 0),
+(17, 1, 17, 0),
+(18, 1, 18, 0),
+(19, 1, 19, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -407,6 +431,17 @@ CREATE TABLE `gamesplatforms` (
   `gameId` int(11) NOT NULL,
   `platformId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `gamesplatforms`
+--
+
+INSERT INTO `gamesplatforms` (`id`, `gameId`, `platformId`) VALUES
+(1, 1, 1),
+(2, 1, 5),
+(3, 1, 6),
+(4, 1, 9),
+(5, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -457,8 +492,33 @@ INSERT INTO `gamestags` (`id`, `gameId`, `tagId`) VALUES
 
 CREATE TABLE `languages` (
   `id` int(11) NOT NULL,
-  `language` int(255) NOT NULL
+  `language` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `languages`
+--
+
+INSERT INTO `languages` (`id`, `language`) VALUES
+(7, 'arabian'),
+(8, 'czech'),
+(2, 'english'),
+(3, 'french'),
+(5, 'german'),
+(1, 'hungarian'),
+(4, 'italian'),
+(9, 'japanese'),
+(10, 'korean'),
+(16, 'la spanish'),
+(11, 'polish'),
+(12, 'portuguese'),
+(13, 'russian'),
+(14, 'simplified chinese'),
+(6, 'spanish'),
+(17, 'thai'),
+(15, 'traditional chinese'),
+(18, 'turkish'),
+(19, 'ukrainian');
 
 -- --------------------------------------------------------
 
@@ -493,6 +553,13 @@ CREATE TABLE `pcspecs` (
   `id` int(11) NOT NULL,
   `gameId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `pcspecs`
+--
+
+INSERT INTO `pcspecs` (`minop`, `mincpu`, `minram`, `mingpu`, `mindirectx`, `cpu`, `ram`, `gpu`, `directx`, `op`, `storage`, `sidenote`, `id`, `gameId`) VALUES
+('64-bit Windows 10', 'Core i7-6700 or Ryzen 5 1600', '12 GB', 'GeForce GTX 1060 6GB or Radeon RX 580 8GB or Arc A380', 'Version 12', 'Core i7-12700 or Ryzen 7 7800X3D', '16 GB', 'GeForce RTX 2060 SUPER or Radeon RX 5700 XT or Arc A770', 'Version 12', ' 64-bit Windows 10', '70 GB', 'SSD required.', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -655,10 +722,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `admin`, `creation`) VALUES
 (1, 'Vencel453', '$2b$10$lU.v7i55wiLeE7gAUh51VOU00LXy1FpLvPtBKMKYObZMLBiGoSM8i', 'email@address.com', 1, '2024-11-27'),
-(2, 'BunyósPityu', '$2b$10$jEhSTQxawR1FDJ74oKdhdOAL5WD2GglD32wAKNBYNShBhFdK79C92', 'pityu@lopo.com', 0, '2024-11-27'),
-(3, 'Grimlock', '$2b$10$IgGkBIQzOSfnzEoFyNA8..o/brsN0X.5SOHDlLmsHntFh2vEFced2', 'citadel.gd@olal.co', 0, '2024-12-03'),
-(4, 'PLSPLSPLS', '$2b$10$AlzVnSAboaS55N3SLlxk.emCX4qpojrOSyH.2bOaJUEtRCQtTo9hi', 'plspls@pls.pls', 0, '2024-12-09'),
-(5, 'PLSPLSPLSa', '$2b$10$6YsUYuPQ6hYOD1LtD3vDDOGzTKvuQJp08Rywghuc20UuJlENahbVC', 'plsplsa@pls.pls', 0, '2024-12-09');
+(2, 'BunyósPityu', '$2b$10$jEhSTQxawR1FDJ74oKdhdOAL5WD2GglD32wAKNBYNShBhFdK79C92', 'pityu@lopo.com', 0, '2024-11-27');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -887,7 +951,7 @@ ALTER TABLE `awards`
 -- AUTO_INCREMENT a táblához `blacklistedtokens`
 --
 ALTER TABLE `blacklistedtokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT a táblához `creations`
@@ -905,7 +969,7 @@ ALTER TABLE `creators`
 -- AUTO_INCREMENT a táblához `favourites`
 --
 ALTER TABLE `favourites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT a táblához `forumcomments`
@@ -941,7 +1005,7 @@ ALTER TABLE `gamesawards`
 -- AUTO_INCREMENT a táblához `gameslanguages`
 --
 ALTER TABLE `gameslanguages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT a táblához `gamesonlineplatforms`
@@ -953,7 +1017,7 @@ ALTER TABLE `gamesonlineplatforms`
 -- AUTO_INCREMENT a táblához `gamesplatforms`
 --
 ALTER TABLE `gamesplatforms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT a táblához `gamestags`
@@ -965,7 +1029,7 @@ ALTER TABLE `gamestags`
 -- AUTO_INCREMENT a táblához `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT a táblához `onlineplatforms`
@@ -977,7 +1041,7 @@ ALTER TABLE `onlineplatforms`
 -- AUTO_INCREMENT a táblához `pcspecs`
 --
 ALTER TABLE `pcspecs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT a táblához `platforms`
@@ -1013,7 +1077,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Megkötések a kiírt táblákhoz

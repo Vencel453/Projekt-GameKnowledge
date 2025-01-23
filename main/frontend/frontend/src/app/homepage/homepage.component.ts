@@ -36,8 +36,6 @@ export class HomepageComponent implements OnInit {
         this.rpgs = data.datas.rpgs;
         this.racings = data.datas.racings;
         this.strategies = data.datas.strategies;
-        }else{
-          console.error('No data recieved!!');
         }
       });
 
@@ -64,9 +62,13 @@ export class HomepageComponent implements OnInit {
     }
 
     startAutoSlide(){
-      this.slideInterval = setInterval(() => {
-        this.nextSlide();
-      }, 5000);
+      if(this.upcomingGames.length > 0){
+        this.slideInterval = setInterval(() => {
+          this.currentSlideIndex = (this.currentSlideIndex + 1) % this.upcomingGames.length;
+        }, 5000);
+      }else{
+        console.warn("No upcoming games are avalible!");
+      }
     }
 
     scrollLeft(container: HTMLElement){

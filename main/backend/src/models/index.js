@@ -33,16 +33,15 @@ import User from "./user.js";
 // Létrehozzuk az adatbázis kapcsolatokat
 
 // Színész - Játék kapcsolat
-Actor.belongsToMany(Game, {
-    through: Acting,
+Actor.hasMany(Acting, {
     foreignKey: "actorId",
-    otherKey: "gameId",
 });
-Game.belongsToMany(Actor, {
-    through: Acting,
+Acting.belongsTo(Actor);
+
+Game.hasMany(Acting, {
     foreignKey: "gameId",
-    otherKey: "actorId",
 });
+Acting.belongsTo(Game);
 
 // Korhatár - Játék kapcsolat
 Game.hasMany(Agerating, {
@@ -52,16 +51,15 @@ Game.hasMany(Agerating, {
 Agerating.belongsTo(Game);
 
 // Díj - Játék kapcsolat
-Game.belongsToMany(Award, {
-    through: Gamesaward,
-    foreignKey: "gameId",
-    otherKey: "awardId"
+Game.hasMany(Gamesaward, {
+    foreignKey: "gameId"
 });
-Award.belongsToMany(Game, {
-    through: Gamesaward,
-    foreignKey: "awardId",
-    otherKey: "gameId",
+Gamesaward.belongsTo(Game);
+
+Award.hasMany(Gamesaward, {
+    foreignKey: "awardId"
 });
+Gamesaward.belongsTo(Award);
 
 // Fekete Listás Tokenek - Felhasználók kapcsolat
 User.hasMany(Blacklistedtoken, {
@@ -70,28 +68,27 @@ User.hasMany(Blacklistedtoken, {
 Blacklistedtoken.belongsTo(User);
 
 // Készítők - Játékok kapcsolat
-Creator.belongsToMany(Game, {
-    through: Creation,
+Creator.hasMany(Creation, {
     foreignKey: "creatorId",
-    otherKey: "gameId",
 });
-Game.belongsToMany(Creator, {
-    through: Creation,
+Creation.belongsTo(Creator);
+
+Game.hasMany(Creation, {
     foreignKey: "gameId",
-    otherKey: "creatorId",
 });
+Creation.belongsTo(Game);
 
 // Kedvencek: Felhasználók - Játékok kapcsolat
-User.belongsToMany(Game, {
-    through: Favourite,
-    foreignKey: "userId",
-    otherKey: "gameId",
-});
-Game.belongsToMany(User, {
-    through: Favourite,
+
+Game.hasMany(Favourite, {
     foreignKey: "gameId",
-    otherKey: "userId"
 });
+Favourite.belongsTo(Game);
+
+User.hasMany(Favourite, {
+    foreignKey: "userId",
+});
+Favourite.belongsTo(User);
 
 // Fórum poszt - Játék kapcsolat
 Game.hasMany(Forumpost, {
@@ -127,28 +124,27 @@ Game.hasMany(Gamepicture, {
 Gamepicture.belongsTo(Game);
 
 // Nyelv - játék kapcsolat
-Language.belongsToMany(Game, {
-    through: Gameslanguage,
-    foreignKey: "languageId",
-    otherKey: "gameId",
+
+Game.hasMany(Gameslanguage, {
+    foreignKey: "gameId"
 });
-Game.belongsToMany(Language, {
-    through: Gameslanguage,
-    foreignKey: "gameId",
-    otherKey: "languageId",
+Gameslanguage.belongsTo(Game);
+
+Language.hasMany(Gameslanguage, {
+    foreignKey: "languageId"
 });
+Gameslanguage.belongsTo(Language);
 
 // Online platform - Játék kapcsolat
-Onlineplatform.belongsToMany(Game, {
-    through: Gamesonlineplatform,
+Onlineplatform.hasMany(Gamesonlineplatform, {
     foreignKey: "platformId",
-    otherKey: "gameId",
 });
-Game.belongsToMany(Onlineplatform, {
-    through: Gamesonlineplatform,
-    foreignKey: "gameId",
-    otherKey: "platformId",
+Gamesonlineplatform.belongsTo(Onlineplatform);
+
+Game.hasMany(Gamesonlineplatform, {
+    foreignKey: "gameId"
 });
+Gamesonlineplatform.belongsTo(Game);
 
 // Gépigény - Játék kapcsolat
 Game.hasOne(Pcspec, {
@@ -157,16 +153,15 @@ Game.hasOne(Pcspec, {
 Pcspec.belongsTo(Game);
 
 // Platform - Játék kapcsolat
-Platform.belongsToMany(Game, {
-    through: Gamesplatform,
+Platform.hasMany(Gamesplatform, {
     foreignKey: "platformId",
-    otherKey: "gameId",
 });
-Game.belongsToMany(Platform, {
-    through: Gamesplatform,
+Gamesplatform.belongsTo(Platform);
+
+Game.hasMany(Gamesplatform, {
     foreignKey: "gameId",
-    otherKey: "platformId",
 });
+Gamesplatform.belongsTo(Game);
 
 // Értékelések - Játékok kapcsolat
 Game.hasMany(Rating, {
@@ -181,27 +176,37 @@ User.hasMany(Rating, {
 Rating.belongsTo(User);
 
 // Studió - Játék kapcsolat
-Studio.belongsToMany(Game, {
-    through: Studiosgame,
-    foreignKey: "studioId",
-    otherKey: "gameId",
-});
-Game.belongsToMany(Studio, {
-    through: Studiosgame,
+Game.hasMany(Studiosgame, {
     foreignKey: "gameId",
-    otherKey: "studioId",
 });
+Studiosgame.belongsTo(Game);
+
+Studio.hasMany(Studiosgame, {
+    foreignKey: "studioId",
+});
+Studiosgame.belongsTo(Studio);
 
 // Címke - Játék kapcsolat
-Tag.belongsToMany(Game, {
-    through: Gamestag,
-    foreignKey: "tagId",
-    otherKey: "gameId",
+Game.hasMany(Gamestag, {
+    foreignKey: "gameId",
 });
+Gamestag.belongsTo(Game);
+
+Tag.hasMany(Gamestag, {
+    foreignKey: "tagId",
+});
+Gamestag.belongsTo(Tag);
+
 Game.belongsToMany(Tag, {
     through: Gamestag,
     foreignKey: "gameId",
-    otherKey: "tagId",
+    otherKey: "tagId"
+});
+
+Tag.belongsToMany(Game, {
+    through: Gamestag,
+    foreignKey: "tagId",
+    otherKey: "gameId"
 });
 
 // Szinkronizáljuk a modeleket az adatbázissal

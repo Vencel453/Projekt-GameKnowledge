@@ -5,6 +5,6 @@ const GamepageRouter = Router();
 
 GamepageRouter.get("/:gameid", gamepageController.GamepageGetController);
 GamepageRouter.put("/:gameid", gamepageController.GamepagePutController);
-GamepageRouter.post("/:gameid", gamepageController.GamepagePutController);
+GamepageRouter.post("/:gameid", gamepageController.GamepagePostController);
 
 export default GamepageRouter;

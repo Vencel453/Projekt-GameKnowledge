@@ -2,14 +2,18 @@
 <div class="slideshow-container">
     <button class="nav-button prev" (click)="previousSlide()">&#9664;</button>
         <div class="slides">
-            <img [src]="upcomingGames[currentSlideIndex]?.promoArt"
+            <img *ngIf="upcomingGames[currentSlideIndex]?.promoArt; else noPromoArt"
+            [src]="upcomingGames[currentSlideIndex]?.promoArt"
             [alt]="'Promo art for game ID' + upcomingGames[currentSlideIndex]?.id"/>
+            <ng-template #noPromoArt>
+                <p>No image avalible</p>
+            </ng-template>
             <p>{{ upcomingGames[currentSlideIndex]?.release }}</p>
         </div>
         <button class="nav-button next" (click)="nextSlide()">&#9654;</button>
 </div>
 <br>
-    <hr class="splitter1">
+   <hr class="splitter1">
     <br>
         <p class="titles">New releases</p>
         <hr class="splitter2">
@@ -92,7 +96,7 @@
         <button class="scroll" (click)="scrollLeft(liststrategies)">&#9664;</button>
         <div class="gamelist" #liststrategies>
             <div class="gamecard" *ngFor="let game of strategies">
-                <img src="../../../../../backend/pictures/boxarts/cyberpunk_2077_2020_boxart.png" [alt]="'Boxart for ' + game.gameTitle"/>
+                <img [src]="game.boxart" [alt]="'Boxart for ' + game.gameTitle"/>
                 <p>{{game.gameTitle}}</p>
             </div>
         </div>

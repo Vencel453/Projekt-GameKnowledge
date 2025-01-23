@@ -1,5 +1,7 @@
 import {Sequelize, DataTypes, Model} from "sequelize";
 import { db_config } from "../config/config.js";
+import Game from "./game.js";
+import Studio from "./studio.js";
 const sequelize = new Sequelize(db_config)
 
 class Studiosgame extends Model {};
@@ -16,7 +18,7 @@ Studiosgame.init ({
                 allowNull: false,
                 references: {
                     model: 'Game',
-                    key: 'Id',
+                    key: 'id',
                 },
             },
 
@@ -25,7 +27,7 @@ Studiosgame.init ({
                 allowNull: false,
                 references: {
                     model: 'Studio',
-                    key: 'Id',
+                    key: 'id',
                 },
             },
 
