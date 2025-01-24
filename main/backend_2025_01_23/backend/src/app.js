@@ -33,6 +33,6 @@ await sequelize.authenticate()
         })
     })
     .catch((error) => {
-        console.error("Can't connect to the server!" + error);
+        console.error("Can't connect to the server!\n" + error);
         sequelize.close();
     });
