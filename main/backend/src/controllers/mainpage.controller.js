@@ -169,6 +169,50 @@ export default {
             });
             return;
         }
-        
+    },
+    // Ez a metódus a kereső sávért felel
+    MainpagePutController: async (req, res) => {
+        // Le mentjük a kapott keresést és a felesleges keresést elkerülve ellenőrizzük hogy a nem-e üres, de alapvetően ez nem számít
+        // hibának, így a 200-as kódot küldjük vissza, de megüzenjük hogy ez üres
+        const search = req.body.search;
+
+        if (search === undefined || search == "") {
+            res.status(200).json({
+                error: false,
+                message: "It is an empty search!"
+            });
+            return;
+        }
+
+        // Try catch párban dolgozunk hogy kezeljünk bármi féle hibát a további futtatás során
+        try {
+            // Az átláthatóság érdekében egy új változóban formázzuk a keresés szövegét az adatbázishoz való lekérdezéshez
+            const formattedSearch = "%" + String(search).toLowerCase() + "%";
+
+            // A szükséges információkat kérjük le csak, a lekérdezés érvényes a játék alternatív nevére is, ezután 200-as kóddal
+            // vissza adjuk az eredményt/eredményeket
+            const result = await Game.findAll({
+                attributes: ["id", "gameTitle", "altGameTitle", "release", "boxart"],
+                where: {[Op.or]:
+                    [   
+                        {gameTitle: {[Op.like]: formattedSearch}},
+                        {altGameTitle: {[Op.like]: formattedSearch}}
+                    ]
+                }
+            });
+
+            res.status(200).json({
+                error: false,
+                message: "Successful search!",
+                result: result
+            });
+        } 
+        catch (error) {
+            console.log(error);
+            res.status(500).json({
+                error: true,
+                message: "Something went wrong during the search!"
+            });
+        }
     }
 }
