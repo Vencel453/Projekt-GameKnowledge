@@ -4,6 +4,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { SpecificgameComponent } from './specificgame/specificgame.component';
 
 
 export const routes: Routes = [
@@ -11,6 +12,7 @@ export const routes: Routes = [
     {path: 'regist', component: RegistrationComponent},
     {path: 'login', component: LoginComponent},
     {path: '**', component: PageNotFoundComponent},         /// Ismeretlen útvonalak kezelése
+    {path: 'game/:id', component: SpecificgameComponent},
 ];
 
 @NgModule({

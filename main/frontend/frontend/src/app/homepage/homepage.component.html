@@ -1,106 +1,59 @@
 <h3 id="Coming">Coming soon...</h3>
-<div class="slideshow-container">
-    <button class="nav-button prev" (click)="previousSlide()">&#9664;</button>
-        <div class="slides">
-            <img *ngIf="upcomingGames[currentSlideIndex]?.promoArt; else noPromoArt"
-            [src]="upcomingGames[currentSlideIndex]?.promoArt"
-            [alt]="'Promo art for game ID' + upcomingGames[currentSlideIndex]?.id"/>
-            <ng-template #noPromoArt>
-                <p>No image avalible</p>
-            </ng-template>
-            <p>{{ upcomingGames[currentSlideIndex]?.release }}</p>
-        </div>
-        <button class="nav-button next" (click)="nextSlide()">&#9654;</button>
-</div>
-<br>
-   <hr class="splitter1">
-    <br>
-        <p class="titles">New releases</p>
-        <hr class="splitter2">
-        <div class="list-container">
-            <button class="scroll" (click)="scrollLeft(listnewReleasedGames)">&#9664;</button>
-            <div class="gamelist" #listnewReleasedGames>
-                <div class="gamecard" *ngFor="let game of newReleasedGames">
-                    <img [src]="game.boxart" [alt]="'Boxart for ' + game.gameTitle"/>
-                    <p>{{game.gameTitle}}</p>
-                </div>
+<div id="slideshow" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-indicators">
+        <button *ngFor="let slide of slides; let i = index"
+        type="button"
+        [attr.data-bs-slide-to] = "i"
+        [class.active]="i === 0"
+        [attr.aria-current]="i === 0 ? 'true': null"
+        [attr.aria.-label]="'Slide '+ (i + 1)">
+    </button>
+    </div>
+    <div class="carousel-inner">
+            <div *ngFor="let slide of slides; let i = index"
+            class="carousel-item"
+            [class.active]="i === 0">
+                <a [routerLink]="['/game', slide.id]">
+                    <img [src]="slide.image" class="d-block w-50" [alt]="slide.title">
+                </a>
+            <div class="carousel-caption d-none d-md-block">
+                <p class="releases">{{slide.releases}}</p>
             </div>
-            <button class="scroll" (click)="scrollRight(listnewReleasedGames)">&#9654;</button>
-        </div>
+            </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#slideshow" data-bs-slide="prev">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#slideshow" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<br>
 <hr class="splitter1">
 <br>
-<p class="titles">Shooters</p>
-    <hr class="splitter2">
-    <div class="list-container">
-        <button class="scroll" (click)="scrollLeft(listshooters)">&#9664;</button>
-        <div class="gamelist" #listshooters>
-            <div class="gamecard" *ngFor="let game of shooters">
-                <img [src]="game.boxart" [alt]="'Boxart for ' + game.gameTitle"/>
-                <p>{{game.gameTitle}}</p>
-            </div>
-        </div>
-        <button class="scroll" (click)="scrollRight(listshooters)">&#9654;</button>
-    </div>
-    <hr class="splitter1">
-    <br>
 
-
-<p class="titles">Adventures</p>
-    <hr class="splitter2">
-    <div class="list-container">
-        <button class="scroll" (click)="scrollLeft(listadventures)">&#9664;</button>
-        <div class="gamelist" #listadventures>
-            <div class="gamecard" *ngFor="let game of adventures">
-                <img [src]="game.boxart" [alt]="'Boxart for ' + game.gameTitle"/>
-                <p>{{game.gameTitle}}</p>
-            </div>
+<p class="title">New releases</p>
+<hr class="splitter2">
+<div class="gamelist-container position-relative">
+    <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(0)"></button>
+    <div class="gamelist" id="gamelist" *ngFor="let game of games1">
+        <div class="item" *ngFor="let game of games1">
+            <a [routerLink]="['/game', game.id]">
+                <img [src]="game.boxart" [alt]="game.name" />
+            </a>
+            <p id="gamename">{{game.name}}</p>
         </div>
-        <button class="scroll" (click)="scrollRight(listadventures)">&#9654;</button>
     </div>
-    <hr class="splitter1">
-    <br>
+    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(0)"></button>
+</div>
 
-    <p class="titles">RPG's</p>
-    <hr class="splitter2">
-    <div class="list-container">
-        <button class="scroll" (click)="scrollLeft(listrpgs)">&#9664;</button>
-        <div class="gamelist" #listrpgs>
-            <div class="gamecard" *ngFor="let game of rpgs">
-                <img [src]="game.boxart" [alt]="'Boxart for ' + game.gameTitle"/>
-                <p>{{game.gameTitle}}</p>
-            </div>
-        </div>
-        <button class="scroll" (click)="scrollRight(listrpgs)">&#9654;</button>
-    </div>
-    <hr class="splitter1">
-    <br>
+<br>
+<hr class="splitter1">
+<br>
+<p class="title"></p>
 
-    <p class="titles">Racing</p>
-    <hr class="splitter2">
-    <div class="list-container">
-        <button class="scroll" (click)="scrollLeft(listracings)">&#9664;</button>
-        <div class="gamelist" #listracings>
-            <div class="gamecard" *ngFor="let game of racings">
-                <img [src]="game.boxart" [alt]="'Boxart for ' + game.gameTitle"/>
-                <p>{{game.gameTitle}}</p>
-            </div>
-        </div>
-        <button class="scroll" (click)="scrollRight(listracings)">&#9654;</button>
-    </div>
-    <hr class="splitter1">
-    <br>
-
-    <p class="titles">Strategies</p>
-    <hr class="splitter2">
-    <div class="list-container">
-        <button class="scroll" (click)="scrollLeft(liststrategies)">&#9664;</button>
-        <div class="gamelist" #liststrategies>
-            <div class="gamecard" *ngFor="let game of strategies">
-                <img [src]="game.boxart" [alt]="'Boxart for ' + game.gameTitle"/>
-                <p>{{game.gameTitle}}</p>
-            </div>
-        </div>
-        <button class="scroll" (click)="scrollRight(liststrategies)">&#9654;</button>
-    </div>
-    <hr class="splitter1">
-    <br>

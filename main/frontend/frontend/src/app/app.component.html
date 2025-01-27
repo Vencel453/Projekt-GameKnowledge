@@ -1,4 +1,4 @@
-<!--Things that are visible on every sites-->
+<!--Általános dolgok, amik az összes oldalon látszanak-->
 
 <!--HTML basic structure-->
 <!DOCTYPE html>
@@ -7,73 +7,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="windowicon" type="image/png" href="/logomain.png">           <!--For now, not working properly-->
-    <title>Homepage</title>                                     <!--The page's title(displayed on top in the browsers)-->
+    <title>Homepage</title>
 </head>
-
 <body>
-<div class="container-fluid d-flex align-items-center">         <!--Div tag what has a custom bootstrap class which controls the aligment of the navbar -->
-    <nav class="navbar navbar-expand-lg">                       <!--Nav tag, the navbar starts here with custom bootstrap classes for the proper display-->
-            <a class="navbar-brand d-flex" href="" routerLinkActive="active">       
-                <img id="logomain" src="/logomain.png" alt="logo">                  <!--Navbar's left side where the Logo is displayed and function as a button which leads you to the Homepage-->
+<div class="container-fluid d-flex align-items-center">
+    <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand d-flex" href="" routerLinkActive="active">
+                <img id="logomain" src="/logomain.png" alt="logo">
             </a>
                 <div class="nav-item search-container d-flex align-items-center">
                     <form class="search-form d-flex" role="search">
-                        <input class="form-control-sm search-input" type="search" placeholder="Search" aria-label="Search">         <!--Searchbar which has the custom bootstrap classes for the proper display.-->
+                     <input class="form-control-sm search-input" type="search" placeholder="Search" aria-label="Search">
                      </form>
                      <a>
-                        <img class="align-items-center nav-item ms-2 magnifiersearchglass" src="/magnifying-glass.png" alt="searchIcon">            <!--Right next to te searchbar a magnifier glass icon-->
+                        <img class="align-items-center nav-item ms-2 magnifiersearchglass" src="/magnifying-glass.png" alt="searchIcon">
                     </a>
-                </div>
+                    </div>
                 
-    <div class="nav-item d-flex align-items-center">                    <!--From here, starts the options(Forum, Login, Regist)-->
-        <a><img class="align-items-center d-flex nav-item ms-2" id="globeicon" src="/globe.png" alt="forumIcon">                <!--Forum option with the globe icon-->
-            </a>
+    <div class="nav-item d-flex align-items-center">
+        <a><img class="align-items-center d-flex nav-item ms-2" id="globeicon" src="/globe.png" alt="forumIcon">
+        </a>
         <a class="link" routerLink="">Forum</a>
         
-        <a routerLink="/login"><img class="align-items-center d-flex nav-item ms-2" id="loginicon" src="/user.png" alt="loginIcon">                 <!--Login option with the user icon-->
-            </a>                                    
+        <a routerLink="/login"><img class="align-items-center d-flex nav-item ms-2" id="loginicon" src="/user.png" alt="loginIcon">
+        </a>
         <a class="link" routerLink="/login">Login</a>
 
-        <a routerLink="/regist"><img class="align-items-center d-flex nav-item ms-2" id="registicon" src="/registicon.png" alt="registIcon">         <!--Regist option with the regist icon-->
-            </a>
+        <a routerLink="/regist"><img class="align-items-center d-flex nav-item ms-2" id="registicon" src="/registicon.png" alt="registIcon">
+        </a>
         <a class="link" routerLink="/regist">Regist</a>
     </div>
-
-    <button class="menu" (click)="menutoggle()">                        <!--Minimenu at the right side of the navbar-->
-       <i class="fa fa-bars" [ngClass] = "{'rotate-icon': ismenuopen}"></i>             <!--Minimeu (3 lines each under) icon with rotation-->
+    <button class="menu" (click)="menutoggle()">
+       <i class="fa fa-bars" [ngClass] = "{'rotate-icon': ismenuopen}"></i>
     </button>
-        <ul class="menucontent" *ngIf="ismenuopen">                 <!--Menu content starts here-->
-            <!--Menu contents-->
-            <li> <img class="menucontenticons" src="./hearth.png" alt="Hearth"> Favourites</li> 
-            <li> <img class="menucontenticons" src="./user.png" alt="Profile"> My account</li>
-            <li> <img class="menucontenticons" src="./globe.png" alt="Globe"> My forum posts</li>
-        </ul>
-    </nav>
+    <ul class="menucontent" *ngIf="ismenuopen">
+        <!--Menu contents-->
+        <li> <img class="menucontenticons" src="./hearth.png" alt="Hearth"> Favourites</li>
+        <li> <img class="menucontenticons" src="./user.png" alt="Profile"> My account</li>
+        <li> <img class="menucontenticons" src="./globe.png" alt="Globe"> My forum posts</li>
+    </ul>
+</nav>
 </div>
-
-    <router-outlet></router-outlet>        <!--NECESSARY, this line displays everything -->
-
-    <hr id="footerdivider">                 <!--Divider line for the footer-->
-
-<footer class="footer text-black py-4">             <!--Footer starts-->
-    <div class="container">                         <!--Container for the easier design manipulations-->
+<router-outlet></router-outlet>
+<hr id="footerdivider">
+<footer class="footer text-black py-4">
+    <div class="container">
         <div class="row align-items-center">
-            <div class="col-3 text-center d-flex justify-content-center align-items-center gap-4">          <!--Starts the footer's contents-->
-                <!--Social media icons-->
+            <div class="col-3 text-center d-flex justify-content-center align-items-center gap-4">
                 <img class="socialmedia" src="/facebook.png" alt="facebook logo">
                 <img class="socialmedia" src="/instagram.png" alt="instagram logo">
                 <img class="socialmedia" src="/discord.png" alt="discord logo">
             </div>
-            <div class="col-1 d-flex justify-content-center">           <!--Divider between the contents-->
+            <div class="col-1 d-flex justify-content-center">
                 <div class="divider"></div>
             </div>
-            <div class="col-4 text-center">                             <!--Copyright part of the footer-->
+            <div class="col-4 text-center">
                 <p id="copyright">&copy; 2025 Copyright</p>
             </div>
-            <div class="col-1 d-flex justify-content-center">           <!--Divider between the contents-->
+            <div class="col-1 d-flex justify-content-center">
                 <div class="divider"></div>
             </div>
-            <div class="col-3 text-center">                             <!--Thirdpart of the footer with the Data Protection and User Terms sections-->
+            <div class="col-3 text-center">
                 <p class="thirdpart">Data Protection</p>
                 <p class="thirdpart">User Terms</p>
             </div>
