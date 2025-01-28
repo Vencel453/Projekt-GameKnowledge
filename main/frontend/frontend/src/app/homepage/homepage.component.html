@@ -1,29 +1,29 @@
 <h3 id="Coming">Coming soon...</h3>
 <div id="slideshow" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
     <div class="carousel-indicators">
-        <button *ngFor="let slide of slides; let i = index"
+        <button *ngFor="let item of slideshow; let i = index"
         type="button"
         [attr.data-bs-slide-to] = "i"
         [class.active]="i === 0"
         [attr.aria-current]="i === 0 ? 'true': null"
-        [attr.aria.-label]="'Slide '+ (i + 1)">
+        [attr.aria-label]="'Slide '+ (i + 1)">
     </button>
     </div>
     <div class="carousel-inner">
-            <div *ngFor="let slide of slides; let i = index"
+            <div *ngFor="let item of slideshow; let i = index"
             class="carousel-item"
             [class.active]="i === 0">
-                <a [routerLink]="['/game', slide.id]">
-                    <img [src]="slide.image" class="d-block w-50" [alt]="slide.title">
+                <a [routerLink]="['/game', item.id]">
+                    <img [src]="item.promoArt" class="d-block w-50" [alt]="item.title">
                 </a>
             <div class="carousel-caption d-none d-md-block">
-                <p class="releases">{{slide.releases}}</p>
+                <p class="releases">{{item.releases}}</p>
             </div>
             </div>
     </div>
 
     <button class="carousel-control-prev" type="button" data-bs-target="#slideshow" data-bs-slide="prev">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
 
@@ -37,12 +37,12 @@
 <hr class="splitter1">
 <br>
 
-<p class="title">New releases</p>
+<p class="titles">New releases</p>
 <hr class="splitter2">
 <div class="gamelist-container position-relative">
     <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(0)"></button>
-    <div class="gamelist" id="gamelist" *ngFor="let game of games1">
-        <div class="item" *ngFor="let game of games1">
+    <div class="gamelist" id="gamelist">
+        <div class="item" *ngFor="let game of games">
             <a [routerLink]="['/game', game.id]">
                 <img [src]="game.boxart" [alt]="game.name" />
             </a>
@@ -52,7 +52,6 @@
     <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(0)"></button>
 </div>
 
-<br>
 <hr class="splitter1">
 <br>
 <p class="title"></p>
