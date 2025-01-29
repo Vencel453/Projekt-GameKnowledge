@@ -6,6 +6,7 @@ import RegistRouter from "./routes/regist.router.js";
 import MainPageRouter from "./routes/mainpage.router.js";
 import LoginRouter from "./routes/login.router.js";
 import GamepageRouter from "./routes/gamepage.router.js";
+import StudiopageRouter from "./routes/studiopage.router.js";
 
 const PORT = 3000;
 const app = express();
@@ -23,6 +24,7 @@ app.use("/", MainPageRouter);
 app.use("/", RegistRouter);
 app.use("/", LoginRouter);
 app.use("/", GamepageRouter);
+app.use("/", StudiopageRouter);
 
 // Egy csatkalozás kisérlet után ha sikeres akkor elindítjuk a szervert
 await sequelize.authenticate()
