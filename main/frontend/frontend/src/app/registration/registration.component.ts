@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { HttpClient,HttpErrorResponse, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { log } from 'node:console';
 
 @Component({
   selector: 'app-registration',
@@ -40,7 +41,9 @@ export class RegistrationComponent {
       })
       .subscribe({
         next: (response: any) =>{
-          if(response.error === "false"){
+          console.log(response.status);
+          if(response.status === 201){
+            console.log("Le fut!")
             this.success = response.message;
             this.failure === null;
             setTimeout(() =>{
@@ -56,13 +59,13 @@ export class RegistrationComponent {
           this.failure = "Not every field was filled!";
           break;
         case "The username is not in the correct length!":
-          this.failure = "The username is not in the correct length!";
+          this.failure = "The username must be minimum 5, and maximum 30 characters lenght!";
           break;
         case "The passwords don't match!":
           this.failure = "The passwords don't match!";
           break;
-        case "The password isn't in a correct form!":
-          this.failure = "The password is in incorrect form!";
+        case "The password is in incorrect form!":
+          this.failure = "The password must be minimum 10, maximum 30 characters lenght, and must contain 1 capital letter and 1 number!";
           break;
         case "The email is in incorrect form!":
           this.failure = "The email is in incorrect form!";
