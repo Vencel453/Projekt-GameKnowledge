@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Jan 27. 10:28
+-- Létrehozás ideje: 2025. Jan 30. 07:18
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -339,11 +339,11 @@ INSERT INTO `games` (`id`, `gameTitle`, `altGameTitle`, `description`, `release`
 (5, 'Forager', NULL, 'The highly popular and quirky \"idle game that you want to actively keep playing\". Explore, craft, gather & manage resources, find secrets and build your base out of nothing! Buy land to explore and expand!', '2019-06-18', 'pictures/boxarts/forager_2019_boxart.png', NULL, 1, NULL, NULL, 2),
 (6, 'Forza Horizon', NULL, 'Celebrate speed, music and style at the Forza Horizon Festival. From the makers of the highest-rated racing franchise of this generation, Forza Horizon combines legendary Forza authenticity with the freedom of the open road.', '2012-10-23', 'pictures/boxarts/forza_horizon_2012_boxart.png', NULL, NULL, NULL, NULL, NULL),
 (7, 'StarCraft 2', NULL, 'Four years after the events of StarCraft: Brood War (1998), Jim Raynor fights against the Dominion and begins a search for artifacts when at the same time the Zerg attack once again.', '2010-07-27', 'pictures/boxarts/starcraft_2_2012_boxart.png', NULL, 0, NULL, NULL, NULL),
-(8, 'A Like a Dragon: Pirate Yakuza in Hawaii', NULL, 'Embark on an over-the-top, modern-day pirate adventure with an ex-yakuza, now pirate captain & his crew. Engage in exhilarating combat on land and sea in the hunt for lost memories and treasure.', '2025-06-23', 'pictures/boxarts/like_a_dragon_pirate_yakuza_in_hawaii_2025_boxart.png', NULL, NULL, NULL, NULL, NULL),
+(8, 'A Like a Dragon: Pirate Yakuza in Hawaii', NULL, 'Embark on an over-the-top, modern-day pirate adventure with an ex-yakuza, now pirate captain & his crew. Engage in exhilarating combat on land and sea in the hunt for lost memories and treasure.', '2025-06-23', 'pictures/boxarts/like_a_dragon_pirate_yakuza_in_hawaii_2025_boxart.png', 'pictures/promo/like_a_dragon_pirate_yakuza_in_hawaii_2025_promo.png', NULL, NULL, NULL, NULL),
 (9, 'Metal Gear Solid Delta: Snake Eater', NULL, 'Discover the origin story of iconic military operative Snake and begin to unravel the plot of the legendary METAL GEAR series.', '2025-06-11', NULL, 'pictures/promo/metal_gear_solid_delta_2025_promo.png', NULL, NULL, NULL, NULL),
 (10, 'Doom: The Dark Ages', NULL, 'DOOM: The Dark Ages is the single-player, action FPS prequel to the critically acclaimed DOOM (2016) and DOOM Eternal. You are the DOOM Slayer, the legendary demon-killing warrior fighting endlessly against Hell. Experience the epic cinematic origin story of the DOOM Slayer\'s rage in 2025.', '2025-06-20', NULL, 'pictures/promo/doom_dark_ages_2025_promo.png', NULL, NULL, NULL, NULL),
 (11, 'Death Stranding 2: On The Beach', NULL, 'Embark on an inspiring mission of human connection beyond the UCA. Sam—with companions by his side—sets out on a new journey to save humanity from extinction. Join them as they traverse a world beset by otherworldly enemies, obstacles and a haunting question: should we have connected?', '2025-06-17', NULL, 'pictures/promo/death_stranding_2_on_the_beach_2025_promo.png', NULL, NULL, NULL, NULL),
-(12, 'Clair Obscur: Expedition 33', NULL, 'Lead the members of Expedition 33 on their quest to destroy the Paintress so that she can never paint death again. Explore a world of wonders inspired by Belle Époque France and battle unique enemies in this turn-based RPG with real-time mechanics.', '2025-06-02', NULL, 'pictures/promo/clair_obscur_expedition_33_promo.png', NULL, NULL, NULL, NULL),
+(12, 'Clair Obscur: Expedition 33', NULL, 'Lead the members of Expedition 33 on their quest to destroy the Paintress so that she can never paint death again. Explore a world of wonders inspired by Belle Époque France and battle unique enemies in this turn-based RPG with real-time mechanics.', '2025-06-02', NULL, 'pictures/promo/clair_obscur_expedition_33_2025_promo.png', NULL, NULL, NULL, NULL),
 (13, 'Indiana Jones and the Great Circle', NULL, 'Uncover one of history’s greatest mysteries in a first-person, single-player adventure. The year is 1937, sinister forces are scouring the globe for the secret to an ancient power connected to the Great Circle, and only one person can stop them - Indiana Jones™', '2024-12-09', 'pictures/boxarts/indiana_jones_and_the_great_circle_2025_boxart.png', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -722,7 +722,13 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `admin`, `creation`) VALUES
 (1, 'Vencel453', '$2b$10$lU.v7i55wiLeE7gAUh51VOU00LXy1FpLvPtBKMKYObZMLBiGoSM8i', 'email@address.com', 1, '2024-11-27'),
-(2, 'BunyósPityu', '$2b$10$jEhSTQxawR1FDJ74oKdhdOAL5WD2GglD32wAKNBYNShBhFdK79C92', 'pityu@lopo.com', 0, '2024-11-27');
+(2, 'BunyósPityu', '$2b$10$jEhSTQxawR1FDJ74oKdhdOAL5WD2GglD32wAKNBYNShBhFdK79C92', 'pityu@lopo.com', 0, '2024-11-27'),
+(9, 'Akamalalo', '$2b$10$ty4jj2IR7vfSced2MG/F1uOcJ9aODHGULxcHEpNmS6IYyqqHfuJPi', 'lolo2@gmail.com', 0, '2025-01-29'),
+(10, 'dkjsaojns', '$2b$10$WKPSCtq2zGExaghNUJV5oebzXFOuubHfjT8l3fOPc6DPe4R8f0zKC', 'hsaufhaiu@gmail.com', 0, '2025-01-29'),
+(11, 'wfeewfgw', '$2b$10$xye/WsSBtQl8j4F82Bif7OfonbAzsmMGe5QV0yKqkht42Z0sYfJPK', 'dqfqfwefwe@ewf.hu', 0, '2025-01-29'),
+(12, 'fewfew', '$2b$10$CRv6WGCVA.kP2zPBjTI9c.yeTCUsuHUR3UnWzB4T7nr0MlxwB6WyW', 'wvefveegbg@wfnf.gur', 0, '2025-01-29'),
+(13, 'FKwejfwj', '$2b$10$75LCp5RPOSfJGQxpMkxDK.mtlZjw.GmTX89sdYUD2DqWv/Us3yrna', 'efwjjfjfw@feinf.hu', 0, '2025-01-29'),
+(14, 'gfngnikien', '$2b$10$quhRJQlFkTQZMPYzIPmZXOX/5TTygBi8k8MzVmjcmqp.9qmofspmu', 'bufvuwfuw@feinw.fwbu', 0, '2025-01-29');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -1077,7 +1083,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Megkötések a kiírt táblákhoz

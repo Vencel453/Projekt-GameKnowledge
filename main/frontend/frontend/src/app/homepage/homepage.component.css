@@ -34,15 +34,16 @@
 .carousel-caption{
     color: #5980f8;
     font-weight: bold;
-    padding: 5px 15px;
+    padding: 1px 10px;
     font-size: larger;
     text-align: center;
     border-radius: 8px;
     background: rgb(0, 0, 0);
     position: absolute;
-    bottom: 30px;
+    max-width: fit-content;
     display: inline-block;
     white-space: nowrap;
+    margin-left: 160px;
 }
 
 #Coming{
