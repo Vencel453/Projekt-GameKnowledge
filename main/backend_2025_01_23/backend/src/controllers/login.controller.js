@@ -9,8 +9,8 @@ export default {
         const {username: loginUsername, password: loginPassword} = req.body;
 
         // Ha bármelyik mező üres, akkor az ahhoz megfelelő hiba kódot és üzenetet küldük
-        if ((loginUsername === undefined || loginPassword === undefined) ||
-            (loginUsername == "" || loginPassword == "")) {
+        if (loginUsername === undefined || loginPassword === undefined ||
+            loginUsername == "" || loginPassword == "" ) {
             res.status(400).json({
                 error: "true",
                 message: "Not every field was filled!"

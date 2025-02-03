@@ -18,7 +18,7 @@ export class HomepageComponent {
     @ViewChildren('gamelist') gamelists!: QueryList<ElementRef>;
 
     slideshow: any[] = [];
-    games: any = [];
+    gamescategories: { [key: string]: any[] } = {};
 
     constructor(private http: HttpClient) {}
 
@@ -37,8 +37,32 @@ export class HomepageComponent {
               title: `Game ${game.id}`,
               release: game.release,
             }));
-
-            this.games = response.datas.newReleaseGames.map((game: any) =>({
+            this.gamescategories["newReleaseGames"] = response.datas.newReleaseGames.map((game: any) =>({
+              id: game.id,
+              boxart: game.boxart,
+              name: game.gameTitle,
+            }));
+            this.gamescategories["shooters"] = response.datas.shooters.map((game: any) =>({
+              id: game.id,
+              boxart: game.boxart,
+              name: game.gameTitle,
+            }));
+            this.gamescategories["adventures"] = response.datas.adventures.map((game: any) =>({
+              id: game.id,
+              boxart: game.boxart,
+              name: game.gameTitle,
+            }));
+            this.gamescategories["rpgs"] = response.datas.rpgs.map((game: any) =>({
+              id: game.id,
+              boxart: game.boxart,
+              name: game.gameTitle,
+            }));
+            this.gamescategories["racings"] = response.datas.racings.map((game: any) =>({
+              id: game.id,
+              boxart: game.boxart,
+              name: game.gameTitle,
+            }));
+            this.gamescategories["strategies"] = response.datas.strategies.map((game: any) =>({
               id: game.id,
               boxart: game.boxart,
               name: game.gameTitle,

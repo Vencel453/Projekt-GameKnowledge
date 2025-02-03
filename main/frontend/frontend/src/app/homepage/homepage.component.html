@@ -42,7 +42,7 @@
 <div class="gamelist-container position-relative">
     <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(0)"></button>
     <div class="gamelist" id="gamelist">
-        <div class="item" *ngFor="let game of games">
+        <div class="item" *ngFor="let game of gamescategories['newReleaseGames']">
             <a [routerLink]="['/game', game.id]">
                 <img [src]="game.boxart" [alt]="game.name" />
             </a>
@@ -54,5 +54,85 @@
 
 <hr class="splitter1">
 <br>
-<p class="title"></p>
+<p class="titles">Shooters</p>
+<hr class="splitter2">
+<div class="gamelist-container position-relative">
+    <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(0)"></button>
+    <div class="gamelist" id="gamelist1">
+        <div class="item" *ngFor="let game of gamescategories['shooters']">
+            <a [routerLink]="['/game', game.id]">
+                <img [src]="game.boxart" [alt]="game.name" />
+            </a>
+            <p id="gamename">{{game.name}}</p>
+        </div>
+    </div>
+    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(0)"></button>
+</div>
 
+<hr class="splitter1">
+<br>
+<p class="titles">Adventures</p>
+<hr class="splitter2">
+<div class="gamelist-container position-relative">
+    <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(0)"></button>
+    <div class="gamelist" id="gamelist2">
+        <div class="item" *ngFor="let game of gamescategories['adventures']">
+            <a [routerLink]="['/game', game.id]">
+                <img [src]="game.boxart" [alt]="game.name" />
+            </a>
+            <p id="gamename">{{game.name}}</p>
+        </div>
+    </div>
+    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(0)"></button>
+</div>
+
+<hr class="splitter1">
+<br>
+<p class="titles">RPG's</p>
+<hr class="splitter2">
+<div class="gamelist-container position-relative">
+    <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(0)"></button>
+    <div class="gamelist" id="gamelist3">
+        <div class="item" *ngFor="let game of gamescategories['rpgs']">
+            <a [routerLink]="['/game', game.id]">
+                <img [src]="game.boxart" [alt]="game.name" />
+            </a>
+            <p id="gamename">{{game.name}}</p>
+        </div>
+    </div>
+    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(0)"></button>
+</div>
+
+<hr class="splitter1">
+<br>
+<p class="titles">Racings</p>
+<hr class="splitter2">
+<div class="gamelist-container position-relative">
+    <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(0)"></button>
+    <div class="gamelist" id="gamelist4">
+        <div class="item" *ngFor="let game of gamescategories['racings']">
+            <a [routerLink]="['/game', game.id]">
+                <img [src]="game.boxart" [alt]="game.name" />
+            </a>
+            <p id="gamename">{{game.name}}</p>
+        </div>
+    </div>
+    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(0)"></button>
+</div>
+
+<hr class="splitter1">
+<br>
+<p class="titles">Strategies</p>
+<hr class="splitter2">
+<div class="gamelist-container position-relative">
+    <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(0)"></button>
+    <div class="gamelist" id="gamelist5">
+        <div class="item" *ngFor="let game of gamescategories['strategies']">
+            <a [routerLink]="['/game', game.id]">
+                <img [src]="game.boxart" [alt]="game.name" />
+            </a>
+            <p id="gamename">{{game.name}}</p>
+        </div>
+    </div>
+    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(0)"></button>
+</div>
