@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { response } from 'express';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Authservice } from '../authservice';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ successmess: string = '';
 username: string = '';
 password: string = '';
 
-constructor(private http: HttpClient, private router: Router){
+constructor(private http: HttpClient, private router: Router, private authService: Authservice){
 
 }
 
@@ -34,7 +35,7 @@ onSubmit(): void {
         if(response.error === 'false'){
           this.successmess = response.message;
 
-          localStorage.setItem('token', response.token);
+          this.authService.login(response.token, response.username, response.isAdmin);
 
           this.router.navigate(['/']);
         }
