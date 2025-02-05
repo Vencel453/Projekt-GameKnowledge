@@ -10,39 +10,40 @@
     <title>Homepage</title>
 </head>
 <body>
-<div class="container-fluid d-flex align-items-center">
-    <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand d-flex" href="" routerLinkActive="active">
+<div class="container-fluid">
+    <nav class="navbar">
+            <a class="navbar-brand" href="" routerLinkActive="active">
                 <img id="logomain" src="/logomain.png" alt="logo">
             </a>
-                <div class="nav-item search-container d-flex align-items-center">
-                    <form class="search-form d-flex" role="search">
-                     <input class="form-control-sm search-input" type="search" placeholder="Search" aria-label="Search">
+                <div class="search-container">
+                    <form class="search-form" role="search">
+                     <input class="search-input" type="search" placeholder="Search" aria-label="Search">
                      </form>
                      <a>
-                        <img class="align-items-center nav-item ms-2 magnifiersearchglass" src="/magnifying-glass.png" alt="searchIcon">
+                        <img class="magnifiersearchglass" src="/magnifying-glass.png" alt="searchIcon">
                     </a>
                     </div>
                 
-    <div class="nav-item d-flex align-items-center">
-        <a><img class="align-items-center d-flex nav-item ms-2" id="globeicon" src="/globe.png" alt="forumIcon">
+    <div class="menu-container">
+        <a><img class="icon" src="/globe.png" alt="forumIcon">
         </a>
         <a class="link" routerLink="">Forum</a>
         
         <ng-container *ngIf="!(isAuthenticated$ | async); else loggedInTemplate">
-        <a routerLink="/login"><img class="align-items-center d-flex nav-item ms-2" id="loginicon" src="/user.png" alt="loginIcon">
+        <a routerLink="/login"><img class="icon" src="/user.png" alt="loginIcon">
         </a>
         <a class="link" routerLink="/login">Login</a>
 
-        <a routerLink="/regist"><img class="align-items-center d-flex nav-item ms-2" id="registicon" src="/registicon.png" alt="registIcon">
+        <a routerLink="/regist"><img class="icon" src="/registicon.png" alt="registIcon">
         </a>
         <a class="link" routerLink="/regist">Regist</a>
     </ng-container>
+
     <ng-template #loggedInTemplate>
         <ng-container *ngIf="user$ | async as user">
             <div class="myprofile">
-                <a routerLink="/myprofile" class="link">
-                    <img class="align-items-center nav-item ms-2 d-flex profile-icon" [src]="user.isadmin ? '/lock.png' : '/user.png'" alt="loginIcon">
+                <a routerLink="/myprofile" class="profile-link">
+                    <img class="profile-icon" [src]="user.isadmin ? '/lock.png' : '/user.png'" alt="loginIcon">
                     <span>{{user.username}}</span>
                 </a>
                 <button class="menu">
@@ -55,9 +56,11 @@
         </ng-container>
     </ng-template>
     </div>
+
     <button class="menu" (click)="menutoggle()">
        <i class="fa fa-bars" [ngClass] = "{'rotate-icon': ismenuopen}"></i>
     </button>
+
     <ul class="menucontent" *ngIf="ismenuopen">
         <!--Menu contents-->
         <li> <img class="menucontenticons" src="./hearth.png" alt="Hearth"> Favourites</li>
@@ -66,7 +69,9 @@
     </ul>
 </nav>
 </div>
+
 <router-outlet></router-outlet>
+
 <hr id="footerdivider">
 <footer class="footer text-black py-4">
     <div class="container">

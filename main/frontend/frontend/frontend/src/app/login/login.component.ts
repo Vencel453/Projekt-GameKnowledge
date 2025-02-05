@@ -35,7 +35,7 @@ onSubmit(): void {
         if(response.error === 'false'){
           this.successmess = response.message;
 
-          this.authService.login(response.token, response.username, response.isAdmin);
+          this.authService.login(response.token, this.username, response.isAdmin);
 
           this.router.navigate(['/']);
         }

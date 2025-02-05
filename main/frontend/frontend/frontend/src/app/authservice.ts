@@ -33,6 +33,7 @@ export class Authservice {
 }
 
    login(token: string, username: string, isAdmin: boolean){
+    console.log("Login funciton called: ", {token, username, isAdmin});
     if (this.isLocalStorageAvailable()){
     localStorage.setItem('token', token);
     localStorage.setItem('username', username);
@@ -54,6 +55,14 @@ export class Authservice {
     this.isauthenticated.next(false);
     this.username.next(null);
     this.isAdmin.next(false);
+   }
+
+   getUsername(): string | null {
+    return localStorage.getItem('username');
+   }
+
+   isLoggedIn(): boolean {
+    return localStorage.getItem('token') !== null;
    }
 
    private hasToken(): boolean {
