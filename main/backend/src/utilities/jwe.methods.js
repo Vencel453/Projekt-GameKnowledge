@@ -179,6 +179,7 @@ export default {
         const decodedToken = await compactDecrypt(token, securekey)
             .catch((error) => {
                 console.log(error);
+                return undefined;
             });
         const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
         return currentPayload.id;
