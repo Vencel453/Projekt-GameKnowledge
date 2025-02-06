@@ -21,14 +21,16 @@ export default {
         // Try catch párban írjuk a következő részeket ahol az adatbázist el kell érnünk
         try {
             // Konstansként elmentjük azt a felhasználót az adatbázisból amelyik neve megegyezik a megadottal
-            const correctUser = await models.User.findOne({where: {username: loginUsername}})
-                .catch(() => {
-                    res.status(400).json({
-                        error: true,
-                        message: "The username or password is incorrect!"
-                    })
-                });
+            const correctUser = await models.User.findOne({where: {username: loginUsername}});
             // Itt ellenőrizzük hogy a felhasználó titkosított jelszava visszafejtve megegyezik-e a felhasználóval megadott jelszóval
+
+            if (!correctUser) {
+                res.status(400).json({
+                    error: true,
+                    message: "The username or password is incorrect!"
+                });
+                return;
+            }
             const correctPassword = bcryptMethods.Comparing(loginPassword, correctUser.password);
 
             // Ha a jelszó helyesen van megadva akkor a felhasználóhoz készül egy token és beengedi az oldalra
