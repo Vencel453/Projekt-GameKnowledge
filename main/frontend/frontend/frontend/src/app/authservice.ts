@@ -43,6 +43,8 @@ export class Authservice {
     this.isauthenticated.next(true);
     this.username.next(username);
     this.isAdmin.next(isAdmin);
+
+    window.scrollTo({top: 0, behavior: "smooth"});
    }
 
    logout(){

@@ -1,0 +1,16 @@
+#notfoundimage {
+    height: 15%;
+    width: 15%;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.notfound {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+.content {
+    text-align: center;
+}

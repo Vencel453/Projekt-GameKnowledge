@@ -5,14 +5,18 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { SpecificgameComponent } from './specificgame/specificgame.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
+import { ForumComponent } from './forum/forum.component';
 
 
 export const routes: Routes = [
     {path: '', component: HomepageComponent},
     {path: 'regist', component: RegistrationComponent},
     {path: 'login', component: LoginComponent},
-    {path: '**', component: PageNotFoundComponent},         /// Ismeretlen útvonalak kezelése
     {path: 'game/:id', component: SpecificgameComponent},
+    {path: 'myprofile', component: MyprofileComponent},
+    {path: 'forum', component: ForumComponent},
+    {path: '**', component: PageNotFoundComponent},         /// Ismeretlen útvonalak kezelése
 ];
 
 @NgModule({

@@ -27,7 +27,7 @@
     <div class="menu-container">
         <a><img class="icon" src="/globe.png" alt="forumIcon">
         </a>
-        <a class="link" routerLink="">Forum</a>
+        <a class="link" routerLink="/forum">Forum</a>
         
         <ng-container *ngIf="!(isAuthenticated$ | async); else loggedInTemplate">
         <a routerLink="/login"><img class="icon" src="/user.png" alt="loginIcon">
@@ -36,7 +36,7 @@
 
         <a routerLink="/regist"><img class="icon" src="/registicon.png" alt="registIcon">
         </a>
-        <a class="link" routerLink="/regist">Regist</a>
+        <a class="link" routerLink="/regist">Registration</a>
     </ng-container>
 
     <ng-template #loggedInTemplate>
@@ -46,12 +46,6 @@
                     <img class="profile-icon" [src]="user.isadmin ? '/lock.png' : '/user.png'" alt="loginIcon">
                     <span>{{user.username}}</span>
                 </a>
-                <button class="menu">
-                    <ul class="menucontent">
-                        <li> <a routerLink="/myprofile">Myprofile</a> </li>
-                        <li> <a (click)="logout()">Logout</a> </li>
-                    </ul>
-                    </button>
             </div>
         </ng-container>
     </ng-template>
@@ -63,9 +57,13 @@
 
     <ul class="menucontent" *ngIf="ismenuopen">
         <!--Menu contents-->
-        <li> <img class="menucontenticons" src="./hearth.png" alt="Hearth"> Favourites</li>
-        <li> <img class="menucontenticons" src="./user.png" alt="Profile"> My account</li>
-        <li> <img class="menucontenticons" src="./globe.png" alt="Globe"> My forum posts</li>
+        <li> <img class="menucontenticons" src="./hearth.png" alt="Hearth"> <a class="link" routerLink="/favourites">Favourites</a></li>
+        <li> <img class="menucontenticons" src="./user.png" alt="Profile"> <a class="link" routerLink="/myaccount">My Account</a></li>
+        <li> <img class="menucontenticons" src="./globe.png" alt="Globe"> <a class="link" routerLink="/forumposts"> My forum posts</a></li>
+        <li *ngIf="isAuthenticated$ | async">
+            <img class="menucontenticons" src="./logout.png" alt="Logout" (click)="logout()">
+            <a class="link" (click)="logout()">Log out</a>
+        </li>
     </ul>
 </nav>
 </div>

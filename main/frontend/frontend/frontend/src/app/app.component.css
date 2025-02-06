@@ -10,7 +10,7 @@
 }
 
 .navbar-brand img {
-    width: 120px;
+    width: 100px;
 }
 
 .search-container {
@@ -108,12 +108,13 @@ body{
 .menucontent{
     list-style-type: none;
     position: absolute;
-    top: 50px;
+    top: 100px;
     right: 10px;
     background-color: #A0B6F7;
     border-radius: 5px;
     box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-    display: none;
+    display: block;
+    z-index: 9999;
 }
 
 .menucontent li{
@@ -124,6 +125,9 @@ body{
 }
 
 .menucontent li:hover{
+    background-color: #7999f8;
+}
+#logout:hover {
     background-color: #7999f8;
 }
 
@@ -170,6 +174,7 @@ body{
 
 .footer{
     background-color: #A0B6F7;
+    
 }
 
 #copyright{
@@ -191,6 +196,7 @@ body{
     display: flex;
     align-items: center;
     gap: 10px;
+    padding-right: 75px;
 }
 
 .profile-icon{
@@ -233,7 +239,7 @@ body{
     }
 
     .menucontent {
-        top: 60px;
+        top: 100px;
         right: 20px;
         width: 200px;
     }
