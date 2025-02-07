@@ -1,6 +1,7 @@
 import models from '../models/index.js';
 import { Op } from 'sequelize';
 import bcryptMethods from '../utilities/bcrypt.methods.js';
+import validationMethods from '../utilities/validation.methods.js';
 
 export default {
     RegistPostController: async (req, res) => {
@@ -49,11 +50,7 @@ export default {
             // Először a felhasználónév helyes méretét ellenőrizzük, majd hiba üzenetet ad ha nem megfelelő tartományban van.
             // Mivel a bekért adat hiába karakterláncként értelmezi alapvetően,
             // de típuskényszerítéssel biztosabban elérhető hogy a szükséges String metódusok eléhetőek legyenek
-            const correctUsername =
-                String(registUsername).length >= 5 && 
-                String(registUsername).length <= 30;
-
-            if (!correctUsername) {
+            if (!validationMethods.CheckUsername(registUsername)) {
                 res.status(400).json({
                     error: "true",
                     message: "The username is not in the correct length!"
@@ -73,13 +70,7 @@ export default {
             // Itt a jelszó helyes formátumát ellenőrzi, miszerint legalább 10 karakter, maximum 30 lehet, tartalmazzon legalább
             // egy nagy betűt és legalább egy számot.
             // Mivel az ellenőrzések mind a jelszó formátumára vonatkozik, ezért a hiba üznenet mindegyikre ugyan az
-            const correctPassword = 
-                String(registPassword).length >= 10 &&
-                String(registPasswordAgain).length <= 30 &&
-                !(registPassword.toLowerCase() == registPassword) &&
-                /[0-9]/.test(registPassword);
-            
-            if (!correctPassword) {
+            if (!validationMethods.CheckPassword(registPassword)) {
                 res.status(400).json({
                     error: "true",
                     message: "The password is in incorrect form!"
