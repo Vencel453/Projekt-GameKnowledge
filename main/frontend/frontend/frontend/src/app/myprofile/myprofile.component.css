@@ -1,0 +1,108 @@
+.profile-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.profile-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #A0B6F7;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.profile-header h2{
+    font-size: 2rem;
+    margin: 0;
+    color: #333333;
+}
+
+.icon i,
+.icon {
+    font-size: 2rem;
+    color: #A0B6F7;
+}
+
+.profile-details{
+    margin-bottom: 2rem;
+}
+
+.profile-details p {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    color: #555555;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333333;
+}
+
+.form-field input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #cccccc;
+}
+
+.form-field input:focus {
+    outline: none;
+    border-color: #A0B6F7;
+}
+
+button[type="submit"] {
+    background-color: #A0B6F7;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #8a9ec7;
+}
+
+@media (max-width: 600px) {
+    .profile-container {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .profile-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .profile-details p {
+        font-size: 1rem;
+    }
+
+    .form-field input {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    button[type="submit"] {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}

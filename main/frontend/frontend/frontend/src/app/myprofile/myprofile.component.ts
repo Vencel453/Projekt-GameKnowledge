@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MyprofileService } from '../datamodifier.service';
+import { MatSnackBarModule, MatSnackBar} from '@angular/material/snack-bar'; 
+import { CommonModule } from '@angular/common';
 
 interface UserResponse {
   error: boolean;
   message: string;
   user: {
     username: string;
-    emial: string;
+    email: string;
     creation: string;
   };
   
@@ -16,17 +19,69 @@ interface UserResponse {
 @Component({
   selector: 'app-myprofile',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, ReactiveFormsModule, MatSnackBarModule, HttpClientModule],
   templateUrl: './myprofile.component.html',
   styleUrl: './myprofile.component.css'
 })
 export class MyprofileComponent implements OnInit {
-    user: UserResponse['user'] | null = null;
-    passwordForm: FormGroup;
+   user: any;
+   profileForm: FormGroup;
 
-    constructor(private http: HttpClient, private fb: FormBuilder) {
-      this.passwordForm = this.fb.group({
-        
-      })
+   constructor(
+    private profileService: MyprofileService,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar
+   ) {
+    this.profileForm = this.fb.group({
+      username: [''],
+      email: [''],
+      password: [''],
+      passwordAgain: ['', Validators.required]
+    });
+   }
+
+   ngOnInit(): void {
+     this.fetchTheData();
+   }
+
+   fetchTheData() {
+    this.profileService.getUser().subscribe({
+      next: (response: UserResponse) =>{
+        if (!response.error) {
+          this.user = response.user;
+          this.profileForm.patchValue({
+            username: this.user.username,
+            email: this.user.email
+          });
+        }else {
+          this.snackBar.open(response.message, 'Close', {duration: 3000});
+        }
+      },
+      error: () => {
+        this.snackBar.open('Something went wrong during the data fetching!', 'Close', {duration: 3000});
+      }
+    });
+   }
+
+   onSubmit() {
+    if (this.profileForm.invalid) {
+      this.snackBar.open('Please, fill correctly the form!', 'Close', {duration: 3000});
+      return;
     }
+
+    this.profileService.updateData(this.profileForm.value).subscribe({
+      next: (response: any) => {
+        if (!response.error) {
+          this.snackBar.open(response.message, 'Close', {duration: 3000});
+          this.fetchTheData();
+        }else{
+          this.snackBar.open(response.message, 'Close', {duration: 3000});
+        }
+      },
+      error: () => {
+        this.snackBar.open("There's an error with the update of the datas!", 'Close', {duration: 3000});
+      }
+    });
+   }
+
 }
