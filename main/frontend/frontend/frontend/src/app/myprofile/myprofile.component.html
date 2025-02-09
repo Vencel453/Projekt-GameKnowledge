@@ -1,6 +1,7 @@
-<div class="profile-container">
-    <div class="profile-header">
+<div class="myprofile-container">
+    <div class="myprofile-header">
         <h2>My Profile</h2>
+        <br>
         <div class="icon">
             <ng-container *ngIf="user?.admin; else normalUser">
                 <i class="icon" aria-label="Admin">
@@ -15,7 +16,7 @@
         </div>
     </div>
 
-    <div class="profile-details">
+    <div class="details">
         <p><strong>Username: </strong> {{user?.username}} </p>
         <p><strong>E-mail: </strong> {{user?.email}} </p>
         <p><strong>Created: </strong> {{user?.creation}} </p>
