@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 07, 2025 at 10:16 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Gép: 127.0.0.1
+-- Létrehozás ideje: 2025. Feb 10. 13:37
+-- Kiszolgáló verziója: 10.4.32-MariaDB
+-- PHP verzió: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `game_knowledge`
+-- Adatbázis: `game_knowledge`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `actings`
+-- Tábla szerkezet ehhez a táblához `actings`
 --
 
 CREATE TABLE `actings` (
@@ -35,7 +35,7 @@ CREATE TABLE `actings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `actings`
+-- A tábla adatainak kiíratása `actings`
 --
 
 INSERT INTO `actings` (`id`, `gameId`, `actorId`, `role`) VALUES
@@ -66,12 +66,18 @@ INSERT INTO `actings` (`id`, `gameId`, `actorId`, `role`) VALUES
 (25, 3, 19, 'Game Show Host'),
 (26, 3, 20, 'Doctor'),
 (27, 3, 21, 'Ernest Baldwin'),
-(28, 3, 22, 'Amy Baldwin');
+(28, 3, 22, 'Amy Baldwin'),
+(29, 14, 27, 'Hero / Prince'),
+(30, 14, 28, 'Leon Strohl da Haliaetus'),
+(31, 14, 29, 'Gallica'),
+(32, 15, 30, 'Samantha'),
+(33, 15, 31, 'Dr. Hill'),
+(34, 15, 32, 'Michael');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `actors`
+-- Tábla szerkezet ehhez a táblához `actors`
 --
 
 CREATE TABLE `actors` (
@@ -82,44 +88,47 @@ CREATE TABLE `actors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `actors`
+-- A tábla adatainak kiíratása `actors`
 --
 
 INSERT INTO `actors` (`id`, `firstName`, `lastName`, `profilePicture`) VALUES
-(1, 'Cherami', 'Leigh', NULL),
-(2, 'Gavin', 'Drea', NULL),
-(3, 'Keanu', 'Reeves', NULL),
-(4, 'Emily', 'Woo Zeller', NULL),
-(5, 'Carla', 'Tassara', NULL),
-(6, 'Luke', 'Roberts', NULL),
-(7, 'Salóme', 'Gunnarsdóttir', NULL),
-(8, 'Evie', 'Templeton', NULL),
-(9, 'Gianna', 'Kiehl', NULL),
-(10, 'Scott', 'Haining', NULL),
-(11, 'Danny', 'Kirrane', NULL),
-(12, 'Iga', 'Górecka', NULL),
-(13, 'Devora', 'Wilde', NULL),
-(14, 'Guy', 'Cihi', NULL),
-(15, 'Monica', 'Horgan', NULL),
-(16, 'Donna', 'Burke', NULL),
-(17, 'David', 'Schaufele', NULL),
-(18, 'Jacquelyn', 'Breckenridge', NULL),
-(19, 'Dominic', 'Allen', NULL),
-(20, 'Dennis', 'Falt', NULL),
-(21, 'Ward', 'Sexton', NULL),
-(22, 'Florence', 'Minowa', NULL),
-(23, 'Alix', 'Wilton Regan', NULL),
-(24, 'Anna', 'Skellern', NULL),
-(25, 'Anthon', 'Welsh', NULL),
-(26, 'Jane', 'Perry', NULL),
+(1, 'Cherami', 'Leigh', 'pictures/actors/cherami_leigh_1.png'),
+(2, 'Gavin', 'Drea', 'pictures/actors/gavin_drea_2.png'),
+(3, 'Keanu', 'Reeves', 'pictures/actors/keanue_reeces_3.png'),
+(4, 'Emily', 'Woo Zeller', 'pictures/actors/emily_woo_zeller_4.png'),
+(5, 'Carla', 'Tassara', 'pictures/actors/carla_tassara_5.png'),
+(6, 'Luke', 'Roberts', 'pictures/actors/luke_roberts_6.png'),
+(7, 'Salóme', 'Gunnarsdóttir', 'pictures/actors/salóme_gunnarsdóttir_7.png'),
+(8, 'Evie', 'Templeton', 'pictures/actors/evie_templeton_8.png'),
+(9, 'Gianna', 'Kiehl', 'pictures/actors/gianna_kiehl_9.png'),
+(10, 'Scott', 'Haining', 'pictures/actors/scott_haining_10.png'),
+(11, 'Danny', 'Kirrane', 'pictures/actors/danny_kirrane_11.png'),
+(12, 'Iga', 'Górecka', 'pictures/actors/iga_górecka_leigh_12.png'),
+(13, 'Devora', 'Wilde', 'pictures/actors/devore_wilde_13.png'),
+(14, 'Guy', 'Cihi', 'pictures/actors/guy_cihi_14.png'),
+(15, 'Monica', 'Horgan', 'pictures/actors/monica_horgan_15.png'),
+(16, 'Donna', 'Burke', 'pictures/actors/donna_burke_16.png'),
+(17, 'David', 'Schaufele', 'pictures/actors/david_schaufele_17.png'),
+(18, 'Jacquelyn', 'Breckenridge', 'pictures/actors/jacquelyn_breckenridge_18.png'),
+(19, 'Dominic', 'Allen', 'pictures/actors/dominic_allen_19.png'),
+(20, 'Dennis', 'Falt', 'pictures/actors/dennis_falt_20.png'),
+(21, 'Ward', 'Sexton', 'pictures/actors/ward_sexton_21.png'),
+(22, 'Florence', 'Minowa', 'pictures/actors/florence_minowa_22.png'),
+(23, 'Alix', 'Wilton Regan', 'pictures/actors/alix_wilton_regan_23.png'),
+(24, 'Anna', 'Skellern', 'pictures/actors/anna_skellem_24.png'),
+(25, 'Anthon', 'Welsh', 'pictures/actors/anthon_welsh_25.png'),
+(26, 'Jane', 'Perry', 'pictures/actors/jane_perry_26.png'),
 (27, 'Caleb', 'Yen', 'pictures/actors/caleb_yen_27.png'),
 (28, 'Stewart', 'Clarke', 'pictures/actors/stewart_clarke_28.png'),
-(29, 'Alejandra', 'Reynoso', 'pictures/actors/alejandra_reynoso_29.png');
+(29, 'Alejandra', 'Reynoso', 'pictures/actors/alejandra_reynoso_29.png'),
+(30, 'Hayden', 'Panettiere', 'pictures/actors/hayden_panettiere_28.png'),
+(31, 'Peter', 'Stormare', 'pictures/actors/peter_stormare_29.png'),
+(32, 'Brett', 'Dalton', 'pictures/actors/brett_dalton_30.png');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ageratings`
+-- Tábla szerkezet ehhez a táblához `ageratings`
 --
 
 CREATE TABLE `ageratings` (
@@ -130,7 +139,7 @@ CREATE TABLE `ageratings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `ageratings`
+-- A tábla adatainak kiíratása `ageratings`
 --
 
 INSERT INTO `ageratings` (`id`, `gameId`, `rating`, `institution`) VALUES
@@ -138,12 +147,16 @@ INSERT INTO `ageratings` (`id`, `gameId`, `rating`, `institution`) VALUES
 (2, 2, 'M', 'ESRB'),
 (3, 3, 'M', 'ESRB'),
 (4, 4, 'E', 'ESRB'),
-(5, 5, 'E', 'ESRB');
+(5, 5, 'E', 'ESRB'),
+(6, 14, 'T', 'ESRB'),
+(7, 14, '16', 'PEGI'),
+(8, 15, 'M', 'ESRB'),
+(9, 15, '18', 'PEGI');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `awards`
+-- Tábla szerkezet ehhez a táblához `awards`
 --
 
 CREATE TABLE `awards` (
@@ -153,19 +166,21 @@ CREATE TABLE `awards` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `awards`
+-- A tábla adatainak kiíratása `awards`
 --
 
 INSERT INTO `awards` (`id`, `organizer`, `name`) VALUES
-(1, 'The Game Awards', 'Best Ongoing Game'),
-(2, 'The Game Awards', 'Best Score & Music'),
+(1, 'TGA', 'Best Ongoing Game'),
+(2, 'TGA', 'Best Score & Music'),
 (3, 'BAFTA', 'Best Evolving Game'),
-(4, 'BAFTA', 'Best Narrative');
+(4, 'BAFTA', 'Best Narrative'),
+(5, 'TGA', 'Best Role Playing Game'),
+(6, 'TGA', 'Game of the Year');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `blacklistedtokens`
+-- Tábla szerkezet ehhez a táblához `blacklistedtokens`
 --
 
 CREATE TABLE `blacklistedtokens` (
@@ -176,7 +191,7 @@ CREATE TABLE `blacklistedtokens` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `blacklistedtokens`
+-- A tábla adatainak kiíratása `blacklistedtokens`
 --
 
 INSERT INTO `blacklistedtokens` (`id`, `userId`, `token`, `date`) VALUES
@@ -185,7 +200,7 @@ INSERT INTO `blacklistedtokens` (`id`, `userId`, `token`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `creations`
+-- Tábla szerkezet ehhez a táblához `creations`
 --
 
 CREATE TABLE `creations` (
@@ -196,7 +211,7 @@ CREATE TABLE `creations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `creations`
+-- A tábla adatainak kiíratása `creations`
 --
 
 INSERT INTO `creations` (`id`, `gameId`, `creatorId`, `field`) VALUES
@@ -217,12 +232,18 @@ INSERT INTO `creations` (`id`, `gameId`, `creatorId`, `field`) VALUES
 (15, 4, 14, 'director'),
 (16, 4, 15, 'story plan'),
 (17, 5, 16, 'creator'),
-(18, 5, 17, 'music');
+(18, 5, 17, 'music'),
+(19, 14, 18, 'director, writer'),
+(20, 14, 19, 'writer'),
+(21, 14, 20, 'music composer'),
+(22, 15, 21, 'director, writer'),
+(23, 15, 22, 'music composer'),
+(24, 15, 23, 'concept artist');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `creators`
+-- Tábla szerkezet ehhez a táblához `creators`
 --
 
 CREATE TABLE `creators` (
@@ -233,7 +254,7 @@ CREATE TABLE `creators` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `creators`
+-- A tábla adatainak kiíratása `creators`
 --
 
 INSERT INTO `creators` (`id`, `firstName`, `lastName`, `profilePicture`) VALUES
@@ -253,12 +274,18 @@ INSERT INTO `creators` (`id`, `firstName`, `lastName`, `profilePicture`) VALUES
 (14, 'Takashi', 'Tokita', NULL),
 (15, 'Masato', 'Kato', NULL),
 (16, 'Mariano', 'Cavallero', NULL),
-(17, 'Hernan', 'Marandino', NULL);
+(17, 'Hernan', 'Marandino', NULL),
+(18, 'Hashino', 'Katsura', 'pictures/creators/hashino_katsura_18.png'),
+(19, 'Kido', 'Azusa', 'pictures/creators/kido_azusa_19_png'),
+(20, 'Meguro', 'Shoji', 'pictures/creators/meguro_shoji_20_png'),
+(21, 'Alessandro', 'Gaudiosi', 'pictures/creators/alessandro_gaudiosi_21.png'),
+(22, 'Mark', 'Korven', 'pictures/creators/mark_korven_22.png'),
+(23, 'Zsóka', 'Nelli Erdélyi', 'pictures/creators/zsóka_nelli_erdélyi_23.png');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `favourites`
+-- Tábla szerkezet ehhez a táblához `favourites`
 --
 
 CREATE TABLE `favourites` (
@@ -270,7 +297,7 @@ CREATE TABLE `favourites` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `forumcomments`
+-- Tábla szerkezet ehhez a táblához `forumcomments`
 --
 
 CREATE TABLE `forumcomments` (
@@ -284,7 +311,7 @@ CREATE TABLE `forumcomments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `forumposts`
+-- Tábla szerkezet ehhez a táblához `forumposts`
 --
 
 CREATE TABLE `forumposts` (
@@ -301,7 +328,7 @@ CREATE TABLE `forumposts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gamepictures`
+-- Tábla szerkezet ehhez a táblához `gamepictures`
 --
 
 CREATE TABLE `gamepictures` (
@@ -313,7 +340,7 @@ CREATE TABLE `gamepictures` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `games`
+-- Tábla szerkezet ehhez a táblához `games`
 --
 
 CREATE TABLE `games` (
@@ -331,22 +358,22 @@ CREATE TABLE `games` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `games`
+-- A tábla adatainak kiíratása `games`
 --
 
 INSERT INTO `games` (`id`, `gameTitle`, `altGameTitle`, `description`, `release`, `boxart`, `promoArt`, `controllerSupport`, `crossplatform`, `crossPlatformException`, `steamdeckComp`) VALUES
 (1, 'Cyberpunk 2077', 'サイバーパンク2077', 'Cyberpunk 2077 is an open-world, action-adventure RPG set in the dark future of Night City — a dangerous megalopolis obsessed with power, glamor, and ceaseless body modification.', '2020-12-10', 'pictures/boxarts/cyberpunk_2077_2020_boxart.png', NULL, 2, NULL, NULL, 2),
 (2, 'Silent Hill 2', 'Silent Hill 2 Remake', 'Having received a letter from his deceased wife, James heads to where they shared so many memories, in the hope of seeing her one more time: Silent Hill.', '2024-10-08', 'pictures/boxarts/silent_hill_2_2024_boxart.png', NULL, 2, NULL, NULL, 0),
 (3, 'Silent Hill 2', NULL, 'After receiving a letter from his late wife, from Silent Hill, James Sunderland heads towards the town to search for her, only to come across a terrifying road of truth and redemption.', '2001-09-24', 'pictures/boxarts/silent_hill_2_2001_boxart.png', NULL, 0, NULL, NULL, NULL),
-(4, 'Chrono Trigger', 'Kurono toriga', 'Crono, a young boy, is thrust to adventure by destiny to destroy an oncoming threat that will destroy the world in 1999.', '1995-05-11', NULL, NULL, 1, NULL, NULL, 1),
+(4, 'Chrono Trigger', 'Kurono toriga', 'Crono, a young boy, is thrust to adventure by destiny to destroy an oncoming threat that will destroy the world in 1999.', '1995-05-11', 'pictures/boxarts/chrono_trigger_1995_boxart.png', NULL, 1, NULL, NULL, 1),
 (5, 'Forager', NULL, 'The highly popular and quirky \"idle game that you want to actively keep playing\". Explore, craft, gather & manage resources, find secrets and build your base out of nothing! Buy land to explore and expand!', '2019-06-18', 'pictures/boxarts/forager_2019_boxart.png', NULL, 1, NULL, NULL, 2),
 (6, 'Forza Horizon', NULL, 'Celebrate speed, music and style at the Forza Horizon Festival. From the makers of the highest-rated racing franchise of this generation, Forza Horizon combines legendary Forza authenticity with the freedom of the open road.', '2012-10-23', 'pictures/boxarts/forza_horizon_2012_boxart.png', NULL, NULL, NULL, NULL, NULL),
 (7, 'StarCraft 2', NULL, 'Four years after the events of StarCraft: Brood War (1998), Jim Raynor fights against the Dominion and begins a search for artifacts when at the same time the Zerg attack once again.', '2010-07-27', 'pictures/boxarts/starcraft_2_2012_boxart.png', NULL, 0, NULL, NULL, NULL),
 (8, 'A Like a Dragon: Pirate Yakuza in Hawaii', NULL, 'Embark on an over-the-top, modern-day pirate adventure with an ex-yakuza, now pirate captain & his crew. Engage in exhilarating combat on land and sea in the hunt for lost memories and treasure.', '2025-06-23', 'pictures/boxarts/like_a_dragon_pirate_yakuza_in_hawaii_2025_boxart.png', NULL, NULL, NULL, NULL, NULL),
-(9, 'Metal Gear Solid Delta: Snake Eater', NULL, 'Discover the origin story of iconic military operative Snake and begin to unravel the plot of the legendary METAL GEAR series.', '2025-06-11', NULL, 'pictures/promo/metal_gear_solid_delta_2025_promo.png', NULL, NULL, NULL, NULL),
-(10, 'Doom: The Dark Ages', NULL, 'DOOM: The Dark Ages is the single-player, action FPS prequel to the critically acclaimed DOOM (2016) and DOOM Eternal. You are the DOOM Slayer, the legendary demon-killing warrior fighting endlessly against Hell. Experience the epic cinematic origin story of the DOOM Slayer\'s rage in 2025.', '2025-06-20', NULL, 'pictures/promo/doom_dark_ages_2025_promo.png', NULL, NULL, NULL, NULL),
-(11, 'Death Stranding 2: On The Beach', NULL, 'Embark on an inspiring mission of human connection beyond the UCA. Sam—with companions by his side—sets out on a new journey to save humanity from extinction. Join them as they traverse a world beset by otherworldly enemies, obstacles and a haunting question: should we have connected?', '2025-06-17', NULL, 'pictures/promo/death_stranding_2_on_the_beach_2025_promo.png', NULL, NULL, NULL, NULL),
-(12, 'Clair Obscur: Expedition 33', NULL, 'Lead the members of Expedition 33 on their quest to destroy the Paintress so that she can never paint death again. Explore a world of wonders inspired by Belle Époque France and battle unique enemies in this turn-based RPG with real-time mechanics.', '2025-06-02', NULL, 'pictures/promo/clair_obscur_expedition_33_promo.png', NULL, NULL, NULL, NULL),
+(9, 'Metal Gear Solid Delta: Snake Eater', NULL, 'Discover the origin story of iconic military operative Snake and begin to unravel the plot of the legendary METAL GEAR series.', '2025-06-11', 'pictures/boxarts/metal_gear_solid_delta_snake_eater_2025_boxart.png', 'pictures/promo/metal_gear_solid_delta_2025_promo.png', NULL, NULL, NULL, NULL),
+(10, 'Doom: The Dark Ages', NULL, 'DOOM: The Dark Ages is the single-player, action FPS prequel to the critically acclaimed DOOM (2016) and DOOM Eternal. You are the DOOM Slayer, the legendary demon-killing warrior fighting endlessly against Hell. Experience the epic cinematic origin story of the DOOM Slayer\'s rage in 2025.', '2025-06-20', 'pictures/boxarts/doom_the_dark_ages_2025_boxart.png', 'pictures/promo/doom_dark_ages_2025_promo.png', NULL, NULL, NULL, NULL),
+(11, 'Death Stranding 2: On The Beach', NULL, 'Embark on an inspiring mission of human connection beyond the UCA. Sam—with companions by his side—sets out on a new journey to save humanity from extinction. Join them as they traverse a world beset by otherworldly enemies, obstacles and a haunting question: should we have connected?', '2025-06-17', 'pictures/boxarts/death_stranding_2_on_the_beach_2025_boxart.png', 'pictures/promo/death_stranding_2_on_the_beach_2025_promo.png', NULL, NULL, NULL, NULL),
+(12, 'Clair Obscur: Expedition 33', NULL, 'Lead the members of Expedition 33 on their quest to destroy the Paintress so that she can never paint death again. Explore a world of wonders inspired by Belle Époque France and battle unique enemies in this turn-based RPG with real-time mechanics.', '2025-06-02', 'pictures/boxarts/clair_obscur_expedition_33_boxart.png', 'pictures/promo/clair_obscur_expedition_33_promo.png', NULL, NULL, NULL, NULL),
 (13, 'Indiana Jones and the Great Circle', NULL, 'Uncover one of history’s greatest mysteries in a first-person, single-player adventure. The year is 1937, sinister forces are scouring the globe for the secret to an ancient power connected to the Great Circle, and only one person can stop them - Indiana Jones™', '2024-12-09', 'pictures/boxarts/indiana_jones_and_the_great_circle_2025_boxart.png', NULL, NULL, NULL, NULL, NULL),
 (14, 'Metaphor: ReFantazio', NULL, 'The throne sits empty after the king’s assassination. With no heirs, the will of the late king decrees that the next monarch will be elected by the people, & thus begins your fight for the throne.. ', '2024-10-11', 'pictures/boxarts/metaphor_refantazio_2024_boxart.png', NULL, 3, NULL, NULL, 1),
 (15, 'Until Dawn', 'Until Dawn Remake', 'Until Dawn invites you to relive the nightmare, and immerse yourself in a gripping slasher horror where every decision can make the difference between life and death. ', '2024-10-04', 'pictures/boxarts/until_dawn_2025_boxart.png', NULL, 3, NULL, NULL, 0);
@@ -354,7 +381,7 @@ INSERT INTO `games` (`id`, `gameTitle`, `altGameTitle`, `description`, `release`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gamesawards`
+-- Tábla szerkezet ehhez a táblához `gamesawards`
 --
 
 CREATE TABLE `gamesawards` (
@@ -366,19 +393,21 @@ CREATE TABLE `gamesawards` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `gamesawards`
+-- A tábla adatainak kiíratása `gamesawards`
 --
 
 INSERT INTO `gamesawards` (`id`, `gameId`, `awardId`, `year`, `result`) VALUES
 (1, 1, 1, 2023, 1),
 (2, 1, 2, 2021, 0),
 (3, 1, 3, 2024, 1),
-(4, 1, 4, 2021, 0);
+(4, 1, 4, 2021, 0),
+(5, 14, 5, 2024, 1),
+(6, 14, 6, 2024, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gameslanguages`
+-- Tábla szerkezet ehhez a táblához `gameslanguages`
 --
 
 CREATE TABLE `gameslanguages` (
@@ -389,7 +418,7 @@ CREATE TABLE `gameslanguages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `gameslanguages`
+-- A tábla adatainak kiíratása `gameslanguages`
 --
 
 INSERT INTO `gameslanguages` (`id`, `gameId`, `languageId`, `dub`) VALUES
@@ -411,12 +440,18 @@ INSERT INTO `gameslanguages` (`id`, `gameId`, `languageId`, `dub`) VALUES
 (16, 1, 16, 0),
 (17, 1, 17, 0),
 (18, 1, 18, 0),
-(19, 1, 19, 0);
+(19, 1, 19, 0),
+(20, 14, 2, 1),
+(21, 14, 9, 1),
+(22, 14, 3, 0),
+(23, 15, 2, 1),
+(24, 15, 3, 1),
+(25, 15, 4, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gamesonlineplatforms`
+-- Tábla szerkezet ehhez a táblához `gamesonlineplatforms`
 --
 
 CREATE TABLE `gamesonlineplatforms` (
@@ -425,10 +460,19 @@ CREATE TABLE `gamesonlineplatforms` (
   `platformId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `gamesonlineplatforms`
+--
+
+INSERT INTO `gamesonlineplatforms` (`id`, `gameId`, `platformId`) VALUES
+(1, 14, 1),
+(2, 14, 4),
+(3, 14, 9);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gamesplatforms`
+-- Tábla szerkezet ehhez a táblához `gamesplatforms`
 --
 
 CREATE TABLE `gamesplatforms` (
@@ -438,7 +482,7 @@ CREATE TABLE `gamesplatforms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `gamesplatforms`
+-- A tábla adatainak kiíratása `gamesplatforms`
 --
 
 INSERT INTO `gamesplatforms` (`id`, `gameId`, `platformId`) VALUES
@@ -446,12 +490,16 @@ INSERT INTO `gamesplatforms` (`id`, `gameId`, `platformId`) VALUES
 (2, 1, 5),
 (3, 1, 6),
 (4, 1, 9),
-(5, 1, 10);
+(5, 1, 10),
+(6, 14, 5),
+(7, 14, 6),
+(8, 14, 10),
+(9, 14, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gamestags`
+-- Tábla szerkezet ehhez a táblához `gamestags`
 --
 
 CREATE TABLE `gamestags` (
@@ -461,7 +509,7 @@ CREATE TABLE `gamestags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `gamestags`
+-- A tábla adatainak kiíratása `gamestags`
 --
 
 INSERT INTO `gamestags` (`id`, `gameId`, `tagId`) VALUES
@@ -492,7 +540,7 @@ INSERT INTO `gamestags` (`id`, `gameId`, `tagId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `languages`
+-- Tábla szerkezet ehhez a táblához `languages`
 --
 
 CREATE TABLE `languages` (
@@ -501,7 +549,7 @@ CREATE TABLE `languages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `languages`
+-- A tábla adatainak kiíratása `languages`
 --
 
 INSERT INTO `languages` (`id`, `language`) VALUES
@@ -528,7 +576,7 @@ INSERT INTO `languages` (`id`, `language`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `onlineplatforms`
+-- Tábla szerkezet ehhez a táblához `onlineplatforms`
 --
 
 CREATE TABLE `onlineplatforms` (
@@ -536,10 +584,25 @@ CREATE TABLE `onlineplatforms` (
   `platform` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `onlineplatforms`
+--
+
+INSERT INTO `onlineplatforms` (`id`, `platform`) VALUES
+(7, 'EA app'),
+(3, 'Epic Games Store'),
+(2, 'GOG'),
+(9, 'PSN'),
+(6, 'Rockstar Games Launcher'),
+(1, 'Steam'),
+(5, 'Ubisoft Connect'),
+(4, 'Xbox'),
+(8, 'Xbox PC');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pcspecs`
+-- Tábla szerkezet ehhez a táblához `pcspecs`
 --
 
 CREATE TABLE `pcspecs` (
@@ -560,16 +623,17 @@ CREATE TABLE `pcspecs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pcspecs`
+-- A tábla adatainak kiíratása `pcspecs`
 --
 
 INSERT INTO `pcspecs` (`minop`, `mincpu`, `minram`, `mingpu`, `mindirectx`, `cpu`, `ram`, `gpu`, `directx`, `op`, `storage`, `sidenote`, `id`, `gameId`) VALUES
-('64-bit Windows 10', 'Core i7-6700 or Ryzen 5 1600', '12 GB', 'GeForce GTX 1060 6GB or Radeon RX 580 8GB or Arc A380', 'Version 12', 'Core i7-12700 or Ryzen 7 7800X3D', '16 GB', 'GeForce RTX 2060 SUPER or Radeon RX 5700 XT or Arc A770', 'Version 12', ' 64-bit Windows 10', '70 GB', 'SSD required.', 1, 1);
+('64-bit Windows 10', 'Core i7-6700 or Ryzen 5 1600', '12 GB', 'GeForce GTX 1060 6GB or Radeon RX 580 8GB or Arc A380', 'Version 12', 'Core i7-12700 or Ryzen 7 7800X3D', '16 GB', 'GeForce RTX 2060 SUPER or Radeon RX 5700 XT or Arc A770', 'Version 12', ' 64-bit Windows 10', '70 GB', 'SSD required.', 1, 1),
+('Windows 10', ' Intel Core i5-3470 or AMD FX-6300', '6 GB', 'NVIDIA GeForce GTX 750 Ti, 4GB or AMD Radeon R7 360, 4GB or Intel Arc A310, 4GB', 'Version 11', ' Intel Core i5-7600 or Ryzen 5 2600', '8 GB', 'NVIDIA GeForce GTX 970, 4GB or AMD Radeon RX 480, 4GB or Intel Arc A380, 6GB', 'Version 11', 'Windows 10', '93 GB', NULL, 2, 14);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `platforms`
+-- Tábla szerkezet ehhez a táblához `platforms`
 --
 
 CREATE TABLE `platforms` (
@@ -578,7 +642,7 @@ CREATE TABLE `platforms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `platforms`
+-- A tábla adatainak kiíratása `platforms`
 --
 
 INSERT INTO `platforms` (`id`, `platform`) VALUES
@@ -603,7 +667,7 @@ INSERT INTO `platforms` (`id`, `platform`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ratings`
+-- Tábla szerkezet ehhez a táblához `ratings`
 --
 
 CREATE TABLE `ratings` (
@@ -616,7 +680,7 @@ CREATE TABLE `ratings` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `studios`
+-- Tábla szerkezet ehhez a táblához `studios`
 --
 
 CREATE TABLE `studios` (
@@ -626,19 +690,19 @@ CREATE TABLE `studios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `studios`
+-- A tábla adatainak kiíratása `studios`
 --
 
 INSERT INTO `studios` (`id`, `name`, `logo`) VALUES
-(1, 'CD Projekt RED', NULL),
-(2, 'Blooper Team', NULL),
-(3, 'Konami', NULL),
-(4, 'Square', NULL),
-(5, 'Square Enix', NULL),
-(6, 'HopFrog', NULL),
-(7, 'Humble Bundle', NULL),
-(8, 'Playground Games', NULL),
-(9, 'Microsoft Studios', NULL),
+(1, 'CD Projekt RED', 'pictures/studios/cd_projekt_red_logo.png'),
+(2, 'Blooper Team', 'pictures/studios/blooper_team_logo.png'),
+(3, 'Konami', 'pictures/studios/konami_logo.png'),
+(4, 'Square', 'pictures/studios/square_logo.png'),
+(5, 'Square Enix', 'pictures/studios/square_enix_logo.png'),
+(6, 'HopFrog', 'pictures/studios/hopfrog_logo.png'),
+(7, 'Humble Bundle', 'pictures/studios/humble_bundle_logo.png'),
+(8, 'Playground Games', 'pictures/studios/playground_games_logo.png'),
+(9, 'Microsoft Studios', 'pictures/studios/microsoft_studios_logo.png'),
 (10, 'Atlus', 'pictures/studios/atlus_logo.png'),
 (11, 'Studio Zero', 'pictures/studios/studio_zero_logo.png'),
 (12, 'Sega', 'pictures/studios/sega_logo.png'),
@@ -648,7 +712,7 @@ INSERT INTO `studios` (`id`, `name`, `logo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `studiosgames`
+-- Tábla szerkezet ehhez a táblához `studiosgames`
 --
 
 CREATE TABLE `studiosgames` (
@@ -660,7 +724,7 @@ CREATE TABLE `studiosgames` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `studiosgames`
+-- A tábla adatainak kiíratása `studiosgames`
 --
 
 INSERT INTO `studiosgames` (`id`, `gameId`, `studioId`, `isDeveloper`, `isPublisher`) VALUES
@@ -671,12 +735,16 @@ INSERT INTO `studiosgames` (`id`, `gameId`, `studioId`, `isDeveloper`, `isPublis
 (5, 4, 4, 1, 1),
 (6, 4, 5, 1, 1),
 (7, 5, 6, 1, 0),
-(8, 5, 7, 0, 1);
+(8, 5, 7, 0, 1),
+(9, 14, 11, 1, 0),
+(10, 14, 10, 1, 1),
+(11, 15, 13, 1, 0),
+(12, 15, 14, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tags`
+-- Tábla szerkezet ehhez a táblához `tags`
 --
 
 CREATE TABLE `tags` (
@@ -685,7 +753,7 @@ CREATE TABLE `tags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tags`
+-- A tábla adatainak kiíratása `tags`
 --
 
 INSERT INTO `tags` (`id`, `tag`) VALUES
@@ -714,7 +782,7 @@ INSERT INTO `tags` (`id`, `tag`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tábla szerkezet ehhez a táblához `users`
 --
 
 CREATE TABLE `users` (
@@ -727,7 +795,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- A tábla adatainak kiíratása `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `admin`, `creation`) VALUES
@@ -736,11 +804,11 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `admin`, `creation`)
 (8, 'Test456', 'MasJelszo23', 'mas@email.com', 0, '2025-02-06');
 
 --
--- Indexes for dumped tables
+-- Indexek a kiírt táblákhoz
 --
 
 --
--- Indexes for table `actings`
+-- A tábla indexei `actings`
 --
 ALTER TABLE `actings`
   ADD PRIMARY KEY (`id`),
@@ -748,33 +816,33 @@ ALTER TABLE `actings`
   ADD KEY `actorId` (`actorId`);
 
 --
--- Indexes for table `actors`
+-- A tábla indexei `actors`
 --
 ALTER TABLE `actors`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ageratings`
+-- A tábla indexei `ageratings`
 --
 ALTER TABLE `ageratings`
   ADD PRIMARY KEY (`id`),
   ADD KEY `gameId` (`gameId`);
 
 --
--- Indexes for table `awards`
+-- A tábla indexei `awards`
 --
 ALTER TABLE `awards`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `blacklistedtokens`
+-- A tábla indexei `blacklistedtokens`
 --
 ALTER TABLE `blacklistedtokens`
   ADD PRIMARY KEY (`id`),
   ADD KEY `userId` (`userId`);
 
 --
--- Indexes for table `creations`
+-- A tábla indexei `creations`
 --
 ALTER TABLE `creations`
   ADD PRIMARY KEY (`id`),
@@ -782,13 +850,13 @@ ALTER TABLE `creations`
   ADD KEY `creatorId` (`creatorId`);
 
 --
--- Indexes for table `creators`
+-- A tábla indexei `creators`
 --
 ALTER TABLE `creators`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `favourites`
+-- A tábla indexei `favourites`
 --
 ALTER TABLE `favourites`
   ADD PRIMARY KEY (`id`),
@@ -796,7 +864,7 @@ ALTER TABLE `favourites`
   ADD KEY `gameId` (`gameId`);
 
 --
--- Indexes for table `forumcomments`
+-- A tábla indexei `forumcomments`
 --
 ALTER TABLE `forumcomments`
   ADD PRIMARY KEY (`id`),
@@ -804,7 +872,7 @@ ALTER TABLE `forumcomments`
   ADD KEY `userId` (`userId`);
 
 --
--- Indexes for table `forumposts`
+-- A tábla indexei `forumposts`
 --
 ALTER TABLE `forumposts`
   ADD PRIMARY KEY (`id`),
@@ -812,20 +880,20 @@ ALTER TABLE `forumposts`
   ADD KEY `gameId` (`gameId`);
 
 --
--- Indexes for table `gamepictures`
+-- A tábla indexei `gamepictures`
 --
 ALTER TABLE `gamepictures`
   ADD PRIMARY KEY (`id`),
   ADD KEY `gameId` (`gameId`);
 
 --
--- Indexes for table `games`
+-- A tábla indexei `games`
 --
 ALTER TABLE `games`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `gamesawards`
+-- A tábla indexei `gamesawards`
 --
 ALTER TABLE `gamesawards`
   ADD PRIMARY KEY (`id`),
@@ -833,7 +901,7 @@ ALTER TABLE `gamesawards`
   ADD KEY `awardId` (`awardId`);
 
 --
--- Indexes for table `gameslanguages`
+-- A tábla indexei `gameslanguages`
 --
 ALTER TABLE `gameslanguages`
   ADD PRIMARY KEY (`id`),
@@ -841,7 +909,7 @@ ALTER TABLE `gameslanguages`
   ADD KEY `languageId` (`languageId`);
 
 --
--- Indexes for table `gamesonlineplatforms`
+-- A tábla indexei `gamesonlineplatforms`
 --
 ALTER TABLE `gamesonlineplatforms`
   ADD PRIMARY KEY (`id`),
@@ -849,7 +917,7 @@ ALTER TABLE `gamesonlineplatforms`
   ADD KEY `platformId` (`platformId`);
 
 --
--- Indexes for table `gamesplatforms`
+-- A tábla indexei `gamesplatforms`
 --
 ALTER TABLE `gamesplatforms`
   ADD PRIMARY KEY (`id`),
@@ -857,7 +925,7 @@ ALTER TABLE `gamesplatforms`
   ADD KEY `platformId` (`platformId`);
 
 --
--- Indexes for table `gamestags`
+-- A tábla indexei `gamestags`
 --
 ALTER TABLE `gamestags`
   ADD PRIMARY KEY (`id`),
@@ -865,35 +933,35 @@ ALTER TABLE `gamestags`
   ADD KEY `tagId` (`tagId`);
 
 --
--- Indexes for table `languages`
+-- A tábla indexei `languages`
 --
 ALTER TABLE `languages`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `unique_language` (`language`);
 
 --
--- Indexes for table `onlineplatforms`
+-- A tábla indexei `onlineplatforms`
 --
 ALTER TABLE `onlineplatforms`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `unique_onlineplatform` (`platform`);
 
 --
--- Indexes for table `pcspecs`
+-- A tábla indexei `pcspecs`
 --
 ALTER TABLE `pcspecs`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `gameId_fk_1` (`gameId`);
 
 --
--- Indexes for table `platforms`
+-- A tábla indexei `platforms`
 --
 ALTER TABLE `platforms`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `unique_platform` (`platform`);
 
 --
--- Indexes for table `ratings`
+-- A tábla indexei `ratings`
 --
 ALTER TABLE `ratings`
   ADD PRIMARY KEY (`id`),
@@ -901,14 +969,14 @@ ALTER TABLE `ratings`
   ADD KEY `userId` (`userId`);
 
 --
--- Indexes for table `studios`
+-- A tábla indexei `studios`
 --
 ALTER TABLE `studios`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `unique_name` (`name`);
 
 --
--- Indexes for table `studiosgames`
+-- A tábla indexei `studiosgames`
 --
 ALTER TABLE `studiosgames`
   ADD PRIMARY KEY (`id`),
@@ -916,14 +984,14 @@ ALTER TABLE `studiosgames`
   ADD KEY `studioId` (`studioId`);
 
 --
--- Indexes for table `tags`
+-- A tábla indexei `tags`
 --
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `unique_tag` (`tag`);
 
 --
--- Indexes for table `users`
+-- A tábla indexei `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -931,272 +999,272 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `unique_name` (`username`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- A kiírt táblák AUTO_INCREMENT értéke
 --
 
 --
--- AUTO_INCREMENT for table `actings`
+-- AUTO_INCREMENT a táblához `actings`
 --
 ALTER TABLE `actings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT for table `actors`
+-- AUTO_INCREMENT a táblához `actors`
 --
 ALTER TABLE `actors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT for table `ageratings`
+-- AUTO_INCREMENT a táblához `ageratings`
 --
 ALTER TABLE `ageratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `awards`
+-- AUTO_INCREMENT a táblához `awards`
 --
 ALTER TABLE `awards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `blacklistedtokens`
+-- AUTO_INCREMENT a táblához `blacklistedtokens`
 --
 ALTER TABLE `blacklistedtokens`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `creations`
+-- AUTO_INCREMENT a táblához `creations`
 --
 ALTER TABLE `creations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `creators`
+-- AUTO_INCREMENT a táblához `creators`
 --
 ALTER TABLE `creators`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `favourites`
+-- AUTO_INCREMENT a táblához `favourites`
 --
 ALTER TABLE `favourites`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `forumcomments`
+-- AUTO_INCREMENT a táblához `forumcomments`
 --
 ALTER TABLE `forumcomments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `forumposts`
+-- AUTO_INCREMENT a táblához `forumposts`
 --
 ALTER TABLE `forumposts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `gamepictures`
+-- AUTO_INCREMENT a táblához `gamepictures`
 --
 ALTER TABLE `gamepictures`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `games`
+-- AUTO_INCREMENT a táblához `games`
 --
 ALTER TABLE `games`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `gamesawards`
+-- AUTO_INCREMENT a táblához `gamesawards`
 --
 ALTER TABLE `gamesawards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `gameslanguages`
+-- AUTO_INCREMENT a táblához `gameslanguages`
 --
 ALTER TABLE `gameslanguages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT for table `gamesonlineplatforms`
+-- AUTO_INCREMENT a táblához `gamesonlineplatforms`
 --
 ALTER TABLE `gamesonlineplatforms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `gamesplatforms`
+-- AUTO_INCREMENT a táblához `gamesplatforms`
 --
 ALTER TABLE `gamesplatforms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `gamestags`
+-- AUTO_INCREMENT a táblához `gamestags`
 --
 ALTER TABLE `gamestags`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `languages`
+-- AUTO_INCREMENT a táblához `languages`
 --
 ALTER TABLE `languages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
--- AUTO_INCREMENT for table `onlineplatforms`
+-- AUTO_INCREMENT a táblához `onlineplatforms`
 --
 ALTER TABLE `onlineplatforms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `pcspecs`
+-- AUTO_INCREMENT a táblához `pcspecs`
 --
 ALTER TABLE `pcspecs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `platforms`
+-- AUTO_INCREMENT a táblához `platforms`
 --
 ALTER TABLE `platforms`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `ratings`
+-- AUTO_INCREMENT a táblához `ratings`
 --
 ALTER TABLE `ratings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `studios`
+-- AUTO_INCREMENT a táblához `studios`
 --
 ALTER TABLE `studios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `studiosgames`
+-- AUTO_INCREMENT a táblához `studiosgames`
 --
 ALTER TABLE `studiosgames`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `tags`
+-- AUTO_INCREMENT a táblához `tags`
 --
 ALTER TABLE `tags`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Constraints for dumped tables
+-- Megkötések a kiírt táblákhoz
 --
 
 --
--- Constraints for table `actings`
+-- Megkötések a táblához `actings`
 --
 ALTER TABLE `actings`
   ADD CONSTRAINT `actings_fk_1` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `actings_fk_2` FOREIGN KEY (`actorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `ageratings`
+-- Megkötések a táblához `ageratings`
 --
 ALTER TABLE `ageratings`
   ADD CONSTRAINT `ageratings_fk_1` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `blacklistedtokens`
+-- Megkötések a táblához `blacklistedtokens`
 --
 ALTER TABLE `blacklistedtokens`
   ADD CONSTRAINT `blacklistedtokens_fk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `creations`
+-- Megkötések a táblához `creations`
 --
 ALTER TABLE `creations`
   ADD CONSTRAINT `creations_fk_1` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `creations_fk_2` FOREIGN KEY (`creatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `favourites`
+-- Megkötések a táblához `favourites`
 --
 ALTER TABLE `favourites`
   ADD CONSTRAINT `favourites_fk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `favourites_fk_2` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `forumcomments`
+-- Megkötések a táblához `forumcomments`
 --
 ALTER TABLE `forumcomments`
   ADD CONSTRAINT `forumcomments_fk_1` FOREIGN KEY (`postId`) REFERENCES `forumposts` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `forumcomments_fk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `forumposts`
+-- Megkötések a táblához `forumposts`
 --
 ALTER TABLE `forumposts`
   ADD CONSTRAINT `forumposts_fk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `forumposts_fk_2` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `gamepictures`
+-- Megkötések a táblához `gamepictures`
 --
 ALTER TABLE `gamepictures`
   ADD CONSTRAINT `gamepictures_fk_1` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `gamesawards`
+-- Megkötések a táblához `gamesawards`
 --
 ALTER TABLE `gamesawards`
   ADD CONSTRAINT `gamesawards_fk_1` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `gamesawards_fk_2` FOREIGN KEY (`awardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `gameslanguages`
+-- Megkötések a táblához `gameslanguages`
 --
 ALTER TABLE `gameslanguages`
   ADD CONSTRAINT `gameslanguages_fk_1` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `gameslanguages_fk_2` FOREIGN KEY (`languageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `gamesonlineplatforms`
+-- Megkötések a táblához `gamesonlineplatforms`
 --
 ALTER TABLE `gamesonlineplatforms`
   ADD CONSTRAINT `gamesonlineplatforms_fk_1` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `gamesonlineplatforms_fk_2` FOREIGN KEY (`platformId`) REFERENCES `onlineplatforms` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `gamesplatforms`
+-- Megkötések a táblához `gamesplatforms`
 --
 ALTER TABLE `gamesplatforms`
   ADD CONSTRAINT `platforms_fk_1` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `platforms_fk_2` FOREIGN KEY (`platformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `gamestags`
+-- Megkötések a táblához `gamestags`
 --
 ALTER TABLE `gamestags`
   ADD CONSTRAINT `tags_fk_1` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `tags_fk_2` FOREIGN KEY (`tagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `pcspecs`
+-- Megkötések a táblához `pcspecs`
 --
 ALTER TABLE `pcspecs`
   ADD CONSTRAINT `pcspecs_fk_1` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `ratings`
+-- Megkötések a táblához `ratings`
 --
 ALTER TABLE `ratings`
   ADD CONSTRAINT `ratings_fk_1` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `ratings_fk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `studiosgames`
+-- Megkötések a táblához `studiosgames`
 --
 ALTER TABLE `studiosgames`
   ADD CONSTRAINT `studiosgames_fk_1` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`) ON DELETE CASCADE,
