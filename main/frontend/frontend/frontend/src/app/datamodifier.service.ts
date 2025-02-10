@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
     providedIn: 'root'
 })
 export class MyprofileService {
-    private backendURL = 'http://localhost:3000';
+    private backendURL = 'http://localhost:3000/myprofile';
 
     constructor(private http: HttpClient) { }
 
@@ -15,6 +15,6 @@ export class MyprofileService {
     }
 
     updateData(data: any): Observable<any> {
-        return this.http.put(`${this.backendURL}`, data);
+        return this.http.post(`${this.backendURL}`, data);
     }
 }

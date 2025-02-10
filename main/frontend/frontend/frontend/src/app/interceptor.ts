@@ -1,16 +1,17 @@
-import { Injectable } from "@angular/core";
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { HttpInterceptorFn } from "@angular/common/http";
+import { ColdObservable } from "rxjs/internal/testing/ColdObservable";
 
-@Injectable()
-export class Interceptor implements HttpInterceptor {
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+export const Interceptor: HttpInterceptorFn = (req, next) => {
+
         const token = localStorage.getItem('token');
-        if (token) {
-            req = req.clone({
-                setHeaders: {Authorization: `Bearer ${token}`}
+        if (token){
+            const clonedrequest = req.clone({
+                setHeaders: { Authorization: `Bearer ${token}`}
             });
+
+            return next(clonedrequest);
+        } else {
+            console.warn("Nincs token mentve");
         }
-        return next.handle(req);
-    }
-}
+        return next(req);
+};

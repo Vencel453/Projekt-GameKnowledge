@@ -54,32 +54,33 @@ export class MyprofileComponent implements OnInit {
             email: this.user.email
           });
         }else {
-          this.snackBar.open(response.message, 'Close', {duration: 3000});
+          this.snackBar.open(response.message, 'Close', {duration: 10000});
         }
       },
       error: () => {
-        this.snackBar.open('Something went wrong during the data fetching!', 'Close', {duration: 3000});
+        this.snackBar.open('Something went wrong during the data fetching!', 'Close', {duration: 10000});
       }
     });
    }
 
    onSubmit() {
     if (this.profileForm.invalid) {
-      this.snackBar.open('Please, fill correctly the form!', 'Close', {duration: 3000});
+      this.snackBar.open('Please, fill correctly the form!', 'Close', {duration: 10000});
       return;
     }
 
     this.profileService.updateData(this.profileForm.value).subscribe({
       next: (response: any) => {
+        console.log(this.profileForm.value);
         if (!response.error) {
-          this.snackBar.open(response.message, 'Close', {duration: 3000});
+          this.snackBar.open(response.message, 'Close', {duration: 10000});
           this.fetchTheData();
         }else{
-          this.snackBar.open(response.message, 'Close', {duration: 3000});
+          this.snackBar.open(response.message, 'Close', {duration: 10000});
         }
       },
       error: () => {
-        this.snackBar.open("There's an error with the update of the datas!", 'Close', {duration: 3000});
+        this.snackBar.open("There's an error with the update of the datas!", 'Close', {duration: 10000});
       }
     });
    }
