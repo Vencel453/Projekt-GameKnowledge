@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+.custombar {
+    background-color: black;
+    color: #A0B6F7;
+    font-size: 16px;
+    width: fit-content;
+    position: fixed;
+    left: 50% !important;
+    top: 50% !important;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+}

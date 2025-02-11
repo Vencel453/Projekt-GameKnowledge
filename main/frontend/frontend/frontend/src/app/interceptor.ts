@@ -1,5 +1,4 @@
 import { HttpInterceptorFn } from "@angular/common/http";
-import { ColdObservable } from "rxjs/internal/testing/ColdObservable";
 
 export const Interceptor: HttpInterceptorFn = (req, next) => {
 

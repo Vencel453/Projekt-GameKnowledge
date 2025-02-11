@@ -1,17 +1,10 @@
 .myprofile-container {
-    text-align: center;
     background-color: #A0B6F7;
     margin-top: 50px;
-}
-
-.icon {
-    width: 50px;
-    height: 50px;
     text-align: center;
 }
 
-.myprofile-header{
-    text-align: center;
-    font-weight: bold;
+.titles {
     font-size: xx-large;
+    font-weight: bold;
 }

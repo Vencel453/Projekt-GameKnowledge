@@ -1,42 +1,31 @@
 <div class="myprofile-container">
-    <div class="myprofile-header">
-        <h2>My Profile</h2>
+        <h2 class="titles">My Profile</h2>
         <br>
-        <div class="icon">
-            <ng-container *ngIf="user?.admin; else normalUser">
-                <i class="icon" aria-label="Admin">
-                    <img src="../lock.png" alt="adminicon">
-                </i>
-            </ng-container>
-            <ng-template #normalUser>
-                <i class="icon" aria-label="Normal">
-                    <img src="../user.png" alt="usericon">
-                </i>
-        </ng-template>
-        </div>
-    </div>
-
+ 
     <div class="details">
         <p><strong>Username: </strong> {{user?.username}} </p>
         <p><strong>E-mail: </strong> {{user?.email}} </p>
         <p><strong>Created: </strong> {{user?.creation}} </p>
     </div>
 
+    <hr>
+<h2 class="titles">Change my datas</h2>
+<br>
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
         <div class="form-field">
-            <label for="username">Username</label>
+            <label for="username">Username: </label>
             <input id="username" type="text" formControlName="username">
         </div>
         <div class="form-field">
-            <label for="email">E-mail</label>
+            <label for="email">E-mail: </label>
             <input id="email" type="email" formControlName="email">
         </div>
         <div class="form-field">
-            <label for="password">New password</label>
+            <label for="password">New password: </label>
             <input id="password" type="password" formControlName="password">
         </div>
         <div class="form-field">
-            <label for="passwordAgain">New password confirmation</label>
+            <label for="passwordAgain">New password confirmation: </label>
             <input id="passwordAgain" type="password" formControlName="passwordAgain">
         </div>
         <button type="submit">Modify</button>
