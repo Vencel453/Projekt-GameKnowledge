@@ -1,11 +1,17 @@
 .custombar {
-    background-color: black;
-    color: #A0B6F7;
-    font-size: 16px;
+    background-color: black !important;
+    color: #A0B6F7 !important;
+    font-size: 16px !important;
     width: fit-content;
-    position: fixed;
-    left: 50% !important;
+    height: fit-content;
     top: 50% !important;
-    bottom: auto;
-    transform: translate(-50%, -50%);
+    left: 50% !important;
+    position: fixed !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+}
+
+.custombar:hover{
+    background-color: #A0B6F7;
+    color: white;
 }

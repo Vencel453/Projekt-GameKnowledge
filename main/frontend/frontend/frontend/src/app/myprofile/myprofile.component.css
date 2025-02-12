@@ -8,3 +8,30 @@
     font-size: xx-large;
     font-weight: bold;
 }
+
+.form-field {
+        padding: 10px;
+        font-weight: bold;
+        text-align: left;
+        margin-left: 40%;
+}
+
+button {
+    background-color: black;
+    color: #A0B6F7;
+    width: fit-content;
+    height: fit-content;
+    font-weight: bold;
+    font-size: x-large;
+    border: none;
+}
+
+button:hover{
+    background-color: #A0B6F7;
+    color: white;
+    border: none;
+}
+
+label {
+    margin-right: 20px;
+}
