@@ -1,12 +1,11 @@
-import { NgFor } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { response } from 'express';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Authservice } from '../authservice';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -21,8 +20,8 @@ successmess: string = '';
 username: string = '';
 password: string = '';
 
-constructor(private http: HttpClient, private router: Router, private authService: Authservice){
-
+constructor(private http: HttpClient, private router: Router, private authService: Authservice, private title: Title){
+  this.title.setTitle('Login');
 }
 
 onSubmit(): void {

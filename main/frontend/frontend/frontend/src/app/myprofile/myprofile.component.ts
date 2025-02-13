@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MyprofileService } from '../datamodifier.service';
 import { MatSnackBarModule, MatSnackBar} from '@angular/material/snack-bar'; 
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 interface UserResponse {
   error: boolean;
@@ -31,8 +32,10 @@ export class MyprofileComponent implements OnInit {
     private profileService: MyprofileService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
+    private title: Title,
     @Inject(PLATFORM_ID) private platformid: Object
    ) {
+    this.title.setTitle('My Profile');
     this.profileForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', Validators.required],

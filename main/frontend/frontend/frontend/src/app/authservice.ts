@@ -1,6 +1,6 @@
 //Szükséges importok beágyazása
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -34,7 +34,6 @@ export class Authservice {
 }
 
    login(token: string, username: string, isAdmin: boolean){
-    console.log("Login funciton called: ", {token, username, isAdmin});
     if (this.isLocalStorageAvailable()){
     localStorage.setItem('token', token);
     localStorage.setItem('username', username);

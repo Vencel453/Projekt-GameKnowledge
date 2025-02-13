@@ -1,10 +1,7 @@
 import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { response, Router } from 'express';
-import { release } from 'os';
-import { Routes, RouterModule } from '@angular/router';
-import { title } from 'process';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
