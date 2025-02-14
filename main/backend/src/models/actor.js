@@ -1,6 +1,5 @@
-import {Sequelize, DataTypes, Model} from "sequelize";
-import { db_config } from "../config/config.js";
-const sequelize = new Sequelize(db_config)
+import sequelize from "../config/config.js";
+import { Model, DataTypes } from "sequelize";
 
 class Actor extends Model {};
 Actor.init ({
@@ -15,7 +14,7 @@ Actor.init ({
                 type: DataTypes.STRING(100),
             },
 
-            lastNameName: {
+            lastName: {
                 type: DataTypes.STRING(100),
             },
 

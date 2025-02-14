@@ -40,28 +40,34 @@ export default {
                 }
             });
 
-            const developers = await Studiosgame.findAll({
-                attributes: [],
-                where: {
-                    gameId: gameid,
-                    isDeveloper: true
-                },
+            const developers = await Studio.findAll({
+                attributes: ["id", "name", "logo"],
                 include: {
-                    model: Studio,
-                    attributes: ["name"],
+                    where: {id: gameid},
+                    attributes: [],
+                    model: Game,
+                    through: {
+                        attributes: [],
+                        model: Studiosgame,
+                        where: {isDeveloper: true}
+                    }
                 },
                 raw: true
             });
 
-            const publishers = await Studiosgame.findAll({
-                attributes: [],
-                where: {
-                    gameId: gameid,
-                    isPublisher: true
-                },
+            console.log(developers);
+
+            const publishers = await Studio.findAll({
+                attributes: ["id", "name", "logo"],
                 include: {
-                    model: Studio,
-                    attributes: ["name"],
+                    where: {id: gameid},
+                    attributes: [],
+                    model: Game,
+                    through: {
+                        attributes: [],
+                        model: Studiosgame,
+                        where: {isPublisher: true}
+                    }
                 },
                 raw: true
             });
@@ -71,90 +77,105 @@ export default {
             const agerating = await Agerating.findAll({
                 attributes: ["rating", "institution"],
                 where: {
-                    gameId: gameid
+                    GameId: gameid
                 }
             });
 
-            const genres = await Gamestag.findAll({
-                attributes: [],
-                where: {
-                    gameId: gameid
-                },
+            const genres = await Tag.findAll({
+                attributes: ["tag"],
                 include: {
-                    model: Tag,
-                    attributes: ["tag"],
+                    where: { id: gameid},
+                    model: Game,
+                    through: {
+                        model: Gamestag,
+                        attributes: [],
+                    },
+                    attributes: [],
                 },
                 raw: true
             });
             
-            const nominations = await Gamesaward.findAll({
-                attributes: ["year"],
-                where: {
-                    gameId: gameid,
-                    result: false
-                },
+            const nominations = await Award.findAll({
+                attributes: ["organizer", "name"],
                 include: {
-                    model: Award,
-                    attributes: ["organizer", "name"]
-                }
-            });
-
-            const wins = await Gamesaward.findAll({
-                attributes: ["year"],
-                where: {
-                    gameId: gameid,
-                    result: true
-                },
-                include: {
-                    model: Award,
-                    attributes: ["organizer", "name"]
-                }
-            });
-
-            const languages = await Gameslanguage.findAll({
-                attributes: ["dub"],
-                where: {
-                    gameId: gameid
-                },
-                include: {
-                    model: Language,
-                    attributes: ["language"]
+                    where: { id: gameid},
+                    model: Game,
+                    through: {
+                        model: Gamesaward,
+                        where: { result: false },
+                        attributes: ["year"]
+                    },
+                    attributes: []
                 },
                 raw: true
             });
 
-            const platforms = await Gamesplatform.findAll({
-                attributes: [],
-                where: {
-                    gameId: gameid
-                },
+            const wins = await Award.findAll({
+                attributes: ["organizer", "name"],
                 include: {
-                    model: Platform,
-                    attributes: ["platform"]
+                    where: { id: gameid},
+                    model: Game,
+                    through: {
+                        model: Gamesaward,
+                        where: { result: true },
+                        attributes: ["year"]
+                    },
+                    attributes: []
                 },
                 raw: true
             });
 
-            const actors = await Acting.findAll({
-                attributes: ["role"],
-                where: {
-                    gameId: gameid
-                },
+            const languages = await Language.findAll({
+                attributes: ["language"],
                 include: {
-                    model: Actor,
-                    attributes: ["firstName", "lastName"]
+                    where: { id: gameid},
+                    model: Game,
+                    through: {
+                        model: Gameslanguage,
+                        attributes: ["dub"]
+                    },
+                    attributes: []
                 },
                 raw: true
             });
 
-            const creators = await Creation.findAll({
-                attributes: ["field"],
-                where: {
-                    gameId: gameid
-                },
+            const platforms = await Platform.findAll({
+                attributes: ["platform"],
                 include: {
-                    model: Creator,
-                    attributes: ["firstName", "lastName"]
+                    where: { id: gameid },
+                    model: Game,
+                    through: {
+                        model: Gamesplatform,
+                        attributes: []
+                    },
+                    attributes: []
+                },
+                raw: true
+            });
+
+            const actors = await Actor.findAll({
+                include: {
+                    where: { id: gameid },
+                    model: Game,
+                    through: {
+                        model: Acting,
+                        attributes: []
+                    },
+                    attributes: []
+                },
+                raw: true
+            });
+
+            const creators = await Creator.findAll({
+                attributes: ["id", "firstName", "lastName"],
+                include: {
+                    where: { id: gameid},
+                    model: Game,
+                    through: {
+                        model: Creation,
+                        attributes: []
+                    },
+                    attributes: []
                 },
                 raw: true
             });
@@ -162,7 +183,7 @@ export default {
             const pcspec = await Pcspec.findOne({
                 attributes: ["minop", "mincpu", "minram", "mingpu", "mindirectx", "op", "cpu", "ram", "gpu", "directx", "storage", "sidenote"],
                 where: {
-                    gameId: gameid
+                    GameId: gameid
                 }
             });
 
@@ -219,8 +240,8 @@ export default {
 
             const conflict = await Favourite.findOne({
                 where: {
-                    userId: userid,
-                    gameId: gameid
+                    UserId: userid,
+                    GameId: gameid
                 }
             });
 
@@ -233,8 +254,8 @@ export default {
             }
 
             await Favourite.create({
-                userId: userid,
-                gameId: gameid
+                UserId: userid,
+                GameId: gameid
             });
 
             res.status(201).json({
@@ -268,8 +289,8 @@ export default {
 
         const conflict = await Rating.findOne({
             where: {
-                userId: userid,
-                gameId: gameid
+                UserId: userid,
+                GameId: gameid
             }
         });
 
@@ -292,9 +313,9 @@ export default {
         }
 
         await Rating.create({
-            gameId: gameid,
-            positive: isPositive,
-            userId: userid
+            GameId: gameid,
+            Positive: isPositive,
+            UserId: userid
         });
 
         res.status(201).json({

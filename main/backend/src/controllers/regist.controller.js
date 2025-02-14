@@ -1,4 +1,4 @@
-import models from '../models/index.js';
+import User from '../models/user.js';
 import { Op } from 'sequelize';
 import bcryptMethods from '../utilities/bcrypt.methods.js';
 import validationMethods from '../utilities/validation.methods.js';
@@ -26,7 +26,7 @@ export default {
         // Try catch párban vannak írva a következő kódok hogy az esetleges adatbázis csatlakozási hibákat kezelni tudjuk
         try {
             // Ellenőrzi hogy a bekért adatoknál van-e már egyező az adatbázisban
-            const conflictingDatas = await models.User.findOne({
+            const conflictingDatas = await User.findOne({
                 where: {[Op.or]:
                     [
                         {email: registEmail},
@@ -89,7 +89,7 @@ export default {
 
             // A felhasznéló létrehozása és az adatbázisban elmentése egyben a megfelelő adatokkal, 
             // majd a 201-es http kóddal megerősítjük, hogy sikeres volt a regisztráció
-            const newUser = await models.User.create({
+            const newUser = await User.create({
                 username: registUsername,
                 password: hashedPassword,
                 email: registEmail,

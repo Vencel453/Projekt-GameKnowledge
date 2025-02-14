@@ -1,6 +1,6 @@
 import jwtHandler from "../utilities/jwe.methods.js";
 import bcryptMethods from "../utilities/bcrypt.methods.js";
-import models from "../models/index.js";
+import User from "../models/user.js";
 
 export default {
     // A bejelentkezés kezelő metódus
@@ -21,7 +21,7 @@ export default {
         // Try catch párban írjuk a következő részeket ahol az adatbázist el kell érnünk
         try {
             // Konstansként elmentjük azt a felhasználót az adatbázisból amelyik neve megegyezik a megadottal
-            const correctUser = await models.User.findOne({where: {username: loginUsername}});
+            const correctUser = await User.findOne({where: {username: loginUsername}});
             // Itt ellenőrizzük hogy a felhasználó titkosított jelszava visszafejtve megegyezik-e a felhasználóval megadott jelszóval
 
             if (!correctUser) {

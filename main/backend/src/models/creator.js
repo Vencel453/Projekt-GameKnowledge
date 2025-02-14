@@ -1,6 +1,5 @@
-import {Sequelize, DataTypes, Model} from "sequelize";
-import { db_config } from "../config/config.js";
-const sequelize = new Sequelize(db_config)
+import sequelize from "../config/config.js";
+import { Model, DataTypes } from "sequelize";
 
 class Creator extends Model {};
 Creator.init ({
@@ -15,9 +14,13 @@ Creator.init ({
                 type: DataTypes.STRING(100),
             },
 
-            lasttName: {
+            lastName: {
                 type: DataTypes.STRING(100),
             },
+
+            profilePicture: {
+                type: DataTypes.STRING,
+            }
         },
         {
             sequelize,

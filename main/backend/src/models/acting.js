@@ -1,6 +1,5 @@
-import {Sequelize, DataTypes, Model} from "sequelize";
-import { db_config } from "../config/config.js";
-const sequelize = new Sequelize(db_config)
+import sequelize from "../config/config.js";
+import { Model, DataTypes } from "sequelize";
 
 class Acting extends Model {};
 Acting.init ({
@@ -9,25 +8,6 @@ Acting.init ({
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-            },
-
-            gameId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Game',
-                    key: 'id'
-                },
-            },
-
-            actorId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Actor',
-                    key: 'id'
-                },
-                
             },
 
             role: {

@@ -3,6 +3,8 @@ import Game from "../models/game.js";
 import Tag from "../models/tag.js";
 import Gamestag from "../models/gamestag.js";
 import jweMethods from "../utilities/jwe.methods.js";
+import Actor from "../models/actor.js";
+import Creator from "../models/creator.js";
 
 export default {
     MainpageGetController: async(req, res) => {
@@ -147,6 +149,7 @@ export default {
     MainpagePostController: async (req, res) => {
         try {
             const success = jweMethods.Blacklisting(req, res);
+            
             if (success === true) {
                 res.status(200).json({
                     error: false,
@@ -191,7 +194,7 @@ export default {
 
             // A szükséges információkat kérjük le csak, a lekérdezés érvényes a játék alternatív nevére is, ezután 200-as kóddal
             // vissza adjuk az eredményt/eredményeket
-            const result = await Game.findAll({
+            const game = await Game.findAll({
                 attributes: ["id", "gameTitle", "altGameTitle", "release", "boxart"],
                 where: {[Op.or]:
                     [   
@@ -201,10 +204,32 @@ export default {
                 }
             });
 
+            const actor = await Actor.findAll({
+                attributes: ["id", "firstName", "lastName", "profilePicture"],
+                where: {[Op.or]:
+                    [   
+                        {firstName: {[Op.like]: formattedSearch}},
+                        {lastName: {[Op.like]: formattedSearch}}
+                    ]
+                }
+            });
+
+            const creator = await Creator.findAll({
+                attributes: ["id", "firstName", "lastName", "profilePicture"],
+                where: {[Op.or]:
+                    [   
+                        {firstName: {[Op.like]: formattedSearch}},
+                        {lastName: {[Op.like]: formattedSearch}}
+                    ]
+                }
+            });
+
             res.status(200).json({
                 error: false,
                 message: "Successful search!",
-                result: result
+                game: game,
+                actor: actor,
+                creator: creator
             });
         } 
         catch (error) {

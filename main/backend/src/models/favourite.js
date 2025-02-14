@@ -1,8 +1,5 @@
-import {Sequelize, DataTypes, Model} from "sequelize";
-import Game from "./game.js";
-import User from "./user.js";
-import { db_config } from "../config/config.js";
-const sequelize = new Sequelize(db_config)
+import sequelize from "../config/config.js";
+import { Model, DataTypes } from "sequelize";
 
 class Favourite extends Model {};
 Favourite.init ({
@@ -11,24 +8,6 @@ Favourite.init ({
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-            },
-
-            userId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'User',
-                    key: "id",
-                },
-            },
-
-            gameId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Game',
-                    key: 'id',
-                },
             },
         },
         {

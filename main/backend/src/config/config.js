@@ -1,5 +1,7 @@
-// Az adatbázis konfigurációját külön fájlba mentjük, mert sok különböző fájlban fel van használva
-export const db_config = {
+// Az adatbázist külön fájlba mentjük, mert sok különböző fájlban fel van használva
+import { Sequelize } from "sequelize";
+
+const sequelize = new Sequelize({
     username: 'root',
     password: '',
     dialect: 'mysql',
@@ -9,4 +11,6 @@ export const db_config = {
     },
     database: 'game_knowledge',
     host: 'localhost'
-};
+});
+
+export default sequelize;

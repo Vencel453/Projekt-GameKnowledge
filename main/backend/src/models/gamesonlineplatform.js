@@ -1,6 +1,5 @@
-import {Sequelize, DataTypes, Model} from "sequelize";
-import { db_config } from "../config/config.js";
-const sequelize = new Sequelize(db_config)
+import sequelize from "../config/config.js";
+import { Model, DataTypes } from "sequelize";
 
 class Gamesonlineplatform extends Model {};
 Gamesonlineplatform.init ({
@@ -11,23 +10,6 @@ Gamesonlineplatform.init ({
                 primaryKey: true,
             },
 
-            gameId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Game',
-                    key: 'id',
-                },
-            },
-
-            platformId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Onlineplatform',
-                    key: 'id',
-                },
-            },
         },
         {
             sequelize,

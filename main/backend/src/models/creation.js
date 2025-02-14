@@ -1,8 +1,5 @@
-import {Sequelize, DataTypes, Model} from "sequelize";
-import Game from "./game.js";
-import Creator from "./creator.js";
-import { db_config } from "../config/config.js";
-const sequelize = new Sequelize(db_config)
+import sequelize from "../config/config.js";
+import { Model, DataTypes } from "sequelize";
 
 class Creation extends Model {};
 Creation.init ({
@@ -11,24 +8,6 @@ Creation.init ({
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-            },
-
-            gameId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Game',
-                    key: 'id',
-                },
-            },
-
-            creatorId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Creator',
-                    key: 'id'
-                },
             },
 
             field: {

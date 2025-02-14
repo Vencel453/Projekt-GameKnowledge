@@ -1,8 +1,5 @@
-import {Sequelize, DataTypes, Model} from "sequelize";
-import { db_config } from "../config/config.js";
-import Game from "./game.js";
-import Studio from "./studio.js";
-const sequelize = new Sequelize(db_config)
+import sequelize from "../config/config.js";
+import { Model, DataTypes } from "sequelize";
 
 class Studiosgame extends Model {};
 Studiosgame.init ({
@@ -11,24 +8,6 @@ Studiosgame.init ({
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-            },
-
-            gameId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Game',
-                    key: 'id',
-                },
-            },
-
-            studioId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Studio',
-                    key: 'id',
-                },
             },
 
             isDeveloper: {

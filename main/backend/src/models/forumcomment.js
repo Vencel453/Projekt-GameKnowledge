@@ -1,8 +1,5 @@
-import {Sequelize, DataTypes, Model} from "sequelize";
-import User from "./user.js";
-import Forumpost from "./forumpost.js";
-import { db_config } from "../config/config.js";
-const sequelize = new Sequelize(db_config)
+import sequelize from "../config/config.js";
+import { Model, DataTypes } from "sequelize";
 
 class Forumcomment extends Model {};
 Forumcomment.init ({
@@ -11,24 +8,6 @@ Forumcomment.init ({
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-            },
-
-            postId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Forumpost',
-                    key: 'id',
-                },
-            },
-
-            userId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'User',
-                    key: 'id',
-                },
             },
 
             content: {

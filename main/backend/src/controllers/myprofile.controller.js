@@ -7,6 +7,7 @@ export default {
     MyprofileGetController: async(req, res) => {
         try {
             const userId = await jweMethods.GetUserId(req);
+            console.log(userId);
 
             if (userId === undefined) {
                 res.status(404).json({
@@ -17,7 +18,7 @@ export default {
             }
 
             const user = await User.findOne({
-                attributes: ["username", "email", "creation"],
+                attributes: ["username", "email", "admin", "creation"],
                 where: {
                     id: userId
                 }
@@ -54,15 +55,14 @@ export default {
                 return;
             }
 
-            const {password, passwordAgain, ...changes} = req.body;
-
-            
+            const {username, email, password, passwordAgain} = req.body;
+            const changes = new Object();
 
             let empty = true;
-            const user = await User.findOne({where: {id: parseInt(userId)}, attributes: ["username", "password", "email"]});
+            const user = await User.findOne({where: {id: userId}, attributes: ["username", "password", "email"]});
 
-            if (!(changes.username === undefined || changes.username == "")) {
-                const conflictingUsername = await User.findOne({where: {username: changes.username}});
+            if (!((username === undefined) || (username === ""))) {
+                const conflictingUsername = await User.findOne({where: {username: username}});
                 if (conflictingUsername) {
                     res.status(409).json({
                         error: "true",
@@ -70,7 +70,7 @@ export default {
                     });
                     return;
                 }
-                if (changes.username === user.username) {
+                if (username === user.username) {
                     res.status(409).json({
                         error: "true",
                         message: "The username is the same as the original!"
@@ -78,7 +78,7 @@ export default {
                     return;
                 }
                 else {
-                    if (!validationMethods.CheckUsername(changes.username)) {
+                    if (validationMethods.CheckUsername(username)) {
                         res.status(400).json({
                             error: "true",
                             message: "The username is not in the correct length!"
@@ -87,10 +87,11 @@ export default {
                     }
                 }
                 empty = false;
+                changes.username = username;
             };
 
-            if (!(changes.email === undefined || changes.email == "")) {
-                const conflictingEmail = await User.findOne({where: {email: changes.email}});
+            if (!(email === undefined || email == "")) {
+                const conflictingEmail = await User.findOne({where: {email: email}});
                 if (conflictingEmail) {
                     res.status(409).json({
                         error: "true",
@@ -98,7 +99,7 @@ export default {
                     });
                     return;
                 }
-                if (changes.email === user.email) {
+                if (email === user.email) {
                     res.status(409).json({
                         error: "true",
                         message: "The email is the same as the original!"
@@ -106,6 +107,7 @@ export default {
                     return;
                 }
                 empty = false;
+                changes.email = email;
             };
 
             if (!(password === undefined || password == "")) {
@@ -127,7 +129,9 @@ export default {
                                 });
                                 return;
                             }
-                            changes.password = bcryptMethods.Hashing(password);
+                            else {
+                                changes.password = bcryptMethods.Hashing(password);
+                            }
                         } 
                         else {
                             res.status(400).json({
@@ -164,7 +168,7 @@ export default {
                 return;
             }
 
-            await User.update(changes, {where: {id: parseInt(userId)}});
+            await User.update(changes, {where: {id: userId}});
             console.log(changes);
 
             res.status(201).json({

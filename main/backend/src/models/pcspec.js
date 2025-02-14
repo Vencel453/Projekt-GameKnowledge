@@ -1,53 +1,58 @@
-import {Sequelize, DataTypes, Model} from "sequelize";
-import Game from "./game.js";
-import { db_config } from "../config/config.js";
-const sequelize = new Sequelize(db_config)
+import sequelize from "../config/config.js";
+import { Model, DataTypes } from "sequelize";
 
 class Pcspec extends Model {};
 Pcspec.init ({
-            minop: {
+            id: {
+                type: DataTypes.INTEGER,
+                allowNul: false,
+                autoIncrement: true,
+                primaryKey: true,
+            },
+
+            minOp: {
                 type: DataTypes.STRING(50),
+                allowNull: false,
             },
 
-            mincpu: {
+            minCpu: {
                 type: DataTypes.STRING(100),
+                allowNull: false,
             },
 
-            minram: {
+            minRam: {
                 type: DataTypes.STRING(10),
+                allowNull: false
             },
 
-            mingpu: {
+            minGpu: {
                 type: DataTypes.STRING(100),
+                allowNull: false,
             },
 
-            mindirectx: {
+            minDirectx: {
                 type: DataTypes.STRING(20),
                 allowNul: false,
             },
 
             cpu: {
-                type: DataTypes.STRING(100),
-                allowNul: false,
+                type: DataTypes.STRING(100)
             },
 
             ram: {
-                type: DataTypes.STRING(10),
-                allowNul: false,
+                type: DataTypes.STRING(10)
             },
 
             gpu: {
-                type: DataTypes.STRING(100),
-                allowNul: false,
+                type: DataTypes.STRING(100)
             },
 
             directx: {
-                type: DataTypes.STRING(20),
-                allowNul: false,
+                type: DataTypes.STRING(20)
             },
 
             op: {
-                type: DataTypes.STRING(50),
+                type: DataTypes.STRING(50)
             },
 
             storage: {
@@ -58,22 +63,7 @@ Pcspec.init ({
             sidenote: {
                 type: DataTypes.TEXT,
             },
-
-            id: {
-                type: DataTypes.INTEGER,
-                allowNul: false,
-                autoIncrement: true,
-                primaryKey: true,
-            },
             
-            gameId: {
-                type: DataTypes.INTEGER,
-                allowNul: false,
-                references: {
-                    model: 'Game',
-                    key: 'id',
-                },
-            },
         },
         {
             sequelize,

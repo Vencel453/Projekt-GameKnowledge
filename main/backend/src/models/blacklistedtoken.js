@@ -1,7 +1,5 @@
-import {Sequelize, DataTypes, Model} from "sequelize";
-import { db_config } from "../config/config.js";
-
-const sequelize = new Sequelize(db_config)
+import sequelize from "../config/config.js";
+import { Model, DataTypes } from "sequelize";
 
 class Blacklistedtoken extends Model {};
 Blacklistedtoken.init ({
@@ -10,15 +8,6 @@ Blacklistedtoken.init ({
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-            },
-
-            userId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: "User",
-                    key: "id",
-                },
             },
 
             token: {

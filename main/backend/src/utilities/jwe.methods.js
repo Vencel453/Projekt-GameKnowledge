@@ -1,12 +1,14 @@
 import { compactDecrypt, EncryptJWT} from "jose";
-import models from "../models/index.js";
 import { Op } from "sequelize";
 import crypto from "crypto";
+import Blacklistedtoken from "../models/blacklistedtoken.js";
 
 // A token titkosításához használt kulcs egy random szám, Uint8Array típusú, mert a titkosításhoz ilyen típusú objektum kell
 // Ez a kulcs minden szerver indításnál új, amely tovább növeli a bztonságot
 const securekey = new Uint8Array(32);
 crypto.randomFillSync(securekey);
+
+// await Blacklistedtoken.truncate();
 
 // Ezeket a metódusokat külön fájlba hozzuk létre majd exportáljuk őket, így a kód átláthatóbb és a token hítelesítés esetén így csak
 // egyszerkell megírni a kódot
@@ -27,7 +29,7 @@ export default {
         // Ha van token akkor a kód egy try catch párban folytatódik hogy kezelni tudjuk az előforduló nem számított hibábákat
         try {
             // Ha olyan token-t kapunk amely benne van a fekete listában, akkor ne gátoljuk a tovább jutást
-            const invalidToken = await models.Blacklistedtoken.findOne({where: {token: newToken}});
+            const invalidToken = await Blacklistedtoken.findOne({where: {token: newToken}});
             if (invalidToken) {
                 res.status(403).json({
                     error: "true",
@@ -69,6 +71,7 @@ export default {
             username: loginUsername,
             email: loginEmail,
         };
+        console.log(payload);
 
         // Itt jön létre a token, a payload a felhasználó adatokat használja, 1 óráig érvényes a token, titkosított fejléce van,
         // a titkosítás a fájl elején létrehozott kulccsal történik
@@ -98,7 +101,7 @@ export default {
             // Ha a maradék idő kevesebb mint 20 perc akkor a felhasználónak adunk egy új token-t  és a régi tokent fekete listázzuk
             // majd tovább lépünk, más esetben vissza küldjük hogy még nincs szükség új tokenre
             if (timeLeft < 1200000) {
-                const tmp = this.Blacklisting(req, res);
+                await this.Blacklisting(req, res);
                 const newToken = await this.CreatingToken(currentPayload.id, currentPayload.username, currentPayload.email);
                 res.status(201).json({
                     error: "false",
@@ -134,16 +137,24 @@ export default {
             return false;
         }
 
-        const decodedToken = await compactDecrypt(logOutToken, securekey);
-        const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
+        const userId = 0;
+
+        await compactDecrypt(logOutToken, securekey)
+            .then((decodedToken) => {
+                const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
+                userId = currentPayload.id;
+            })
+            .catch((error) => {
+                console.log(error);
+                return true;
+            });
 
         // Lementjük a jelenlegi dátumot és megkeressük a felhasználót a neve alapján
         const currentDate = new Date();
-        const logOutUser = await models.User.findOne({where: {username: currentPayload.username}})
 
         // Az adatbázisban lementjük a szükséges adatokat a tokenről
-        await models.Blacklistedtoken.create({
-            userId: logOutUser.id,
+        await Blacklistedtoken.create({
+            userId: userId,
             token: logOutToken,
             date: currentDate,
         });
@@ -151,7 +162,7 @@ export default {
         // Megnézzük hogy az adatbázisban van-e már olyan token ami 1 óránál régebbi, ha igen akkor töröljük, mert a token lejárt
         // és felesleges feketelistán tárolni, mert már amúgy se használható
         const datecheck = new Date(Date.now() - 3600000)
-        await models.Blacklistedtoken.destroy({
+        await Blacklistedtoken.destroy({
             where: {
                 date: {
                     [Op.lt]: datecheck
@@ -171,18 +182,27 @@ export default {
         // A token lekérjük, de utána ellenőrizzük hogy van e tényleges token, ha nincs akkor vissza küldünk egy undefined
         // eredményt, amit a fő program majd kezel 
         const token = req.headers['authorization']?.split(' ')[1];
+        
         if (!token) {
             return undefined;
         }
 
+        let id = 0;
         // Dekódoljuk a token-t majd az abból szükszéges adatot, vagyis az azonosítót visszaküldjük
-        const decodedToken = await compactDecrypt(token, securekey)
+        await compactDecrypt(token, securekey)
+            .then((decodedToken) => {
+                const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
+                id = currentPayload.id;
+            })
             .catch((error) => {
                 console.log(error);
-                return undefined;
             });
-        const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
-        return currentPayload.id;
         
+        if (id === 0) {
+            return undefined;
+        }
+        else {
+            return id;
+        }
     }
 }
