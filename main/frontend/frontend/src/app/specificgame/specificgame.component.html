@@ -1,1 +1,50 @@
+<div *ngIf="gameData" class="title">
+    <h1>{{gameData.title}}</h1>
+    <h2 *ngIf="gameData.altTitle">{{gameData.altTitle}}</h2>
+</div>
 
+<div class="content">
+    <div class="leftpanel">
+        <img [src]="gameData.boxart" alt="{{gameData.title}}" class="boxart"/>
+        <p class="release">
+            {{gameData.release}}
+        </p>
+
+        <div class="studios">
+            <span *ngFor="let develop of gameData.developers; let i = index">
+                {{develop.name}}<span *ngIf="i < gameData.developers.length - 1">,</span>
+            </span>
+
+            <span *ngFor="let publishers of gameData.publishers; let i = index">
+                {{publishers.name}}<span *ngIf="i < gameData.publishers.length - 1">,</span>
+            </span>
+        </div>
+
+        <div class="ageratings">
+            <div *ngFor="let age of gameData.agerating">
+                <img [src]="'public/pictures/ageratings/' + age.institution + '_' + age.rating + '.png'" alt="age.institution + ' ' + age.rating "/>
+            </div>
+        </div>
+    </div>
+
+    <div class="rightpanel">
+        <p class="description">{{gameData.description}}</p>
+        <div class="ratingsection">
+            <div class="ratingbar">
+                <div class="negative">20%</div>
+                <div class="positive">80%</div>
+            </div>
+        <button (click)="RateGame()">Rate the game</button>
+        <button (click)="AddtoFavourites()">Add to favourites</button>
+        </div>
+
+        <div class="gallery">
+            <h3>Gallery</h3>
+            <div class="images">
+                <div class="item" *ngFor="let img of gameData.gallery">
+                    <img [src]="img.url" alt="Gallery image" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
