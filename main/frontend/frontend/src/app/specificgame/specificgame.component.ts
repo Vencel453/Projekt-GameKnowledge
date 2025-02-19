@@ -48,8 +48,10 @@ export class SpecificgameComponent implements OnInit {
             const gameId = +params['id'];
             this.gameService.getGamesDetailsByID(gameId).subscribe({
                 next: (response) => {
+                    console.log("Backend response: ", response);
                     if (!response.error){
                         this.gameData = response.datas;
+                        console.log("gamedata: ", this.gameData);
                     }
                 },
                 error: (err) => {
@@ -59,13 +61,12 @@ export class SpecificgameComponent implements OnInit {
         })
     }
 
-    getAgeratingIcon(institution: string, rating: string): string {
-        const inst = institution;
-
-        const rate = rating.toUpperCase();
+    getAgeratingIcon(agerating: {institution: string, rating: string}): string {
+        const inst = agerating.institution.toUpperCase();
+        const rate = agerating.rating;
 
         if(this.ratingLogoMap[inst] && this.ratingLogoMap[inst][rate]) {
-            return 'public/pictures/ageratings/' + this.ratingLogoMap[inst][rate];
+            return './public/pictures/ageratings/' + this.ratingLogoMap[inst][rate];
         }else{
             return 'public/pictures/ageratings/default.png';
         }

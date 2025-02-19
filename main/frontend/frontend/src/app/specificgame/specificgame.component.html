@@ -1,11 +1,12 @@
 <div *ngIf="gameData" class="title">
     <h1>{{gameData.title}}</h1>
-    <h2 *ngIf="gameData.altTitle">{{gameData.altTitle}}</h2>
+    <h2 id="altTitle" *ngIf="gameData.altTitle">{{gameData.altTitle}}</h2>
 </div>
+<hr class="dividerline">
 
 <div class="content">
-    <div class="leftpanel">
-        <img [src]="gameData.boxart" alt="{{gameData.title}}" class="boxart"/>
+    <div *ngIf="gameData" class="leftpanel">
+        <img *ngIf="gameData" [src]="gameData.boxart" alt="{{gameData.title}}" class="boxart"/>
         <p class="release">
             {{gameData.release}}
         </p>
@@ -21,25 +22,28 @@
         </div>
 
         <div class="ageratings">
-            <div *ngFor="let age of gameData.agerating">
-                <img [src]="'public/pictures/ageratings/' + age.institution + '_' + age.rating + '.png'" alt="age.institution + ' ' + age.rating "/>
+            <div *ngFor="let agerating of gameData.agerating">
+                <img [src]="getAgeratingIcon(agerating)" alt="{{agerating.institution}} {{agerating.rating}}"/>
             </div>
         </div>
     </div>
 
-    <div class="rightpanel">
+    <div *ngIf="gameData" class="rightpanel">
         <p class="description">{{gameData.description}}</p>
         <div class="ratingsection">
-            <div class="ratingbar">
-                <div class="negative">20%</div>
-                <div class="positive">80%</div>
+            <div class="progress" style="height: 20px;">
+                <div class="progress-bar bg-danger" style="width: 20%;">20%</div>
+                <div class="progress-bar bg-success" style="width: 80%;">80%</div>
             </div>
+        <div class="rategame">
         <button (click)="RateGame()">Rate the game</button>
+        </div>
         <button (click)="AddtoFavourites()">Add to favourites</button>
         </div>
 
         <div class="gallery">
-            <h3>Gallery</h3>
+            <h3 id="gallery">Gallery</h3>
+            <hr class="dividerline">
             <div class="images">
                 <div class="item" *ngFor="let img of gameData.gallery">
                     <img [src]="img.url" alt="Gallery image" />
