@@ -19,6 +19,11 @@ Agerating.init ({
                 type: DataTypes.STRING(4),
                 allowNull: false,
             },
+
+            url: {
+                type: DataTypes.STRING,
+                allowNull: false
+            }
         },
         {
             sequelize,

@@ -19,6 +19,7 @@ import Creator from "../models/creator.js";
 import Pcspec from "../models/pcspec.js";
 import Favourite from "../models/favourite.js";
 import jweMethods from "../utilities/jwe.methods.js";
+import Gamesagerating from "../models/gamesagerating.js";
 
 export default {
     // Ez a metódus egy adott játéknak az összes adatát lekérdezi 
@@ -72,13 +73,23 @@ export default {
                 raw: true
             });
 
-            const rating = await Rating.count({where: {gameId: gameid, positive: true}}) - await Rating.count({where: {gameId: gameid}}) * 100;
+            const positiveRatings = await Rating.count({where: {GameId: gameid, positive: true}});
+            const allRatings = await Rating.count({where: {GameId: gameid}});
+
+            const rating = Math.ceil((positiveRatings / allRatings) * 100)
 
             const agerating = await Agerating.findAll({
-                attributes: ["rating", "institution"],
-                where: {
-                    GameId: gameid
-                }
+                attributes: ["rating", "institution", "url"],
+                include: {
+                    where: { id: gameid },
+                    model: Game,
+                    through: {
+                        model: Gamesagerating,
+                        attributes: [],
+                    },
+                    attributes: [],
+                },
+                raw: true
             });
 
             const genres = await Tag.findAll({
@@ -303,8 +314,9 @@ export default {
         }
 
         const isPositive = req.body.isPositive;
+        console.log(isPositive);
 
-        if (isPositive === undefined || isPositive == "") {
+        if (isPositive === undefined || isPositive === "") {
             res.status(400).json({
                 error: true,
                 message: "The rating is missing!"
@@ -314,7 +326,7 @@ export default {
 
         await Rating.create({
             GameId: gameid,
-            Positive: isPositive,
+            positive: isPositive,
             UserId: userid
         });
 

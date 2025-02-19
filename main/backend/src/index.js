@@ -14,6 +14,7 @@ import Forumcomment from "./models/forumcomment.js";
 import Forumpost from "./models/forumpost.js";
 import Game from "./models/game.js";
 import Gamepicture from "./models/gamepicture.js";
+import Gamesagerating from "./models/gamesagerating.js";
 import Gamesaward from "./models/gamesaward.js";
 import Gameslanguage from "./models/gameslanguage.js";
 import Gamesonlineplatform from "./models/gamesonlineplatform.js";
@@ -40,10 +41,12 @@ Actor.belongsToMany(Game, {
 });
 
 // Korhatár - Játék kapcsolat
-Game.hasMany(Agerating, {
-    onDelete: "CASCADE"
+Game.belongsToMany(Agerating, {
+    through: Gamesagerating
 });
-Agerating.belongsTo(Game);
+Agerating.belongsToMany(Game, {
+    through: Gamesagerating
+});
 
 // Díj - Játék kapcsolat
 Game.belongsToMany(Award, {
@@ -72,12 +75,6 @@ Favourite.belongsTo(Game);
 User.hasMany(Favourite);
 Favourite.belongsTo(User);
 
-// Fórum poszt - Játék kapcsolat
-Game.hasMany(Forumpost, {
-    onDelete: "CASCADE"
-});
-Forumpost.belongsTo(Game);
-
 // Fórum poszt - Felhasználó kapcsolat
 User.hasMany(Forumpost);
 Forumpost.belongsTo(User);
@@ -99,7 +96,6 @@ Game.hasMany(Gamepicture, {
 Gamepicture.belongsTo(Game);
 
 // Nyelv - játék kapcsolat
-
 Game.belongsToMany(Language, {
     through: Gameslanguage
 });

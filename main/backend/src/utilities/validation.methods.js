@@ -1,6 +1,13 @@
+import leoProfanity from "leo-profanity";
+
 export default {
+    CheckProfanity: async(text) => {
+        return leoProfanity.check(text);
+    },
+
     CheckUsername: async(username) => {
-        return String(username).length >= 5 && String(username).length <= 30;
+        return String(username).length >= 5 && String(username).length <= 30 &&
+            !String(username).includes(" ");
     },
 
     CheckPassword: async(password) => {

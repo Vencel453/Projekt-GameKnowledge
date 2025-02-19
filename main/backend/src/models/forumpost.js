@@ -10,6 +10,11 @@ Forumpost.init ({
                 primaryKey: true,
             },
 
+            title: {
+                type: DataTypes.STRING(100),
+                allowNull: false,
+            },
+
             content: {
                 type: DataTypes.TEXT,
                 allowNull: false,
