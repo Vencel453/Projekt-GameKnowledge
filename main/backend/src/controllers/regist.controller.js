@@ -50,10 +50,19 @@ export default {
             // Először a felhasználónév helyes méretét ellenőrizzük, majd hiba üzenetet ad ha nem megfelelő tartományban van.
             // Mivel a bekért adat hiába karakterláncként értelmezi alapvetően,
             // de típuskényszerítéssel biztosabban elérhető hogy a szükséges String metódusok eléhetőek legyenek
-            if (!validationMethods.CheckUsername(registUsername)) {
+        
+            if (validationMethods.CheckUsername(registUsername) === false) {
                 res.status(400).json({
                     error: "true",
                     message: "The username is not in the correct length!"
+                });
+                return;
+            }
+
+            if (validationMethods.CheckProfanity(registUsername) === true) {
+                res.status(400).json({
+                    error: "true",
+                    message: "The username contains profanity!"
                 });
                 return;
             }
@@ -70,7 +79,7 @@ export default {
             // Itt a jelszó helyes formátumát ellenőrzi, miszerint legalább 10 karakter, maximum 30 lehet, tartalmazzon legalább
             // egy nagy betűt és legalább egy számot.
             // Mivel az ellenőrzések mind a jelszó formátumára vonatkozik, ezért a hiba üznenet mindegyikre ugyan az
-            if (!validationMethods.CheckPassword(registPassword)) {
+            if (validationMethods.CheckPassword(registPassword) === false) {
                 res.status(400).json({
                     error: "true",
                     message: "The password is in incorrect form!"

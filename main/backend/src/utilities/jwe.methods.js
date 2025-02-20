@@ -8,62 +8,11 @@ import Blacklistedtoken from "../models/blacklistedtoken.js";
 const securekey = new Uint8Array(32);
 crypto.randomFillSync(securekey);
 
-// await Blacklistedtoken.truncate();
+await Blacklistedtoken.truncate();
 
 // Ezeket a metódusokat külön fájlba hozzuk létre majd exportáljuk őket, így a kód átláthatóbb és a token hítelesítés esetén így csak
 // egyszerkell megírni a kódot
 export default {
-    // Ez a metódus a tokent hítelesíti, 
-    Authenticating: async (req, res, next) => {
-        // Kedzve azzal hogy a headers-ből lekéri és eltárolja a tokent,
-        // ha nincs token, akkor írja ki a megfelelő hiba üzenetet és http kódot
-        const newToken = req.headers['authorization']?.split(' ')[1];
-        if (!newToken) {
-            res.status(403).json({
-                error: "true",
-                message: "A valid token is required!"
-            });
-            return;
-        }
-
-        // Ha van token akkor a kód egy try catch párban folytatódik hogy kezelni tudjuk az előforduló nem számított hibábákat
-        try {
-            // Ha olyan token-t kapunk amely benne van a fekete listában, akkor ne gátoljuk a tovább jutást
-            const invalidToken = await Blacklistedtoken.findOne({where: {token: newToken}});
-            if (invalidToken) {
-                res.status(403).json({
-                    error: "true",
-                    message: "The token is invalid or expired!"
-                });
-                return;
-            }
-
-            // Ha a token-t visszatudjuk fejteni sikeresen az azt jelenti hogy működik és mehetünk a következő middleware-re
-            // más esetben visszaküldük a megfelelő http kódot és üzenetet
-            await compactDecrypt(newToken, securekey)
-                .then(() => {
-                    this.ExntendingToken(req, res, next);
-                    next();
-                })
-                .catch((error) => {
-                    console.log(error);
-                    res.status(401).json({
-                        error: "true",
-                        message: "The token is invalid or expired!"
-                    });
-                    return;
-                });
-        } 
-        catch (error) {
-            console.log(error);
-            res.status(500).json({
-                error: "true",
-                message: "Something went wrong during the authenticating!"
-            });
-            return;
-        }
-    },
-
     // Ez a metődus a token-t hozza létre a felhasználónév és email alapján
     CreatingToken: async (loginId, loginUsername, loginEmail) => {
         const payload = {
@@ -72,6 +21,23 @@ export default {
             email: loginEmail,
         };
         console.log(payload);
+
+        // Megnézzük hogy az adatbázisban van-e már olyan token ami 1 óránál régebbi, ha igen akkor töröljük, mert a token lejárt
+        // és felesleges feketelistán tárolni, mert már amúgy se használható
+        const datecheck = new Date(Date.now() - 3600000);
+
+        await Blacklistedtoken.destroy({
+            where: {
+                date: {
+                    [Op.lt]: datecheck
+                }
+            }
+        }).then(
+            console.log("Old tokens succesfully deleted!")
+        )
+        .catch(error => {
+            console.log("There was an error: " + error);
+        });
 
         // Itt jön létre a token, a payload a felhasználó adatokat használja, 1 óráig érvényes a token, titkosított fejléce van,
         // a titkosítás a fájl elején létrehozott kulccsal történik
@@ -87,6 +53,14 @@ export default {
     ExntendingToken: async (req, res, next) => {
         // A tokent lekérdezzük, majd visszafejtjük és lemenetjük a nyers adatokat
         const currentToken = req.headers['authorization']?.split(' ')[1];
+
+        if (!currentToken) {
+            res.status(200).json({
+                error: "false",
+                message: "There's no token, continue"
+            });
+            next();
+        }
         const decodedToken = await compactDecrypt(currentToken, securekey);
         const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
 
@@ -101,11 +75,15 @@ export default {
             // Ha a maradék idő kevesebb mint 20 perc akkor a felhasználónak adunk egy új token-t  és a régi tokent fekete listázzuk
             // majd tovább lépünk, más esetben vissza küldjük hogy még nincs szükség új tokenre
             if (timeLeft < 1200000) {
-                await this.Blacklisting(req, res);
-                const newToken = await this.CreatingToken(currentPayload.id, currentPayload.username, currentPayload.email);
+                await this.Blacklisting(req);
+                const newToken = await new EncryptJWT(currentPayload)
+                    .setExpirationTime("1 hour")
+                    .setProtectedHeader({ alg: "dir", enc: "A256GCM"})
+                    .encrypt(securekey)
+
                 res.status(201).json({
                     error: "false",
-                    message: "The token was about to expire, so a new one was created",
+                    message: "The token was about to expire, so a new one was created!",
                     token: newToken,
                 });
                 next();
@@ -113,9 +91,9 @@ export default {
             else {
                 res.status(200).json({
                     error: "false",
-                    message: "The token is still viable for a while"
+                    message: "The token is still viable for a while!"
                 });
-                return;
+                next();
             }
         } 
         catch (error) {
@@ -129,7 +107,7 @@ export default {
     },
 
     // Ez a metódus a fekete listázásért felel
-    Blacklisting: async (req, res) => {
+    Blacklisting: async (req) => {
         // Visszafejtjük a token-t hogy kinyerjük a szükséges adatokat
         const logOutToken = req.headers['authorization']?.split(' ')[1];
 
@@ -137,7 +115,7 @@ export default {
             return false;
         }
 
-        const userId = 0;
+        const userId = null;
 
         await compactDecrypt(logOutToken, securekey)
             .then((decodedToken) => {
@@ -158,23 +136,6 @@ export default {
             token: logOutToken,
             date: currentDate,
         });
-
-        // Megnézzük hogy az adatbázisban van-e már olyan token ami 1 óránál régebbi, ha igen akkor töröljük, mert a token lejárt
-        // és felesleges feketelistán tárolni, mert már amúgy se használható
-        const datecheck = new Date(Date.now() - 3600000)
-        await Blacklistedtoken.destroy({
-            where: {
-                date: {
-                    [Op.lt]: datecheck
-                }
-            }
-        }).then(
-            console.log("Old tokens succesfully deleted")
-        )
-        .catch(error => {
-            console.log("There was an error: " + error);
-        })
-        return true;
     },
 
     // Ez a metódus a token-ből kinyeri a felhasználó azonosítóját

@@ -244,7 +244,8 @@ export default {
                 res.status(401).json({
                     error: true,
                     message: "The user is not logged in or the token is faulty!"
-                })
+                });
+                return;
             };
 
             const gameid = req.params.gameid;
@@ -257,7 +258,7 @@ export default {
             });
 
             if (conflict) {
-                res.status(403).json({
+                res.status(409).json({
                     error: true,
                     message: "The user has already added the game to favourites!"
                 });
@@ -306,7 +307,7 @@ export default {
         });
 
         if (conflict) {
-            res.status(403).json({
+            res.status(409).json({
                 error: true,
                 message: "The user has already rated the game!"
             });

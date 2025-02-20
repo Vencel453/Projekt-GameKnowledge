@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import Forumpost from "../models/forumpost.js"
 import User from "../models/user.js";
 import jweMethods from "../utilities/jwe.methods.js";
@@ -7,22 +8,27 @@ import { format } from "date-fns";
 export default {
     ForumGetController: async(req, res) => {
         try {
-            const query = req.query;
+            const page = req.query.page || 1;
+            const search = req.query.search || null
 
-            if (Object.keys(query).length === 0) {
-                console.log("The query is empty, using default values!")
-            };
+            let formattedSearch = null
+            if (search !== null) {
+                formattedSearch = "%" + String(search).toLowerCase() + "%";
+            }
+            else {
+                formattedSearch = "%"
+            }
+            console.log(page);
 
-            console.log(query);
-            const postQuantity = parseInt(query.posts) || 30;
-            const page = parseInt(query.page) || 1;
-
-            const offset = (page - 1) * postQuantity;
+            const offset = (page - 1) * 30;
 
             const posts = await Forumpost.findAll({
                 attributes: ["title", "content", "story", "gameplay", "creation"],
+                where: {
+                    title: {[Op.like]: formattedSearch}
+                },
                 offset: offset,
-                limit: postQuantity,
+                limit: 30,
                 order: [["creation", "DESC"]],
                 include: {
                     model: User,
@@ -38,7 +44,7 @@ export default {
 
             res.status(200).json({
                 error: false,
-                message: `This is page: ${page}, the maximum post shown on one page is ${postQuantity}!`,
+                message: `This is page: ${page}`,
                 posts: dateFormatedPosts
             });
         }
@@ -70,7 +76,7 @@ export default {
                 });
                 return;
             }
-            if (await validationMethods.CheckProfanity(title) === true) {
+            if (validationMethods.CheckProfanity(title) === true) {
                 res.status(400).json({
                     error: true,
                     message: "The title contains profanity, submission is prohibited!"
@@ -95,7 +101,7 @@ export default {
                 return;
             }
 
-            if (await validationMethods.CheckProfanity(content) === true) {
+            if (validationMethods.CheckProfanity(content) === true) {
                 res.status(400).json({
                     error: true,
                     message: "The post contains profanity, submission is prohibited!"
@@ -123,7 +129,7 @@ export default {
 
             const date = new Date();
 
-            console.log(await validationMethods.CheckProfanity(content));
+            console.log(validationMethods.CheckProfanity(content));
 
             await Forumpost.create({
                 content: content,

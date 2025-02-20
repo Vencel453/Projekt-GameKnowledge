@@ -85,6 +85,13 @@ export default {
                         });
                         return;
                     }
+                    if (validationMethods.CheckProfanity(registUsername)) {
+                        res.status(400).json({
+                            error: "true",
+                            message: "The username contains profanity!"
+                        });
+                        return;
+                    }
                 }
                 empty = false;
                 changes.username = username;

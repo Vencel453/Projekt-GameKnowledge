@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Feb 17. 11:58
+-- Létrehozás ideje: 2025. Feb 20. 08:04
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -134,7 +134,7 @@ INSERT INTO `actors` (`id`, `firstName`, `lastName`, `profilePicture`) VALUES
 (35, 'Brian', 'Bloom', 'pictures/actors/brian_bloom_35.png'),
 (36, 'Gareth', 'David-Lloyd', 'pictures/actors/gareth_david_lloyd_36.png'),
 (37, 'Ali', 'Hillis', 'pictures/actors/ali_hillis_37.png'),
-(38, 'Tommy', 'Sim\'aan', 'pictures/actors/tommy_simaan_38.png'),
+(38, 'Tommy', 'Si\'maan', 'pictures/actors/tommy_simaan_38.png'),
 (39, 'Stewart', 'Scudamore', 'pictures/actors/stewart_scudamore_39.png'),
 (40, 'Adam', 'Diggle', 'pictures/actors/adam_diggle_40.png'),
 (41, 'Clive', 'Standen', 'pictures/actors/clive_standen_41.png'),
@@ -150,23 +150,29 @@ CREATE TABLE `ageratings` (
   `id` int(11) NOT NULL,
   `rating` varchar(10) NOT NULL,
   `institution` varchar(4) NOT NULL,
-  `GameId` int(11) DEFAULT NULL
+  `url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `ageratings`
 --
 
-INSERT INTO `ageratings` (`id`, `rating`, `institution`, `GameId`) VALUES
-(1, '18', 'PEGI', 1),
-(2, 'M', 'ESRB', 2),
-(3, 'M', 'ESRB', 3),
-(4, 'E', 'ESRB', 4),
-(5, 'E', 'ESRB', 5),
-(6, 'T', 'ESRB', 14),
-(7, '16', 'PEGI', 14),
-(8, 'M', 'ESRB', 15),
-(9, '18', 'PEGI', 15);
+INSERT INTO `ageratings` (`id`, `rating`, `institution`, `url`) VALUES
+(1, '3', 'PEGI', '/pictures/ageratings/PEGI_3.png'),
+(2, '7', 'PEGI', '/pictures/ageratings/PEGI_7.png'),
+(3, '12', 'PEGI', '/pictures/ageratings/PEGI_12.png'),
+(4, '16', 'PEGI', '/pictures/ageratings/PEGI_16.png'),
+(5, '18', 'PEGI', '/pictures/ageratings/PEGI_18.png'),
+(6, 'E', 'ESRB', '/pictures/ageratings/ESRB_E.png'),
+(7, 'E10+', 'ESRB', '/pictures/ageratings/ESRB_E10+.png'),
+(8, 'T', 'ESRB', '/pictures/ageratings/ESRB_T.png'),
+(9, 'M', 'ESRB', '/pictures/ageratings/ESRB_M.png'),
+(10, 'A', 'ESRB', '/pictures/ageratings/ESRB_A.png'),
+(11, 'A', 'CERO', '/pictures/ageratings/CERO_A.png'),
+(12, 'B', 'CERO', '/pictures/ageratings/CERO_B.png'),
+(13, 'C', 'CERO', '/pictures/ageratings/CERO_C.png'),
+(14, 'D', 'CERO', '/pictures/ageratings/CERO_D.png'),
+(15, 'Z', 'CERO', '/pictures/ageratings/CERO_Z.png');
 
 -- --------------------------------------------------------
 
@@ -204,13 +210,6 @@ CREATE TABLE `blacklistedtokens` (
   `date` datetime NOT NULL,
   `UserId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- A tábla adatainak kiíratása `blacklistedtokens`
---
-
-INSERT INTO `blacklistedtokens` (`id`, `token`, `date`, `UserId`) VALUES
-(6, 'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..LbpAGMVIGTQElwhg.hrYGj-fTDZajzpqj8AkylPOhkXVEzSESp3TIjk-IrCRlW81_WPdD12Y9w1VtrWuViPhkxZgnw4-2QlAe71LGV7dw2w3bSAbcajjwDw.ajciVncbxeYubzCeHto8_Q', '2025-01-22 09:43:47', 1);
 
 -- --------------------------------------------------------
 
@@ -338,13 +337,63 @@ CREATE TABLE `forumcomments` (
 
 CREATE TABLE `forumposts` (
   `id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
   `content` text NOT NULL,
   `story` tinyint(1) NOT NULL DEFAULT 0,
   `gameplay` tinyint(1) NOT NULL DEFAULT 0,
   `creation` datetime NOT NULL,
-  `GameId` int(11) DEFAULT NULL,
   `UserId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `forumposts`
+--
+
+INSERT INTO `forumposts` (`id`, `title`, `content`, `story`, `gameplay`, `creation`, `UserId`) VALUES
+(1, 'Cyberpunk 2077 is awesome!', 'I really like this game...', 0, 0, '2025-02-18 12:35:33', 1),
+(2, 'Cyberpunk 2077 is awesome!', 'I really like this game...', 0, 0, '2025-02-18 12:36:06', 1),
+(3, 'Cyberpunk 2077 is awesome!', 'I really like this game...', 0, 0, '2025-02-18 12:36:08', 1),
+(4, 'Cyberpunk 2077 is awesome!', 'I really like this game...', 0, 0, '2025-02-18 12:36:09', 1),
+(5, 'Cyberpunk 2077 is shit!', 'I really fucking hate this game...', 0, 0, '2025-02-18 12:39:43', 1),
+(6, 'Cyberpunk 2077 is shit!', 'I really fucking hate this game...', 0, 0, '2025-02-18 12:41:29', 1),
+(7, 'Cyberpunk 2077 is shit!', 'I really fucking hate this game...', 0, 0, '2025-02-18 12:43:56', 1),
+(8, 'Cyberpunk 2077 is shit!', 'I really fucking hate this game...', 0, 0, '2025-02-18 12:46:26', 1),
+(9, 'Cyberpunk 2077 is shit!', 'I really fucking hate this game...', 0, 0, '2025-02-18 12:49:00', 1),
+(10, 'Cyberpunk 2077 is shit!', 'I really fucking hate this game...', 0, 0, '2025-02-19 07:00:51', 1),
+(11, 'Cyberpunk 2077 is shit!', 'I really fucking hate this game...', 0, 0, '2025-02-19 07:02:05', 1),
+(12, 'Cyberpunk 2077 is shit!', 'I really fucking hate this game...', 0, 0, '2025-02-19 07:05:38', 1),
+(13, 'Cyberpunk 2077 is shit!', 'I really fucking hate this game...', 0, 0, '2025-02-19 07:07:28', 1),
+(14, 'Cyberpunk 2077 is bad!', 'I really hate this game...', 1, 1, '2025-02-19 07:09:28', 1),
+(15, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 08:24:20', 1),
+(16, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 08:25:36', 2),
+(17, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 08:41:29', 2),
+(18, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 08:44:37', 2),
+(19, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 08:47:14', 1),
+(20, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 08:51:28', 1),
+(21, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 08:52:41', 1),
+(22, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:02:43', 1),
+(23, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:03:39', 1),
+(24, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:04:37', 1),
+(25, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:10:06', 1),
+(26, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:20:44', 1),
+(27, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:21:54', 1),
+(28, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:22:51', 1),
+(29, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:37:00', 1),
+(30, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:38:59', 1),
+(31, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:44:30', 1),
+(32, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:48:19', 1),
+(33, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:50:50', 1),
+(34, 'Cyberpunk 2077 is bad!', 'I really hate this game...', 1, 1, '2025-02-19 09:53:39', 2),
+(35, 'Cyberpunk 2077 is bad!', 'I really hate this game...', 1, 1, '2025-02-19 09:55:38', 2),
+(36, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:59:21', 2),
+(37, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 10:00:41', 1);
+INSERT INTO `forumposts` (`id`, `title`, `content`, `story`, `gameplay`, `creation`, `UserId`) VALUES
+(38, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 10:04:02', 2),
+(39, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 10:06:09', 1),
+(40, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 10:08:35', 1),
+(41, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 10:10:02', 1),
+(42, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 10:12:19', 1),
+(43, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fantastic.\'', 0, 0, '2025-02-19 10:52:52', 1);
 
 -- --------------------------------------------------------
 
@@ -410,6 +459,27 @@ INSERT INTO `games` (`id`, `gameTitle`, `altGameTitle`, `description`, `release`
 (17, 'Dragon Age™: The Veilguard', NULL, 'Unite the Veilguard and defy the gods in Dragon Age™: The Veilguard, an immersive single-player RPG.', '2024-10-31', '/pictures/boxarts/dragon_age_the_veilguard_2024_boxart.png', NULL, 3, NULL, NULL, 2),
 (18, 'Prince of Persia The Lost Crown', NULL, 'Dash into a stylish and thrilling action-adventure platformer set in a mythological Persian world where the boundaries of time and space are yours to manipulate.', '2024-08-08', 'pictures/boxarts/prince_of_persia_the_lost_crown_2024_boxart.png', NULL, 3, NULL, NULL, 2),
 (19, 'Warhammer 40,000: Space Marine 2', NULL, 'Embody the superhuman skill and brutality of a Space Marine. Unleash deadly abilities and devastating weaponry to obliterate the relentless Tyranid swarms. Defend the Imperium in spectacular third-person action in solo or multiplayer modes.', '2024-09-09', 'pictures/boxarts/warhammer_40000_space_marine_2_boxart.png', NULL, 2, 1, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `gamesageratings`
+--
+
+CREATE TABLE `gamesageratings` (
+  `id` int(11) NOT NULL,
+  `GameId` int(11) DEFAULT NULL,
+  `AgeratingId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `gamesageratings`
+--
+
+INSERT INTO `gamesageratings` (`id`, `GameId`, `AgeratingId`) VALUES
+(1, 1, 5),
+(2, 1, 9),
+(3, 1, 14);
 
 -- --------------------------------------------------------
 
@@ -770,7 +840,9 @@ CREATE TABLE `ratings` (
 --
 
 INSERT INTO `ratings` (`id`, `positive`, `GameId`, `UserId`) VALUES
-(1, 0, 1, 1);
+(2, 1, 1, 2),
+(3, 0, 1, 3),
+(5, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -921,7 +993,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `admin`, `creation`) VALUES
 (1, 'Vencel453', '$2b$10$lU.v7i55wiLeE7gAUh51VOU00LXy1FpLvPtBKMKYObZMLBiGoSM8i', 'email@address.com', 1, '2024-11-27'),
-(2, 'BunyósPityu', '$2b$10$jEhSTQxawR1FDJ74oKdhdOAL5WD2GglD32wAKNBYNShBhFdK79C92', 'pityu@lopo.com', 0, '2024-11-27');
+(2, 'BunyósPityu', '$2b$10$jEhSTQxawR1FDJ74oKdhdOAL5WD2GglD32wAKNBYNShBhFdK79C92', 'pityu@lopo.com', 0, '2024-11-27'),
+(3, 'Test1234', '$2b$10$EvbJEFfwN4I0qBiQ36Gn2u0CEMDRipKor6sp4J9y8LheoVDnhx7wC', 'cmon@please.com', 0, '2025-02-19');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -945,8 +1018,7 @@ ALTER TABLE `actors`
 -- A tábla indexei `ageratings`
 --
 ALTER TABLE `ageratings`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `GameId` (`GameId`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- A tábla indexei `awards`
@@ -996,7 +1068,6 @@ ALTER TABLE `forumcomments`
 --
 ALTER TABLE `forumposts`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `GameId` (`GameId`),
   ADD KEY `UserId` (`UserId`);
 
 --
@@ -1011,6 +1082,14 @@ ALTER TABLE `gamepictures`
 --
 ALTER TABLE `games`
   ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `gamesageratings`
+--
+ALTER TABLE `gamesageratings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `Gamesageratings_AgeratingId_GameId_unique` (`GameId`,`AgeratingId`),
+  ADD KEY `AgeratingId` (`AgeratingId`);
 
 --
 -- A tábla indexei `gamesawards`
@@ -1057,14 +1136,20 @@ ALTER TABLE `gamestags`
 --
 ALTER TABLE `languages`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `language` (`language`);
+  ADD UNIQUE KEY `language` (`language`),
+  ADD UNIQUE KEY `language_2` (`language`),
+  ADD UNIQUE KEY `language_3` (`language`),
+  ADD UNIQUE KEY `language_4` (`language`);
 
 --
 -- A tábla indexei `onlineplatforms`
 --
 ALTER TABLE `onlineplatforms`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `onlineplatform` (`onlineplatform`);
+  ADD UNIQUE KEY `onlineplatform` (`onlineplatform`),
+  ADD UNIQUE KEY `onlineplatform_2` (`onlineplatform`),
+  ADD UNIQUE KEY `onlineplatform_3` (`onlineplatform`),
+  ADD UNIQUE KEY `onlineplatform_4` (`onlineplatform`);
 
 --
 -- A tábla indexei `pcspecs`
@@ -1078,7 +1163,10 @@ ALTER TABLE `pcspecs`
 --
 ALTER TABLE `platforms`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `platform` (`platform`);
+  ADD UNIQUE KEY `platform` (`platform`),
+  ADD UNIQUE KEY `platform_2` (`platform`),
+  ADD UNIQUE KEY `platform_3` (`platform`),
+  ADD UNIQUE KEY `platform_4` (`platform`);
 
 --
 -- A tábla indexei `ratings`
@@ -1093,7 +1181,10 @@ ALTER TABLE `ratings`
 --
 ALTER TABLE `studios`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD UNIQUE KEY `name` (`name`),
+  ADD UNIQUE KEY `name_2` (`name`),
+  ADD UNIQUE KEY `name_3` (`name`),
+  ADD UNIQUE KEY `name_4` (`name`);
 
 --
 -- A tábla indexei `studiosgames`
@@ -1108,7 +1199,10 @@ ALTER TABLE `studiosgames`
 --
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `tag` (`tag`);
+  ADD UNIQUE KEY `tag` (`tag`),
+  ADD UNIQUE KEY `tag_2` (`tag`),
+  ADD UNIQUE KEY `tag_3` (`tag`),
+  ADD UNIQUE KEY `tag_4` (`tag`);
 
 --
 -- A tábla indexei `users`
@@ -1116,7 +1210,13 @@ ALTER TABLE `tags`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `username_2` (`username`),
+  ADD UNIQUE KEY `email_2` (`email`),
+  ADD UNIQUE KEY `username_3` (`username`),
+  ADD UNIQUE KEY `email_3` (`email`),
+  ADD UNIQUE KEY `username_4` (`username`),
+  ADD UNIQUE KEY `email_4` (`email`);
 
 --
 -- A kiírt táblák AUTO_INCREMENT értéke
@@ -1138,7 +1238,7 @@ ALTER TABLE `actors`
 -- AUTO_INCREMENT a táblához `ageratings`
 --
 ALTER TABLE `ageratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT a táblához `awards`
@@ -1150,7 +1250,7 @@ ALTER TABLE `awards`
 -- AUTO_INCREMENT a táblához `blacklistedtokens`
 --
 ALTER TABLE `blacklistedtokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT a táblához `creations`
@@ -1180,7 +1280,7 @@ ALTER TABLE `forumcomments`
 -- AUTO_INCREMENT a táblához `forumposts`
 --
 ALTER TABLE `forumposts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT a táblához `gamepictures`
@@ -1193,6 +1293,12 @@ ALTER TABLE `gamepictures`
 --
 ALTER TABLE `games`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT a táblához `gamesageratings`
+--
+ALTER TABLE `gamesageratings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT a táblához `gamesawards`
@@ -1252,7 +1358,7 @@ ALTER TABLE `platforms`
 -- AUTO_INCREMENT a táblához `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT a táblához `studios`
@@ -1276,7 +1382,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -1287,108 +1393,192 @@ ALTER TABLE `users`
 --
 ALTER TABLE `actings`
   ADD CONSTRAINT `actings_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_2` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Megkötések a táblához `ageratings`
---
-ALTER TABLE `ageratings`
-  ADD CONSTRAINT `ageratings_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `actings_ibfk_2` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `actings_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `actings_ibfk_4` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `actings_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `actings_ibfk_6` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `actings_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `actings_ibfk_8` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `blacklistedtokens`
 --
 ALTER TABLE `blacklistedtokens`
-  ADD CONSTRAINT `blacklistedtokens_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `blacklistedtokens_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `blacklistedtokens_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `blacklistedtokens_ibfk_3` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `blacklistedtokens_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `creations`
 --
 ALTER TABLE `creations`
   ADD CONSTRAINT `creations_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_2` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `creations_ibfk_2` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `creations_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `creations_ibfk_4` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `creations_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `creations_ibfk_6` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `creations_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `creations_ibfk_8` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `favourites`
 --
 ALTER TABLE `favourites`
   ADD CONSTRAINT `favourites_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `favourites_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `favourites_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `favourites_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `favourites_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `favourites_ibfk_6` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `favourites_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `favourites_ibfk_8` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `forumcomments`
 --
 ALTER TABLE `forumcomments`
   ADD CONSTRAINT `forumcomments_ibfk_1` FOREIGN KEY (`ForumpostId`) REFERENCES `forumposts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `forumcomments_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `forumcomments_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `forumcomments_ibfk_3` FOREIGN KEY (`ForumpostId`) REFERENCES `forumposts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `forumcomments_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `forumcomments_ibfk_5` FOREIGN KEY (`ForumpostId`) REFERENCES `forumposts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `forumcomments_ibfk_6` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `forumcomments_ibfk_7` FOREIGN KEY (`ForumpostId`) REFERENCES `forumposts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `forumcomments_ibfk_8` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `forumposts`
 --
 ALTER TABLE `forumposts`
-  ADD CONSTRAINT `forumposts_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `forumposts_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `forumposts_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `forumposts_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `forumposts_ibfk_3` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `forumposts_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamepictures`
 --
 ALTER TABLE `gamepictures`
-  ADD CONSTRAINT `gamepictures_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamepictures_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamepictures_ibfk_2` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamepictures_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamepictures_ibfk_4` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Megkötések a táblához `gamesageratings`
+--
+ALTER TABLE `gamesageratings`
+  ADD CONSTRAINT `gamesageratings_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesageratings_ibfk_2` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesageratings_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesageratings_ibfk_4` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesageratings_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesageratings_ibfk_6` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesageratings_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesageratings_ibfk_8` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamesawards`
 --
 ALTER TABLE `gamesawards`
   ADD CONSTRAINT `gamesawards_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_2` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamesawards_ibfk_2` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesawards_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesawards_ibfk_4` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesawards_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesawards_ibfk_6` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesawards_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesawards_ibfk_8` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gameslanguages`
 --
 ALTER TABLE `gameslanguages`
   ADD CONSTRAINT `gameslanguages_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_2` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gameslanguages_ibfk_2` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gameslanguages_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gameslanguages_ibfk_4` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gameslanguages_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gameslanguages_ibfk_6` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gameslanguages_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gameslanguages_ibfk_8` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamesonlineplatforms`
 --
 ALTER TABLE `gamesonlineplatforms`
   ADD CONSTRAINT `gamesonlineplatforms_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesonlineplatforms_ibfk_2` FOREIGN KEY (`OnlineplatformId`) REFERENCES `onlineplatforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamesonlineplatforms_ibfk_2` FOREIGN KEY (`OnlineplatformId`) REFERENCES `onlineplatforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesonlineplatforms_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesonlineplatforms_ibfk_4` FOREIGN KEY (`OnlineplatformId`) REFERENCES `onlineplatforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesonlineplatforms_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesonlineplatforms_ibfk_6` FOREIGN KEY (`OnlineplatformId`) REFERENCES `onlineplatforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesonlineplatforms_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesonlineplatforms_ibfk_8` FOREIGN KEY (`OnlineplatformId`) REFERENCES `onlineplatforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamesplatforms`
 --
 ALTER TABLE `gamesplatforms`
   ADD CONSTRAINT `gamesplatforms_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_2` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamesplatforms_ibfk_2` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesplatforms_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesplatforms_ibfk_4` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesplatforms_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesplatforms_ibfk_6` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesplatforms_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesplatforms_ibfk_8` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamestags`
 --
 ALTER TABLE `gamestags`
   ADD CONSTRAINT `gamestags_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_2` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamestags_ibfk_2` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamestags_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamestags_ibfk_4` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamestags_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamestags_ibfk_6` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamestags_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamestags_ibfk_8` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `pcspecs`
 --
 ALTER TABLE `pcspecs`
-  ADD CONSTRAINT `pcspecs_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `pcspecs_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `pcspecs_ibfk_2` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `pcspecs_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `pcspecs_ibfk_4` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `ratings`
 --
 ALTER TABLE `ratings`
   ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `ratings_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `ratings_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `ratings_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `ratings_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `ratings_ibfk_6` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `ratings_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `ratings_ibfk_8` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `studiosgames`
 --
 ALTER TABLE `studiosgames`
   ADD CONSTRAINT `studiosgames_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_2` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `studiosgames_ibfk_2` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `studiosgames_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `studiosgames_ibfk_4` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `studiosgames_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `studiosgames_ibfk_6` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `studiosgames_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `studiosgames_ibfk_8` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
