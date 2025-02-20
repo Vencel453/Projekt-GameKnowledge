@@ -157,6 +157,9 @@ export class MyprofileComponent implements OnInit {
             case "The email is in incorrect form!":
               message = "The e-mail must contain at least one '@' and one '.' character!";
               break;
+            case "The username contains profanity!":
+              message = "The username must not contains any profanity!";
+              break;
           }
         } else if (error.status === 500) {
           message = "Something went wrong fetching the user's data!";

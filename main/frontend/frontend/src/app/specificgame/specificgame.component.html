@@ -12,12 +12,12 @@
         </p>
 
         <div class="studios">
-            <span *ngFor="let develop of gameData.developers; let i = index">
-                {{develop.name}}<span *ngIf="i < gameData.developers.length - 1">,</span>
+            <span *ngFor="let develop of gameData.developers; let last = last">
+                {{develop.name}}{{last ? '' : ', '}}
             </span>
-
-            <span *ngFor="let publishers of gameData.publishers; let i = index">
-                {{publishers.name}}<span *ngIf="i < gameData.publishers.length - 1">,</span>
+            <br>
+            <span *ngFor="let publishers of gameData.publishers; let last = last">
+                {{publishers.name}}{{last ? '' : ', '}}
             </span>
         </div>
 
@@ -30,14 +30,17 @@
 
     <div *ngIf="gameData" class="rightpanel">
         <p class="description">{{gameData.description}}</p>
+        <br>
         <div class="ratingsection">
-            <div class="progress" style="height: 20px;">
-                <div class="progress-bar bg-danger" style="width: 20%;">20%</div>
-                <div class="progress-bar bg-success" style="width: 80%;">80%</div>
+            <div class="progress">
+                <div class="progress-bar bg-danger" [style.width]="calculateProgress().negative">{{calculateProgress().negative}}</div>
+                <div class="progress-bar bg-success" [style.width]="calculateProgress().positive">{{calculateProgress().positive}}</div>
             </div>
         <div class="rategame">
         <button (click)="RateGame()">Rate the game</button>
         </div>
+
+
         <button (click)="AddtoFavourites()">Add to favourites</button>
         </div>
 

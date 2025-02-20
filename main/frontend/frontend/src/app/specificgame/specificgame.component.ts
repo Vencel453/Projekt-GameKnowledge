@@ -3,6 +3,7 @@ import { GameDetailsService } from "../../gamedetails.service";
 import { IGamesDetails } from "../../gamedetails.model";
 import { CommonModule } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
     selector: 'app-game-details',
@@ -15,6 +16,8 @@ export class SpecificgameComponent implements OnInit {
     gameData!: IGamesDetails;
 
     userRating: number = 0;
+
+    private destroy$ = new Subject<void>();
 
     private ratingLogoMap: { [inst: string]: { [rating: string]: string}} = {
         PEGI: {
@@ -44,31 +47,47 @@ export class SpecificgameComponent implements OnInit {
     constructor(private gameService: GameDetailsService, private route: ActivatedRoute){}
 
     ngOnInit(): void {
-        this.route.params.subscribe(params => {
-            const gameId = +params['id'];
-            this.gameService.getGamesDetailsByID(gameId).subscribe({
-                next: (response) => {
-                    console.log("Backend response: ", response);
-                    if (!response.error){
-                        this.gameData = response.datas;
-                        console.log("gamedata: ", this.gameData);
+        this.route.params.pipe(
+            takeUntil(this.destroy$)
+        ).subscribe(params => {
+            this.route.params.subscribe(params => {
+                const gameId = +params['id'];
+                this.gameService.getGamesDetailsByID(gameId).subscribe({
+                    next: (response) => {
+                        console.log("Backend response: ", response);
+                        if (!response.error){
+                            this.gameData = response.datas;
+                            console.log("gamedata: ", this.gameData);
+                        }
+                    },
+                    error: (err) => {
+                        console.error(err);
                     }
-                },
-                error: (err) => {
-                    console.error(err);
-                }
-            })
         })
+            })
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
+
+    calculateProgress() {
+        return {
+            positive: this.gameData.rating + '%',
+            negative: (100 - this.gameData.rating) + '%'
+        };
     }
 
     getAgeratingIcon(agerating: {institution: string, rating: string}): string {
         const inst = agerating.institution.toUpperCase();
         const rate = agerating.rating;
 
-        if(this.ratingLogoMap[inst] && this.ratingLogoMap[inst][rate]) {
-            return './public/pictures/ageratings/' + this.ratingLogoMap[inst][rate];
+        if(this.ratingLogoMap[inst]?.[rate]) {
+            return `/public/pictures/ageratings/${this.ratingLogoMap[inst][rate]}`;
         }else{
-            return 'public/pictures/ageratings/default.png';
+            return '/public/pictures/ageratings/default.png';
         }
     }
 

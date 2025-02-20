@@ -71,6 +71,9 @@ export class RegistrationComponent {
         case "The email is in incorrect form!":
           this.failure = "The email is in incorrect form!";
           break;
+        case "The username contains profanity!":
+          this.failure = "The username must not contains any profanity!";
+          break;
         default:
           this.failure = "An unexpected error occured. Please try again later.";
       }

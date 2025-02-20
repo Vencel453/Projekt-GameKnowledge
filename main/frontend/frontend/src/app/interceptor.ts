@@ -1,16 +1,24 @@
-import { HttpInterceptorFn } from "@angular/common/http";
+import { Injectable, Inject, PLATFORM_ID } from "@angular/core";
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { isPlatformBrowser } from "@angular/common";
 
-export const Interceptor: HttpInterceptorFn = (req, next) => {
+@Injectable()
+export class Interceptor implements HttpInterceptor {
+    constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
-        const token = localStorage.getItem('token');
-        if (token){
-            const clonedrequest = req.clone({
-                setHeaders: { Authorization: `Bearer ${token}`}
-            });
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        let token: string | null = null;
 
-            return next(clonedrequest);
-        } else {
-            console.warn("Nincs token mentve");
+        if(isPlatformBrowser(this.platformId)){
+            token = localStorage.getItem('token');
         }
-        return next(req);
-};
+
+        if (token) {
+            req = req.clone({
+                setHeaders: {Authorization: `Bearer ${token}`}
+            });
+        }
+        return next.handle(req);
+    }
+}
