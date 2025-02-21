@@ -5,10 +5,10 @@ export interface IGamesDetails {
     boxart: string;
     gallery: {url: string}[];
     release: string;
-    developers: {id: number; name: string; logo: string}[];
-    publishers: {id: number; name: string; logo: string}[];
+    developers: {id: number; name: string;}[];
+    publishers: {id: number; name: string;}[];
     rating: number;
-    agerating: {rating: string; institution: string}[];
+    agerating: {rating: string; institution: string; url?: string}[];
 }
 
 export interface IGamesResponse {

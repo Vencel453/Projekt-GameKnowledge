@@ -80,17 +80,6 @@ export class SpecificgameComponent implements OnInit {
         };
     }
 
-    getAgeratingIcon(agerating: {institution: string, rating: string}): string {
-        const inst = agerating.institution.toUpperCase();
-        const rate = agerating.rating;
-
-        if(this.ratingLogoMap[inst]?.[rate]) {
-            return `/public/pictures/ageratings/${this.ratingLogoMap[inst][rate]}`;
-        }else{
-            return '/public/pictures/ageratings/default.png';
-        }
-    }
-
     RateGame() {
 
     }

@@ -8,22 +8,22 @@
     <div *ngIf="gameData" class="leftpanel">
         <img *ngIf="gameData" [src]="gameData.boxart" alt="{{gameData.title}}" class="boxart"/>
         <p class="release">
-            {{gameData.release}}
+            Release: {{gameData.release}}
         </p>
 
         <div class="studios">
             <span *ngFor="let develop of gameData.developers; let last = last">
-                {{develop.name}}{{last ? '' : ', '}}
+               <strong>Developers:</strong> {{develop.name}}{{last ? '' : ', '}}
             </span>
             <br>
             <span *ngFor="let publishers of gameData.publishers; let last = last">
-                {{publishers.name}}{{last ? '' : ', '}}
+               <strong>Publishers:</strong> {{publishers.name}}{{last ? '' : ', '}}
             </span>
         </div>
 
         <div class="ageratings">
             <div *ngFor="let agerating of gameData.agerating">
-                <img [src]="getAgeratingIcon(agerating)" alt="{{agerating.institution}} {{agerating.rating}}"/>
+                <img class="icon" [src]="agerating.url" alt="{{agerating.institution}} {{agerating.rating}}"/>
             </div>
         </div>
     </div>
@@ -54,4 +54,5 @@
             </div>
         </div>
     </div>
+    <hr class="dividerline">
 </div>

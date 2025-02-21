@@ -54,22 +54,24 @@
     font-weight: bold;
     margin-bottom: 1rem;
     color: white;
+    text-align: center;
 }
 
 .studios{
     margin-bottom: 1rem;
     color: white;
+    text-align: center;
 }
 
 .ageratings{
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    margin-left: 18%;
+}
 
-    .icon{
-        width: 40px;
-        height: auto;
-    }
+.icon{
+    width: 45%;
+    height: 45%;
 }
 
 .rightpanel{
