@@ -154,6 +154,7 @@ const PORT = 3000;
 // Egy csatkalozás kisérlet után ha sikeres akkor elindítjuk a szervert
 await sequelize.authenticate()
     .then(() => {
+        Blacklistedtoken.truncate();
         console.log("The test connection to the server was succesfull!");
         // Szinkronizáljuk a modeleket az adatbázissal
         sequelize.sync()

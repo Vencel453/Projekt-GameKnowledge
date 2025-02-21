@@ -8,8 +8,6 @@ import Blacklistedtoken from "../models/blacklistedtoken.js";
 const securekey = new Uint8Array(32);
 crypto.randomFillSync(securekey);
 
-await Blacklistedtoken.truncate();
-
 // Ezeket a metódusokat külön fájlba hozzuk létre majd exportáljuk őket, így a kód átláthatóbb és a token hítelesítés esetén így csak
 // egyszerkell megírni a kódot
 export default {
