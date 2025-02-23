@@ -84,8 +84,11 @@ export class RegistrationComponent {
     }else{
       this.failure = "An unexpected error occured.";
     }
-
-    console.error('Error:', err);
+    setTimeout(() => {
+      if (this.failure) {
+        window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+      }
+    }, 0);
   }
 });
     }

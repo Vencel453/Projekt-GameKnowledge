@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Authservice } from '../authservice';
 import { Title } from '@angular/platform-browser';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,8 @@ successmess: string = '';
 username: string = '';
 password: string = '';
 
+@ViewChild('errormess') errorMess!: ElementRef;
+
 constructor(private http: HttpClient, private router: Router, private authService: Authservice, private title: Title){
   this.title.setTitle('Login');
 }
@@ -33,9 +36,7 @@ onSubmit(): void {
       next: (response) =>{
         if(response.error === 'false'){
           this.successmess = response.message;
-
           this.authService.login(response.token, this.username, response.isAdmin);
-
           this.router.navigate(['/']);
         }
       },
@@ -47,7 +48,11 @@ onSubmit(): void {
         }else{
           this.errormess = 'An unknown error occured!';
         }
-        console.error(err);
+        setTimeout(() => {
+          if (this.errormess) {
+            window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+          }
+        }, 0);
       },
     });
   }

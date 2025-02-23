@@ -17,7 +17,7 @@
     text-align: center;
 }
 
-.content{
+.firstsection{
     display: flex;
     gap: 2rem;
     color: white;
@@ -36,7 +36,7 @@
 }
 
 @media (max-width: 768px){
-    .content{
+    .firstsection{
         flex-direction: column;
     }
 
@@ -48,6 +48,46 @@
 .rategame {
     text-align: center;
     margin-top: 5px;
+}
+
+.optionbuttons{
+    background-color: #A0B6F7;
+    color: black;
+    font-weight: bold;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: backround-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.optionbuttons:hover{
+    background-color: #8fa0e1;
+    transform: translateY(-2px);
+}
+
+.optionbuttons:active{
+    transform: translateY(0);
+}
+
+.optionbuttons:focus{
+    outline: 2px solid #4A90E2;
+    outline-offset: 2px;
+}
+
+#ratethegame {
+    margin-bottom: 10%;
+}
+
+#addtofavourites {
+    float: right;
+}
+
+#favouritehearth{
+    width: 25px;
+    height: 25px;
 }
 
 .release{
@@ -118,4 +158,66 @@
         justify-content: center;
         font-weight: bold;
     }
+}
+
+.secondsection{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    gap: 1em;
+    width: 100%;
+}
+
+.genres{
+    flex: 1;
+    padding: 1em;
+    border-radius: 8px;
+}
+
+.genres h3{
+    margin-top: 0;
+    color: white;
+}
+
+.genreslist{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: 0.5em;
+}
+
+.genretag{
+    background-color: #A0B6F7;
+    color: black;
+    padding: 0.4em 0.8em;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.controllersupport{
+    flex: 1;
+    padding: 1em;
+    border-radius: 8px;
+}
+
+.controllersupport h3{
+    margin-top: 0;
+}
+
+.controllers{
+    margin-top: 0.5em;
+}
+
+.controllericons{
+    display: flex;
+    gap: 0.5em;
+}
+
+.controllericons img{
+    width: 50px;
+    height: auto;
+    border-radius: 4px;
+    padding: 0.3em;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
 }

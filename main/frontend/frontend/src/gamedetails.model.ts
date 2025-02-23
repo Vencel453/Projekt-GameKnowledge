@@ -9,6 +9,8 @@ export interface IGamesDetails {
     publishers: {id: number; name: string;}[];
     rating: number;
     agerating: {rating: string; institution: string; url?: string}[];
+    genres: {tag: string}[];
+    controllerSupport: number;
 }
 
 export interface IGamesResponse {

@@ -26,6 +26,6 @@
             </div>
             <br>
         </form>
-        <div *ngIf="errormess" class="error">{{errormess}}</div>
-        <div *ngIf="successmess" class="error">{{successmess}}</div>
+        <p *ngIf="errormess" class="error" #errorMess>{{errormess}}</p>
+        <p *ngIf="successmess" class="error" #successMess>{{successmess}}</p>
     </div>

@@ -97,11 +97,6 @@ export class MyprofileComponent implements OnInit {
       return;
     }
 
-   /* if (this.profileForm.invalid) {
-      this.snackBar.open('You must modify at least 1 field if you want to modify!', 'Close', {duration: 10000, panelClass: ['custombar']});
-      return;
-    }*/
-
     this.profileService.updateData(this.profileForm.value).subscribe({
       next: (response: UserResponse) => {
         if (!response.error) {
