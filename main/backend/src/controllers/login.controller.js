@@ -5,23 +5,24 @@ import User from "../models/user.js";
 export default {
     // A bejelentkezés kezelő metódus
     LoginPostController: async (req, res) => {
-        // Mivel ezeknek az értéke nem változik, konstansként mentjük el hogy tovább dolgozzunk vele
-        const {username: loginUsername, password: loginPassword} = req.body;
+        try {
+            // Mivel ezeknek az értéke nem változik, konstansként mentjük el hogy tovább dolgozzunk vele
+             const {username: loginUsername, password: loginPassword} = req.body;
 
         // Ha bármelyik mező üres, akkor az ahhoz megfelelő hiba kódot és üzenetet küldük
-        if ((loginUsername === undefined || loginPassword === undefined) ||
-            (loginUsername == "" || loginPassword == "")) {
-            res.status(400).json({
-                error: "true",
-                message: "Not every field was filled!"
-            });
-            return;
-        }
+            if (!loginUsername || !loginPassword) {
+                res.status(400).json({
+                    error: "true",
+                    message: "Not every field was filled!"
+                });
+                return;
+            }
 
         // Try catch párban írjuk a következő részeket ahol az adatbázist el kell érnünk
-        try {
             // Konstansként elmentjük azt a felhasználót az adatbázisból amelyik neve megegyezik a megadottal
-            const correctUser = await User.findOne({where: {username: loginUsername}});
+            const correctUser = await User.findOne({
+                where: {username: loginUsername}
+            });
             // Itt ellenőrizzük hogy a felhasználó titkosított jelszava visszafejtve megegyezik-e a felhasználóval megadott jelszóval
 
             if (!correctUser) {
@@ -38,6 +39,7 @@ export default {
             if (correctPassword) {
                 const token = await jwtHandler.CreatingToken(correctUser.id, correctUser.username, correctUser.email);
 
+                res.setHeader("Authorization", `Bearer ${token}`);
                 res.status(200).json({
                     error: "false",
                     message: "Succefull login",
@@ -64,5 +66,5 @@ export default {
             });
             return;
         }
-    },
+    }
 }

@@ -49,58 +49,64 @@ export default {
 
     // Ez a metódus egy middleware-ként szolgál, amely a felhasználó token-ét cseréli le egy újra, ha a felhasználó még mindig aktív
     ExntendingToken: async (req, res, next) => {
-        // A tokent lekérdezzük, majd visszafejtjük és lemenetjük a nyers adatokat
-        const currentToken = req.headers['authorization']?.split(' ')[1];
-
-        if (!currentToken) {
-            res.status(200).json({
-                error: "false",
-                message: "There's no token, continue"
-            });
-            next();
-        }
-        const decodedToken = await compactDecrypt(currentToken, securekey);
-        const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
-
-        // A token lejárati idejét és a jelenlegi dátumut lementjük egy azonos formátumban, majd kiszámoljuk hogy mennyi idő van hátra
-        // a token élettartalmából
-        const expire = decodedToken.exp * 1000;
-        const currentDate = new Date();
-        const timeLeft = currentDate - expire;
-
         // A következő sorok a biztonság kedvéért try catch párban vannak írva hogy a felmerülő hibákat kezelni tudjuk
         try {
+            console.log("lefut: 1");
+            // A tokent lekérdezzük, majd visszafejtjük és lemenetjük a nyers adatokat
+            const currentToken = req.headers['authorization']?.split(' ')[1];
+
+            if (!currentToken) {
+                console.log("lefut: 2");
+                return next();
+            }
+
+            let validToken = true;
+            const decodedToken = await compactDecrypt(currentToken, securekey)
+                .catch((error) => {
+                    console.log(error);
+                    validToken = false;
+                });
+
+            if (validToken === false) {
+                console.log("Geci");
+                return next();
+            }
+
+            const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
+
+            // A token lejárati idejét és a jelenlegi dátumut lementjük egy azonos formátumban, majd kiszámoljuk hogy mennyi idő van hátra
+            // a token élettartalmából
+            const expire = currentPayload.exp * 1000;
+            const currentDate = new Date();
+            const timeLeft = expire - currentDate;
+
             // Ha a maradék idő kevesebb mint 20 perc akkor a felhasználónak adunk egy új token-t  és a régi tokent fekete listázzuk
             // majd tovább lépünk, más esetben vissza küldjük hogy még nincs szükség új tokenre
-            if (timeLeft < 1200000) {
-                await this.Blacklisting(req);
+            if (timeLeft < 1800000) {
+                console.log("lefut: 3");
+                await Blacklistedtoken.create({
+                    userId: currentPayload.id,
+                    token: currentToken,
+                    date: currentDate,
+                });
+
                 const newToken = await new EncryptJWT(currentPayload)
                     .setExpirationTime("1 hour")
                     .setProtectedHeader({ alg: "dir", enc: "A256GCM"})
-                    .encrypt(securekey)
+                    .encrypt(securekey);
 
-                res.status(201).json({
-                    error: "false",
-                    message: "The token was about to expire, so a new one was created!",
-                    token: newToken,
-                });
-                next();
+                res.setHeader("Authorization", `Bearer ${newToken}`);
+                console.log(newToken);
             }
-            else {
-                res.status(200).json({
-                    error: "false",
-                    message: "The token is still viable for a while!"
-                });
-                next();
-            }
-        } 
+            console.log("lefut: 4");
+            return next();
+        }
         catch (error) {
             console.log(error);
-            res.status(500).json({
+            return res.status(500).json({
                 error: true,
                 message: "Something went wrong when checking the validity of the token!",
             });
-            return;
         }
     },
 

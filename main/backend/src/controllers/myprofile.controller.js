@@ -97,7 +97,7 @@ export default {
                 changes.username = username;
             };
 
-            if (!(email === undefined || email == "")) {
+            if (email) {
                 const conflictingEmail = await User.findOne({where: {email: email}});
                 if (conflictingEmail) {
                     res.status(409).json({
@@ -117,9 +117,9 @@ export default {
                 changes.email = email;
             };
 
-            if (!(password === undefined || password == "")) {
+            if (password) {
                 empty = false;
-                if (passwordAgain === undefined || passwordAgain == "") {
+                if (!passwordAgain) {
                     res.status(400).json({
                         error: "true",
                         message: "The password confirmation is empty!"
@@ -158,7 +158,7 @@ export default {
                 }
             }
             else {
-                if (!(passwordAgain === undefined || passwordAgain == "")) {
+                if (passwordAgain) {
                     res.status(400).json({
                         error: "true",
                         message: "The password field is empty!"
@@ -201,5 +201,5 @@ export default {
             });
             return;
         }
-    },
+    }
 }

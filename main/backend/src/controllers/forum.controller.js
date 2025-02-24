@@ -92,7 +92,7 @@ export default {
             }
 
             const title = req.body.title;
-            if (title == "" || title === undefined) {
+            if (!title) {
                 res.status(400).json({
                     error: true,
                     message: "The title is empty!"
@@ -108,7 +108,7 @@ export default {
             }
 
             const content = req.body.content;
-            if (content == "" || content === undefined) {
+            if (!content) {
                 res.status(400).json({
                     error: true,
                     message: "The post is empty!"
@@ -133,7 +133,7 @@ export default {
             }
 
             const gameplay = req.body.gameplay;
-            if (gameplay === "" || gameplay === undefined) {
+            if (!gameplay) {
                 res.status(400).json({
                     error: true,
                     message: "The gameplay flair is empty!"
@@ -142,7 +142,7 @@ export default {
             }
 
             const story = req.body.story;
-            if (story === "" || story === undefined) {
+            if (!story) {
                 res.status(400).json({
                     error: true,
                     message: "The story flair is empty!"
@@ -435,6 +435,5 @@ export default {
             });
             return;
         }
-    },
-
+    }
 }

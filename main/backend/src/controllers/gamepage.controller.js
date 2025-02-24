@@ -26,25 +26,34 @@ export default {
     GamepageGetController: async (req, res) => {
 
         // Az url paramétere tartalmazza a játék azonosítóját, ezt elmentjük és megkeressük az adott játékot 
-        const gameid = req.params.gameid;
         try {
+            const gameId = req.params.gameid;
+            
+            if (isFinite(gameId) === false) {
+                res.status(400).json({
+                    error: true,
+                    message: "There's no game id!"
+                });
+                return;
+            }
+
             const game = await Game.findOne({
                 where: {
-                    id: gameid
+                    id: gameId
                 }
             });
 
             const pictures = await Gamepicture.findAll({
                 attributes: ['url'],
                 where: {
-                    gameid: gameid
+                    gameid: gameId
                 }
             });
 
             const developers = await Studio.findAll({
                 attributes: ["id", "name", "logo"],
                 include: {
-                    where: {id: gameid},
+                    where: {id: gameId},
                     attributes: [],
                     model: Game,
                     through: {
@@ -61,7 +70,7 @@ export default {
             const publishers = await Studio.findAll({
                 attributes: ["id", "name", "logo"],
                 include: {
-                    where: {id: gameid},
+                    where: {id: gameId},
                     attributes: [],
                     model: Game,
                     through: {
@@ -73,15 +82,15 @@ export default {
                 raw: true
             });
 
-            const positiveRatings = await Rating.count({where: {GameId: gameid, positive: true}});
-            const allRatings = await Rating.count({where: {GameId: gameid}});
+            const positiveRatings = await Rating.count({where: {GameId: gameId, positive: true}});
+            const allRatings = await Rating.count({where: {GameId: gameId}});
 
             const rating = Math.ceil((positiveRatings / allRatings) * 100)
 
             const agerating = await Agerating.findAll({
-                attributes: ["rating", "institution", "url"],
+                attributes: ["url"],
                 include: {
-                    where: { id: gameid },
+                    where: { id: gameId },
                     model: Game,
                     through: {
                         model: Gamesagerating,
@@ -95,7 +104,7 @@ export default {
             const genres = await Tag.findAll({
                 attributes: ["tag"],
                 include: {
-                    where: { id: gameid},
+                    where: { id: gameId},
                     model: Game,
                     through: {
                         model: Gamestag,
@@ -109,7 +118,7 @@ export default {
             const nominations = await Award.findAll({
                 attributes: ["organizer", "name"],
                 include: {
-                    where: { id: gameid},
+                    where: { id: gameId},
                     model: Game,
                     through: {
                         model: Gamesaward,
@@ -124,7 +133,7 @@ export default {
             const wins = await Award.findAll({
                 attributes: ["organizer", "name"],
                 include: {
-                    where: { id: gameid},
+                    where: { id: gameId},
                     model: Game,
                     through: {
                         model: Gamesaward,
@@ -139,7 +148,7 @@ export default {
             const languages = await Language.findAll({
                 attributes: ["language"],
                 include: {
-                    where: { id: gameid},
+                    where: { id: gameId},
                     model: Game,
                     through: {
                         model: Gameslanguage,
@@ -153,7 +162,7 @@ export default {
             const platforms = await Platform.findAll({
                 attributes: ["platform"],
                 include: {
-                    where: { id: gameid },
+                    where: { id: gameId },
                     model: Game,
                     through: {
                         model: Gamesplatform,
@@ -166,7 +175,7 @@ export default {
 
             const actors = await Actor.findAll({
                 include: {
-                    where: { id: gameid },
+                    where: { id: gameId },
                     model: Game,
                     through: {
                         model: Acting,
@@ -180,7 +189,7 @@ export default {
             const creators = await Creator.findAll({
                 attributes: ["id", "firstName", "lastName"],
                 include: {
-                    where: { id: gameid},
+                    where: { id: gameId},
                     model: Game,
                     through: {
                         model: Creation,
@@ -194,7 +203,7 @@ export default {
             const pcspec = await Pcspec.findOne({
                 attributes: ["minop", "mincpu", "minram", "mingpu", "mindirectx", "op", "cpu", "ram", "gpu", "directx", "storage", "sidenote"],
                 where: {
-                    GameId: gameid
+                    GameId: gameId
                 }
             });
 
@@ -214,6 +223,8 @@ export default {
                     agerating: agerating,
                     genres: genres,
                     controllerSupport: game.controllerSupport,
+                    crossplatform: game.crossplatform,
+                    crossPlatformException: game.crossPlatformException,
                     awards: {
                         nominations: nominations,
                         wins: wins,
@@ -299,6 +310,31 @@ export default {
 
         const gameid = req.params.gameid;
 
+        const existingGame = await Game.findOne({
+            attributes: ["gameTitle", "release"],
+            where: {
+                id: gameid
+            }
+        });
+
+        if (!existingGame) {
+            res.status(404).json({
+                error: true,
+                message: "There isn't any game with this id!"
+            });
+            return;
+        };
+
+        const currentDate = new Date();
+
+        if (existingGame.release < currentDate) {
+            res.status(400).json({
+                error: true,
+                message: "You can't rate a game when it's not released yet!"
+            });
+            return;
+        }
+
         const conflict = await Rating.findOne({
             where: {
                 UserId: userid,
@@ -317,7 +353,7 @@ export default {
         const isPositive = req.body.isPositive;
         console.log(isPositive);
 
-        if (isPositive === undefined || isPositive === "") {
+        if (!isPositive) {
             res.status(400).json({
                 error: true,
                 message: "The rating is missing!"

@@ -13,7 +13,7 @@ export default {
             // Először azokat a játékokat kérjük le amelyek az elkövetkező 6 hónapban megjelennek
             const currentDate = new Date();
             const oneMonthForward = new Date();
-            oneMonthForward.setMonth(currentDate.getMonth() + 6);
+            oneMonthForward.setMonth(currentDate.getMonth() + 12);
 
             const upcomingGames = await Game.findAll({
                 attributes: ["id", "promoArt", "release"],
@@ -26,7 +26,7 @@ export default {
 
             // Most azokat a játékokat kérjük le amelyek 6 hónapon belül jelentek meg
             const oneMonthBack = new Date();
-            oneMonthBack.setMonth(currentDate.getMonth() - 6);
+            oneMonthBack.setMonth(currentDate.getMonth() - 12);
 
             const newReleaseGames = await Game.findAll({
                 attributes: ["id", "gameTitle", "boxart"],
@@ -175,20 +175,20 @@ export default {
     },
     // Ez a metódus a kereső sávért felel
     MainpagePutController: async (req, res) => {
-        // Le mentjük a kapott keresést és a felesleges keresést elkerülve ellenőrizzük hogy a nem-e üres, de alapvetően ez nem számít
-        // hibának, így a 200-as kódot küldjük vissza, de megüzenjük hogy ez üres
-        const search = req.body.search;
-
-        if (search === undefined || search == "") {
-            res.status(200).json({
-                error: false,
-                message: "It is an empty search!"
-            });
-            return;
-        }
-
         // Try catch párban dolgozunk hogy kezeljünk bármi féle hibát a további futtatás során
         try {
+            // Le mentjük a kapott keresést és a felesleges keresést elkerülve ellenőrizzük hogy a nem-e üres, de alapvetően ez nem számít
+            // hibának, így a 200-as kódot küldjük vissza, de megüzenjük hogy ez üres
+            const search = req.body.search;
+
+            if (search === undefined || search == "") {
+                res.status(200).json({
+                    error: false,
+                    message: "It is an empty search!"
+                });
+                return;
+            }
+
             // Az átláthatóság érdekében egy új változóban formázzuk a keresés szövegét az adatbázishoz való lekérdezéshez
             const formattedSearch = "%" + String(search).toLowerCase() + "%";
 

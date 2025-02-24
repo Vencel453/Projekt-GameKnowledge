@@ -5,26 +5,22 @@ import validationMethods from '../utilities/validation.methods.js';
 
 export default {
     RegistPostController: async (req, res) => {
-        // Konstansként elmentjük azokat az adatokat amelyeket bekérünk a felhasználótól, mert ezek nem változnak
-        const { username: registUsername, password: registPassword, passwordAgain: registPasswordAgain, email: registEmail} = req.body;
-        console.log(req.body);
-
-        // Ha a valamelyik mező nincs kitöltve akkor akkor 400-as hibával visszaküldi, hogy hiba történt, 
-        // mert nem volt minden mező kitöltve és ezeket kötelező kitölteni
-        if ((registUsername === undefined || registPassword === undefined ||
-            registEmail === undefined || registPasswordAgain === undefined) || 
-            (registUsername == "" || registPassword == "" ||
-            registEmail == "" || registPasswordAgain == ""))
-             {
-            res.status(400).json({
-                error: "true",
-                message: "Not every field was filled!"
-            });
-            return;
-        }
-        
         // Try catch párban vannak írva a következő kódok hogy az esetleges adatbázis csatlakozási hibákat kezelni tudjuk
         try {
+             // Konstansként elmentjük azokat az adatokat amelyeket bekérünk a felhasználótól, mert ezek nem változnak
+            const { username: registUsername, password: registPassword, passwordAgain: registPasswordAgain, email: registEmail} = req.body;
+            console.log(req.body);
+
+            // Ha a valamelyik mező nincs kitöltve akkor akkor 400-as hibával visszaküldi, hogy hiba történt, 
+            // mert nem volt minden mező kitöltve és ezeket kötelező kitölteni
+            if (!registUsername || !registPassword || !registEmail || !registPasswordAgain) {
+                res.status(400).json({
+                    error: "true",
+                    message: "Not every field was filled!"
+                });
+                return;
+            }
+        
             // Ellenőrzi hogy a bekért adatoknál van-e már egyező az adatbázisban
             const conflictingDatas = await User.findOne({
                 where: {[Op.or]:
@@ -68,7 +64,7 @@ export default {
             }
 
             // Ha a jelszó megerősítés sikertelen a felhasználótól akkor hiba üzenetet küldd az esetre
-            if (!(registPassword === registPasswordAgain)) {
+            if (registPassword !== registPasswordAgain) {
                 res.status(400).json({
                     error: "true",
                     message: "The passwords don't match!"
@@ -135,5 +131,5 @@ export default {
             return;
             }
         }
-    },
+    }
 }
