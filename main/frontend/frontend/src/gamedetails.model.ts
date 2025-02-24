@@ -1,4 +1,6 @@
 export interface IGamesDetails {
+wins: any;
+nominations: any;
     title: string;
     altTitle: string;
     description: string;
@@ -11,6 +13,7 @@ export interface IGamesDetails {
     agerating: {rating: string; institution: string; url?: string}[];
     genres: {tag: string}[];
     controllerSupport: number;
+    awards: IGamesDetails;
 }
 
 export interface IGamesResponse {

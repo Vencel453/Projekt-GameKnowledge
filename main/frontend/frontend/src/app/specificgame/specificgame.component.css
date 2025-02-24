@@ -30,8 +30,7 @@
     .boxart {
         max-width: 70%;
         display: block;
-        margin-bottom: 1rem;
-        margin-left: 5rem;
+        margin: 0 auto 1rem;
     }
 }
 
@@ -106,7 +105,9 @@
 .ageratings{
     display: flex;
     align-items: center;
-    margin-left: 18%;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 5em;
 }
 
 .icon{
@@ -162,22 +163,26 @@
 
 .secondsection{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     margin-top: 1em;
     margin-bottom: 1em;
     gap: 1em;
     width: 100%;
+    text-align: center;
 }
 
 .genres{
     flex: 1;
     padding: 1em;
     border-radius: 8px;
+    text-align: center;
 }
 
 .genres h3{
     margin-top: 0;
     color: white;
+    text-align: center;
 }
 
 .genreslist{
@@ -185,11 +190,13 @@
     flex-wrap: wrap;
     gap: 0.5em;
     margin-top: 0.5em;
+    justify-content: center;
 }
 
 .genretag{
     background-color: #A0B6F7;
     color: black;
+    font-weight: bold;
     padding: 0.4em 0.8em;
     border-radius: 4px;
     font-size: 0.9rem;
@@ -199,10 +206,13 @@
     flex: 1;
     padding: 1em;
     border-radius: 8px;
+    text-align: center;
 }
 
 .controllersupport h3{
     margin-top: 0;
+    color: white;
+    text-align: center;
 }
 
 .controllers{
@@ -210,14 +220,73 @@
 }
 
 .controllericons{
-    display: flex;
-    gap: 0.5em;
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    row-gap: 0.2em;
 }
 
 .controllericons img{
-    width: 50px;
+    width: 60px;
     height: auto;
     border-radius: 4px;
-    padding: 0.3em;
+    border: none;
+    padding: 0;
+    margin: 0;
     box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}
+
+.controllertext {
+    color: white;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.thirdsection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    gap: 1em;
+    width: 100%;
+    text-align: center;
+}
+
+.thirdsection h3 {
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.item{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin: 0.5rem;
+    padding: 0.3rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+.icon{
+    width: 60px;
+    height: auto;
+}
+
+.year {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    color: #A0B6F7;
+    font-weight: bold;
+}
+
+.organizer,
+.category {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-weight: bold;
 }

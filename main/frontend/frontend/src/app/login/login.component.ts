@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Authservice } from '../authservice';
 import { Title } from '@angular/platform-browser';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',

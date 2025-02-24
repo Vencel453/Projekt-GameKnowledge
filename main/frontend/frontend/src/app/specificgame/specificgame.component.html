@@ -12,12 +12,12 @@
         </p>
 
         <div class="studios">
-            <span *ngFor="let develop of gameData.developers; let last = last">
-               <strong>Developers:</strong> {{develop.name}}{{last ? '' : ', '}}
+            <span *ngIf="gameData.developers?.length">
+               <strong>Developers: {{developerslist}}</strong>
             </span>
             <br>
-            <span *ngFor="let publishers of gameData.publishers; let last = last">
-               <strong>Publishers:</strong> {{publishers.name}}{{last ? '' : ', '}}
+            <span *ngIf="gameData.publishers?.length">
+               <strong>Publishers: {{publisherslist}}</strong>
             </span>
         </div>
 
@@ -60,6 +60,7 @@
     <div class="secondsection">
     <div class="genres">
         <h3>Genres</h3>
+        <br>
         <div class="genreslist">
             <span *ngFor="let genre of gameData.genres" class="genretag">
                 {{genre.tag}}
@@ -69,26 +70,61 @@
 
     <div class="controllersupport">
         <h3>Controller Support(PC)</h3>
+        <br>
         <div class="controllers">
             <ng-container [ngSwitch]="gameData.controllerSupport">
                 <div *ngSwitchCase="3" class="controllericons">
-                    <img src="./XBox.png" alt="Xbox">
-                    <img src="./PSdualsense.png" alt="dualsense">
-                    <img src="./PSdualshock.png" alt="dualshock">
+                    <img src="./XBox.png" alt="Xbox"><p class="controllertext">Xbox controller</p>
+                    <img src="./PSdualsense.png" alt="dualsense"><p class="controllertext">Playstation Dualsense(USB)</p>
+                    <img src="./PSdualshock.png" alt="dualshock"><p class="controllertext">Playstation Dualshock(USB)</p>
                 </div>
                 <div *ngSwitchCase="1" class="controllericons">
-                    <img src="./XBox.png" alt="Xbox">
+                    <img src="./XBox.png" alt="Xbox"><p class="controllertext">Xbox controller</p>
                 </div>
                 <div *ngSwitchCase="2" class="controllericons">
-                    <img src="./XBox.png" alt="Xbox">
-                    <img src="./PSdualsensehalf.png" alt="dualsensehalf">
-                    <img src="./PSdualshockhalf.png" alt="dualshockhalf">
+                    <img src="./XBox.png" alt="Xbox"><p class="controllertext">Xbox controller</p>
+                    <img src="./PSdualsensehalf.png" alt="dualsensehalf"><p class="controllertext">Partial playstation dualsense controller support</p>
+                    <img src="./PSdualshockhalf.png" alt="dualshockhalf"><p class="controllertext">Partial playstation dualshock controller support</p>
                 </div>
                 <div *ngSwitchDefault>
-                    <p>No controller support</p>
+                    <p>No controller support or console exclusive.</p>
                 </div>
             </ng-container>
         </div>
+    </div>
+</div>
+
+<hr class="dividerline">
+
+<div class="thirdsection" *ngIf="gameData?.awards">
+    <div class="nominations" *ngIf="gameData.awards.nominations?.length">
+        <h3>Nominations</h3>
+        <br>
+        <div class="item" *ngFor="let nomination of gameData.awards.nominations">
+            <img src="./awardnominated.png" alt="nominated" class="icon">
+            <span class="year">{{nomination['Games.Gamesaward.year']}}</span>
+            <span class="organizer">{{nomination.organizer}}</span>
+            <span class="category">{{nomination.name}}</span>
+        </div>
+    </div>
+
+    <div class="wins" *ngIf="gameData.awards.wins?.length">
+        <h3>Wins</h3>
+        <br>
+        <div class="item" *ngFor="let win of gameData.awards.wins">
+            <img src="./awardwinner.png" alt="winner" class="icon">
+            <span class="year">{{win['Games.Gamesaward.year']}}</span>
+            <span class="organizer">{{win.organizer}}</span>
+            <span class="category">{{win.name}}</span>
+        </div>
+    </div>
+</div>
+
+<hr class="dividerline">
+
+<div class="fourthsection">
+    <div class="platforms">
+        <h3>Supported Lanuages & Platforms</h3>
     </div>
 </div>
 

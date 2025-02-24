@@ -14,35 +14,21 @@ import { Subject, takeUntil } from "rxjs";
 })
 export class SpecificgameComponent implements OnInit {
     gameData!: IGamesDetails;
+    showMore = false;
+    visibleActors = 4;
+    visibleCreators = 3;
+
+    get developerslist(): string {
+        return this.gameData?.developers?.map(dev => dev.name).join(', ') || '';
+    }
+
+    get publisherslist(): string {
+        return this.gameData?.publishers?.map(pub => pub.name).join(', ') || '';
+    }
 
     userRating: number = 0;
 
     private destroy$ = new Subject<void>();
-
-    private ratingLogoMap: { [inst: string]: { [rating: string]: string}} = {
-        PEGI: {
-            '3': 'pegi_3.png',
-            '7': 'pegi_7.png',
-            '12': 'pegi_12.png',
-            '16': 'pegi_16.png',
-            '18': 'pegi_18.png'
-        },
-        ESRB: {
-            'E': 'esrb_everyone.png',
-            'E10+': 'esrb_everyone10.png',
-            'T': 'esrb_teen.png',
-            'M': 'esrb_mature.png',
-            'AO': 'esrb_adultsonly.png',
-            'RP': 'esrb_ratingpending.png'
-        },
-        CERO: {
-            'A': 'cero_A.png',
-            'B': 'cero_B.png',
-            'C': 'cero_C.png',
-            'D': 'cero_D.png',
-            'Z': 'cero_Z.png',
-        }
-    };
 
     constructor(private gameService: GameDetailsService, private route: ActivatedRoute){}
 
