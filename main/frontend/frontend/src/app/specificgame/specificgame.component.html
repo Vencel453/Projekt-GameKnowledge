@@ -123,8 +123,77 @@
 <hr class="dividerline">
 
 <div class="fourthsection">
-    <div class="platforms">
-        <h3>Supported Lanuages & Platforms</h3>
+    <div class="languages" *ngIf="voicesLanguages.length || subtitlesLanguages.length">
+        <h3>Supported Languages</h3>
+        <div class="Vlanguages" *ngIf="voicesLanguages.length">
+            <h4>Voice</h4>
+            <ul>
+                <li *ngFor="let lang of displayedVlanguages">
+                    <img [src]="languageFlagMap[lang.toLowerCase()]" [alt]="lang + ' flag'" class="flagicon">
+                    {{lang | titlecase}}
+                </li>
+            </ul>
+            <div class="3dot" *ngIf="!showFullFourthSection && voicesLanguages.length > visibleVlanguages">
+                ...
+            </div>
+        </div>
+        <div class="Slanguages" *ngIf="subtitlesLanguages.length">
+            <h4>Subtitles</h4>
+            <ul>
+                <li *ngFor="let lang of displayedSlanguages">
+                    <img [src]="languageFlagMap[lang.toLowerCase()]" [alt]="lang + ' flag'" class="flagicon">
+                    {{lang | titlecase}}
+                </li>
+            </ul>
+            <div class="3dot" *ngIf="!showFullFourthSection && subtitlesLanguages.length > visibleSlanguages">
+                ...
+            </div>
+        </div>
+    </div>
+
+    <div class="platforms" *ngIf="gameData?.platforms?.length">
+        <h3>Platforms</h3>
+        <ul>
+            <li *ngFor="let p of displayedPlatforms">
+                {{p.platform}}
+            </li>
+        </ul>
+        <div class="3dot" *ngIf="!showFullFourthSection && platformsCount > visiblePlatforms">
+            ...
+        </div>
+    </div>
+
+    <div class="cross" *ngIf="gameData">
+      <h3>Cross</h3>
+      <ng-container [ngSwitch]="gameData.crossplatform">
+        <p *ngSwitchCase="0">No cross-platform support.</p>
+
+        <p *ngSwitchCase="1">Cross-platform is avaliable.<strong>(Between consoles only)</strong></p>
+
+        <p *ngSwitchCase="2">Full cross-platform avaliable.</p>
+
+        <p *ngSwitchDefault>Singleplayer only.</p>
+      </ng-container>
+      <p *ngIf="gameData.crossplatform !== null && gameData.crossPlatformException">
+        {{gameData.crossPlatformException}}
+      </p>
+    </div>
+</div>
+
+<button id="showmore1" class="optionbuttons" (click)="toggleFourthSection()">
+    {{showFullFourthSection ? 'Show Less' : 'Show More'}}
+</button>
+
+<hr class="dividerline">
+
+<div class="fifthsection" *ngIf="gameData">
+    <div class="crew" *ngIf="gameData.creators?.length">
+        <h3>Crew</h3>
+        <ul>
+            <li *ngFor="let c of gameData.creators">
+                {{c.firstname}} {{c.lastname}}
+            </li>
+        </ul>
     </div>
 </div>
 

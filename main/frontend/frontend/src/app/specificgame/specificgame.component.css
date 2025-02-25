@@ -290,3 +290,77 @@
     color: white;
     font-weight: bold;
 }
+
+.fourthsection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    color: white;
+    margin: 2em 0;
+    text-align: center;
+}
+
+.fourthsection h3,
+.fourthsection h4 {
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.fourthsection img {
+    width: 24px;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 0.5em;
+}
+
+.dot3{
+    font-size: 1.5em;
+    color: white;
+    margin-top: 0.5em;
+}
+
+.languages {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.languages > div {
+    flex: 1 1 200px;
+    text-align: center;
+}
+
+.languages ul,
+.platforms ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.languages,
+.platforms,
+.cross {
+    flex: 1 1 300px;
+    margin: 0.5em;
+    padding: 1em;
+    border-radius: 8px;
+}
+
+.fifthsection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    color: white;
+    margin: 1em 0;
+}
+
+.crew, .cast {
+    flex: 1 1 300px;
+}
+
+#showmore1 {
+    text-align: center;
+    margin-left: 47%;
+}

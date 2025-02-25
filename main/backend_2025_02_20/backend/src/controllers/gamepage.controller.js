@@ -214,6 +214,8 @@ export default {
                     agerating: agerating,
                     genres: genres,
                     controllerSupport: game.controllerSupport,
+                    crossplatform: game.crossplatform,
+                    crossPlatformExceptiom: game.crossPlatformExceptiom,
                     awards: {
                         nominations: nominations,
                         wins: wins,

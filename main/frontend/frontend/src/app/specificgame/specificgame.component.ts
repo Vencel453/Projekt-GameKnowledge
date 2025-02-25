@@ -14,9 +14,38 @@ import { Subject, takeUntil } from "rxjs";
 })
 export class SpecificgameComponent implements OnInit {
     gameData!: IGamesDetails;
-    showMore = false;
-    visibleActors = 4;
-    visibleCreators = 3;
+    showFullFourthSection = false;
+    visibleVlanguages = 5;
+    visibleSlanguages = 5;
+    visiblePlatforms = 3;
+
+    languageFlagMap: {[key: string]: string} = {
+        'english': './united-kingdom.png',
+        'french': './france.png',
+        'german': './germany.png',
+        'hungarian': './hungary.png',
+        'japanese': './japan.png',
+        'italian': './italy.png',
+        'polish': './poland.png',
+        'portuguese': './portugal.png',
+        'russian': './russia.png',
+        'korean': './south-korea.png',
+        'spanish': './spain.png',
+        'la spanish': './spain.png',
+        'thai': './thailand.png',
+        'turkish': './turkey.png',
+        'ukrainian': './ukraine.png',
+        'arabian': './united-arab-emirates.png',
+        'czech': './czech-republic.png',
+        'simplified chinese': './china.png',
+        'traditional chinese': './china.png'
+    };
+
+    userRating: number = 0;
+
+    voicesLanguages: string[] = [];
+    subtitlesLanguages: string[] = [];
+
 
     get developerslist(): string {
         return this.gameData?.developers?.map(dev => dev.name).join(', ') || '';
@@ -26,7 +55,32 @@ export class SpecificgameComponent implements OnInit {
         return this.gameData?.publishers?.map(pub => pub.name).join(', ') || '';
     }
 
-    userRating: number = 0;
+    get displayedVlanguages() {
+        return this.showFullFourthSection ? this.voicesLanguages : this.voicesLanguages.slice(0, this.visibleVlanguages);
+    }
+
+    get displayedSlanguages() {
+        return this.showFullFourthSection ? this.subtitlesLanguages : this.subtitlesLanguages.slice(0, this.visibleSlanguages);
+    }
+
+    get displayedPlatforms(){
+        if (!this.gameData?.platforms) return [];
+        return this.showFullFourthSection ? this.gameData.platforms : this.gameData.platforms.slice(0, this.visiblePlatforms);
+    }
+
+    get displayedCrossException(){
+        if(!this.gameData?.crossPlatformException) return '';
+        const text = this.gameData.crossPlatformException;
+        return this.showFullFourthSection || text.length <= 100 ? text : text.slice(0, 100) + '...';
+    }
+
+    get platformsCount(): number {
+        return this.gameData?.platforms?.length ?? 0;
+    }
+
+    toggleFourthSection(): void {
+        this.showFullFourthSection = !this.showFullFourthSection;
+    }
 
     private destroy$ = new Subject<void>();
 
@@ -44,6 +98,15 @@ export class SpecificgameComponent implements OnInit {
                         if (!response.error){
                             this.gameData = response.datas;
                             console.log("gamedata: ", this.gameData);
+                            if(this.gameData.languages?.length){
+                                this.voicesLanguages = this.gameData.languages
+                                .filter(lang => lang['Games.Gameslanguage.dub'] === 1)
+                                .map(lang => lang.language);
+
+                                this.subtitlesLanguages = this.gameData.languages
+                                .filter(lang => lang['Games.Gameslanguage.dub'] === 0)
+                                .map(lang => lang.language);
+                            }
                         }
                     },
                     error: (err) => {
