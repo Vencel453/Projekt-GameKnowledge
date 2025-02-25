@@ -148,9 +148,9 @@ export default {
     // üzenetet, ha valami hiba történik akkor hiba üznetet ki írja a konzolra
     MainpagePostController: async (req, res) => {
         try {
-            const success = jweMethods.Blacklisting(req, res);
+            const successfulLogout = await jweMethods.Blacklisting(req, res);
             
-            if (success === true) {
+            if (successfulLogout === true) {
                 res.status(200).json({
                     error: false,
                     message: "The users token has been invalidated!"
@@ -158,10 +158,11 @@ export default {
                 return;
             }
             else {
-                res.status(400).json({
-                    error: true,
-                    message: "No token is provided!"
+                res.status(200).json({
+                    error: false,
+                    message: "The token was already invalid!"
                 });
+                return;
             }
         }
         catch (error) {
@@ -181,7 +182,7 @@ export default {
             // hibának, így a 200-as kódot küldjük vissza, de megüzenjük hogy ez üres
             const search = req.body.search;
 
-            if (search === undefined || search == "") {
+            if (!search) {
                 res.status(200).json({
                     error: false,
                     message: "It is an empty search!"

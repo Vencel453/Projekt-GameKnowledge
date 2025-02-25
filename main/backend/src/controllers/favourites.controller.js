@@ -53,18 +53,29 @@ export default {
             
             const gameId = req.body.gameId;
             if (!gameId) {
-                res.status(404).json({
+                res.status(400).json({
                     error: true,
                     message: "The game's id is missing!"
                 });
                 return;
             }
 
+            if (isFinite(gameId) === false) {
+                res.status(400).json({
+                    error: true,
+                    message: "The game's id is not a number!"
+                });
+                return;
+            }
+
             const favouriteToDelete = await Favourite.findOne({
                 where: {
-                    id: gameId
+                    GameId: gameId,
+                    UserId: userId
                 }
             });
+
+            console.log(favouriteToDelete);
 
             if (!favouriteToDelete) {
                 res.status(404).json({
@@ -86,7 +97,7 @@ export default {
             console.log(error);
             res.status(500).json({
                 error: true,
-                message: "Something went wrong when creating a comment!"
+                message: "Something went wrong when deleting a favourite!"
             });
             return;
         }

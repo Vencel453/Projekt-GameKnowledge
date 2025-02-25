@@ -4,7 +4,7 @@ import { Model, DataTypes } from "sequelize";
 class Award extends Model {};
 Award.init ({
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,

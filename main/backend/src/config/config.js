@@ -4,7 +4,7 @@ import { Sequelize } from "sequelize";
 const sequelize = new Sequelize({
     username: 'root',
     password: '',
-    dialect: 'mysql',
+    dialect: "mariadb",
     // Így a createdAt és updatedAt táblák automatikus létrehozását kikapcsoljuk, mert nincs rá szükségünk
     define: {
         timestamps: false,

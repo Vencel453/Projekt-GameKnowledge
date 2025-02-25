@@ -27,9 +27,9 @@ export default {
 
         // Az url paramétere tartalmazza a játék azonosítóját, ezt elmentjük és megkeressük az adott játékot 
         try {
-            const gameId = req.params.gameid;
+            const gameId = Number(req.params.gameid?.trim());
             
-            if (isFinite(gameId) === false) {
+            if (!gameId || isFinite(gameId) === false) {
                 res.status(400).json({
                     error: true,
                     message: "There's no game id!"
@@ -249,9 +249,9 @@ export default {
     GamepagePostController: async (req, res) => {
         try {
 
-            const userid = await jweMethods.GetUserId(req);
+            const userId = await jweMethods.GetUserId(req);
 
-            if (userid === undefined) {
+            if (userId === undefined) {
                 res.status(401).json({
                     error: true,
                     message: "The user is not logged in or the token is faulty!"
@@ -259,12 +259,20 @@ export default {
                 return;
             };
 
-            const gameid = req.params.gameid;
+            const gameId = Number(req.params.gameId?.trim());
+
+            if (!gameId || isFinite(gameId) === false) {
+                res.status(400).json({
+                    error: true,
+                    message: "The games's id is missing!"
+                });
+                return;
+            }
 
             const conflict = await Favourite.findOne({
                 where: {
-                    UserId: userid,
-                    GameId: gameid
+                    UserId: userId,
+                    GameId: gameId
                 }
             });
 
@@ -277,8 +285,8 @@ export default {
             }
 
             await Favourite.create({
-                UserId: userid,
-                GameId: gameid
+                UserId: userId,
+                GameId: gameId
             });
 
             res.status(201).json({
@@ -298,9 +306,9 @@ export default {
         }
     },
     GamepagePutController: async (req, res) => {
-        const userid = await jweMethods.GetUserId(req);
+        const userId = await jweMethods.GetUserId(req);
 
-        if (userid === undefined) {
+        if (userId === undefined) {
             res.status(401).json({
                 error: true,
                 message: "The user is not logged in or the token is faulty!"
@@ -308,12 +316,20 @@ export default {
             return;
         };
 
-        const gameid = req.params.gameid;
+        const gameId = Number(req.params.gameId?.trim());
+
+        if (!gameId || isFinite(gameId) === false) {
+            res.status(400).json({
+                error: true,
+                message: "The games's id is missing!"
+            });
+            return;
+        }
 
         const existingGame = await Game.findOne({
             attributes: ["gameTitle", "release"],
             where: {
-                id: gameid
+                id: gameId
             }
         });
 
@@ -337,8 +353,8 @@ export default {
 
         const conflict = await Rating.findOne({
             where: {
-                UserId: userid,
-                GameId: gameid
+                UserId: userId,
+                GameId: gameId
             }
         });
 
@@ -361,10 +377,18 @@ export default {
             return;
         }
 
+        if (isPositive === true || isPositive === false) {
+            res.status(400).json({
+                error: true,
+                message: "The rating is not a boolean!"
+            });
+            return;
+        }
+
         await Rating.create({
-            GameId: gameid,
+            GameId: gameId,
             positive: isPositive,
-            UserId: userid
+            UserId: userId
         });
 
         res.status(201).json({

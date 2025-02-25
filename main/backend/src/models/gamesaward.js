@@ -4,14 +4,14 @@ import { Model, DataTypes } from "sequelize";
 class Gamesaward extends Model {};
 Gamesaward.init ({
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
             },
 
             year: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 allowNull: false,
             },
 

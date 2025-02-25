@@ -4,7 +4,7 @@ import { Model, DataTypes } from "sequelize";
 class Gamepicture extends Model {};
 Gamepicture.init ({
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,

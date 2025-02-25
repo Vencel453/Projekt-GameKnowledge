@@ -4,7 +4,7 @@ import { Model, DataTypes } from "sequelize";
 class Language extends Model {};
 Language.init ({
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,

@@ -9,7 +9,7 @@ import Forumcomment from "../models/forumcomment.js";
 export default {
     ForumGetController: async(req, res) => {
         try {
-            const page = Math.max(1, req.query.page || 1);
+            const page = Math.max(1, Number(req.query.page?.trim()) || 1);
             const search = req.query.search || null
             const maxPostOnPage = 30;
 
@@ -70,6 +70,7 @@ export default {
                 maximumPost: maxPage,
                 posts: formatedPosts
             });
+            return;
         }
         catch (error) {
             console.log(error);
@@ -77,6 +78,7 @@ export default {
                 error: true,
                 message: "Something went wrong during fetching the posts"
             });
+            return;
         }
     },
 
@@ -99,6 +101,15 @@ export default {
                 });
                 return;
             }
+
+            if (title.length > 150) {
+                res.status(400).json({
+                    error: true,
+                    message: "The title is longer than 150 character empty!"
+                });
+                return;
+            }
+
             if (validationMethods.CheckProfanity(title) === true) {
                 res.status(400).json({
                     error: true,
@@ -136,7 +147,15 @@ export default {
             if (!gameplay) {
                 res.status(400).json({
                     error: true,
-                    message: "The gameplay flair is empty!"
+                    message: "The gameplay tag is empty!"
+                });
+                return;
+            }
+
+            if (gameplay === true || gameplay === false) {
+                res.status(400).json({
+                    error: true,
+                    message: "The gameplay tag is not a booelan!"
                 });
                 return;
             }
@@ -145,7 +164,15 @@ export default {
             if (!story) {
                 res.status(400).json({
                     error: true,
-                    message: "The story flair is empty!"
+                    message: "The story tag is empty!"
+                });
+                return;
+            }
+
+            if (story === true || story === false) {
+                res.status(400).json({
+                    error: true,
+                    message: "The story flair is not a booelan!"
                 });
                 return;
             }
@@ -182,9 +209,9 @@ export default {
 
     ForumIdGetController: async(req, res) => {
         try {
-            const postId = req.params.postId;
-            
-            if (isFinite(postId) === false) {
+            const postId = Number(req.params.postId?.trim());
+
+            if (!postId || isFinite(postId) === false) {
                 res.status(400).json({
                     error: true,
                     message: "There's no post id!"
@@ -213,7 +240,7 @@ export default {
             }
 
             const comments = await Forumcomment.findAll({
-                attributes: ["content", "creation"],
+                attributes: ["id", "content", "creation"],
                 where: {
                     ForumPostId: postId
                 },
@@ -249,9 +276,9 @@ export default {
 
     ForumIdPostController: async(req, res) => {
         try {
-            const postId = req.params.postId;
-            
-            if (isFinite(postId) === false) {
+            const postId = Number(req.params.postId?.trim());
+
+            if (!postId || isFinite(postId) === false) {
                 res.status(400).json({
                     error: true,
                     message: "There's no post id!"
@@ -259,9 +286,9 @@ export default {
                 return;
             }
 
-            const userid = await jweMethods.GetUserId(req);
+            const userId = await jweMethods.GetUserId(req);
 
-            if (userid === undefined) {
+            if (userId === undefined) {
                 res.status(401).json({
                     error: true,
                     message: "The user is not logged in or the token is faulty or expired!"
@@ -293,7 +320,7 @@ export default {
                 content: newComment,
                 creation: currentDate,
                 ForumpostId: postId,
-                UserId: userid
+                UserId: userId
             });
 
             res.status(201).json({
@@ -314,9 +341,9 @@ export default {
 
     ForumIdDeleteController: async(req, res) => {
         try {
-            const postId = req.params.postId;
-            
-            if (isFinite(postId) === false) {
+            const postId = Number(req.params.postId?.trim());
+
+            if (!postId || isFinite(postId) === false) {
                 res.status(400).json({
                     error: true,
                     message: "There's no post id!"
@@ -324,9 +351,9 @@ export default {
                 return;
             }
 
-            const userid = await jweMethods.GetUserId(req);
+            const userId = await jweMethods.GetUserId(req);
 
-            if (userid === undefined) {
+            if (userId === undefined) {
                 res.status(401).json({
                     error: true,
                     message: "The user is not logged in or the token is faulty or expired!"
@@ -336,7 +363,7 @@ export default {
 
             const isAdmin = await User.findOne({
                 where: {
-                    id: userid,
+                    id: userId,
                     admin: true
                 }
             });

@@ -4,7 +4,7 @@ import { Model, DataTypes } from "sequelize";
 class Game extends Model {};
 Game.init ({
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 allowNull: false,
                 primaryKey: true,
                 autoIncrement: true
@@ -42,11 +42,11 @@ Game.init ({
             },
 
             crossplatform: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
             },
 
             crossPlatformException: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
             },
 
             steamdeckComp: {

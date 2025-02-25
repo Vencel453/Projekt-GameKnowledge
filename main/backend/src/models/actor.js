@@ -4,7 +4,7 @@ import { Model, DataTypes } from "sequelize";
 class Actor extends Model {};
 Actor.init ({
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,

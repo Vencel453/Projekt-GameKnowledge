@@ -4,7 +4,7 @@ import { Model, DataTypes } from "sequelize";
 class Pcspec extends Model {};
 Pcspec.init ({
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 allowNul: false,
                 autoIncrement: true,
                 primaryKey: true,

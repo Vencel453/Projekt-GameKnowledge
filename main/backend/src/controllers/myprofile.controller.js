@@ -81,7 +81,7 @@ export default {
                     if (validationMethods.CheckUsername(username)) {
                         res.status(400).json({
                             error: "true",
-                            message: "The username is not in the correct length!"
+                            message: "The username is not in the correct length or contains space!"
                         });
                         return;
                     }

@@ -68,7 +68,7 @@ export default {
                 });
 
             if (validToken === false) {
-                console.log("Geci");
+                console.log("Token nem valid");
                 return next();
             }
 
@@ -82,7 +82,7 @@ export default {
 
             // Ha a maradék idő kevesebb mint 20 perc akkor a felhasználónak adunk egy új token-t  és a régi tokent fekete listázzuk
             // majd tovább lépünk, más esetben vissza küldjük hogy még nincs szükség új tokenre
-            if (timeLeft < 1800000) {
+            if (timeLeft < 1800000) { // 5db nulla
                 console.log("lefut: 3");
                 await Blacklistedtoken.create({
                     userId: currentPayload.id,
@@ -119,27 +119,32 @@ export default {
             return false;
         }
 
-        const userId = null;
+        let userId = null;
+        let success = false;
 
         await compactDecrypt(logOutToken, securekey)
             .then((decodedToken) => {
                 const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
                 userId = currentPayload.id;
+                success = true
             })
             .catch((error) => {
                 console.log(error);
-                return true;
+                success =  false;
             });
 
         // Lementjük a jelenlegi dátumot és megkeressük a felhasználót a neve alapján
         const currentDate = new Date();
 
         // Az adatbázisban lementjük a szükséges adatokat a tokenről
-        await Blacklistedtoken.create({
-            userId: userId,
-            token: logOutToken,
-            date: currentDate,
-        });
+        if (success === true) {
+            await Blacklistedtoken.create({
+                userId: userId,
+                token: logOutToken,
+                date: currentDate,
+            });
+        }
+        return success;
     },
 
     // Ez a metódus a token-ből kinyeri a felhasználó azonosítóját
