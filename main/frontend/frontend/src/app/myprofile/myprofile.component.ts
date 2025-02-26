@@ -125,17 +125,17 @@ export class MyprofileComponent implements OnInit {
               case "The e-mail is the same as the original!":
                 message = "The e-mail must be different from the current one!";
                 break;
+              case "The password is the same as the original!":
+                message = "The new password must be different from the old one!";
+                break;
             }
         }else if (error.status === 400){
           switch (error.error.message) {
-            case "The username is not in the correct lenght!":
-              message = "Username lenght must be minimum 5, maximum 30 characters!";
+            case "The username is not in the correct length or contains space!":
+              message = "Username length must be minimum 5, maximum 30 characters and must not contain space!";
               break;
             case "The password confirmation is empty!":
               message = "Please confirm your password!";
-              break;
-            case "The password is the same as the original!":
-              message = "The new password must be different from the old one!";
               break;
             case "The password is in incorrect form!":
               message = "Invalid password format!";
@@ -143,8 +143,8 @@ export class MyprofileComponent implements OnInit {
             case "The passwords dont't match!":
               message = "Passwords do not match!";
               break;
-            case "The password field is empty!":
-              message = "Password field cannot be empty!"
+            case "The password field is empty while the password again is not!":
+              message = "Password field cannot be empty if the password confirmation isn't empty either!"
               break;
             case "Every field is empty!":
               message = "You must modify at least 1 field if you want to modify!";

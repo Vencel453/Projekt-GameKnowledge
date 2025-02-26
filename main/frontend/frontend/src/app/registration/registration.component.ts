@@ -59,8 +59,8 @@ export class RegistrationComponent {
         case "Not every field was filled!":
           this.failure = "Not every field was filled!";
           break;
-        case "The username is not in the correct length!":
-          this.failure = "The username must be minimum 5, and maximum 30 characters lenght!";
+        case "The username is not in the correct length or contains space!":
+          this.failure = "The username must be minimum 5, and maximum 30 characters lenght, and must not contain spaces!";
           break;
         case "The passwords don't match!":
           this.failure = "The passwords don't match!";

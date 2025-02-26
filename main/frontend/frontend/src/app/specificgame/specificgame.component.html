@@ -164,15 +164,17 @@
     </div>
 
     <div class="cross" *ngIf="gameData">
-      <h3>Cross</h3>
+      <h3>Crossplay</h3>
       <ng-container [ngSwitch]="gameData.crossplatform">
+        <strong>
         <p *ngSwitchCase="0">No cross-platform support.</p>
 
-        <p *ngSwitchCase="1">Cross-platform is avaliable.<strong>(Between consoles only)</strong></p>
+        <p *ngSwitchCase="1">Partial cross-platform support</p>
 
         <p *ngSwitchCase="2">Full cross-platform avaliable.</p>
 
         <p *ngSwitchDefault>Singleplayer only.</p>
+        </strong>
       </ng-container>
       <p *ngIf="gameData.crossplatform !== null && gameData.crossPlatformException">
         {{gameData.crossPlatformException}}

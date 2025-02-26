@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Feb 20. 08:04
+-- Létrehozás ideje: 2025. Feb 26. 20:22
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -77,7 +77,12 @@ INSERT INTO `actings` (`id`, `role`, `GameId`, `ActorId`) VALUES
 (42, 'Parrot', 18, 40),
 (43, 'Titus', 19, 41),
 (44, 'Gadriel', 19, 42),
-(45, 'Calgar', 19, 39);
+(45, 'Calgar', 19, 39),
+(46, 'Rogue Amendiares', 1, 26),
+(47, 'Alt Cunningham', 1, 23),
+(48, 'River Ward', 1, 43),
+(49, 'Jackie Welles', 1, 44),
+(50, 'Goro Takemura', 1, 45);
 
 -- --------------------------------------------------------
 
@@ -138,7 +143,10 @@ INSERT INTO `actors` (`id`, `firstName`, `lastName`, `profilePicture`) VALUES
 (39, 'Stewart', 'Scudamore', 'pictures/actors/stewart_scudamore_39.png'),
 (40, 'Adam', 'Diggle', 'pictures/actors/adam_diggle_40.png'),
 (41, 'Clive', 'Standen', 'pictures/actors/clive_standen_41.png'),
-(42, 'Arthur', 'Lee', 'pictures/actors/arthur_lee_42.png');
+(42, 'Arthur', 'Lee', 'pictures/actors/arthur_lee_42.png'),
+(43, 'Robbie', 'Daymond', 'pictures/actors/robbie_daymond_43.png'),
+(44, 'Jason', 'Hightower', 'pictures/actors/jason_hightower_44.png'),
+(45, 'Rome', 'Kanda', 'pictures/actors/rome_kanda_45.png');
 
 -- --------------------------------------------------------
 
@@ -252,7 +260,12 @@ INSERT INTO `creations` (`id`, `field`, `GameId`, `CreatorId`) VALUES
 (21, 'music composer', 14, 20),
 (22, 'director, writer', 15, 21),
 (23, 'music composer', 15, 22),
-(24, 'concept artist', 15, 23);
+(24, 'concept artist', 15, 23),
+(25, 'character concept artist', 1, 24),
+(26, 'concept artist', 1, 25),
+(27, 'additional art director', 1, 26),
+(28, 'storyboard artist: trailer', 1, 27),
+(29, 'senior previz artist', 1, 28);
 
 -- --------------------------------------------------------
 
@@ -294,7 +307,12 @@ INSERT INTO `creators` (`id`, `firstName`, `lastName`, `profilePicture`) VALUES
 (20, 'Meguro', 'Shoji', 'pictures/creators/meguro_shoji_20_png'),
 (21, 'Alessandro', 'Gaudiosi', NULL),
 (22, 'Mark', 'Korven', 'pictures/creators/mark_korven_22.png'),
-(23, 'Zsóka', 'Nelli Erdélyi', NULL);
+(23, 'Zsóka', 'Nelli Erdélyi', NULL),
+(24, 'Marek', 'Brzezinski', NULL),
+(25, 'Paul', 'Chadeisson', NULL),
+(26, 'Marian', 'Chomiak', NULL),
+(27, 'Giuseppe', 'Cristiano', NULL),
+(28, 'Carles', 'Carrión Díaz', NULL);
 
 -- --------------------------------------------------------
 
@@ -313,7 +331,9 @@ CREATE TABLE `favourites` (
 --
 
 INSERT INTO `favourites` (`id`, `GameId`, `UserId`) VALUES
-(1, 1, 1);
+(4, 1, 1),
+(5, 2, 1),
+(6, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -374,7 +394,6 @@ INSERT INTO `forumposts` (`id`, `title`, `content`, `story`, `gameplay`, `creati
 (22, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:02:43', 1),
 (23, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:03:39', 1),
 (24, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:04:37', 1),
-(25, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:10:06', 1),
 (26, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:20:44', 1),
 (27, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:21:54', 1),
 (28, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:22:51', 1),
@@ -386,9 +405,9 @@ INSERT INTO `forumposts` (`id`, `title`, `content`, `story`, `gameplay`, `creati
 (34, 'Cyberpunk 2077 is bad!', 'I really hate this game...', 1, 1, '2025-02-19 09:53:39', 2),
 (35, 'Cyberpunk 2077 is bad!', 'I really hate this game...', 1, 1, '2025-02-19 09:55:38', 2),
 (36, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 09:59:21', 2),
-(37, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 10:00:41', 1);
+(37, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 10:00:41', 1),
+(38, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 10:04:02', 2);
 INSERT INTO `forumposts` (`id`, `title`, `content`, `story`, `gameplay`, `creation`, `UserId`) VALUES
-(38, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 10:04:02', 2),
 (39, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 10:06:09', 1),
 (40, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 10:08:35', 1),
 (41, 'A small story', 'It was a quiet evening in the city of Eldoria, where the golden glow of street lamps reflected on rain-soaked cobblestones. Arthur strolled down the narrow alleys, his boots splashing through shallow puddles, lost in thought. The scent of fresh bread wafted from a nearby bakery, mixing with the distant murmur of conversation from the tavern at the corner. He had always loved these late-night walks—moments of solitude where the world seemed to slow down, allowing him to piece together his scattered thoughts. The town square was nearly empty, save for a lone musician strumming a melancholic tune on his lute. Arthur paused, leaning against a worn-out wooden post, closing his eyes as the music washed over him. A gust of wind sent a flurry of autumn leaves tumbling across the street. He pulled his coat tighter around himself and resumed walking, his mind drifting to the events of the past week. The letter he had received from his brother still weighed heavily on his mind. A summons to return home—urgent matters that could not be discussed in writing. The path led him past the old clock tower, its hands frozen at 11:47, a reminder of a long-forgotten past. Stories claimed that a great fire had stopped the mechanism decades ago, but no one had ever repaired it. Some said it was cursed, others simply shrugged it off as another abandoned relic of time. Arthur never cared much for superstitions, but something about the tower unsettled him tonight. As he approached the edge of the marketplace, a group of drunkards stumbled out of a tavern, their laughter echoing through the empty streets. One of them, a burly man with a thick beard, bumped into Arthur and grumbled something unintelligible. Arthur ignored him and kept walking, his eyes set on the distant silhouette of his small cottage. The night deepened, and the sound of the city slowly faded. The wind carried whispers of forgotten stories, rustling through the trees as Arthur finally reached his doorstep. He hesitated for a moment before pushing the door open, stepping inside the warmth of his home.His brother’s letter lay on the table, unopened.And that’s when he muttered to himself, \'Well, this is just fucking fantastic.\'', 0, 0, '2025-02-19 10:10:02', 1),
@@ -413,7 +432,9 @@ CREATE TABLE `gamepictures` (
 
 INSERT INTO `gamepictures` (`id`, `url`, `GameId`) VALUES
 (1, 'pictures/gallery/cyberpunk_2077_2020_1.png', 1),
-(2, 'pictures/gallery/cyberpunk_2077_2020_2.png', 1);
+(2, 'pictures/gallery/cyberpunk_2077_2020_2.png', 1),
+(3, 'pictures/gallery/cyberpunk_2077_2020_3.png', 1),
+(4, 'pictures/gallery/cyberpunk_2077_2020_4.png', 1);
 
 -- --------------------------------------------------------
 
@@ -430,8 +451,8 @@ CREATE TABLE `games` (
   `boxart` varchar(255) DEFAULT NULL,
   `promoArt` varchar(255) DEFAULT NULL,
   `controllerSupport` int(11) DEFAULT NULL,
-  `crossplatform` int(11) DEFAULT NULL,
-  `crossPlatformException` int(11) DEFAULT NULL,
+  `crossplatform` int(10) UNSIGNED DEFAULT NULL,
+  `crossPlatformException` varchar(255) DEFAULT NULL,
   `steamdeckComp` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -446,19 +467,19 @@ INSERT INTO `games` (`id`, `gameTitle`, `altGameTitle`, `description`, `release`
 (4, 'Chrono Trigger', 'Kurono toriga', 'Crono, a young boy, is thrust to adventure by destiny to destroy an oncoming threat that will destroy the world in 1999.', '1995-05-11', 'pictures/boxarts/chrono_trigger_1995_boxart.png', NULL, 1, NULL, NULL, 1),
 (5, 'Forager', NULL, 'The highly popular and quirky \"idle game that you want to actively keep playing\". Explore, craft, gather & manage resources, find secrets and build your base out of nothing! Buy land to explore and expand!', '2019-06-18', 'pictures/boxarts/forager_2019_boxart.png', NULL, 1, NULL, NULL, 2),
 (6, 'Forza Horizon', NULL, 'Celebrate speed, music and style at the Forza Horizon Festival. From the makers of the highest-rated racing franchise of this generation, Forza Horizon combines legendary Forza authenticity with the freedom of the open road.', '2012-10-23', 'pictures/boxarts/forza_horizon_2012_boxart.png', NULL, NULL, NULL, NULL, NULL),
-(7, 'StarCraft 2', NULL, 'Four years after the events of StarCraft: Brood War (1998), Jim Raynor fights against the Dominion and begins a search for artifacts when at the same time the Zerg attack once again.', '2010-07-27', 'pictures/boxarts/starcraft_2_2012_boxart.png', NULL, 0, NULL, NULL, NULL),
-(8, 'A Like a Dragon: Pirate Yakuza in Hawaii', NULL, 'Embark on an over-the-top, modern-day pirate adventure with an ex-yakuza, now pirate captain & his crew. Engage in exhilarating combat on land and sea in the hunt for lost memories and treasure.', '2025-06-23', 'pictures/boxarts/like_a_dragon_pirate_yakuza_in_hawaii_2025_boxart.png', NULL, NULL, NULL, NULL, NULL),
+(7, 'StarCraft 2', NULL, 'Four years after the events of StarCraft: Brood War (1998), Jim Raynor fights against the Dominion and begins a search for artifacts when at the same time the Zerg attack once again.', '2010-07-27', 'pictures/boxarts/starcraft_2_2010_boxart.png', NULL, 0, NULL, NULL, NULL),
+(8, 'A Like a Dragon: Pirate Yakuza in Hawaii', NULL, 'Embark on an over-the-top, modern-day pirate adventure with an ex-yakuza, now pirate captain & his crew. Engage in exhilarating combat on land and sea in the hunt for lost memories and treasure.', '2025-06-23', 'pictures/boxarts/like_a_dragon_pirate_yakuza_in_hawaii_2025_boxart.png', 'pictures/promo/like_a_dragon_pirate_yakuza_in_hawaii_2025_promo.png', NULL, NULL, NULL, NULL),
 (9, 'Metal Gear Solid Delta: Snake Eater', NULL, 'Discover the origin story of iconic military operative Snake and begin to unravel the plot of the legendary METAL GEAR series.', '2025-06-11', 'pictures/boxarts/metal_gear_solid_delta_snake_eater_2025_boxart.png', 'pictures/promo/metal_gear_solid_delta_2025_promo.png', NULL, NULL, NULL, NULL),
 (10, 'Doom: The Dark Ages', NULL, 'DOOM: The Dark Ages is the single-player, action FPS prequel to the critically acclaimed DOOM (2016) and DOOM Eternal. You are the DOOM Slayer, the legendary demon-killing warrior fighting endlessly against Hell. Experience the epic cinematic origin story of the DOOM Slayer\'s rage in 2025.', '2025-06-20', 'pictures/boxarts/doom_the_dark_ages_2025_boxart.png', 'pictures/promo/doom_dark_ages_2025_promo.png', NULL, NULL, NULL, NULL),
 (11, 'Death Stranding 2: On The Beach', NULL, 'Embark on an inspiring mission of human connection beyond the UCA. Sam—with companions by his side—sets out on a new journey to save humanity from extinction. Join them as they traverse a world beset by otherworldly enemies, obstacles and a haunting question: should we have connected?', '2025-06-17', 'pictures/boxarts/death_stranding_2_on_the_beach_2025_boxart.png', 'pictures/promo/death_stranding_2_on_the_beach_2025_promo.png', NULL, NULL, NULL, NULL),
-(12, 'Clair Obscur: Expedition 33', NULL, 'Lead the members of Expedition 33 on their quest to destroy the Paintress so that she can never paint death again. Explore a world of wonders inspired by Belle Époque France and battle unique enemies in this turn-based RPG with real-time mechanics.', '2025-06-02', 'pictures/boxarts/clair_obscur_expedition_33_boxart.png', 'pictures/promo/clair_obscur_expedition_33_promo.png', NULL, NULL, NULL, NULL),
+(12, 'Clair Obscur: Expedition 33', NULL, 'Lead the members of Expedition 33 on their quest to destroy the Paintress so that she can never paint death again. Explore a world of wonders inspired by Belle Époque France and battle unique enemies in this turn-based RPG with real-time mechanics.', '2025-06-02', 'pictures/boxarts/clair_obscur_expedition_33_2025_boxart.png', 'pictures/promo/clair_obscur_expedition_33_2025_promo.png', NULL, NULL, NULL, NULL),
 (13, 'Indiana Jones and the Great Circle', NULL, 'Uncover one of history’s greatest mysteries in a first-person, single-player adventure. The year is 1937, sinister forces are scouring the globe for the secret to an ancient power connected to the Great Circle, and only one person can stop them - Indiana Jones™', '2024-12-09', 'pictures/boxarts/indiana_jones_and_the_great_circle_2025_boxart.png', NULL, NULL, NULL, NULL, NULL),
 (14, 'Metaphor: ReFantazio', NULL, 'The throne sits empty after the king’s assassination. With no heirs, the will of the late king decrees that the next monarch will be elected by the people, & thus begins your fight for the throne.. ', '2024-10-11', 'pictures/boxarts/metaphor_refantazio_2024_boxart.png', NULL, 3, NULL, NULL, 1),
-(15, 'Until Dawn', 'Until Dawn Remake', 'Until Dawn invites you to relive the nightmare, and immerse yourself in a gripping slasher horror where every decision can make the difference between life and death. ', '2024-10-04', 'pictures/boxarts/until_dawn_2025_boxart.png', NULL, 3, NULL, NULL, 0),
+(15, 'Until Dawn', 'Until Dawn Remake', 'Until Dawn invites you to relive the nightmare, and immerse yourself in a gripping slasher horror where every decision can make the difference between life and death. ', '2024-10-04', 'pictures/boxarts/until_dawn_2024_boxart.png', NULL, 3, NULL, NULL, 0),
 (16, 'Astro Bot', NULL, 'JOIN ASTRO IN A BRAND-NEW, SUPERSIZED SPACE ADVENTURE! The PS5® mothership has been wrecked, leaving ASTRO and the bot crew scattered all over the galaxies. Time to ride your trusty Dual Speeder across more than 50 planets full of fun, danger and surprises. On your journey, make the most of ASTRO\'s new powers and reunite with many iconic heroes from the PlayStation universe!', '2024-09-09', 'pictures/boxarts/astro_bot_2024_boxart.png', NULL, NULL, NULL, NULL, NULL),
 (17, 'Dragon Age™: The Veilguard', NULL, 'Unite the Veilguard and defy the gods in Dragon Age™: The Veilguard, an immersive single-player RPG.', '2024-10-31', '/pictures/boxarts/dragon_age_the_veilguard_2024_boxart.png', NULL, 3, NULL, NULL, 2),
 (18, 'Prince of Persia The Lost Crown', NULL, 'Dash into a stylish and thrilling action-adventure platformer set in a mythological Persian world where the boundaries of time and space are yours to manipulate.', '2024-08-08', 'pictures/boxarts/prince_of_persia_the_lost_crown_2024_boxart.png', NULL, 3, NULL, NULL, 2),
-(19, 'Warhammer 40,000: Space Marine 2', NULL, 'Embody the superhuman skill and brutality of a Space Marine. Unleash deadly abilities and devastating weaponry to obliterate the relentless Tyranid swarms. Defend the Imperium in spectacular third-person action in solo or multiplayer modes.', '2024-09-09', 'pictures/boxarts/warhammer_40000_space_marine_2_boxart.png', NULL, 2, 1, 0, 1);
+(19, 'Warhammer 40,000: Space Marine 2', NULL, 'Embody the superhuman skill and brutality of a Space Marine. Unleash deadly abilities and devastating weaponry to obliterate the relentless Tyranid swarms. Defend the Imperium in spectacular third-person action in solo or multiplayer modes.', '2024-09-09', 'pictures/boxarts/warhammer_40000_space_marine_2_2024_boxart.png', NULL, 2, 1, 'Players across consoles and PC\'s can play in coop mode, but the PvP mode is only between PC players vs PC players, and console players between console players', 1);
 
 -- --------------------------------------------------------
 
@@ -489,7 +510,7 @@ INSERT INTO `gamesageratings` (`id`, `GameId`, `AgeratingId`) VALUES
 
 CREATE TABLE `gamesawards` (
   `id` int(11) NOT NULL,
-  `year` int(11) NOT NULL,
+  `year` int(10) UNSIGNED NOT NULL,
   `result` tinyint(1) NOT NULL DEFAULT 0,
   `GameId` int(11) DEFAULT NULL,
   `AwardId` int(11) DEFAULT NULL
@@ -841,8 +862,11 @@ CREATE TABLE `ratings` (
 
 INSERT INTO `ratings` (`id`, `positive`, `GameId`, `UserId`) VALUES
 (2, 1, 1, 2),
-(3, 0, 1, 3),
-(5, 1, 1, 1);
+(3, 0, 1, NULL),
+(5, 1, 1, 1),
+(6, 0, 2, 2),
+(7, 1, 3, NULL),
+(8, 1, 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -994,7 +1018,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `admin`, `creation`) VALUES
 (1, 'Vencel453', '$2b$10$lU.v7i55wiLeE7gAUh51VOU00LXy1FpLvPtBKMKYObZMLBiGoSM8i', 'email@address.com', 1, '2024-11-27'),
 (2, 'BunyósPityu', '$2b$10$jEhSTQxawR1FDJ74oKdhdOAL5WD2GglD32wAKNBYNShBhFdK79C92', 'pityu@lopo.com', 0, '2024-11-27'),
-(3, 'Test1234', '$2b$10$EvbJEFfwN4I0qBiQ36Gn2u0CEMDRipKor6sp4J9y8LheoVDnhx7wC', 'cmon@please.com', 0, '2025-02-19');
+(10, 'kutátok', '$2b$10$.6XzjacqV5A0lKxIIt11vOlqggPYI8lddHeGFS2rCrcNahPBM1J56', 'cmon@pleaseee.com', 0, '2025-02-26'),
+(11, 'Teszt123', '$2b$10$dDcyWISkYrY0VosnRnuuuuR4L0sYgY08rHAvF1cbb94i5PskKRQwK', 'kkfkkg@fkgm.hi', 0, '2025-02-26');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -1139,7 +1164,8 @@ ALTER TABLE `languages`
   ADD UNIQUE KEY `language` (`language`),
   ADD UNIQUE KEY `language_2` (`language`),
   ADD UNIQUE KEY `language_3` (`language`),
-  ADD UNIQUE KEY `language_4` (`language`);
+  ADD UNIQUE KEY `language_4` (`language`),
+  ADD UNIQUE KEY `language_5` (`language`);
 
 --
 -- A tábla indexei `onlineplatforms`
@@ -1149,7 +1175,8 @@ ALTER TABLE `onlineplatforms`
   ADD UNIQUE KEY `onlineplatform` (`onlineplatform`),
   ADD UNIQUE KEY `onlineplatform_2` (`onlineplatform`),
   ADD UNIQUE KEY `onlineplatform_3` (`onlineplatform`),
-  ADD UNIQUE KEY `onlineplatform_4` (`onlineplatform`);
+  ADD UNIQUE KEY `onlineplatform_4` (`onlineplatform`),
+  ADD UNIQUE KEY `onlineplatform_5` (`onlineplatform`);
 
 --
 -- A tábla indexei `pcspecs`
@@ -1166,7 +1193,8 @@ ALTER TABLE `platforms`
   ADD UNIQUE KEY `platform` (`platform`),
   ADD UNIQUE KEY `platform_2` (`platform`),
   ADD UNIQUE KEY `platform_3` (`platform`),
-  ADD UNIQUE KEY `platform_4` (`platform`);
+  ADD UNIQUE KEY `platform_4` (`platform`),
+  ADD UNIQUE KEY `platform_5` (`platform`);
 
 --
 -- A tábla indexei `ratings`
@@ -1184,7 +1212,8 @@ ALTER TABLE `studios`
   ADD UNIQUE KEY `name` (`name`),
   ADD UNIQUE KEY `name_2` (`name`),
   ADD UNIQUE KEY `name_3` (`name`),
-  ADD UNIQUE KEY `name_4` (`name`);
+  ADD UNIQUE KEY `name_4` (`name`),
+  ADD UNIQUE KEY `name_5` (`name`);
 
 --
 -- A tábla indexei `studiosgames`
@@ -1202,7 +1231,8 @@ ALTER TABLE `tags`
   ADD UNIQUE KEY `tag` (`tag`),
   ADD UNIQUE KEY `tag_2` (`tag`),
   ADD UNIQUE KEY `tag_3` (`tag`),
-  ADD UNIQUE KEY `tag_4` (`tag`);
+  ADD UNIQUE KEY `tag_4` (`tag`),
+  ADD UNIQUE KEY `tag_5` (`tag`);
 
 --
 -- A tábla indexei `users`
@@ -1216,7 +1246,9 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `username_3` (`username`),
   ADD UNIQUE KEY `email_3` (`email`),
   ADD UNIQUE KEY `username_4` (`username`),
-  ADD UNIQUE KEY `email_4` (`email`);
+  ADD UNIQUE KEY `email_4` (`email`),
+  ADD UNIQUE KEY `username_5` (`username`),
+  ADD UNIQUE KEY `email_5` (`email`);
 
 --
 -- A kiírt táblák AUTO_INCREMENT értéke
@@ -1226,13 +1258,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `actings`
 --
 ALTER TABLE `actings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT a táblához `actors`
 --
 ALTER TABLE `actors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT a táblához `ageratings`
@@ -1256,25 +1288,25 @@ ALTER TABLE `blacklistedtokens`
 -- AUTO_INCREMENT a táblához `creations`
 --
 ALTER TABLE `creations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT a táblához `creators`
 --
 ALTER TABLE `creators`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT a táblához `favourites`
 --
 ALTER TABLE `favourites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT a táblához `forumcomments`
 --
 ALTER TABLE `forumcomments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT a táblához `forumposts`
@@ -1286,7 +1318,7 @@ ALTER TABLE `forumposts`
 -- AUTO_INCREMENT a táblához `gamepictures`
 --
 ALTER TABLE `gamepictures`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `games`
@@ -1358,7 +1390,7 @@ ALTER TABLE `platforms`
 -- AUTO_INCREMENT a táblához `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT a táblához `studios`
@@ -1382,7 +1414,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -1393,13 +1425,15 @@ ALTER TABLE `users`
 --
 ALTER TABLE `actings`
   ADD CONSTRAINT `actings_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `actings_ibfk_10` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `actings_ibfk_2` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `actings_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `actings_ibfk_4` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `actings_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `actings_ibfk_6` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `actings_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_8` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `actings_ibfk_8` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `actings_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `blacklistedtokens`
@@ -1408,46 +1442,53 @@ ALTER TABLE `blacklistedtokens`
   ADD CONSTRAINT `blacklistedtokens_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `blacklistedtokens_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `blacklistedtokens_ibfk_3` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `blacklistedtokens_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `blacklistedtokens_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `blacklistedtokens_ibfk_5` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `creations`
 --
 ALTER TABLE `creations`
   ADD CONSTRAINT `creations_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `creations_ibfk_10` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `creations_ibfk_2` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `creations_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `creations_ibfk_4` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `creations_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `creations_ibfk_6` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `creations_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_8` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `creations_ibfk_8` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `creations_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `favourites`
 --
 ALTER TABLE `favourites`
   ADD CONSTRAINT `favourites_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `favourites_ibfk_10` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `favourites_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `favourites_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `favourites_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `favourites_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `favourites_ibfk_6` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `favourites_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_8` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `favourites_ibfk_8` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `favourites_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `forumcomments`
 --
 ALTER TABLE `forumcomments`
   ADD CONSTRAINT `forumcomments_ibfk_1` FOREIGN KEY (`ForumpostId`) REFERENCES `forumposts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `forumcomments_ibfk_10` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `forumcomments_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `forumcomments_ibfk_3` FOREIGN KEY (`ForumpostId`) REFERENCES `forumposts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `forumcomments_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `forumcomments_ibfk_5` FOREIGN KEY (`ForumpostId`) REFERENCES `forumposts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `forumcomments_ibfk_6` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `forumcomments_ibfk_7` FOREIGN KEY (`ForumpostId`) REFERENCES `forumposts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `forumcomments_ibfk_8` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `forumcomments_ibfk_8` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `forumcomments_ibfk_9` FOREIGN KEY (`ForumpostId`) REFERENCES `forumposts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `forumposts`
@@ -1456,7 +1497,8 @@ ALTER TABLE `forumposts`
   ADD CONSTRAINT `forumposts_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `forumposts_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `forumposts_ibfk_3` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `forumposts_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `forumposts_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `forumposts_ibfk_5` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamepictures`
@@ -1465,85 +1507,98 @@ ALTER TABLE `gamepictures`
   ADD CONSTRAINT `gamepictures_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamepictures_ibfk_2` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamepictures_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamepictures_ibfk_4` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamepictures_ibfk_4` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamepictures_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamesageratings`
 --
 ALTER TABLE `gamesageratings`
   ADD CONSTRAINT `gamesageratings_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesageratings_ibfk_10` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesageratings_ibfk_2` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesageratings_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesageratings_ibfk_4` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesageratings_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesageratings_ibfk_6` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesageratings_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_8` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamesageratings_ibfk_8` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesageratings_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamesawards`
 --
 ALTER TABLE `gamesawards`
   ADD CONSTRAINT `gamesawards_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesawards_ibfk_10` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesawards_ibfk_2` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesawards_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesawards_ibfk_4` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesawards_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesawards_ibfk_6` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesawards_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_8` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamesawards_ibfk_8` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesawards_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gameslanguages`
 --
 ALTER TABLE `gameslanguages`
   ADD CONSTRAINT `gameslanguages_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gameslanguages_ibfk_10` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gameslanguages_ibfk_2` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gameslanguages_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gameslanguages_ibfk_4` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gameslanguages_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gameslanguages_ibfk_6` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gameslanguages_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_8` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gameslanguages_ibfk_8` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gameslanguages_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamesonlineplatforms`
 --
 ALTER TABLE `gamesonlineplatforms`
   ADD CONSTRAINT `gamesonlineplatforms_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesonlineplatforms_ibfk_10` FOREIGN KEY (`OnlineplatformId`) REFERENCES `onlineplatforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesonlineplatforms_ibfk_2` FOREIGN KEY (`OnlineplatformId`) REFERENCES `onlineplatforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesonlineplatforms_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesonlineplatforms_ibfk_4` FOREIGN KEY (`OnlineplatformId`) REFERENCES `onlineplatforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesonlineplatforms_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesonlineplatforms_ibfk_6` FOREIGN KEY (`OnlineplatformId`) REFERENCES `onlineplatforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesonlineplatforms_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesonlineplatforms_ibfk_8` FOREIGN KEY (`OnlineplatformId`) REFERENCES `onlineplatforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamesonlineplatforms_ibfk_8` FOREIGN KEY (`OnlineplatformId`) REFERENCES `onlineplatforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesonlineplatforms_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamesplatforms`
 --
 ALTER TABLE `gamesplatforms`
   ADD CONSTRAINT `gamesplatforms_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesplatforms_ibfk_10` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesplatforms_ibfk_2` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesplatforms_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesplatforms_ibfk_4` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesplatforms_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesplatforms_ibfk_6` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamesplatforms_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_8` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamesplatforms_ibfk_8` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamesplatforms_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamestags`
 --
 ALTER TABLE `gamestags`
   ADD CONSTRAINT `gamestags_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamestags_ibfk_10` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamestags_ibfk_2` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamestags_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamestags_ibfk_4` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamestags_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamestags_ibfk_6` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gamestags_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_8` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamestags_ibfk_8` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gamestags_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `pcspecs`
@@ -1552,33 +1607,38 @@ ALTER TABLE `pcspecs`
   ADD CONSTRAINT `pcspecs_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `pcspecs_ibfk_2` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `pcspecs_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `pcspecs_ibfk_4` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `pcspecs_ibfk_4` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `pcspecs_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `ratings`
 --
 ALTER TABLE `ratings`
   ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `ratings_ibfk_10` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `ratings_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `ratings_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `ratings_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `ratings_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `ratings_ibfk_6` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `ratings_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_8` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `ratings_ibfk_8` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `ratings_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `studiosgames`
 --
 ALTER TABLE `studiosgames`
   ADD CONSTRAINT `studiosgames_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `studiosgames_ibfk_10` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `studiosgames_ibfk_2` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `studiosgames_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `studiosgames_ibfk_4` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `studiosgames_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `studiosgames_ibfk_6` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `studiosgames_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_8` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `studiosgames_ibfk_8` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `studiosgames_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
