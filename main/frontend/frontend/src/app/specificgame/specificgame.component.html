@@ -87,7 +87,7 @@
                     <img src="./PSdualshockhalf.png" alt="dualshockhalf"><p class="controllertext">Partial playstation dualshock controller support</p>
                 </div>
                 <div *ngSwitchDefault>
-                    <p>No controller support or console exclusive.</p>
+                    <p id="noCsupport">No controller support or console exclusive.</p>
                 </div>
             </ng-container>
         </div>
@@ -133,7 +133,7 @@
                     {{lang | titlecase}}
                 </li>
             </ul>
-            <div class="3dot" *ngIf="!showFullFourthSection && voicesLanguages.length > visibleVlanguages">
+            <div class="dot3" *ngIf="!showFullFourthSection && voicesLanguages.length > visibleVlanguages">
                 ...
             </div>
         </div>
@@ -145,7 +145,7 @@
                     {{lang | titlecase}}
                 </li>
             </ul>
-            <div class="3dot" *ngIf="!showFullFourthSection && subtitlesLanguages.length > visibleSlanguages">
+            <div class="dot3" *ngIf="!showFullFourthSection && subtitlesLanguages.length > visibleSlanguages">
                 ...
             </div>
         </div>
@@ -158,7 +158,7 @@
                 {{p.platform}}
             </li>
         </ul>
-        <div class="3dot" *ngIf="!showFullFourthSection && platformsCount > visiblePlatforms">
+        <div class="dot3" *ngIf="!showFullFourthSection && platformsCount > visiblePlatforms">
             ...
         </div>
     </div>
@@ -187,13 +187,64 @@
 <hr class="dividerline">
 
 <div class="fifthsection" *ngIf="gameData">
-    <div class="crew" *ngIf="gameData.creators?.length">
-        <h3>Crew</h3>
-        <ul>
-            <li *ngFor="let c of gameData.creators">
-                {{c.firstname}} {{c.lastname}}
-            </li>
-        </ul>
+    <h3>PC System Requirements</h3>
+    <div class="specs">
+        <div class="minimum">
+            <h4>Minimum</h4>
+            <ul>
+                <li><strong>OS: </strong>{{gameData.pcspec?.minop}}</li>
+                <li><strong>CPU: </strong>{{gameData.pcspec?.mincpu}}</li>
+                <li><strong>RAM: </strong>{{gameData.pcspec?.minram}}</li>
+                <li><strong>GPU: </strong>{{gameData.pcspec?.mingpu}}</li>
+                <li><strong>DirectX: </strong>{{gameData.pcspec?.mindirectx}}</li>
+                <li><strong>Storage: </strong>{{gameData.pcspec?.storage}}</li>
+                <li *ngIf="gameData.pcspec?.sidenote"><strong>Note: </strong>{{gameData.pcspec?.sidenote}}</li>
+            </ul>
+        </div>
+
+        <div class="recommended">
+            <h4>Recommended</h4>
+            <ul>
+                <li><strong>OS: </strong>{{gameData.pcspec?.op}}</li>
+                <li><strong>CPU: </strong>{{gameData.pcspec?.cpu}}</li>
+                <li><strong>RAM: </strong>{{gameData.pcspec?.ram}}</li>
+                <li><strong>GPU: </strong>{{gameData.pcspec?.gpu}}</li>
+                <li><strong>DirectX: </strong>{{gameData.pcspec?.directx}}</li>
+                <li><strong>Storage: </strong>{{gameData.pcspec?.storage}}</li>
+                <li *ngIf="gameData.pcspec?.sidenote"><strong>Note: </strong>{{gameData.pcspec?.sidenote}}</li>
+            </ul>
+        </div>
     </div>
 </div>
 
+<hr class="dividerline">
+
+<div class="sixthsection" *ngIf="gameData?.creators?.length">
+    <div class="crew">
+        <h3>Crew</h3>
+        <div class="cards" *ngFor="let member of gameData.creators">
+            <p>{{member.firstName}} {{member.lastName}}</p>
+        </div>
+    </div>
+</div>
+
+<hr class="dividerline">
+
+<div class="seventhsection" *ngIf="gameData?.actors?.length">
+    <h3>Cast</h3>
+    <div class="castwrapper">
+        <button class="arrow left-arrow" (click)="scrollCast('left')">
+            <img src="./left-arrow.png" alt="Left Arrow" />
+        </button>
+
+        <div class="cast-container" #castContainer>
+            <div class="card" *ngFor="let actor of gameData.actors">
+                <img class="photo" [src]="actor.profilePicture" alt="{{actor.firstname}} {{actor.lastname}}"/>
+              <!--<p class="charactername">{{actor.character}}</p> -->
+            </div>
+        </div>
+        <button class="arrow right-arrow" (click)="scrollCast('right')">
+            <img src="./right-arrow.png" alt="Right Arrow"/>
+        </button>
+    </div>
+</div>

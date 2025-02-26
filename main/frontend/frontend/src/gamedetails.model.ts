@@ -41,13 +41,27 @@ nominations: any;
         id: number;
         firstname: string;
         lastname: string;
-        profilepicture: string;
+        profilePicture: string;
     }[];
     creators?: {
         id: number;
-        firstname: string;
-        lastname: string;
+        firstName: string;
+        lastName: string;
     }[];
+    pcspec?: {
+        minop: string;
+        mincpu: string;
+        minram: string;
+        mingpu: string;
+        mindirectx: string;
+        op: string;
+        cpu: string;
+        ram: string;
+        gpu: string;
+        directx: string;
+        storage: string;
+        sidenote: string;
+    };
 }
 
 export interface IGamesResponse {

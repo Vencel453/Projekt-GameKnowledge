@@ -78,7 +78,7 @@ export default {
                     return;
                 }
                 else {
-                    if (validationMethods.CheckUsername(username)) {
+                    if (validationMethods.CheckUsername(username) === false) {
                         res.status(400).json({
                             error: "true",
                             message: "The username is not in the correct length!"
@@ -121,8 +121,8 @@ export default {
                 }
                 else {
                     if (password === passwordAgain) {
-                        if (validationMethods.CheckPassword(password)) {
-                            if (bcryptMethods.Comparing(password, user.password)) {
+                        if (validationMethods.CheckPassword(password) === true) {
+                            if (bcryptMethods.Comparing(password, user.password) === true) {
                                 res.status(400).json({
                                     error: "true",
                                     message: "The password is the same as the original!"

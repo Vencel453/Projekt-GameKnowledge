@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { GameDetailsService } from "../../gamedetails.service";
 import { IGamesDetails } from "../../gamedetails.model";
 import { CommonModule } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
-import { Subject, takeUntil } from "rxjs";
+import { BehaviorSubject, Subject, takeUntil } from "rxjs";
 
 @Component({
     selector: 'app-game-details',
@@ -115,6 +115,18 @@ export class SpecificgameComponent implements OnInit {
         })
             })
         });
+    }
+
+    @ViewChild('castContainer', {read: ElementRef}) castContainer!: ElementRef;
+
+    scrollCast(direction: string): void {
+        const container = this.castContainer.nativeElement;
+        const scrollAmount = 300;
+        if (direction === 'left'){
+            container.scrollBy({left: -scrollAmount, behaivor: 'smooth'});
+        }else if (direction === 'right'){
+            container.scrollBy({left: scrollAmount, behaivor: 'smooth'});
+        }
     }
 
     ngOnDestroy(): void {
