@@ -27,7 +27,10 @@ export default {
 
         // Az url paramétere tartalmazza a játék azonosítóját, ezt elmentjük és megkeressük az adott játékot 
         try {
-            const gameId = Number(req.params.gameid?.trim());
+            const gameId = Number(req.params.gameId?.trim());
+            console.log(gameId);
+            console.log(!gameId);
+            console.log(isFinite(gameId) === false);
             
             if (!gameId || isFinite(gameId) === false) {
                 res.status(400).json({

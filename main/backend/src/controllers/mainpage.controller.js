@@ -160,7 +160,7 @@ export default {
             else {
                 res.status(200).json({
                     error: false,
-                    message: "The token was already invalid!"
+                    message: "The token was already invalid or empty!"
                 });
                 return;
             }
@@ -205,32 +205,10 @@ export default {
                 }
             });
 
-            const actor = await Actor.findAll({
-                attributes: ["id", "firstName", "lastName", "profilePicture"],
-                where: {[Op.or]:
-                    [   
-                        {firstName: {[Op.like]: formattedSearch}},
-                        {lastName: {[Op.like]: formattedSearch}}
-                    ]
-                }
-            });
-
-            const creator = await Creator.findAll({
-                attributes: ["id", "firstName", "lastName", "profilePicture"],
-                where: {[Op.or]:
-                    [   
-                        {firstName: {[Op.like]: formattedSearch}},
-                        {lastName: {[Op.like]: formattedSearch}}
-                    ]
-                }
-            });
-
             res.status(200).json({
                 error: false,
                 message: "Successful search!",
-                game: game,
-                actor: actor,
-                creator: creator
+                game: game
             });
         } 
         catch (error) {
