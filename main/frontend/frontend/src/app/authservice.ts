@@ -1,23 +1,34 @@
 //Szükséges importok beágyazása
-import { Injectable } from "@angular/core";
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import {jwtDecode} from 'jwt-decode';
+import { isPlatformBrowser } from "@angular/common";
+
+interface TokenPayLoad {
+    expire: number;
+}
 
 @Injectable({
     providedIn: 'root'
 })
+
 export class Authservice {
    private isauthenticated = new BehaviorSubject<boolean>(this.hasToken());
    private username = new BehaviorSubject<string | null>(null);
    private isAdmin = new BehaviorSubject<boolean>(false);
+   private logouttimer: any = null;
 
    isAuthenticated$ = this.isauthenticated.asObservable();
    username$ = this.username.asObservable();
    isAdmin$ = this.isAdmin.asObservable();
 
-   constructor(){
+   constructor( @Inject(PLATFORM_ID) private platformid: Object, private http: HttpClient, private snackBar: MatSnackBar){
     this.clearInvalidToken();
     this.loadUserInfo();
     this.isauthenticated.next(this.hasToken());
+    this.checkRefreshToken();
    }
 
    private clearInvalidToken() {
@@ -34,6 +45,7 @@ export class Authservice {
 }
 
    login(token: string, username: string, isAdmin: boolean){
+    console.log("Token recieved: ", token);
     if (this.isLocalStorageAvailable()){
     localStorage.setItem('token', token);
     localStorage.setItem('username', username);
@@ -43,6 +55,7 @@ export class Authservice {
     this.isauthenticated.next(true);
     this.username.next(username);
     this.isAdmin.next(isAdmin);
+    this.AutoLogout(token);
 
     window.scrollTo({top: 0, behavior: "smooth"});
    }
@@ -57,6 +70,10 @@ export class Authservice {
     this.isauthenticated.next(false);
     this.username.next(null);
     this.isAdmin.next(false);
+
+    if (this.logouttimer){
+        clearTimeout(this.logouttimer);
+    }
    }
 
    getUsername(): string | null {
@@ -85,6 +102,68 @@ export class Authservice {
 }
 
 private isLocalStorageAvailable(): boolean {
-    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+    return isPlatformBrowser(this.platformid) && typeof localStorage !== 'undefined';
+}
+
+private AutoLogout(token: string) {
+    try{
+        const decoded: TokenPayLoad = jwtDecode(token);
+        const expiration = new Date(decoded.expire * 1000);
+        const now = new Date();
+        const expiresin = expiration.getTime() - now.getTime();
+
+        if (expiresin <= 0){
+            this.snackBar.open("You're current session is over! Please login again!", "Close", {duration: 10000});
+            this.logout();
+        } else {
+            this.logouttimer = setTimeout(() => {
+                this.snackBar.open("You're current session is over! Please login again!", "Close", {duration: 10000});
+                this.logout();
+            }, expiresin);
+        }
+    } catch (error) {
+        console.error("Token decoding problem!", error);
+        this.logout();
+    }
+}
+
+private checkRefreshToken() {
+    if (!this.isLocalStorageAvailable()) return;
+    
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    try {
+        const decoded: TokenPayLoad = jwtDecode(token);
+        const expiration = new Date(decoded.expire * 1000);
+        const now = new Date();
+        const remaining = expiration.getTime() - now.getTime();
+
+        if (remaining < 30 * 60 * 1000){
+            this.checkRefreshToken();
+        }else {
+            this.AutoLogout(token);
+        }
+    } catch (error) {
+        console.error("Token decoding problem 2!", error);
+        this.logout();
+    }
+}
+
+private refreshToken() {
+    this.http.post<{token: string}>('http://localhost:4200', {})
+    .subscribe({
+        next: (res) => {
+            const newToken = res.token;
+            if (newToken && this.isLocalStorageAvailable()){
+                localStorage.setItem('token', newToken);
+                this.AutoLogout(newToken);
+            }
+        },
+        error: (err) => {
+            console.error("Token refresh failure!", err);
+            this.logout();
+        }
+    });
 }
 }

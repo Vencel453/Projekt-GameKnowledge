@@ -14,10 +14,16 @@ import { BehaviorSubject, Subject, takeUntil } from "rxjs";
 })
 export class SpecificgameComponent implements OnInit {
     gameData!: IGamesDetails;
+
+    selectedImg: string | null = null;
+
     showFullFourthSection = false;
     visibleVlanguages = 5;
     visibleSlanguages = 5;
     visiblePlatforms = 3;
+
+    showAllCrew = false;
+    visibleCrew = 5;
 
     languageFlagMap: {[key: string]: string} = {
         'english': './united-kingdom.png',
@@ -78,8 +84,27 @@ export class SpecificgameComponent implements OnInit {
         return this.gameData?.platforms?.length ?? 0;
     }
 
+    get displayedCrew() {
+        if (!this.gameData?.creators) {
+            return [];
+        }
+        return this.showAllCrew ? this.gameData.creators : this.gameData.creators.slice(0, this.visibleCrew);
+    }
+
     toggleFourthSection(): void {
         this.showFullFourthSection = !this.showFullFourthSection;
+    }
+
+    toggleCrew(): void {
+        this.showAllCrew = !this.showAllCrew;
+    }
+
+    openIMG(imageURL: string): void {
+        this.selectedImg = imageURL;
+    }
+
+    closeIMG(): void {
+        this.selectedImg = null;
     }
 
     private destroy$ = new Subject<void>();

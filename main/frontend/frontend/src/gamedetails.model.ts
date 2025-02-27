@@ -39,14 +39,16 @@ nominations: any;
     crossPlatformException?: string | null;
     actors?: {
         id: number;
-        firstname: string;
-        lastname: string;
+        firstName: string;
+        lastName: string;
         profilePicture: string;
+        'Games.Acting.role': string;
     }[];
     creators?: {
         id: number;
         firstName: string;
         lastName: string;
+        'Games.Creation.field': string;
     }[];
     pcspec?: {
         minop: string;

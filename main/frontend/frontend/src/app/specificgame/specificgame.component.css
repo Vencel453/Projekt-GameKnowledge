@@ -138,6 +138,7 @@
 
             .item{
                 width: 200px;
+                cursor: pointer;
                 img {
                     width: 100%;
                     height: auto;
@@ -395,6 +396,38 @@
 .sixthsection{
     text-align: center;
     margin: 2rem 0;
+    color: white;
+}
+
+.crewtable {
+    display: inline-table;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+
+.crewrow{
+    display: table-row;
+}
+
+.crewrow header{
+    font-weight: bold;
+    border-bottom: 1px solid;
+}
+
+.name,
+.role {
+    border: none;
+    display: table-cell;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#Tname,
+#Trole {
+    font-size: larger;
+    font-weight: bold;
+    margin-bottom: 0.5em;
 }
 
 .sixthsection h3{
@@ -432,6 +465,7 @@
     gap: 1rem;
     padding: 1rem;
     scrollbar-width: none;
+    background: transparent;
 }
 
 .cast-container::-webkit-scrollbar {
@@ -439,15 +473,35 @@
 }
 
 .card {
-    min-width: 150px;
-    border-radius: 5px;
+    flex: 0 0 auto;
+    width: 250px;
     text-align: center;
+    background: transparent;
+    padding: 0.5rem;
+    border: none;
 }
 
 .photo {
-    width: 50%;
-    height: auto;
+    width: 250px;
+    height: 350px;
+    object-fit: cover;
     border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+}
+
+.actorname {
+    color: white;
+    margin: 0.5rem 0 0.2rem;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.charactername {
+    font-size: 0.9rem;
+    color: #A0B6F7;
+    margin: 0;
+    font-weight: bold;
 }
 
 .arrow{
@@ -460,4 +514,44 @@
 .arrow img {
     width: 30px;
     height: auto;
+}
+
+.modaloverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #A0B6F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalcontent{
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.modalcontent img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #4A90E2;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
 }

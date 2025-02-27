@@ -49,10 +49,18 @@
             <hr class="dividerline">
             <div class="images">
                 <div class="item" *ngFor="let img of gameData.gallery">
-                    <img [src]="img.url" alt="Gallery image" />
+                    <img [src]="img.url" alt="Gallery image" (click)="openIMG(img.url)" />
                 </div>
             </div>
         </div>
+
+        <div class="modaloverlay" *ngIf="selectedImg" (click)="closeIMG()">
+            <div class="modalcontent" (click)="$event.stopPropagation()">
+                <img [src]="selectedImg" alt="Larged IMG" />
+                <button class="close" (click)="closeIMG()">X</button>
+            </div>
+        </div>
+
     </div>
 </div>
     <hr class="dividerline">
@@ -222,18 +230,31 @@
 <hr class="dividerline">
 
 <div class="sixthsection" *ngIf="gameData?.creators?.length">
-    <div class="crew">
         <h3>Crew</h3>
-        <div class="cards" *ngFor="let member of gameData.creators">
-            <p>{{member.firstName}} {{member.lastName}}</p>
+        <div class="crewtable">
+        <div class="crewrow header">
+            <div class="name" id="Tname">Name</div>
+            <div class="role" id="Trole">Role</div>
+        </div>
+        <div class="crewrow" *ngFor="let member of displayedCrew">
+            <div class="name">{{member.firstName}} {{member.lastName}}</div>
+            <div class="role">{{member["Games.Creation.field"]}}</div>
         </div>
     </div>
+    <div class="dot3" *ngIf="!showAllCrew && platformsCount > visiblePlatforms">
+        ...
+    </div>
+    <br>
+    <button class="optionbuttons" (click)="toggleCrew()">
+        {{showAllCrew ? 'Show less' : 'Show More'}}
+    </button>
 </div>
 
 <hr class="dividerline">
 
 <div class="seventhsection" *ngIf="gameData?.actors?.length">
     <h3>Cast</h3>
+    <br>
     <div class="castwrapper">
         <button class="arrow left-arrow" (click)="scrollCast('left')">
             <img src="./left-arrow.png" alt="Left Arrow" />
@@ -241,8 +262,9 @@
 
         <div class="cast-container" #castContainer>
             <div class="card" *ngFor="let actor of gameData.actors">
-                <img class="photo" [src]="actor.profilePicture" alt="{{actor.firstname}} {{actor.lastname}}"/>
-              <!--<p class="charactername">{{actor.character}}</p> -->
+                <img class="photo" [src]="actor.profilePicture" alt="{{actor.firstName}} {{actor.lastName}}"/>
+                <p class="actorname">{{actor.firstName}} {{actor.lastName}}</p>
+              <p class="charactername">{{actor["Games.Acting.role"]}}</p>
             </div>
         </div>
         <button class="arrow right-arrow" (click)="scrollCast('right')">
