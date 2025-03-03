@@ -60,6 +60,8 @@ export default {
                 return next();
             }
 
+            console.log(currentToken);
+
             let validToken = true;
             const decodedToken = await compactDecrypt(currentToken, securekey)
                 .catch((error) => {
@@ -79,10 +81,11 @@ export default {
             const expire = currentPayload.exp * 1000;
             const currentDate = new Date();
             const timeLeft = expire - currentDate;
+            console.log(timeLeft);
 
             // Ha a maradék idő kevesebb mint 20 perc akkor a felhasználónak adunk egy új token-t  és a régi tokent fekete listázzuk
             // majd tovább lépünk, más esetben vissza küldjük hogy még nincs szükség új tokenre
-            if (timeLeft < 1800000) { // 5db nulla
+            if (timeLeft < 18 || true) { // 5db nulla
                 console.log("lefut: 3");
                 await Blacklistedtoken.create({
                     userId: currentPayload.id,

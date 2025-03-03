@@ -13,7 +13,9 @@ const app = express();
 
 // A frontend elérése a 4200-as porton
 app.use(cors({
-    origin: "http://localhost:4200"
+    origin: "http://localhost:4200",
+    allowedHeaders: ["Authorization", "Content-Type"],
+    exposedHeaders: ["Authorization"]
 }));
 
 app.use(express.json());

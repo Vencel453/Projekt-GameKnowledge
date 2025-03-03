@@ -28,7 +28,6 @@ export class Authservice {
     this.clearInvalidToken();
     this.loadUserInfo();
     this.isauthenticated.next(this.hasToken());
-    this.checkRefreshToken();
    }
 
    private clearInvalidToken() {
@@ -55,7 +54,6 @@ export class Authservice {
     this.isauthenticated.next(true);
     this.username.next(username);
     this.isAdmin.next(isAdmin);
-    this.AutoLogout(token);
 
     window.scrollTo({top: 0, behavior: "smooth"});
    }
@@ -105,65 +103,5 @@ private isLocalStorageAvailable(): boolean {
     return isPlatformBrowser(this.platformid) && typeof localStorage !== 'undefined';
 }
 
-private AutoLogout(token: string) {
-    try{
-        const decoded: TokenPayLoad = jwtDecode(token);
-        const expiration = new Date(decoded.expire * 1000);
-        const now = new Date();
-        const expiresin = expiration.getTime() - now.getTime();
 
-        if (expiresin <= 0){
-            this.snackBar.open("You're current session is over! Please login again!", "Close", {duration: 10000});
-            this.logout();
-        } else {
-            this.logouttimer = setTimeout(() => {
-                this.snackBar.open("You're current session is over! Please login again!", "Close", {duration: 10000});
-                this.logout();
-            }, expiresin);
-        }
-    } catch (error) {
-        console.error("Token decoding problem!", error);
-        this.logout();
-    }
-}
-
-private checkRefreshToken() {
-    if (!this.isLocalStorageAvailable()) return;
-    
-    const token = localStorage.getItem('token');
-    if (!token) return;
-
-    try {
-        const decoded: TokenPayLoad = jwtDecode(token);
-        const expiration = new Date(decoded.expire * 1000);
-        const now = new Date();
-        const remaining = expiration.getTime() - now.getTime();
-
-        if (remaining < 30 * 60 * 1000){
-            this.checkRefreshToken();
-        }else {
-            this.AutoLogout(token);
-        }
-    } catch (error) {
-        console.error("Token decoding problem 2!", error);
-        this.logout();
-    }
-}
-
-private refreshToken() {
-    this.http.post<{token: string}>('http://localhost:4200', {})
-    .subscribe({
-        next: (res) => {
-            const newToken = res.token;
-            if (newToken && this.isLocalStorageAvailable()){
-                localStorage.setItem('token', newToken);
-                this.AutoLogout(newToken);
-            }
-        },
-        error: (err) => {
-            console.error("Token refresh failure!", err);
-            this.logout();
-        }
-    });
-}
 }
