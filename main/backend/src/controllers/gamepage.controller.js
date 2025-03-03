@@ -177,12 +177,13 @@ export default {
             });
 
             const actors = await Actor.findAll({
+                attributes: ["firstName", "lastName"],
                 include: {
                     where: { id: gameId },
                     model: Game,
                     through: {
                         model: Acting,
-                        attributes: []
+                        attributes: ["role"]
                     },
                     attributes: []
                 },
@@ -190,13 +191,13 @@ export default {
             });
 
             const creators = await Creator.findAll({
-                attributes: ["id", "firstName", "lastName"],
+                attributes: ["firstName", "lastName"],
                 include: {
                     where: { id: gameId},
                     model: Game,
                     through: {
                         model: Creation,
-                        attributes: []
+                        attributes: ["field"]
                     },
                     attributes: []
                 },

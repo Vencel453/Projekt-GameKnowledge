@@ -61,19 +61,20 @@ export default {
             let empty = true;
             const user = await User.findOne({where: {id: userId}, attributes: ["username", "password", "email"]});
 
-            if (!((username === undefined) || (username === ""))) {
+            if (username) {
                 const conflictingUsername = await User.findOne({where: {username: username}});
-                if (conflictingUsername) {
-                    res.status(409).json({
-                        error: "true",
-                        message: "There's already an user with this username!"
-                    });
-                    return;
-                }
                 if (username === user.username) {
                     res.status(409).json({
                         error: "true",
                         message: "The username is the same as the original!"
+                    });
+                    return;
+                }
+
+                if (conflictingUsername) {
+                    res.status(409).json({
+                        error: "true",
+                        message: "There's already an user with this username!"
                     });
                     return;
                 }
@@ -99,17 +100,18 @@ export default {
 
             if (email) {
                 const conflictingEmail = await User.findOne({where: {email: email}});
-                if (conflictingEmail) {
-                    res.status(409).json({
-                        error: "true",
-                        message: "There's already an user with this email address!"
-                    });
-                    return;
-                }
                 if (email === user.email) {
                     res.status(409).json({
                         error: "true",
                         message: "The email is the same as the original!"
+                    });
+                    return;
+                }
+
+                if (conflictingEmail) {
+                    res.status(409).json({
+                        error: "true",
+                        message: "There's already an user with this email address!"
                     });
                     return;
                 }
