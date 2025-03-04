@@ -1,0 +1,49 @@
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-width: 300px !important;
+    position: relative !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+::ng-deep .cdk-overlay-pane {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 1000 !important;
+}
+
+.ratingcontainer{
+    text-align: center;
+    padding: 2rem;
+}
+
+.options{
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.options button{
+    padding: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.options button:hover{
+    transform: scale(1.1);
+}
+
+.options button:active{
+    transform: scale(0.95);
+}
+
+.options img{
+    width: 64px;
+    height: 64px;
+    display: block;
+}

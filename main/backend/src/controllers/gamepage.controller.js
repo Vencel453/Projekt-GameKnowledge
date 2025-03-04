@@ -380,7 +380,7 @@ export default {
             return;
         }
 
-        if (isPositive === true || isPositive === false) {
+        if (isPositive !== true && isPositive !== false) {
             res.status(400).json({
                 error: true,
                 message: "The rating is not a boolean!"

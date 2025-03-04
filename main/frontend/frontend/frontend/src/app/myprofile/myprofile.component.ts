@@ -5,6 +5,7 @@ import { MyprofileService } from '../datamodifier.service';
 import { MatSnackBarModule, MatSnackBar} from '@angular/material/snack-bar'; 
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Title } from '@angular/platform-browser';
+import { Authservice } from '../authservice';
 
 interface UserResponse {
   error: boolean;
@@ -33,6 +34,7 @@ export class MyprofileComponent implements OnInit {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private title: Title,
+    private authservice: Authservice,
     @Inject(PLATFORM_ID) private platformid: Object
    ) {
     this.title.setTitle('My Profile');
@@ -45,6 +47,10 @@ export class MyprofileComponent implements OnInit {
    }
 
    ngOnInit(): void {
+    if (!this.authservice.isLoggedIn){
+      this.snackBar.open('Your session is over, please login again!', 'Close', {duration: 10000, panelClass: 'custombar'});
+      this.authservice.logout();
+    }
     if (isPlatformBrowser(this.platformid)){
       setTimeout(() => {
         this.fetchTheData();

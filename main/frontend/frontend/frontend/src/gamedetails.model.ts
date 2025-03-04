@@ -1,4 +1,5 @@
 export interface IGamesDetails {
+gameId: number;
 wins: any;
 nominations: any;
     title: string;
@@ -70,4 +71,9 @@ export interface IGamesResponse {
     error: boolean;
     message: string;
     datas: IGamesDetails;
+}
+
+export interface IRatingsResponse {
+    error: boolean;
+    message: string;
 }

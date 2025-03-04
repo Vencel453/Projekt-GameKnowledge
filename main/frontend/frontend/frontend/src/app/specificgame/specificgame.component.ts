@@ -3,12 +3,16 @@ import { GameDetailsService } from "../../gamedetails.service";
 import { IGamesDetails } from "../../gamedetails.model";
 import { CommonModule } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
-import { BehaviorSubject, Subject, takeUntil } from "rxjs";
+import { Subject, takeUntil } from "rxjs";
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { Authservice } from "../authservice";
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { RatingwindowComponent } from "../ratingwindow/ratingwindow.component";
 
 @Component({
     selector: 'app-game-details',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, MatDialogModule],
     templateUrl: './specificgame.component.html',
     styleUrl: './specificgame.component.css'
 })
@@ -109,7 +113,7 @@ export class SpecificgameComponent implements OnInit {
 
     private destroy$ = new Subject<void>();
 
-    constructor(private gameService: GameDetailsService, private route: ActivatedRoute){}
+    constructor(private gameService: GameDetailsService, private route: ActivatedRoute, private ratewindow: MatDialog, private authservice: Authservice, private snackBar: MatSnackBar){}
 
     ngOnInit(): void {
         this.route.params.pipe(
@@ -166,8 +170,29 @@ export class SpecificgameComponent implements OnInit {
         };
     }
 
-    RateGame() {
+    isRatingWindowOpen = false;
 
+    RateGame(gameId: number): void {
+        if (!this.authservice.isLoggedIn()) {
+            this.snackBar.open('You must be logged in to use this feature!', 'Close', {duration: 10000, panelClass: 'custombar'});
+            return;
+        }
+        if (this.isRatingWindowOpen) return;
+
+        this.isRatingWindowOpen = true;
+
+       const dialogRef = this.ratewindow.open(RatingwindowComponent, {
+            width: '400px',
+            data: {gameId},
+            hasBackdrop: true,
+            disableClose: false,
+            backdropClass: 'custom-backdrop',
+            panelClass: 'transparent-dialog'
+        });
+
+            dialogRef.afterClosed().subscribe(() => {
+                this.isRatingWindowOpen = false;
+            });
     }
 
     AddtoFavourites() {

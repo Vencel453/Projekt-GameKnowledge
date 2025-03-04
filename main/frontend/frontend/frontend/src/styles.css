@@ -15,3 +15,40 @@
     background-color: #A0B6F7;
     color: white;
 }
+
+.dark-backdrop{
+    background: #A0B6F7;
+}
+
+.ratingcontainer {
+    padding: 20px;
+    text-align: center;
+}
+
+.options{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+::ng-deep .custom-backdrop{
+    background-color: #A0B6F7 !important;
+    opacity: 0.5 !important;
+}
+
+::ng-deep .mat-mdc-dialog-container {
+    --mdc-dialog-container-color: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+::ng-deep .transparent-dialog{
+    background: transparent !important;
+    box-shadow: none !important;
+}
