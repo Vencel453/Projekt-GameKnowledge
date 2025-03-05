@@ -8,6 +8,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Authservice } from "../authservice";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RatingwindowComponent } from "../ratingwindow/ratingwindow.component";
+import { FavouritesService, IFavouriteGame } from "../../favourite.service";
 
 @Component({
     selector: 'app-game-details',
@@ -113,7 +114,7 @@ export class SpecificgameComponent implements OnInit {
 
     private destroy$ = new Subject<void>();
 
-    constructor(private gameService: GameDetailsService, private route: ActivatedRoute, private ratewindow: MatDialog, private authservice: Authservice, private snackBar: MatSnackBar){}
+    constructor(private gameService: GameDetailsService, private route: ActivatedRoute, private ratewindow: MatDialog, private authservice: Authservice, private snackBar: MatSnackBar, private favouriteService: FavouritesService){}
 
     ngOnInit(): void {
         this.route.params.pipe(
@@ -172,7 +173,7 @@ export class SpecificgameComponent implements OnInit {
 
     isRatingWindowOpen = false;
 
-    RateGame(gameId: number): void {
+    RateGame(): void {
         if (!this.authservice.isLoggedIn()) {
             this.snackBar.open('You must be logged in to use this feature!', 'Close', {duration: 10000, panelClass: 'custombar'});
             return;
@@ -181,11 +182,17 @@ export class SpecificgameComponent implements OnInit {
 
         this.isRatingWindowOpen = true;
 
+        const URL = this.route.snapshot.paramMap.get('id');
+        if (!URL){
+            console.error('NO ID');
+            return;
+        }
+
        const dialogRef = this.ratewindow.open(RatingwindowComponent, {
             width: '400px',
-            data: {gameId},
+            data: {gameId: URL},
             hasBackdrop: true,
-            disableClose: false,
+            disableClose: true,
             backdropClass: 'custom-backdrop',
             panelClass: 'transparent-dialog'
         });
@@ -195,7 +202,26 @@ export class SpecificgameComponent implements OnInit {
             });
     }
 
-    AddtoFavourites() {
-        
+    AddtoFavourites(): void {
+        if(!this.authservice.isLoggedIn()) {
+            this.snackBar.open('you must be logged in with an account to use this feature!', 'Close', {duration: 10000, panelClass: 'custombar'});
+            return;
+        }
+        if(!this.gameData) return;
+
+        const favourite: IFavouriteGame = {
+            id: this.gameData.gameId,
+            title: this.gameData.title,
+            alttitle: this.gameData.altTitle,
+            boxart: this.gameData.boxart
+        };
+
+        const added = this.favouriteService.addFavourite(favourite);
+        if(!added) {
+            this.snackBar.open('This game is already in your favourites!', 'Close', {duration: 10000, panelClass: 'custombar'});
+        }else{
+        this.favouriteService.addFavourite(favourite);
+        this.snackBar.open('Game has been added to the favourites!', 'Close', {duration: 10000, panelClass: 'custombar'});
+        }
     }
 }

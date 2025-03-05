@@ -20,12 +20,14 @@
 .ratingcontainer{
     text-align: center;
     padding: 2rem;
+    min-width: 300px;
 }
 
 .options{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 2rem;
-    justify-content: center;
     margin-top: 1.5rem;
 }
 
@@ -43,7 +45,24 @@
 }
 
 .options img{
-    width: 64px;
-    height: 64px;
+    width: 74px;
+    height: 74px;
     display: block;
+}
+
+#close {
+    font-weight: bold;
+    font-size: larger;
+    color: black;
+}
+
+#close:hover {
+    transform: scale(1.1);
+    color: white
+}
+
+.closesection{
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

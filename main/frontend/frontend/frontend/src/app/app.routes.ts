@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { SpecificgameComponent } from './specificgame/specificgame.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { ForumComponent } from './forum/forum.component';
+import { FavouritesComponent } from './favourites/favourites.component';
 
 
 export const routes: Routes = [
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {path: 'game/:id', component: SpecificgameComponent},
     {path: 'myprofile', component: MyprofileComponent},
     {path: 'forum', component: ForumComponent},
+    {path: 'favourites', component: FavouritesComponent},
     {path: '**', component: PageNotFoundComponent},         /// Ismeretlen útvonalak kezelése
 ];
 

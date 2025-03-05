@@ -372,7 +372,7 @@ export default {
         const isPositive = req.body.isPositive;
         console.log(isPositive);
 
-        if (!isPositive) {
+        if (isPositive === "" || isPositive === undefined || isPositive === null) {
             res.status(400).json({
                 error: true,
                 message: "The rating is missing!"

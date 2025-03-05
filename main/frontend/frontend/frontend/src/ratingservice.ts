@@ -12,9 +12,9 @@ export class ratingservice {
 
     constructor(private http: HttpClient) {}
 
-    rate(gameid: string, isPositive: boolean) {
+    rate(gameId: string, isPositive: boolean) {
         return this.http.put<IRatingsResponse>(
-            `${this.backendurl}/${gameid}`,
+            `${this.backendurl}/${gameId}`,
             {isPositive}, {
                 headers: new HttpHeaders({
                     'Content-Type': 'application/json',

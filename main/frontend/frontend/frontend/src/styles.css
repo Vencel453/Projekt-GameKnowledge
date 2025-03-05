@@ -32,23 +32,24 @@
     margin-top: 20px;
 }
 
-::ng-deep .custom-backdrop{
+.custom-backdrop{
     background-color: #A0B6F7 !important;
     opacity: 0.5 !important;
 }
 
-::ng-deep .mat-mdc-dialog-container {
+.mat-mdc-dialog-container {
     --mdc-dialog-container-color: transparent !important;
     background: transparent !important;
     box-shadow: none !important;
 }
 
-::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+.mat-mdc-dialog-container .mdc-dialog__surface {
     background: transparent !important;
     box-shadow: none !important;
+    background-color: #A0B6F7 !important;
 }
 
-::ng-deep .transparent-dialog{
+.transparent-dialog{
     background: transparent !important;
     box-shadow: none !important;
 }

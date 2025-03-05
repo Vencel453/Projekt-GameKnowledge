@@ -85,7 +85,7 @@ export default {
 
             // Ha a maradék idő kevesebb mint 20 perc akkor a felhasználónak adunk egy új token-t  és a régi tokent fekete listázzuk
             // majd tovább lépünk, más esetben vissza küldjük hogy még nincs szükség új tokenre
-            if (timeLeft < 18 || true) { // 5db nulla
+            if (timeLeft < 1800000 || true) { // 5db nulla
                 console.log("lefut: 3");
                 await Blacklistedtoken.create({
                     userId: currentPayload.id,

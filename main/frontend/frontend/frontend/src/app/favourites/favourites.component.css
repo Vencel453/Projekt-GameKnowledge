@@ -1,0 +1,25 @@
+.favourite-container {
+    padding: 16px;
+}
+
+.favourite-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.gameinfo{
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.boxart {
+    width: 80px;
+    height: auto;
+    margin-right: 16px;
+}
+
+.titles
+button {margin-left: 8px}

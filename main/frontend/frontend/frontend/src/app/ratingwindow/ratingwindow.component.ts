@@ -20,13 +20,13 @@ export class RatingwindowComponent {
       private ratingservice: ratingservice,
       private snackBar: MatSnackBar,
       public dialogRef: MatDialogRef<RatingwindowComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: {gameid : string}
+      @Inject(MAT_DIALOG_DATA) public data: {gameId : string}
     ) {
       dialogRef.updateSize('400px', 'auto');
     }
 
     rate(isPositive: boolean): void {
-      this.ratingservice.rate(this.data.gameid, isPositive).subscribe({
+      this.ratingservice.rate(this.data.gameId, isPositive).subscribe({
         next: (response: IRatingsResponse) => {
           this.snackBar.open(response.message, 'Close', {duration: 10000, panelClass: 'custombar'});
           this.dialogRef.close();

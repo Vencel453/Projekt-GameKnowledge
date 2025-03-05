@@ -1,0 +1,18 @@
+<div class="favourite-container">
+    <h2>Favourites</h2>
+    <div *ngIf="favourites.length === 0">
+        <p>No favourites added yet!</p>
+    </div>
+    <div class="favourite-item" *ngFor="let game of favourites">
+        <div class="gameinfo" (click)="toGame(game.id)">
+            <img [src]="game.boxart" alt="{{game.title}}" class="boxart">
+            <div class="titles">
+                <h3>{{game.title}}</h3>
+                <p>{{game.alttitle}}</p>
+            </div>
+        </div>
+        <button mat-icon-button (click)="removeGame(game.id); $event.stopPropagation()">
+            <mat-icon><img src="./trashcan.png" alt="trashcan"></mat-icon>
+        </button>
+    </div>
+</div>

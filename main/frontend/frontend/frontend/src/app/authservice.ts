@@ -5,10 +5,6 @@ import { HttpClient } from "@angular/common/http";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { isPlatformBrowser } from "@angular/common";
 
-interface TokenPayLoad {
-    expire: number;
-}
-
 @Injectable({
     providedIn: 'root'
 })

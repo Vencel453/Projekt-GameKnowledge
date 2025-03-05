@@ -47,7 +47,7 @@ export class MyprofileComponent implements OnInit {
    }
 
    ngOnInit(): void {
-    if (!this.authservice.isLoggedIn){
+    if (!this.authservice.isLoggedIn()){
       this.snackBar.open('Your session is over, please login again!', 'Close', {duration: 10000, panelClass: 'custombar'});
       this.authservice.logout();
     }
