@@ -46,6 +46,14 @@ export default {
                 }
             });
 
+            if (!game) {
+                res.status(404).json({
+                    error: true,
+                    message: "There's no game with this id!"
+                });
+                return;
+            }
+
             const pictures = await Gamepicture.findAll({
                 attributes: ['url'],
                 where: {
@@ -273,6 +281,20 @@ export default {
                 return;
             }
 
+            const gameExist = await Game.findOne({
+                where: {
+                    id: gameId
+                }
+            });
+
+            if (!gameExist) {
+                res.status(404).json({
+                    error: true,
+                    message: "There's no game with this id!"
+                });
+                return;
+            }
+
             const conflict = await Favourite.findOne({
                 where: {
                     UserId: userId,
@@ -373,7 +395,7 @@ export default {
         const isPositive = req.body.isPositive;
         console.log(isPositive);
 
-        if (!isPositive) {
+        if (isPositive === "" || isPositive === null || isPositive === undefined) {
             res.status(400).json({
                 error: true,
                 message: "The rating is missing!"
@@ -381,7 +403,7 @@ export default {
             return;
         }
 
-        if (isPositive === true || isPositive === false) {
+        if (isPositive !== true && isPositive !== false) {
             res.status(400).json({
                 error: true,
                 message: "The rating is not a boolean!"

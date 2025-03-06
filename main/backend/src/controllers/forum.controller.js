@@ -25,7 +25,7 @@ export default {
             const offset = (page - 1) * maxPostOnPage;
 
             const posts = await Forumpost.findAll({
-                attributes: ["title", "content", "story", "gameplay", "creation"],
+                attributes: ["id", "title", "content", "story", "gameplay", "creation"],
                 where: {
                     title: {[Op.like]: formattedSearch}
                 },
@@ -105,7 +105,7 @@ export default {
             if (title.length > 150) {
                 res.status(400).json({
                     error: true,
-                    message: "The title is longer than 150 character empty!"
+                    message: "The title is longer than 150 character!"
                 });
                 return;
             }
@@ -127,10 +127,18 @@ export default {
                 return;
             }
 
+            if (content.length < 30) {
+                res.status(400).json({
+                    error: true,
+                    message: "The post is less then 30 character!"
+                });
+                return;
+            }
+            
             if (content.length > 15000) {
                 res.status(400).json({
                     error: true,
-                    message: "The post is longer than 15 000 characters!"
+                    message: "The post is longer than 15 000 character!"
                 });
                 return;
             }
@@ -144,7 +152,7 @@ export default {
             }
 
             const gameplay = req.body.gameplay;
-            if (!gameplay) {
+            if (gameplay === "" || gameplay === null || gameplay === undefined) {
                 res.status(400).json({
                     error: true,
                     message: "The gameplay tag is empty!"
@@ -152,7 +160,8 @@ export default {
                 return;
             }
 
-            if (gameplay === true || gameplay === false) {
+            console.log(gameplay)
+            if (gameplay !== true && gameplay !== false) {
                 res.status(400).json({
                     error: true,
                     message: "The gameplay tag is not a booelan!"
@@ -161,7 +170,7 @@ export default {
             }
 
             const story = req.body.story;
-            if (!story) {
+            if (story === "" || story === null || story === undefined) {
                 res.status(400).json({
                     error: true,
                     message: "The story tag is empty!"
@@ -169,7 +178,7 @@ export default {
                 return;
             }
 
-            if (story === true || story === false) {
+            if (story !== true && story !== false) {
                 res.status(400).json({
                     error: true,
                     message: "The story flair is not a booelan!"
@@ -286,6 +295,20 @@ export default {
                 return;
             }
 
+            const postExist = await Forumpost.findOne({
+                where: {
+                    id: postId
+                }
+            });
+
+            if (!postExist) {
+                res.status(400).json({
+                    error: true,
+                    message: "There's no post with this id!"
+                });
+                return;
+            }
+
             const userId = await jweMethods.GetUserId(req);
 
             if (userId === undefined) {
@@ -302,6 +325,22 @@ export default {
                 res.status(400).json({
                     error: true,
                     message: "The comment is missing or empty!"
+                });
+                return;
+            }
+
+            if (newComment.length < 2) {
+                res.status(400).json({
+                    error: true,
+                    message: "The comment is less than 2 character!"
+                });
+                return;
+            }
+
+            if (newComment.length > 5000) {
+                res.status(400).json({
+                    error: true,
+                    message: "The comment is longer than 5000 character!"
                 });
                 return;
             }
@@ -347,6 +386,20 @@ export default {
                 res.status(400).json({
                     error: true,
                     message: "There's no post id!"
+                });
+                return;
+            }
+
+            const postExist = await Forumpost.findOne({
+                where: {
+                    id: postId
+                }
+            });
+
+            if (!postExist) {
+                res.status(404).json({
+                    error: true,
+                    message: "There is no post with this id!"
                 });
                 return;
             }
