@@ -72,7 +72,7 @@ export class MyprofileComponent implements OnInit {
         }
       },
       error: () => {
-        this.snackBar.open('Something went wrong during the data fetching!', 'Close', {duration: 10000, panelClass: ['custombar']});
+        this.snackBar.open('Something went wrong during the data fetching or your session is over. Please login again!', 'Close', {duration: 10000, panelClass: ['custombar']});
       }
     });
    }

@@ -279,6 +279,8 @@ export default {
                 }
             });
 
+            console.log(conflict);
+
             if (conflict) {
                 res.status(409).json({
                     error: true,

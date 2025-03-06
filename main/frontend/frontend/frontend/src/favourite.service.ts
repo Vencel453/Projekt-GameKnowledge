@@ -1,10 +1,10 @@
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, catchError, Observable, tap, throwError } from "rxjs";
 
 export interface IFavouriteGame {
     id: number;
-    title: string;
-    alttitle: string;
+    gameTitle: string;
     boxart: string;
 }
 
@@ -12,42 +12,59 @@ export interface IFavouriteGame {
     providedIn: 'root'
 })
 export class FavouritesService {
-    private stkey = 'favourites';
-    private favouritesSubject = new BehaviorSubject<IFavouriteGame[]>(this.loadFavourites());
+    private backendURL = 'http://localhost:3000/favourites';
+    private favouritesSubject = new BehaviorSubject<IFavouriteGame[]>([]);
 
     favourites$ = this.favouritesSubject.asObservable();
 
-    private loadFavourites(): IFavouriteGame[] {
-        const data = localStorage.getItem(this.stkey);
-        if (data) {
-            try {
-                return JSON.parse(data);
-            } catch (e) {
-                console.error('Error parsing favourites from localstorage', e);
+    constructor(private http: HttpClient) {}
+
+    fetchFavourites(): void {
+        this.http.get<{error: boolean, message: string, favourites: IFavouriteGame[]}>(this.backendURL)
+        .pipe(
+            catchError(this.handleError)
+        )
+        .subscribe(response => {
+            if(!response.error){
+                this.favouritesSubject.next(response.favourites);
+            }else {
+                console.error(response.message);
             }
-        }
-        return [];
+        });
     }
 
-    private saveFavourites(favourites: IFavouriteGame[]): void {
-        localStorage.setItem(this.stkey, JSON.stringify(favourites));
-        this.favouritesSubject.next(favourites);
+    addtoFavourite(id: number): Observable<{error: boolean, message: string}>{
+        const URL = `http://localhost:3000/game/${id}`;
+        return this.http.post<{error: boolean, message: string}>(URL, {})
+        .pipe(
+            tap(response => {
+                if(!response.error) {
+                    this.fetchFavourites();
+                }
+            }),
+            catchError(this.handleError)
+        );
     }
 
-    addFavourite(game: IFavouriteGame): boolean {
-        const favourites = this.loadFavourites();
+    removeGame(id: number): Observable<{error: boolean, message: string}>{
+        const options = {
+          headers: new HttpHeaders({'Content-Type': 'application/json'}),
+          body: {gameId: id}
+        };
+        return this.http.delete<{error: boolean, message: string}>(this.backendURL, options)
+        .pipe(
+          tap(response => {
+            if(!response.error){
+              this.fetchFavourites();
+            }
+          }),
+          catchError(this.handleError)
+        );
+      }
 
-        if (favourites.find(fav => fav.id === game.id)) {
-            return false;
-        }
-        favourites.push(game);
-        this.saveFavourites(favourites);
-        return true;
-    }
-
-    removeFavourite(gameId: number): void {
-        const favourites = this.loadFavourites().filter(fav => fav.id !== gameId);
-        this.saveFavourites(favourites);
+    private handleError(error: HttpErrorResponse){
+        console.error(error);
+        return throwError(() => new Error('Something went wrong try again'));
     }
 
 }

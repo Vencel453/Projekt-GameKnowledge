@@ -8,12 +8,13 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Authservice } from "../authservice";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RatingwindowComponent } from "../ratingwindow/ratingwindow.component";
-import { FavouritesService, IFavouriteGame } from "../../favourite.service";
+import { FavouritesService } from "../../favourite.service";
+import { PictureNotFoundDirective } from "../../picturenotfound.directive";
 
 @Component({
     selector: 'app-game-details',
     standalone: true,
-    imports: [CommonModule, MatDialogModule],
+    imports: [CommonModule, MatDialogModule, PictureNotFoundDirective],
     templateUrl: './specificgame.component.html',
     styleUrl: './specificgame.component.css'
 })
@@ -96,6 +97,16 @@ export class SpecificgameComponent implements OnInit {
         return this.showAllCrew ? this.gameData.creators : this.gameData.creators.slice(0, this.visibleCrew);
     }
 
+    get hasRecommendedSpecs(): boolean {
+        if (!this.gameData.pcspec) return false;
+
+        return !!this.gameData.pcspec.op ||
+        !!this.gameData.pcspec.cpu ||
+        !!this.gameData.pcspec.ram ||
+        !!this.gameData.pcspec.gpu ||
+        !!this.gameData.pcspec.directx;
+    }
+
     toggleFourthSection(): void {
         this.showFullFourthSection = !this.showFullFourthSection;
     }
@@ -164,10 +175,11 @@ export class SpecificgameComponent implements OnInit {
         this.destroy$.complete();
     }
 
-    calculateProgress() {
+    get ratingProgress() {
+        if (this.gameData.rating == null) return null;
         return {
-            positive: this.gameData.rating + '%',
-            negative: (100 - this.gameData.rating) + '%'
+            positive: `${this.gameData.rating}%`,
+            negative: `${100 - this.gameData.rating}%`
         };
     }
 
@@ -204,24 +216,29 @@ export class SpecificgameComponent implements OnInit {
 
     AddtoFavourites(): void {
         if(!this.authservice.isLoggedIn()) {
-            this.snackBar.open('you must be logged in with an account to use this feature!', 'Close', {duration: 10000, panelClass: 'custombar'});
+            this.snackBar.open('You must be logged in with an account to use this feature!', 'Close', {duration: 10000, panelClass: 'custombar'});
             return;
         }
         if(!this.gameData) return;
 
-        const favourite: IFavouriteGame = {
-            id: this.gameData.gameId,
-            title: this.gameData.title,
-            alttitle: this.gameData.altTitle,
-            boxart: this.gameData.boxart
-        };
-
-        const added = this.favouriteService.addFavourite(favourite);
-        if(!added) {
-            this.snackBar.open('This game is already in your favourites!', 'Close', {duration: 10000, panelClass: 'custombar'});
-        }else{
-        this.favouriteService.addFavourite(favourite);
-        this.snackBar.open('Game has been added to the favourites!', 'Close', {duration: 10000, panelClass: 'custombar'});
+        const idString = this.route.snapshot.paramMap.get('id');
+        if(!idString) {
+            console.log('NO ID');
+            return
         }
+        const id = Number(idString);
+        if(isNaN(id)){
+            console.log('NOT VALID ID');
+            return;
+        }
+
+        this.favouriteService.addtoFavourite(id).subscribe({
+            next: (response) => {
+                this.snackBar.open(response.message, 'Close', {duration: 10000, panelClass: 'custombar'});
+            },
+            error: (err) => {
+                this.snackBar.open('The game is already added to the favourites!', 'Close', {duration: 10000, panelClass: 'custombar'});
+            }
+        });
     }
 }

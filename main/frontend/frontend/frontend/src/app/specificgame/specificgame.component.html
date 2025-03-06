@@ -33,8 +33,17 @@
         <br>
         <div class="ratingsection">
             <div class="progress">
-                <div class="progress-bar bg-danger" [style.width]="calculateProgress().negative">{{calculateProgress().negative}}</div>
-                <div class="progress-bar bg-success" [style.width]="calculateProgress().positive">{{calculateProgress().positive}}</div>
+                <ng-container *ngIf="ratingProgress; else noRating">
+                <div class="progress-bar bg-danger" [style.width]="ratingProgress.negative">{{ratingProgress.negative}}</div>
+                <div class="progress-bar bg-success" [style.width]="ratingProgress.positive">{{ratingProgress.positive}}</div>
+            </ng-container>
+            <ng-template #noRating>
+                <div class="progress-bar bg-secondary
+                d-felx justify-content-center
+                align-itmes-center" style="width: 100%;">
+                    No ratings yet
+                </div>
+            </ng-template>
             </div>
         </div>
             <br>
@@ -44,12 +53,12 @@
 
         <button class="optionbuttons" id="addtofavourites" (click)="AddtoFavourites()">Add to favourites! <img id="favouritehearth" src="./hearth.png" alt="hearth"></button>
         <br>
-        <div class="gallery">
+        <div class="gallery" *ngIf="gameData.gallery.length > 0">
             <h3 id="gallery">Gallery</h3>
             <hr class="dividerline">
             <div class="images">
                 <div class="item" *ngFor="let img of gameData.gallery">
-                    <img [src]="img.url" alt="Gallery image" (click)="openIMG(img.url)" />
+                    <img apppicturenotfound [src]="img.url" alt="Gallery image" (click)="openIMG(img.url)" />
                 </div>
             </div>
         </div>
@@ -196,32 +205,32 @@
 
 <hr class="dividerline">
 
-<div class="fifthsection" *ngIf="gameData">
+<div class="fifthsection" *ngIf="gameData.pcspec">
     <h3>PC System Requirements</h3>
     <div class="specs">
         <div class="minimum">
             <h4>Minimum</h4>
             <ul>
-                <li><strong>OS: </strong>{{gameData.pcspec?.minop}}</li>
-                <li><strong>CPU: </strong>{{gameData.pcspec?.mincpu}}</li>
-                <li><strong>RAM: </strong>{{gameData.pcspec?.minram}}</li>
-                <li><strong>GPU: </strong>{{gameData.pcspec?.mingpu}}</li>
-                <li><strong>DirectX: </strong>{{gameData.pcspec?.mindirectx}}</li>
-                <li><strong>Storage: </strong>{{gameData.pcspec?.storage}}</li>
-                <li *ngIf="gameData.pcspec?.sidenote"><strong>Note: </strong>{{gameData.pcspec?.sidenote}}</li>
+                <li><strong>OS: </strong>{{gameData.pcspec.minop}}</li>
+                <li><strong>CPU: </strong>{{gameData.pcspec.mincpu}}</li>
+                <li><strong>RAM: </strong>{{gameData.pcspec.minram}}</li>
+                <li><strong>GPU: </strong>{{gameData.pcspec.mingpu}}</li>
+                <li><strong>DirectX: </strong>{{gameData.pcspec.mindirectx}}</li>
+                <li><strong>Storage: </strong>{{gameData.pcspec.storage}}</li>
+                <li *ngIf="gameData.pcspec?.sidenote"><strong>Note: </strong>{{gameData.pcspec.sidenote}}</li>
             </ul>
         </div>
 
-        <div class="recommended">
+        <div class="recommended" *ngIf="hasRecommendedSpecs">
             <h4>Recommended</h4>
             <ul>
-                <li><strong>OS: </strong>{{gameData.pcspec?.op}}</li>
-                <li><strong>CPU: </strong>{{gameData.pcspec?.cpu}}</li>
-                <li><strong>RAM: </strong>{{gameData.pcspec?.ram}}</li>
-                <li><strong>GPU: </strong>{{gameData.pcspec?.gpu}}</li>
-                <li><strong>DirectX: </strong>{{gameData.pcspec?.directx}}</li>
-                <li><strong>Storage: </strong>{{gameData.pcspec?.storage}}</li>
-                <li *ngIf="gameData.pcspec?.sidenote"><strong>Note: </strong>{{gameData.pcspec?.sidenote}}</li>
+                <li><strong>OS: </strong>{{gameData.pcspec.op}}</li>
+                <li><strong>CPU: </strong>{{gameData.pcspec.cpu}}</li>
+                <li><strong>RAM: </strong>{{gameData.pcspec.ram}}</li>
+                <li><strong>GPU: </strong>{{gameData.pcspec.gpu}}</li>
+                <li><strong>DirectX: </strong>{{gameData.pcspec.directx}}</li>
+                <li><strong>Storage: </strong>{{gameData.pcspec.storage}}</li>
+                <li *ngIf="gameData.pcspec?.sidenote"><strong>Note: </strong>{{gameData.pcspec.sidenote}}</li>
             </ul>
         </div>
     </div>
@@ -262,7 +271,7 @@
 
         <div class="cast-container" #castContainer>
             <div class="card" *ngFor="let actor of gameData.actors">
-                <img class="photo" [src]="actor.profilePicture" alt="{{actor.firstName}} {{actor.lastName}}"/>
+                <img apppicturenotfound class="photo" [src]="actor.profilePicture" alt="{{actor.firstName}} {{actor.lastName}}"/>
                 <p class="actorname">{{actor.firstName}} {{actor.lastName}}</p>
               <p class="charactername">{{actor["Games.Acting.role"]}}</p>
             </div>
