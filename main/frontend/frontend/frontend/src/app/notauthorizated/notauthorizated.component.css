@@ -1,0 +1,16 @@
+#notauthorizatedimage {
+    height: 25%;
+    width: 25%;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.notauthorizated {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+.content {
+    text-align: center;
+}

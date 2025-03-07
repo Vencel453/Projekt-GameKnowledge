@@ -8,6 +8,7 @@ import { SpecificgameComponent } from './specificgame/specificgame.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { ForumComponent } from './forum/forum.component';
 import { FavouritesComponent } from './favourites/favourites.component';
+import { NotauthorizatedComponent } from './notauthorizated/notauthorizated.component';
 
 
 export const routes: Routes = [
@@ -18,7 +19,8 @@ export const routes: Routes = [
     {path: 'myprofile', component: MyprofileComponent},
     {path: 'forum', component: ForumComponent},
     {path: 'favourites', component: FavouritesComponent},
-    {path: '**', component: PageNotFoundComponent},         /// Ismeretlen útvonalak kezelése
+    {path: 'notauthorizated', component: NotauthorizatedComponent},
+    {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({

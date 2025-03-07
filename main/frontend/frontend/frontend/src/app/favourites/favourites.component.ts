@@ -36,13 +36,25 @@ export class FavouritesComponent {
     }
 
     removeGame(gameId: number): void {
-      this.favouritesService.removeGame(gameId).subscribe(response => {
-        if(!response.error){
-          this.snackBar.open('Game has been removed!', 'Closed', {duration: 10000, panelClass: 'custombar'});
-        }else {
-          this.snackBar.open('Error removing the game.', 'Closed', {duration: 10000, panelClass: 'custombar'});
+      this.favouritesService.removeGame(gameId).subscribe({
+        next: response => {
+          if(!response.error){
+            this.snackBar.open('Game has been removed!', 'Close', {duration: 10000, panelClass: 'custombar'});
+          }else {
+            this.snackBar.open('An error occured with the removal of the game.', 'Close', {duration: 10000, panelClass: 'custombar'});
+          }
+        },
+        error: err => {
+          if(err.status === 401) {
+            this.snackBar.open('You must be logged in to use this feature!', 'Close', {duration: 10000, panelClass: 'custombar'});
+            this.router.navigate(['/login']);
+          }else if(err.status === 404) {
+            this.router.navigate(['**']);
+          }else {
+            this.snackBar.open('Unexpected error occured.', 'Close', {duration: 10000, panelClass: 'custombar'});
+          }
         }
-      })
+      });
     }
 
     

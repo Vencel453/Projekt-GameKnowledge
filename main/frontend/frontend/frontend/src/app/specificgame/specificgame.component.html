@@ -13,11 +13,11 @@
 
         <div class="studios">
             <span *ngIf="gameData.developers?.length">
-               <strong>Developers: {{developerslist}}</strong>
+               <strong>Developer(s): {{developerslist}}</strong>
             </span>
             <br>
             <span *ngIf="gameData.publishers?.length">
-               <strong>Publishers: {{publisherslist}}</strong>
+               <strong>Publisher(s): {{publisherslist}}</strong>
             </span>
         </div>
 
@@ -79,7 +79,7 @@
         <h3>Genres</h3>
         <br>
         <div class="genreslist">
-            <span *ngFor="let genre of gameData.genres" class="genretag">
+            <span *ngFor="let genre of gameData?.genres" class="genretag">
                 {{genre.tag}}
             </span>
         </div>

@@ -46,6 +46,14 @@ export default {
                 }
             });
 
+            if (!game) {
+                res.status(404).json({
+                    error: true,
+                    message: "There's no game with this id!"
+                });
+                return;
+            }
+
             const pictures = await Gamepicture.findAll({
                 attributes: ['url'],
                 where: {

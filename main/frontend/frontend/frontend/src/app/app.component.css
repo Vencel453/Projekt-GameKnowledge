@@ -244,3 +244,8 @@ body{
         width: 200px;
     }
 }
+
+#notloggedinminimenu{
+    font-size: larger;
+    font-weight: bold;
+}
