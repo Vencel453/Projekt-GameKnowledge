@@ -17,12 +17,25 @@
                 <img id="logomain" src="/logomain.png" alt="logo">
             </a>
                 <div class="search-container">                  <!--Keresősáv a nagyitó ikonnal-->
-                        <form class="search-form" role="search">
-                             <input class="search-input" type="search" placeholder="Search" aria-label="Search">
+                        <form class="search-form" role="search" (submit)="selectfirstresult()">
+                             <input class="search-input" type="search" placeholder="Search" aria-label="Search" [formControl]="searchControl">
                         </form>
-                    <a>
+                    <a (click)="selectfirstresult()">
                         <img class="magnifiersearchglass" src="/magnifying-glass.png" alt="searchIcon">
                     </a>
+                </div>
+
+                <div *ngIf="searchResults.length > 0" class="searchresults">
+                    <ul>
+                        <li *ngFor="let result of searchResults" (click)="selectresult(result)">
+                            <img [src]="result.boxart" alt="{{result.gameTitle}} cover" class="resultboxart">
+                            <div class="resultdetails">
+                                <div class="gametitle">{{result.gameTitle}}</div>
+                                <div class="alttitle" *ngIf="result.altGameTitle">{{result.altGameTitle}}</div>
+                                <div class="release">{{result.release}}</div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 
             <!--A nav sáv jobb oldali része ahol dinamikusan változnak az elérhető opciók a bejelentkezett/vendég felhasználók alalpján-->

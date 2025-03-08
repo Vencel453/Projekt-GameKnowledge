@@ -199,7 +199,10 @@
     </div>
 </div>
 
-<button id="showmore1" class="optionbuttons" (click)="toggleFourthSection()">
+<button id="showmore1" class="optionbuttons" (click)="toggleFourthSection()" *ngIf="
+(voicesLanguages.length > visibleVlanguages) ||
+(voicesLanguages.length > visibleSlanguages) ||
+(platformsCount > visiblePlatforms)">
     {{showFullFourthSection ? 'Show Less' : 'Show More'}}
 </button>
 
@@ -250,11 +253,11 @@
             <div class="role">{{member["Games.Creation.field"]}}</div>
         </div>
     </div>
-    <div class="dot3" *ngIf="!showAllCrew && platformsCount > visiblePlatforms">
+    <div class="dot3" *ngIf="!showAllCrew && (gameData?.creators?.length ?? 0) > visibleCrew">
         ...
     </div>
     <br>
-    <button class="optionbuttons" (click)="toggleCrew()">
+    <button class="optionbuttons" (click)="toggleCrew()" *ngIf="(gameData?.creators?.length ?? 0) > visibleCrew">
         {{showAllCrew ? 'Show less' : 'Show More'}}
     </button>
 </div>
