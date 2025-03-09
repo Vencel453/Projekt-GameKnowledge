@@ -14,11 +14,7 @@ Studio.init ({
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique: true,
-            },
-
-            logo: {
-                type: DataTypes.STRING,
-            },
+            }
         },
         {
             sequelize,

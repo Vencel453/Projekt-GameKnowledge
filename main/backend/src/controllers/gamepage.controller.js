@@ -62,7 +62,7 @@ export default {
             });
 
             const developers = await Studio.findAll({
-                attributes: ["id", "name", "logo"],
+                attributes: ["id", "name"],
                 include: {
                     where: {id: gameId},
                     attributes: [],
@@ -79,7 +79,7 @@ export default {
             console.log(developers);
 
             const publishers = await Studio.findAll({
-                attributes: ["id", "name", "logo"],
+                attributes: ["id", "name"],
                 include: {
                     where: {id: gameId},
                     attributes: [],
@@ -185,12 +185,13 @@ export default {
             });
 
             const actors = await Actor.findAll({
+                attributes: ["firstName", "lastName", "profilePicture"],
                 include: {
                     where: { id: gameId },
                     model: Game,
                     through: {
                         model: Acting,
-                        attributes: ["role"],
+                        attributes: ["role"]
                     },
                     attributes: []
                 },
@@ -198,7 +199,7 @@ export default {
             });
 
             const creators = await Creator.findAll({
-                attributes: ["id", "firstName", "lastName"],
+                attributes: ["firstName", "lastName"],
                 include: {
                     where: { id: gameId},
                     model: Game,
@@ -280,14 +281,26 @@ export default {
                 return;
             }
 
+            const gameExist = await Game.findOne({
+                where: {
+                    id: gameId
+                }
+            });
+
+            if (!gameExist) {
+                res.status(404).json({
+                    error: true,
+                    message: "There's no game with this id!"
+                });
+                return;
+            }
+
             const conflict = await Favourite.findOne({
                 where: {
                     UserId: userId,
                     GameId: gameId
                 }
             });
-
-            console.log(conflict);
 
             if (conflict) {
                 res.status(409).json({
@@ -382,7 +395,7 @@ export default {
         const isPositive = req.body.isPositive;
         console.log(isPositive);
 
-        if (isPositive === "" || isPositive === undefined || isPositive === null) {
+        if (isPositive === "" || isPositive === null || isPositive === undefined) {
             res.status(400).json({
                 error: true,
                 message: "The rating is missing!"

@@ -49,9 +49,6 @@ Game.init ({
                 type: DataTypes.STRING,
             },
 
-            steamdeckComp: {
-                type: DataTypes.INTEGER,
-            },
         },
         {
             sequelize,
