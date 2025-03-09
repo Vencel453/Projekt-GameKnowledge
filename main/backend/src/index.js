@@ -10,18 +10,14 @@ import Blacklistedtoken from "./models/blacklistedtoken.js";
 import Creation from "./models/creation.js";
 import Creator from "./models/creator.js"
 import Favourite from "./models/favourite.js";
-import Forumcomment from "./models/forumcomment.js";
-import Forumpost from "./models/forumpost.js";
 import Game from "./models/game.js";
 import Gamepicture from "./models/gamepicture.js";
 import Gamesagerating from "./models/gamesagerating.js";
 import Gamesaward from "./models/gamesaward.js";
 import Gameslanguage from "./models/gameslanguage.js";
-import Gamesonlineplatform from "./models/gamesonlineplatform.js";
 import Gamesplatform from "./models/gamesplatform.js";
 import Gamestag from "./models/gamestag.js";
 import Language from "./models/language.js";
-import Onlineplatform from "./models/onlineplatform.js";
 import Pcspec from "./models/pcspec.js";
 import Platform from "./models/platform.js";
 import Rating from "./models/rating.js";
@@ -75,20 +71,6 @@ Favourite.belongsTo(Game);
 User.hasMany(Favourite);
 Favourite.belongsTo(User);
 
-// Fórum poszt - Felhasználó kapcsolat
-User.hasMany(Forumpost);
-Forumpost.belongsTo(User);
-
-// Fórum poszt - Fórum komment kapcsolat
-Forumpost.hasMany(Forumcomment, {
-    onDelete: "CASCADE"
-});
-Forumcomment.belongsTo(Forumpost);
-
-// Fórum komment - Felhasználó kapcsolat
-User.hasMany(Forumcomment);
-Forumcomment.belongsTo(User);
-
 // Játék - Játék képek kapcsolat
 Game.hasMany(Gamepicture, {
     onDelete: 'CASCADE',
@@ -101,14 +83,6 @@ Game.belongsToMany(Language, {
 });
 Language.belongsToMany(Game, {
     through: Gameslanguage
-});
-
-// Online platform - Játék kapcsolat
-Game.belongsToMany(Onlineplatform, {
-    through: Gamesonlineplatform
-});
-Onlineplatform.belongsToMany(Game, {
-    through: Gamesonlineplatform
 });
 
 // Gépigény - Játék kapcsolat
@@ -149,15 +123,16 @@ Tag.belongsToMany(Game, {
     through: Gamestag,
 });
 
+// Konstansként elmentjük a backend port számát
 const PORT = 3000;
 
 // Egy csatkalozás kisérlet után ha sikeres akkor elindítjuk a szervert
 await sequelize.authenticate()
     .then(() => {
-        Blacklistedtoken.truncate();
+        // Mivel a backend minden újraindításnál más titkosító kulcsot használ, ezért töröljük a feketelista tartalmát
         console.log("The test connection to the server was succesfull!");
         // Szinkronizáljuk a modeleket az adatbázissal
-        sequelize.sync()
+        sequelize.sync( {force: true, alter: true})
         .then(() => {
             console.log("The database sync was succesfull!");
             app.listen(PORT, () => {

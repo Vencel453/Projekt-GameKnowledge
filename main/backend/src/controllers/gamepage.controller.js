@@ -62,7 +62,7 @@ export default {
             });
 
             const developers = await Studio.findAll({
-                attributes: ["id", "name", "logo"],
+                attributes: ["id", "name"],
                 include: {
                     where: {id: gameId},
                     attributes: [],
@@ -79,7 +79,7 @@ export default {
             console.log(developers);
 
             const publishers = await Studio.findAll({
-                attributes: ["id", "name", "logo"],
+                attributes: ["id", "name"],
                 include: {
                     where: {id: gameId},
                     attributes: [],
@@ -185,7 +185,7 @@ export default {
             });
 
             const actors = await Actor.findAll({
-                attributes: ["firstName", "lastName"],
+                attributes: ["firstName", "lastName", "profilePicture"],
                 include: {
                     where: { id: gameId },
                     model: Game,

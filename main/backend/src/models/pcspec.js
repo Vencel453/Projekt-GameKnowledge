@@ -35,6 +35,10 @@ Pcspec.init ({
                 allowNul: false,
             },
 
+            op: {
+                type: DataTypes.STRING(50)
+            },
+
             cpu: {
                 type: DataTypes.STRING(100)
             },
@@ -51,17 +55,13 @@ Pcspec.init ({
                 type: DataTypes.STRING(20)
             },
 
-            op: {
-                type: DataTypes.STRING(50)
-            },
-
             storage: {
                 type: DataTypes.STRING(10),
                 allowNul: false,
             },
 
             sidenote: {
-                type: DataTypes.TEXT,
+                type: DataTypes.STRING,
             },
             
         },

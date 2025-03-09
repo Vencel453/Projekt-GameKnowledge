@@ -51,15 +51,15 @@ export default {
     ExntendingToken: async (req, res, next) => {
         // A következő sorok a biztonság kedvéért try catch párban vannak írva hogy a felmerülő hibákat kezelni tudjuk
         try {
-            console.log("lefut: 1");
             // A tokent lekérdezzük, majd visszafejtjük és lemenetjük a nyers adatokat
             const currentToken = req.headers['authorization']?.split(' ')[1];
 
+            // Ha nincs token, azt jelenti hogy felhasználó nincs bejelentkezve, ilyenkor nem tudunk token-t cserélni
             if (!currentToken) {
-                console.log("lefut: 2");
                 return next();
             }
 
+            // Megnézzük hogy a token érvényes-e, ha nem akkor nem cserélünk token-t
             let validToken = true;
             const decodedToken = await compactDecrypt(currentToken, securekey)
                 .catch((error) => {
@@ -68,7 +68,6 @@ export default {
                 });
 
             if (validToken === false) {
-                console.log("Token nem valid");
                 return next();
             }
 
@@ -82,13 +81,7 @@ export default {
 
             // Ha a maradék idő kevesebb mint 20 perc akkor a felhasználónak adunk egy új token-t  és a régi tokent fekete listázzuk
             // majd tovább lépünk, más esetben vissza küldjük hogy még nincs szükség új tokenre
-            if (timeLeft < 1800000) { // 5db nulla
-                console.log("lefut: 3");
-                await Blacklistedtoken.create({
-                    userId: currentPayload.id,
-                    token: currentToken,
-                    date: currentDate,
-                });
+            if (timeLeft < 1800000) {
 
                 const newToken = await new EncryptJWT(currentPayload)
                     .setExpirationTime("1 hour")
@@ -98,7 +91,6 @@ export default {
                 res.setHeader("Authorization", `Bearer ${newToken}`);
                 console.log(newToken);
             }
-            console.log("lefut: 4");
             return next();
         }
         catch (error) {
@@ -157,6 +149,17 @@ export default {
             return undefined;
         }
 
+        // Ha a token benne van a fekete listában, akkor nem engedjük tovább, és vissza adjuk az undefined értéket
+        const isBlacklisted = await Blacklistedtoken.findOne({
+            where: {
+                token: token
+            }
+        });
+
+        if (isBlacklisted) {
+            return undefined;
+        }
+
         let id = 0;
         // Dekódoljuk a token-t majd az abból szükszéges adatot, vagyis az azonosítót visszaküldjük
         await compactDecrypt(token, securekey)
@@ -168,6 +171,8 @@ export default {
                 console.log(error);
             });
         
+        // Ha a token visszafejtése nem sikerült, az azért van, mert a token lejárt, vagy egyéb okok miatt már nem aktív,
+        // ilyenkor szintén undefined-ot küldünk vissza, ha érvényes token, akkor vissza küldjük az azonosítót
         if (id === 0) {
             return undefined;
         }

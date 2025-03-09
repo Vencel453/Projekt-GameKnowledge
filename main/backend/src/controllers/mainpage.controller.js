@@ -3,8 +3,6 @@ import Game from "../models/game.js";
 import Tag from "../models/tag.js";
 import Gamestag from "../models/gamestag.js";
 import jweMethods from "../utilities/jwe.methods.js";
-import Actor from "../models/actor.js";
-import Creator from "../models/creator.js";
 
 export default {
     MainpageGetController: async(req, res) => {

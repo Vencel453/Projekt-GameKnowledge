@@ -18,9 +18,6 @@ Creator.init ({
                 type: DataTypes.STRING(100),
             },
 
-            profilePicture: {
-                type: DataTypes.STRING,
-            }
         },
         {
             sequelize,

@@ -48,7 +48,7 @@ export default {
             const userId = await jweMethods.GetUserId(req);
 
             if (userId === undefined) {
-                res.status(404).json({
+                res.status(401).json({
                     error: true,
                     message: "The token is missing or faulty!"
                 });

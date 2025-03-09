@@ -46,12 +46,9 @@ Game.init ({
             },
 
             crossPlatformException: {
-                type: DataTypes.INTEGER.UNSIGNED,
+                type: DataTypes.STRING,
             },
 
-            steamdeckComp: {
-                type: DataTypes.INTEGER,
-            },
         },
         {
             sequelize,
