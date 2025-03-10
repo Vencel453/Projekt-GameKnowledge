@@ -3,8 +3,11 @@ import Game from "../models/game.js";
 import jweMethods from "../utilities/jwe.methods.js";
 
 export default {
+    // Ez a metódus lekérdezi az adott bejelentkezett felhasználó kedvencekbe mentett játékait
     FavouritesGetController: async(req, res) => {
         try {
+            // Lekérjük a felhasználó azonosítóját, és hiba üzenetet küldünk ha ez nem sikerül, mert nem bejelentkezett felhaszánó
+            // nem fér hozzá ehhez a funkcióhoz
             const userId = await jweMethods.GetUserId(req);
             if (userId === undefined) {
                 res.status(401).json({
@@ -14,6 +17,7 @@ export default {
                 return;
             }
             
+            // A felhasználó azonosítója alapján megkeressük az összes kedvencekbe elmentett játékokat, majd vissz adjuk a válaszban
             const favourites = await Game.findAll({
                 attributes: ["id", "gameTitle", "boxart"],
                 include: {
@@ -40,8 +44,12 @@ export default {
         }
     },
 
+    // Ez a metódus a kitörli a bejelentkezett felhasználó kedvencekbe mentet játékát,
+    // azt hogy melyik játékot, azt a body-ban kell megadni
     FavouritesDeleteController: async(req, res) => {
         try {
+            // Lekérjük a felhasználó azonosírtóját, és hiba üzenetet küldünk ha ez nem sikerül, mert nem bejelentkezett felhaszánó
+            // nem fér hozzá ehhez a funkcióhoz
             const userId = await jweMethods.GetUserId(req);
             if (userId === undefined) {
                 res.status(404).json({
@@ -51,6 +59,7 @@ export default {
                 return;
             }
             
+            // Ha nem kapjuk meg a játék azonosítóját, akkor erre hiba üzenetet küldünk
             const gameId = req.body.gameId;
             if (!gameId) {
                 res.status(400).json({
@@ -60,6 +69,7 @@ export default {
                 return;
             }
 
+            // Ha nem számot kapunk értékül, akkor hibát adunk rá
             if (isFinite(gameId) === false) {
                 res.status(400).json({
                     error: true,
@@ -68,14 +78,14 @@ export default {
                 return;
             }
 
+            // Ellenőrízzük hogy a játék amelyet törölni szeretnénk az tényleg le volt-e mentve a felhasználónál,
+            // ha nem, akkor erre hibát dobunk
             const favouriteToDelete = await Favourite.findOne({
                 where: {
                     GameId: gameId,
                     UserId: userId
                 }
             });
-
-            console.log(favouriteToDelete);
 
             if (!favouriteToDelete) {
                 res.status(404).json({
@@ -85,6 +95,8 @@ export default {
                 return;
             }
 
+            // Ha nem volt probléma az ellenőrzések során, akkor kitöröljük a játékot a felhasználó kedvenceiből, és a válaszban
+            // megerősítjük hogy sikeres volt
             await favouriteToDelete.destroy();
 
             res.status(200).json({

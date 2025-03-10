@@ -1,7 +1,6 @@
 import { compactDecrypt, EncryptJWT} from "jose";
 import { Op } from "sequelize";
 import crypto from "crypto";
-import Blacklistedtoken from "../models/blacklistedtoken.js";
 
 // A token titkosításához használt kulcs egy random szám, Uint8Array típusú, mert a titkosításhoz ilyen típusú objektum kell
 // Ez a kulcs minden szerver indításnál új, amely tovább növeli a bztonságot
@@ -19,23 +18,6 @@ export default {
             email: loginEmail,
         };
         console.log(payload);
-
-        // Megnézzük hogy az adatbázisban van-e már olyan token ami 1 óránál régebbi, ha igen akkor töröljük, mert a token lejárt
-        // és felesleges feketelistán tárolni, mert már amúgy se használható
-        const datecheck = new Date(Date.now() - 3600000);
-
-        await Blacklistedtoken.destroy({
-            where: {
-                date: {
-                    [Op.lt]: datecheck
-                }
-            }
-        }).then(
-            console.log("Old tokens succesfully deleted!")
-        )
-        .catch(error => {
-            console.log("There was an error: " + error);
-        });
 
         // Itt jön létre a token, a payload a felhasználó adatokat használja, 1 óráig érvényes a token, titkosított fejléce van,
         // a titkosítás a fájl elején létrehozott kulccsal történik
@@ -102,43 +84,6 @@ export default {
         }
     },
 
-    // Ez a metódus a fekete listázásért felel
-    Blacklisting: async (req) => {
-        // Visszafejtjük a token-t hogy kinyerjük a szükséges adatokat
-        const logOutToken = req.headers['authorization']?.split(' ')[1];
-
-        if (logOutToken === undefined) {
-            return false;
-        }
-
-        let userId = null;
-        let success = false;
-
-        await compactDecrypt(logOutToken, securekey)
-            .then((decodedToken) => {
-                const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
-                userId = currentPayload.id;
-                success = true
-            })
-            .catch((error) => {
-                console.log(error);
-                success =  false;
-            });
-
-        // Lementjük a jelenlegi dátumot és megkeressük a felhasználót a neve alapján
-        const currentDate = new Date();
-
-        // Az adatbázisban lementjük a szükséges adatokat a tokenről
-        if (success === true) {
-            await Blacklistedtoken.create({
-                userId: userId,
-                token: logOutToken,
-                date: currentDate,
-            });
-        }
-        return success;
-    },
-
     // Ez a metódus a token-ből kinyeri a felhasználó azonosítóját
     GetUserId: async (req) => {
         // A token lekérjük, de utána ellenőrizzük hogy van e tényleges token, ha nincs akkor vissza küldünk egy undefined
@@ -146,17 +91,6 @@ export default {
         const token = req.headers['authorization']?.split(' ')[1];
         
         if (!token) {
-            return undefined;
-        }
-
-        // Ha a token benne van a fekete listában, akkor nem engedjük tovább, és vissza adjuk az undefined értéket
-        const isBlacklisted = await Blacklistedtoken.findOne({
-            where: {
-                token: token
-            }
-        });
-
-        if (isBlacklisted) {
             return undefined;
         }
 

@@ -6,7 +6,6 @@ import Acting from "./models/acting.js";
 import Actor from "./models/actor.js"
 import Agerating from "./models/agerating.js";
 import Award from "./models/award.js";
-import Blacklistedtoken from "./models/blacklistedtoken.js";
 import Creation from "./models/creation.js";
 import Creator from "./models/creator.js"
 import Favourite from "./models/favourite.js";
@@ -21,6 +20,7 @@ import Language from "./models/language.js";
 import Pcspec from "./models/pcspec.js";
 import Platform from "./models/platform.js";
 import Rating from "./models/rating.js";
+import Review from "./models/review.js";
 import Studio from "./models/studio.js";
 import Studiosgame from "./models/studiosgame.js";
 import Tag from "./models/tag.js";
@@ -51,10 +51,6 @@ Game.belongsToMany(Award, {
 Award.belongsToMany(Game, {
     through: Gamesaward
 });
-
-// Fekete Listás Tokenek - Felhasználók kapcsolat
-User.hasMany(Blacklistedtoken);
-Blacklistedtoken.belongsTo(User);
 
 // Készítők - Játékok kapcsolat
 Game.belongsToMany(Creator,{
@@ -123,6 +119,14 @@ Tag.belongsToMany(Game, {
     through: Gamestag,
 });
 
+// Kritika - Felhasználó kapcsolat
+User.hasMany(Review);
+Review.belongsTo(User);
+
+// Kritika - Játék kapcsolat
+Game.hasMany(Review);
+Review.belongsTo(Game); 
+
 // Konstansként elmentjük a backend port számát
 const PORT = 3000;
 
@@ -132,7 +136,7 @@ await sequelize.authenticate()
         // Mivel a backend minden újraindításnál más titkosító kulcsot használ, ezért töröljük a feketelista tartalmát
         console.log("The test connection to the server was succesfull!");
         // Szinkronizáljuk a modeleket az adatbázissal
-        sequelize.sync( {force: true, alter: true})
+        sequelize.sync()
         .then(() => {
             console.log("The database sync was succesfull!");
             app.listen(PORT, () => {

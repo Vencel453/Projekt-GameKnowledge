@@ -3,11 +3,11 @@ import bcryptMethods from "../utilities/bcrypt.methods.js";
 import User from "../models/user.js";
 
 export default {
-    // A bejelentkezés kezelő metódus
+    // A bejelentkezést kezelő metódus
     LoginPostController: async (req, res) => {
         try {
             // Mivel ezeknek az értéke nem változik, konstansként mentjük el hogy tovább dolgozzunk vele
-             const {username: loginUsername, password: loginPassword} = req.body;
+            const {username: loginUsername, password: loginPassword} = req.body;
 
         // Ha bármelyik mező üres, akkor az ahhoz megfelelő hiba kódot és üzenetet küldük
             if (!loginUsername || !loginPassword) {
@@ -18,13 +18,12 @@ export default {
                 return;
             }
 
-        // Try catch párban írjuk a következő részeket ahol az adatbázist el kell érnünk
             // Konstansként elmentjük azt a felhasználót az adatbázisból amelyik neve megegyezik a megadottal
             const correctUser = await User.findOne({
                 where: {username: loginUsername}
-            });
-            // Itt ellenőrizzük hogy a felhasználó titkosított jelszava visszafejtve megegyezik-e a felhasználóval megadott jelszóval
+            });l
 
+            // Ha nincs teljes egyezés, akkor hiba üzenetet küldünk
             if (!correctUser) {
                 res.status(400).json({
                     error: true,
@@ -32,6 +31,7 @@ export default {
                 });
                 return;
             }
+            // Itt ellenőrizzük hogy a felhasználó titkosított jelszava visszafejtve megegyezik-e a felhasználóval megadott jelszóva
             const correctPassword = bcryptMethods.Comparing(loginPassword, correctUser.password);
 
             // Ha a jelszó helyesen van megadva akkor a felhasználóhoz készül egy token és beengedi az oldalra

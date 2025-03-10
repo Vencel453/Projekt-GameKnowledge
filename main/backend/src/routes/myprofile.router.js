@@ -5,5 +5,6 @@ const MyprofileRouter = Router();
 
 MyprofileRouter.get("/myprofile", myprofileController.MyprofileGetController);
 MyprofileRouter.post("/myprofile", myprofileController.MyprofilePostController);
+MyprofileRouter.delete("/myprofile", myprofileController.MyprofileDeleteController);
 
 export default MyprofileRouter;

@@ -2,13 +2,12 @@ import { Op } from "sequelize";
 import Game from "../models/game.js";
 import Tag from "../models/tag.js";
 import Gamestag from "../models/gamestag.js";
-import jweMethods from "../utilities/jwe.methods.js";
 
 export default {
     MainpageGetController: async(req, res) => {
         // Ez a főoldalhoz kéri le az adatbázisból az adatokat, így egyből try catch párban kezdjük a kódot
         try {
-            // Először azokat a játékokat kérjük le amelyek az elkövetkező 6 hónapban megjelennek
+            // Először azokat a játékokat kérjük le amelyek az elkövetkező 12 hónapban megjelennek
             const currentDate = new Date();
             const oneMonthForward = new Date();
             oneMonthForward.setMonth(currentDate.getMonth() + 12);
@@ -22,7 +21,7 @@ export default {
                 }
             });
 
-            // Most azokat a játékokat kérjük le amelyek 6 hónapon belül jelentek meg
+            // Most azokat a játékokat kérjük le amelyek 12 hónapon belül jelentek meg
             const oneMonthBack = new Date();
             oneMonthBack.setMonth(currentDate.getMonth() - 12);
 
@@ -118,6 +117,7 @@ export default {
                     }],
             });
 
+            // Ha minden rendben futtot le, akkor a válaszban megadjuk a lementett értékeket
             res.status(200).json({
                 error: false,
                 message: "Game datas successfully fetched!",
@@ -142,39 +142,8 @@ export default {
             })
         }
     },
-    // Ez a metódus kijelentkezteti a felhasználót, ehhez a 'jweHandler' fájl egy metódusát hívja meg és küldi ki a megfelelő kódot és
-    // üzenetet, ha valami hiba történik akkor hiba üznetet ki írja a konzolra
-    MainpagePostController: async (req, res) => {
-        try {
-            const successfulLogout = await jweMethods.Blacklisting(req, res);
-            
-            if (successfulLogout === true) {
-                res.status(200).json({
-                    error: false,
-                    message: "The users token has been invalidated!"
-                });
-                return;
-            }
-            else {
-                res.status(200).json({
-                    error: false,
-                    message: "The token was already invalid or empty!"
-                });
-                return;
-            }
-        }
-        catch (error) {
-            console.log(error);
-            res.status(500).json({
-                error: true,
-                message: "Something went wrong doing the logout!"
-            });
-            return;
-        }
-    },
     // Ez a metódus a kereső sávért felel
     MainpagePutController: async (req, res) => {
-        // Try catch párban dolgozunk hogy kezeljünk bármi féle hibát a további futtatás során
         try {
             // Le mentjük a kapott keresést és a felesleges keresést elkerülve ellenőrizzük hogy a nem-e üres, de alapvetően ez nem számít
             // hibának, így a 200-as kódot küldjük vissza, de megüzenjük hogy ez üres
@@ -203,6 +172,7 @@ export default {
                 }
             });
 
+            // Ha minden helyesen futott le, akkor vissza adjuk a talált eredményeket
             res.status(200).json({
                 error: false,
                 message: "Successful search!",
