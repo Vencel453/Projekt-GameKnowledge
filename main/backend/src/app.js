@@ -7,6 +7,7 @@ import LoginRouter from "./routes/login.router.js";
 import GamepageRouter from "./routes/gamepage.router.js";
 import MyprofileRouter from "./routes/myprofile.router.js";
 import FavouritesRouter from "./routes/favourites.router.js";
+import ReviewRouter from "./routes/review.router.js";
 
 // Létrehozzunk egy konstanst az express segítségével amivel a szervert fogjuk kezelni
 const app = express();
@@ -28,6 +29,7 @@ app.use("/", LoginRouter);
 app.use("/", jweMethods.ExntendingToken, GamepageRouter);
 app.use("/", jweMethods.ExntendingToken, MyprofileRouter);
 app.use("/", jweMethods.ExntendingToken, FavouritesRouter);
+app.use("/", jweMethods.ExntendingToken, ReviewRouter);
 
 // Ha egy olyan metódust kapunk egy útvonalra amit nem támogatunk, akkor ezt az üzenetet adjuk vissza
 app.use((req, res) => {

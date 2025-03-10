@@ -7,7 +7,6 @@ export default {
     MyprofileGetController: async(req, res) => {
         try {
             const userId = await jweMethods.GetUserId(req);
-            console.log(userId);
 
             if (userId === undefined) {
                 res.status(401).json({
@@ -203,5 +202,43 @@ export default {
             });
             return;
         }
+    },
+
+    MyprofileDeleteController: async(req, res) => {
+        const userId = await jweMethods.GetUserId(req);
+
+        if (userId === undefined) {
+            res.status(401).json({
+                error: true,
+                message: "The token is missing or faulty!"
+            });
+            return;
+        }
+
+        const isUserStillExist = await User.findOne({
+            where: {
+                id: userId
+            }
+        });
+
+        if (!isUserStillExist) {
+            res.status(404).json({
+                error: true,
+                message: "This user doesn't exist!"
+            });
+            return;
+        }
+
+        await User.destroy({
+            where: {
+                id: userId
+            }
+        });
+
+        res.status(200).json({
+            error: false,
+            message: "The user profile has been deleted!"
+        });
+        return;
     }
 }

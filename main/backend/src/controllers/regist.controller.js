@@ -123,12 +123,12 @@ export default {
             // Minden más hiba nem szándékos vagy előre tervezett így ebben az esetben egy tág értelmezésű
             // szerver hibát írunk ki és a teljes hiba üzenetet a konzolra
             else {
-            console.log(error);
-            res.status(500).json({
-                error: "true",
-                message: "Something went wrong creating an user!",
-            });
-            return;
+                console.log(error);
+                res.status(500).json({
+                    error: "true",
+                    message: "Something went wrong creating an user!",
+                });
+                return;
             }
         }
     }

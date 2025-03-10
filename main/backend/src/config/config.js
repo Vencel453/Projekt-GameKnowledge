@@ -1,6 +1,8 @@
-// Az adatbázist külön fájlba mentjük, mert sok különböző fájlban fel van használva
+// Az adatbázist külön konstansként mentjük majd exportáljuk, mert sok különböző fájlban fel van használva
+
 import { Sequelize } from "sequelize";
 
+// Megadjuk az adatbázis adatait az eléréséhez
 const sequelize = new Sequelize({
     username: 'root',
     password: '',
