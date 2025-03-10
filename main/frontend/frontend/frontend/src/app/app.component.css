@@ -101,14 +101,6 @@ body{
     color: black;
 }
 
-#globeicon{
-    cursor: pointer;
-    width: 500%;
-    height: 500%;
-    display: flex;
-    padding-left: 170%;
-}
-
 #loginicon{
     cursor: pointer;
     width: 500%;
@@ -241,6 +233,11 @@ body{
     padding-top: 10px;
     font-weight: bold;
     text-decoration: underline;
+    color: black;
+}
+
+#copyright:hover{
+    color: white;
 }
 
 #footerdivider{
@@ -250,6 +247,12 @@ body{
 
 .thirdpart{
     font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+.thirdpart:hover{
+    text-decoration: underline;
 }
 
 .myprofile {
@@ -308,4 +311,8 @@ body{
 #notloggedinminimenu{
     font-size: larger;
     font-weight: bold;
+}
+
+.socialmedia {
+    cursor: pointer;
 }

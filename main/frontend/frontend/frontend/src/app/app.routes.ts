@@ -6,9 +6,12 @@ import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { SpecificgameComponent } from './specificgame/specificgame.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
-import { ForumComponent } from './forum/forum.component';
 import { FavouritesComponent } from './favourites/favourites.component';
 import { NotauthorizatedComponent } from './notauthorizated/notauthorizated.component';
+import { SocialmediaComponent } from './socialmedia/socialmedia.component';
+import { CopyrightComponent } from './copyright/copyright.component';
+import { DataprotectionComponent } from './dataprotection/dataprotection.component';
+import { UsertermsComponent } from './userterms/userterms.component';
 
 
 export const routes: Routes = [
@@ -17,9 +20,12 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'game/:id', component: SpecificgameComponent},
     {path: 'myprofile', component: MyprofileComponent},
-    {path: 'forum', component: ForumComponent},
     {path: 'favourites', component: FavouritesComponent},
     {path: 'notauthorizated', component: NotauthorizatedComponent},
+    {path: 'socialmedia', component: SocialmediaComponent},
+    {path: 'copyright', component: CopyrightComponent},
+    {path: 'dataprotection', component: DataprotectionComponent},
+    {path: 'userterms', component: UsertermsComponent},
     {path: '**', component: PageNotFoundComponent}
 ];
 

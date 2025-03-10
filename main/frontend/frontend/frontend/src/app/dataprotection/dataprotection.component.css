@@ -1,0 +1,29 @@
+.title{
+    font-weight: bold;
+    font-size: 35px;
+    color: white;
+    text-align: center;
+}
+
+.divider{
+    border-width: 5px;
+    color: black;
+}
+
+.description{
+    text-align: justify;
+    color: #A0B6F7;
+    font-weight: bold;
+    font-size: larger;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.datause{
+    text-align: justify;
+    color: white;
+    font-weight: bold;
+    font-size: larger;
+    margin-left: 30px;
+    margin-right: 30px;
+}

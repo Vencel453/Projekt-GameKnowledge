@@ -41,9 +41,6 @@
             <!--A nav sáv jobb oldali része ahol dinamikusan változnak az elérhető opciók a bejelentkezett/vendég felhasználók alalpján-->
 
     <div class="menu-container">
-        <a><img class="icon" src="/globe.png" alt="forumIcon">
-        </a>
-        <a class="link" routerLink="/forum">Forum</a>
         
         <ng-container *ngIf="!(isAuthenticated$ | async); else loggedInTemplate">       <!--Az oldal eldonti hogy az adott pillanatban van e bejelentkezve valaki-->
         
@@ -83,7 +80,6 @@
     <ul class="menucontent" *ngIf="ismenuopen">         <!--Figyeli hogy a menu éppen levan e nyitva vagy sem, és nyitott menu-nél elfordul az ikon-->
         <p id="notloggedinminimenu" *ngIf="!(isAuthenticated$ | async)">Features will be displayed, once you login with an account!</p>
         <li *ngIf="isAuthenticated$ | async"> <img class="menucontenticons" src="./hearth.png" alt="Hearth"> <a class="link" routerLink="/favourites">Favourites</a></li>
-        <li *ngIf="isAuthenticated$ | async"> <img class="menucontenticons" src="./globe.png" alt="Globe"> <a class="link" routerLink="/forumposts"> My forum posts</a></li>
         <li *ngIf="isAuthenticated$ | async">           <!--Figyeli hogyha a felhasználó bevan jelentkezve, akkor megjelenjen a Kijelentkezés funckió-->
             <img class="menucontenticons" src="./logout.png" alt="Logout" (click)="logout()">
             <a class="link" (click)="logout()">Log out</a>
@@ -97,29 +93,29 @@
 <!--Az oldal alja-->
 
 <hr id="footerdivider">
-<footer class="footer text-black py-4">
+<footer class="footer text-black py-3">
     <div class="container">
         <div class="row align-items-center">            <!--Boostrap-es osztalyazonosítókkal létrehozott szerkezet-->
             <div class="col-3 text-center d-flex justify-content-center align-items-center gap-4">         <!--3 részre vágás-->
                 <!--Első bal oldali rész-->
-                <img class="socialmedia" src="/facebook.png" alt="facebook logo">
-                <img class="socialmedia" src="/instagram.png" alt="instagram logo">
-                <img class="socialmedia" src="/discord.png" alt="discord logo">
+               <a routerLink="/socialmedia" class="socialmedialink"> <img class="socialmedia" src="/facebook.png" alt="facebook logo"></a>
+               <a routerLink="/socialmedia" class="socialmedialink"> <img class="socialmedia" src="/instagram.png" alt="instagram logo"></a>
+               <a routerLink="/socialmedia" class="socialmedialink"> <img class="socialmedia" src="/discord.png" alt="discord logo"></a>
             </div>
             <div class="col-1 d-flex justify-content-center">           <!--Láthatatlan elválasztók a részek között-->
                 <div class="divider"></div>
             </div>
             <!--Második középső rész-->
             <div class="col-4 text-center">
-                <p id="copyright">&copy; 2025 Copyright</p>
+              <a routerLink="/copyright"><p id="copyright">&copy; 2024-2025 Copyright</p></a>
             </div>
             <div class="col-1 d-flex justify-content-center">
                 <div class="divider"></div>
             </div>
             <!--Harmadik jobb oldali rész-->
             <div class="col-3 text-center">
-                <p class="thirdpart">Data Protection</p>
-                <p class="thirdpart">User Terms</p>
+              <a routerLink="/dataprotection" class="thirdpart"><p class="thirdpart">Data Protection</p></a>
+              <a routerLink="/userterms" class="thirdpart"><p class="thirdpart">User Terms</p></a>
             </div>
         </div>
     </div>
