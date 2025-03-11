@@ -65,6 +65,8 @@ nominations: any;
         storage: string;
         sidenote: string;
     };
+
+    reviews?: IReview[];
 }
 
 export interface IGamesResponse {
@@ -76,4 +78,14 @@ export interface IGamesResponse {
 export interface IRatingsResponse {
     error: boolean;
     message: string;
+}
+
+export interface IReview {
+    id: number;
+    title: string;
+    content: string;
+    date: string;
+    "User.username": string;
+    "User.Ratings.id"?: number;
+    "User.Ratings.positive": number;
 }

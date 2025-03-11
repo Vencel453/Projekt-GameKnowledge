@@ -21,7 +21,7 @@ export default {
             // Konstansként elmentjük azt a felhasználót az adatbázisból amelyik neve megegyezik a megadottal
             const correctUser = await User.findOne({
                 where: {username: loginUsername}
-            });l
+            });
 
             // Ha nincs teljes egyezés, akkor hiba üzenetet küldünk
             if (!correctUser) {

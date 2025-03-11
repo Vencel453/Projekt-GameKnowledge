@@ -1,0 +1,42 @@
+<div class="reviewssection">
+    <h3>Reviews</h3>
+
+    <div *ngIf="reviews && reviews.length > 0; else noReviews">
+        <div *ngFor="let review of displayedReviews" class="reviewcard">
+            <h4>{{review.title}}</h4>
+            <p>{{review.content}}</p>
+            <p class="reviewdate">{{review.date | date: 'mediumDate'}}</p>
+            <div class="reviewfooter">
+                <span class="reviewuser">{{review['User.username']}}</span>
+                <img [src]="review['User.Ratings.positive'] === 1 ? like : dislike" alt="RatingIcon" class="ratingicon">
+                <button *ngIf="canDelete(review)" (click)="deleteReview(review.id)" class="delete">
+                    Delete
+                </button>
+            </div>
+        </div>
+        <button *ngIf="reviews.length > 5" (click)="toggleShowAll()" class="showmore">
+            {{showAllReviews ? 'Show Less' : 'Show More'}}
+        </button>
+    </div>
+
+    <ng-template #noReviews>
+        <p>No reviews available yet.</p>
+    </ng-template>
+
+    <div class="reviewform" *ngIf="authservice.isLoggedIn() && !UserReviewed">
+        <h4>Write a review!</h4>
+        <input type="text" placeholder="Title" [(ngModel)]="reviewTitle" maxlength="100">
+        <textarea placeholder="Content" [(ngModel)]="reviewcontent" maxlength="5000"></textarea>
+        <button (click)="submit()" [disabled]="isSubmitting">
+            Submit Review
+        </button>
+    </div>
+
+    <div *ngIf="authservice.isLoggedIn() && UserReviewed">
+        <p>You already wrote a review for this game!</p>
+    </div>
+
+    <div *ngIf="!authservice.isLoggedIn()">
+        <p>You must be logged in to write a review!</p>
+    </div>
+</div>

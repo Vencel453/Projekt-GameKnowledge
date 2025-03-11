@@ -10,11 +10,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { RatingwindowComponent } from "../ratingwindow/ratingwindow.component";
 import { FavouritesService } from "../../favourite.service";
 import { PictureNotFoundDirective } from "../../picturenotfound.directive";
+import { ReviewsComponent } from "../reviews/reviews.component";
+import { FormsModule } from "@angular/forms";
 
 @Component({
     selector: 'app-game-details',
     standalone: true,
-    imports: [CommonModule, MatDialogModule, PictureNotFoundDirective],
+    imports: [CommonModule, MatDialogModule, PictureNotFoundDirective, ReviewsComponent, FormsModule],
     templateUrl: './specificgame.component.html',
     styleUrl: './specificgame.component.css'
 })
