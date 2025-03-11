@@ -12,7 +12,8 @@ Gamestag.init ({
         },
         {
             sequelize,
-            modelName: "Gamestag"
+            modelName: "Gamestag",
+            comment: "Stores the connections of games and the tags that fit the game."
         }
     );
     

@@ -13,16 +13,19 @@ Award.init ({
             organizer: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                comment: "The organizer of the award."
             },
 
             name: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                comment: "The name and the category of the award."
             },
         },
         {
             sequelize,
-            modelName: "Award"
+            modelName: "Award",
+            comment: "Stores various game awards."
         }
     );
     

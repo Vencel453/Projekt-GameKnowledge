@@ -7,7 +7,7 @@ export default {
     RegistPostController: async (req, res) => {
         // Try catch párban vannak írva a következő kódok hogy az esetleges adatbázis csatlakozási hibákat kezelni tudjuk
         try {
-             // Konstansként elmentjük azokat az adatokat amelyeket bekérünk a felhasználótól, mert ezek nem változnak
+            // Konstansként elmentjük azokat az adatokat amelyeket bekérünk a felhasználótól, mert ezek nem változnak
             const { username: registUsername, password: registPassword, passwordAgain: registPasswordAgain, email: registEmail} = req.body;
             console.log(req.body);
 

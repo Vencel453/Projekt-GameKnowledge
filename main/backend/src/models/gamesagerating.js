@@ -12,7 +12,8 @@ Gamesagerating.init({
         },
         {
             sequelize,
-            modelName: "Gamesagerating"
+            modelName: "Gamesagerating",
+            comment: "Stores the connections of age ratings and games."
         }
     );
 

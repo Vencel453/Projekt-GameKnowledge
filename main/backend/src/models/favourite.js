@@ -12,7 +12,8 @@ Favourite.init ({
         },
         {
             sequelize,
-            modelName: "Favourite"
+            modelName: "Favourite",
+            comment: "Stores the games that the users are saved in thex favourites."
         }
     );
 

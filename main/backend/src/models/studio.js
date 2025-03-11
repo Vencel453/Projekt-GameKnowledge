@@ -14,11 +14,13 @@ Studio.init ({
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique: true,
+                comment: "The name of the studio."
             }
         },
         {
             sequelize,
-            modelName: "Studio"
+            modelName: "Studio",
+            comment: "Stores various game studios."
         }
     );
 

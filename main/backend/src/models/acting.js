@@ -12,11 +12,13 @@ Acting.init ({
 
             role: {
                 type: DataTypes.STRING(100),
+                comment: "Shows what character was the actor playing."
             },
         },
         {
             sequelize, 
-            modelName: 'Acting'
+            modelName: "Acting",
+            comment: "Stores the connections of the games and actors and show an actor role in the game."
         }
     );
 

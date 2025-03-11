@@ -13,11 +13,13 @@ Gamepicture.init ({
             url: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                comment: "The URL of a picture that shows a screenshot of the game."
             }
         },
         {
             sequelize,
-            modelName: "Gamepicture"
+            modelName: "Gamepicture",
+            comment: "Stores the screenshots of various games."
         }
     );
 

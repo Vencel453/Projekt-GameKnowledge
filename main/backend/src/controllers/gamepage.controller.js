@@ -307,6 +307,22 @@ export default {
                 return;
             };
 
+            // Az azonosító alapján megkeressük a felhasználót
+            const user = await User.findOne({
+                attributes: ["username", "email", "admin", "creation"],
+                where: {
+                    id: userId
+                }
+            });
+
+            // Ha az adatbázisban nincs ilyen felhasználó, akkor hiba üzenetet küldünk
+            if (!user) {
+                res.status(401).json({
+                    error: true,
+                    message: "The token is missing or faulty!"
+                });
+            }
+
             // Az URL-ben szereplő játék azonosított lementjük a megfelelő formátumban
             const gameId = Number(req.params.gameId?.trim());
 
@@ -389,7 +405,23 @@ export default {
             return;
         };
 
-         // Az URL-ben szereplő játék azonosított lementjük a megfelelő formátumban
+        // Az azonosító alapján megkeressük a felhasználót
+        const user = await User.findOne({
+            attributes: ["username", "email", "admin", "creation"],
+            where: {
+                id: userId
+            }
+        });
+
+        // Ha az adatbázisban nincs ilyen felhasználó, akkor hiba üzenetet küldünk
+        if (!user) {
+            res.status(401).json({
+                error: true,
+                message: "The token is missing or faulty!"
+            });
+        }
+
+        // Az URL-ben szereplő játék azonosított lementjük a megfelelő formátumban
         const gameId = Number(req.params.gameId?.trim());
 
         // Ha a játék azonosító hiányzik vagy nem egy szám, akkor egy hiba üzenetet küldünk vissza

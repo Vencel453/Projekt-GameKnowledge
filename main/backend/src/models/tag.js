@@ -13,12 +13,14 @@ Tag.init ({
             tag: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique: true
+                unique: true,
+                comment: "The name of the tag."
             },
         },
         {
             sequelize,
-            modelName: "Tag"
+            modelName: "Tag",
+            comment: "Stores various tags that can be associated to games."
         }
     );
 

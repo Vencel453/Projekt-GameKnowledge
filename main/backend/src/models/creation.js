@@ -12,11 +12,13 @@ Creation.init ({
 
             field: {
                 type: DataTypes.STRING,
+                comment: "On what field or role did the developer take part in."
             },
         },
         {
             sequelize,
-            modelName: "Creation"
+            modelName: "Creation",
+            comment: "Stores the connections of the games and the developers and what part or role they did during the game's development."
         }
     );
 

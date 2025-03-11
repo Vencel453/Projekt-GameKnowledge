@@ -1,5 +1,4 @@
 import { compactDecrypt, EncryptJWT} from "jose";
-import { Op } from "sequelize";
 import crypto from "crypto";
 
 // A token titkosításához használt kulcs egy random szám, Uint8Array típusú, mert a titkosításhoz ilyen típusú objektum kell
@@ -7,8 +6,7 @@ import crypto from "crypto";
 const securekey = new Uint8Array(32);
 crypto.randomFillSync(securekey);
 
-// Ezeket a metódusokat külön fájlba hozzuk létre majd exportáljuk őket, így a kód átláthatóbb és a token hítelesítés esetén így csak
-// egyszerkell megírni a kódot
+// Ezeket a metódusokat külön fájlba hozzuk létre majd exportáljuk őket, így a kód átláthatóbb
 export default {
     // Ez a metődus a token-t hozza létre a felhasználónév és email alapján
     CreatingToken: async (loginId, loginUsername, loginEmail) => {
@@ -29,7 +27,7 @@ export default {
         return token;
     },
 
-    // Ez a metódus egy middleware-ként szolgál, amely a felhasználó token-ét cseréli le egy újra, ha a felhasználó még mindig aktív
+    // Ez a metódus egy middleware-ként szolgál, amely a felhasználónak új token-t ad, ha az előző még aktív, de hamarosan lejár
     ExntendingToken: async (req, res, next) => {
         // A következő sorok a biztonság kedvéért try catch párban vannak írva hogy a felmerülő hibákat kezelni tudjuk
         try {
@@ -41,7 +39,7 @@ export default {
                 return next();
             }
 
-            // Megnézzük hogy a token érvényes-e, ha nem akkor nem cserélünk token-t
+            // Megnézzük hogy a token érvényes-e, ha nem, akkor nem cserélünk token-t
             let validToken = true;
             const decodedToken = await compactDecrypt(currentToken, securekey)
                 .catch((error) => {
@@ -61,17 +59,15 @@ export default {
             const currentDate = new Date();
             const timeLeft = expire - currentDate;
 
-            // Ha a maradék idő kevesebb mint 20 perc akkor a felhasználónak adunk egy új token-t  és a régi tokent fekete listázzuk
+            // Ha a maradék idő kevesebb mint 30 perc akkor a felhasználónak adunk egy új token-t,
             // majd tovább lépünk, más esetben vissza küldjük hogy még nincs szükség új tokenre
             if (timeLeft < 1800000) {
-
                 const newToken = await new EncryptJWT(currentPayload)
                     .setExpirationTime("1 hour")
                     .setProtectedHeader({ alg: "dir", enc: "A256GCM"})
                     .encrypt(securekey);
 
                 res.setHeader("Authorization", `Bearer ${newToken}`);
-                console.log(newToken);
             }
             return next();
         }
@@ -105,8 +101,10 @@ export default {
                 console.log(error);
             });
         
+        
+            
         // Ha a token visszafejtése nem sikerült, az azért van, mert a token lejárt, vagy egyéb okok miatt már nem aktív,
-        // ilyenkor szintén undefined-ot küldünk vissza, ha érvényes token, akkor vissza küldjük az azonosítót
+        // ilyenkor szintén undefined-ot küldünk vissza, ha érvényes a token, akkor vissza küldjük az azonosítót
         if (id === 0) {
             return undefined;
         }
