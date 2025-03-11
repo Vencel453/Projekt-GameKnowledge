@@ -13,56 +13,56 @@ Game.init ({
             gameTitle: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                comment: "The game's title."
+                comment: "A játék címe"
             },
 
             altGameTitle: {
                 type: DataTypes.STRING,
-                comment: "The game's alternative title."
+                comment: "A játék esetleges alternatív címe"
             },
 
             description: {
                 type: DataTypes.TEXT,
                 allowNull: false,
-                comment: "A small description of the game."
+                comment: "Rövid leírás a játékról"
             },
 
             release: {
                 type: DataTypes.DATEONLY,
                 allowNull: false,
-                comment: "The date when the game was first released."
+                comment: "A játék legelső megjelenítési dátuma"
             },
 
             boxart: {
                 type: DataTypes.STRING,
-                comment: "The URL of a picture of the game's boxart."
+                comment: "A játék borító képének az elérési útvonala"
             },
 
             promoArt: {
                 type: DataTypes.STRING,
-                comment: "A wide picture of the game used in promotional materials."
+                comment: "Egy olyan széles felbontású kép a játékról"
             },
 
             controllerSupport: {
                 type: DataTypes.INTEGER,
-                comment: "Shows if the game has controller support: NULL means that is not relevant, 0 is that it doesn't, 1 that is support xbox controller, 2 that is partially support playstation controllers, 3 that is fully support both types of controller."
+                comment: "A játék kontroller támogatásának száma, a NULL azt jelenti hogy nem releváns, a 0 hogy nincs támogatás, az 1 hogy csak xbox típusú kontrollert támogat, a 2 hogy az xbox mellet a playstation részleges támogatást kap, a 3 hogy xbox és playstation kontrollert is teljesen támogat"
             },
 
             crossplatform: {
                 type: DataTypes.INTEGER.UNSIGNED,
-                comment: "Shows if the game has cross platform support: NULL means it's not relevant, 0 that it doesn't have, 1 that is partially has, 2 that it has full support."
+                comment: "A crossplay támogatás száma, a NULL azt jelenti hogy nem releváns, a 0 hogy nincs, az 1 hogy részleges támogatás, a 2 hogy teljes támogatás"
             },
 
             crossPlatformException: {
                 type: DataTypes.STRING,
-                comment: "Explains partial cross platform support."
+                comment: "Azt magyarázza hogy a részleges crossplay támogatást mit jelent az adott játék esetén"
             },
 
         },
         {
             sequelize,
             modelName: "Game",
-            comment: "Stores the datas of games."
+            comment: "A játékok egyedi adatait tárolja"
         }
     );
 export default Game;

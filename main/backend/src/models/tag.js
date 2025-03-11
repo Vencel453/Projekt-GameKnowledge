@@ -14,13 +14,13 @@ Tag.init ({
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique: true,
-                comment: "The name of the tag."
+                comment: "A címke neve"
             },
         },
         {
             sequelize,
             modelName: "Tag",
-            comment: "Stores various tags that can be associated to games."
+            comment: "Különböző címkéket tárol amivel a játékokat lehet besorolni"
         }
     );
 

@@ -14,13 +14,13 @@ User.init ({
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique: true,
-                comment: "The custom name of the user."
+                comment: "A felhasználó által megadott becenév"
             },
 
             password: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                comment: "The hashed password of the user."
+                comment: "A felhasználó jelszava titkosítva"
             },
 
             email: {
@@ -28,26 +28,26 @@ User.init ({
                 allowNull: false,
                 unique: true,
                 validate: {isEmail: true},
-                comment: "The email address of the user."
+                comment: "A felhasználó email címe"
             },
 
             admin: {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: 0,
-                comment: "The user status, 0 means general user, 1 means admin user."
+                comment: "A felhasználó admin státusza, ahol a 0 azt jelenti hogy csak általános felhasználó, míg az 1 azt jelenti hogy admin"
             },
 
             creation: {
                 type: DataTypes.DATEONLY,
                 allowNull: false,
-                comment: "The date of the user account's creation. "
+                comment: "A felhasználó fiókjának létrehozásának a dátuma"
             },
         },
         {
             sequelize,
             modelName: "User",
-            comment: "Stores the datas of users."
+            comment: "A felhasználók adatait tárolja"
         }
     );
 

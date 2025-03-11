@@ -14,14 +14,14 @@ Gameslanguage.init ({
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: 0,
-                comment: "Does the game has dub, 0 means no, 1 means yes."
+                comment: "Az adott nyelvhez tartozik-e szinkron, a 0 nemet jelent, az 1 az igent"
             },
 
         },
         {
             sequelize,
             modelName: "Gameslanguage",
-            comment: "Stores the connections of games and languages and expand on that did the language include dub."
+            comment: "A játékokat köti össze a játék által támogatott nyelvekkel kiegészítve hogy tartozik-e hozzá szinkron"
         }
     );
 

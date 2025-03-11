@@ -13,7 +13,7 @@ Gamesagerating.init({
         {
             sequelize,
             modelName: "Gamesagerating",
-            comment: "Stores the connections of age ratings and games."
+            comment: "Összeköti a játékokat a hozzájuk tartozó korhatár besorolásaikkal"
         }
     );
 

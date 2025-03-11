@@ -13,25 +13,25 @@ Agerating.init ({
             rating: {
                 type: DataTypes.STRING(10),
                 allowNull: false,
-                comment: "An age rating of the game."
+                comment: "A korhatár besorolás"
             },
 
             institution: {
                 type: DataTypes.STRING(4),
                 allowNull: false,
-                comment: "The institution that gave the age rating."
+                comment: "A korhatár besorolást intéző intézmény"
             },
 
             url: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                comment: "The URL of the age rating's picture."
+                comment: "A korhatár besorolás képének az elérési útvonala"
             }
         },
         {
             sequelize,
             modelName: "Agerating",
-            comment: "Stores a games age ratings and which institutions gave it and the URL of the age rating's pictures."
+            comment: "Korhatár besorolások adatait tartalmazó tábla"
         }
     );
 

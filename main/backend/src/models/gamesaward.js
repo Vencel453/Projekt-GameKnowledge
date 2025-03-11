@@ -13,20 +13,20 @@ Gamesaward.init ({
             year: {
                 type: DataTypes.INTEGER.UNSIGNED,
                 allowNull: false,
-                comment: "The year when the game was nominated."
+                comment: "Az év amikor a játékot a díjra jelölték"
             },
 
             result: {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: 0,
-                comment: "The result where 0 means the games was only nominated, 1 means that the award was won."
+                comment: "Az eredmény, ahol a 0 azt jelenti hogy a játékot csak jelölték a díjra, az 1 hogy megnyerte a díjat"
             },
         },
         {
             sequelize,
             modelName: "Gamesaward",
-            comment: "Stores the connections of games and awards and expand on what year was the event and did the game won the award."
+            comment: "A játékokat köti össze azokkal a díjakkal amelyekre jeölték és az adott jelölésre specifikus adatokkal kiegészítve"
         }
     );
 

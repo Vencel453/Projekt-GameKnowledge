@@ -13,7 +13,7 @@ Favourite.init ({
         {
             sequelize,
             modelName: "Favourite",
-            comment: "Stores the games that the users are saved in thex favourites."
+            comment: "A felhasználók által a kedvencekbe mentett játékaikat tárolja"
         }
     );
 

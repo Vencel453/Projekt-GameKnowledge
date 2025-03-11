@@ -14,7 +14,7 @@ Gamesplatform.init ({
         {
             sequelize,
             modelName: "Gamesplatform",
-            comment: "Stores the connections of the games and the platforms that they was releason on."
+            comment: "A játékokat köti össze azokkal a platformokkal amelyeken megjelentek"
         }
     );
     

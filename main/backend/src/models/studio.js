@@ -14,13 +14,13 @@ Studio.init ({
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique: true,
-                comment: "The name of the studio."
+                comment: "A stúdió neve"
             }
         },
         {
             sequelize,
             modelName: "Studio",
-            comment: "Stores various game studios."
+            comment: "Különböző játék stúdiókat tárol"
         }
     );
 

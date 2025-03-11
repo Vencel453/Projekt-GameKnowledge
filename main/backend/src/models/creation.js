@@ -12,13 +12,13 @@ Creation.init ({
 
             field: {
                 type: DataTypes.STRING,
-                comment: "On what field or role did the developer take part in."
+                comment: "A személy munkaterületét írja le"
             },
         },
         {
             sequelize,
             modelName: "Creation",
-            comment: "Stores the connections of the games and the developers and what part or role they did during the game's development."
+            comment: "Összeköti a készítőket az általuk részt vett játékokkal és hogy milyen téren vett részt"
         }
     );
 

@@ -13,7 +13,7 @@ Gamestag.init ({
         {
             sequelize,
             modelName: "Gamestag",
-            comment: "Stores the connections of games and the tags that fit the game."
+            comment: "A játékokat köti azokkal a címkékkel amelyek a játékra illenek"
         }
     );
     

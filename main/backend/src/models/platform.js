@@ -14,13 +14,13 @@ Platform.init ({
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique: true,
-                comment: "The name of the platform or console."
+                comment: "A platform neve"
             },
         },
         {
             sequelize,
             modelName: "Platform",
-            comment: "Stores various platforms or console that officially support running games."
+            comment: "Különböző platformokat tárol amelyek hivatalosan támogatják a játékok futtatását"
         }
     );
     

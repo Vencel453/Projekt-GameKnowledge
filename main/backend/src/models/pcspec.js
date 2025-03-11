@@ -13,74 +13,74 @@ Pcspec.init ({
             minOp: {
                 type: DataTypes.STRING(50),
                 allowNull: false,
-                comment: "The minimum requirement of the operation system."
+                comment: "A minimum rendszer követelményben meghatározott operációs rendszer"
             },
 
             minCpu: {
                 type: DataTypes.STRING(100),
                 allowNull: false,
-                comment: "The minimum requirement of the CPU."
+                comment: "A minimum rendszer követelményben meghatározott processzor"
             },
 
             minRam: {
                 type: DataTypes.STRING(10),
                 allowNull: false,
-                comment: "The minimum requirement of the RAM storage."
+                comment: "A minimum rendszer követelményben meghatározott memória"
             },
 
             minGpu: {
                 type: DataTypes.STRING(100),
                 allowNull: false,
-                comment: "The minimum requirement of the GPU."
+                comment: "A minimum rendszer követelményben meghatározott videókártya"
             },
 
             minDirectx: {
                 type: DataTypes.STRING(20),
                 allowNul: false,
-                comment: "The minimum requirement of the DirectX version."
+                comment: "A minimum rendszer követelményben meghatározott DirectX verziója"
             },
 
             op: {
                 type: DataTypes.STRING(50),
-                comment: "The recommended requirement of the operation system"
+                comment: "Az ajánlott rendszer követelményben meghatározott operációs rendszer"
             },
 
             cpu: {
                 type: DataTypes.STRING(100),
-                comment: "The recommended requirement of the CPU."
+                comment: "Az ajánlott rendszer követelményben meghatározott processzor"
             },
 
             ram: {
                 type: DataTypes.STRING(10),
-                comment: "The recommended requirement of the RAM storage."
+                comment: "Az ajánlott rendszer követelményben meghatározott memória"
             },
 
             gpu: {
                 type: DataTypes.STRING(100),
-                comment: "The recommended requirement of the GPU."
+                comment: "Az ajánlott rendszer követelményben meghatározott videókártya"
             },
 
             directx: {
                 type: DataTypes.STRING(20),
-                comment: "The recommended requirement of the DirectX version."
+                comment: "Az ajánlott rendszer követelményben meghatározott DirectX verzió"
             },
 
             storage: {
                 type: DataTypes.STRING(10),
                 allowNul: false,
-                comment: "The needed free space needed on a secondary storage."
+                comment: "Az rendszer követelményben meghatározott háttártáron szükséges szabad hely"
             },
 
             sidenote: {
                 type: DataTypes.STRING,
-                comment: "Some other requirement that couldn't be specified in the other columns."
+                comment: "Egyéb rendszerkövetelmény"
             },
             
         },
         {
             sequelize,
             modelName: "Pcspec",
-            comment: "Stores a game's pc requirements."
+            comment: "A játékok rendszer követelményeit tárolja"
         }
     );
 

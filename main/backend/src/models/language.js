@@ -14,13 +14,13 @@ Language.init ({
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique: true,
-                comment: "The name of the language."
+                comment: "A nyelv neve"
             },
         },
         {
             sequelize,
             modelName: "Language",
-            comment: "Stores the various langauges that usually supported in games."
+            comment: "A játékokban előforduló nyelveket tárolja"
         }
     );
 export default Language;
