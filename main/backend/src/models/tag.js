@@ -11,7 +11,7 @@ Tag.init ({
             },
 
             tag: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(40),
                 allowNull: false,
                 unique: true,
                 comment: "A címke neve"

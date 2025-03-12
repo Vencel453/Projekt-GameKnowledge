@@ -17,7 +17,7 @@ Award.init ({
             },
 
             name: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(100),
                 allowNull: false,
                 comment: "A díj kategóriája/neve"
             },

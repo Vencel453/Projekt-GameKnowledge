@@ -1,6 +1,6 @@
 import { compactDecrypt, EncryptJWT} from "jose";
 import crypto from "crypto";
-import User from "../models/user";
+import User from "../models/user.js";
 
 // A token titkosításához használt kulcs egy random szám, Uint8Array típusú, mert a titkosításhoz ilyen típusú objektum kell
 // Ez a kulcs minden szerver indításnál új, amely tovább növeli a bztonságot

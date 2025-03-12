@@ -1,7 +1,6 @@
 import Favourite from "../models/favourite.js";
 import Game from "../models/game.js";
 import jweMethods from "../utilities/jwe.methods.js";
-import User from "../models/user.js";
 
 export default {
     // Ez a metódus lekérdezi az adott bejelentkezett felhasználó kedvencekbe mentett játékait
@@ -53,7 +52,7 @@ export default {
             // nem fér hozzá ehhez a funkcióhoz
             const userId = await jweMethods.GetUserId(req);
             if (userId === undefined) {
-                res.status(404).json({
+                res.status(401).json({
                     error: true,
                     message: "The token is empty or faulty!"
                 });

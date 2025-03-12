@@ -11,7 +11,7 @@ Studio.init ({
             },
 
             name: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(50),
                 allowNull: false,
                 unique: true,
                 comment: "A stúdió neve"

@@ -11,7 +11,7 @@ User.init ({
             },
 
             username: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(30),
                 allowNull: false,
                 unique: true,
                 comment: "A felhasználó által megadott becenév"

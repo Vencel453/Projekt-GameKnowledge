@@ -11,18 +11,18 @@ Game.init ({
             },
 
             gameTitle: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(350),
                 allowNull: false,
                 comment: "A játék címe"
             },
 
             altGameTitle: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(350),
                 comment: "A játék esetleges alternatív címe"
             },
 
             description: {
-                type: DataTypes.TEXT,
+                type: DataTypes.STRING,
                 allowNull: false,
                 comment: "Rövid leírás a játékról"
             },
@@ -44,7 +44,7 @@ Game.init ({
             },
 
             controllerSupport: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 comment: "A játék kontroller támogatásának száma, a NULL azt jelenti hogy nem releváns, a 0 hogy nincs támogatás, az 1 hogy csak xbox típusú kontrollert támogat, a 2 hogy az xbox mellet a playstation részleges támogatást kap, a 3 hogy xbox és playstation kontrollert is teljesen támogat"
             },
 

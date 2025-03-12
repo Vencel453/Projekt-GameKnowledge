@@ -21,7 +21,7 @@ Actor.init ({
             },
 
             profilePicture: {
-                type: DataTypes.STRING(100),
+                type: DataTypes.STRING,
                 comment: "A színészről tárolt kép elérési útvonala"
             },
         },

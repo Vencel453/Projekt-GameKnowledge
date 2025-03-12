@@ -11,7 +11,7 @@ Creation.init ({
             },
 
             field: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(50),
                 comment: "A személy munkaterületét írja le"
             },
         },
