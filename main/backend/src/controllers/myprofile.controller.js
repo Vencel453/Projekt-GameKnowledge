@@ -24,14 +24,6 @@ export default {
                 }
             });
 
-            // Ha az adatbázisban nincs ilyen felhasználó, akkor hiba üzenetet küldünk
-            if (!user) {
-                res.status(401).json({
-                    error: true,
-                    message: "The token is missing or faulty!"
-                });
-            }
-
             // Végül a válaszban visszaadjuk a felhasználó adatait
             res.status(200).json({
                 error: false,

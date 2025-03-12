@@ -1,5 +1,6 @@
 import { compactDecrypt, EncryptJWT} from "jose";
 import crypto from "crypto";
+import User from "../models/user";
 
 // A token titkosításához használt kulcs egy random szám, Uint8Array típusú, mert a titkosításhoz ilyen típusú objektum kell
 // Ez a kulcs minden szerver indításnál új, amely tovább növeli a bztonságot
@@ -91,10 +92,26 @@ export default {
         }
 
         let id = 0;
-        // Dekódoljuk a token-t majd az abból szükszéges adatot, vagyis az azonosítót visszaküldjük
+        // Dekódoljuk a token-t majd a megfelelő formátumba hozzuk
         await compactDecrypt(token, securekey)
-            .then((decodedToken) => {
+            .then(async(decodedToken) => {
                 const currentPayload = JSON.parse(decodedToken.plaintext.toString("utf8"));
+
+                // Ellenőrizzük hogy az adatbázisban van ilyen felhasználó
+                const isInTheDatabase = await User.findOne({
+                    attributes: ["id", "username"],
+                    where: {
+                        id: currentPayload.id,
+                        username: currentPayload.username
+                    }
+                });
+
+                // Ha nincs, akkor a undefined értéket küldünk vissza
+                if (!isInTheDatabase) {
+                    id = undefined
+                }
+
+                // Ha az ellenőrzésen átment, akkor elmentjük a felhasználó azonosítóját
                 id = currentPayload.id;
             })
             .catch((error) => {

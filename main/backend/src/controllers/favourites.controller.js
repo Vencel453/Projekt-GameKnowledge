@@ -17,22 +17,6 @@ export default {
                 });
                 return;
             }
-
-            // Az azonosító alapján megkeressük a felhasználót
-            const user = await User.findOne({
-                attributes: ["username", "email", "admin", "creation"],
-                where: {
-                    id: userId
-                }
-            });
-
-            // Ha az adatbázisban nincs ilyen felhasználó, akkor hiba üzenetet küldünk
-            if (!user) {
-                res.status(401).json({
-                    error: true,
-                    message: "The token is missing or faulty!"
-                });
-            }
             
             // A felhasználó azonosítója alapján megkeressük az összes kedvencekbe elmentett játékokat, majd vissz adjuk a válaszban
             const favourites = await Game.findAll({
@@ -74,22 +58,6 @@ export default {
                     message: "The token is empty or faulty!"
                 });
                 return;
-            }
-
-            // Az azonosító alapján megkeressük a felhasználót
-            const user = await User.findOne({
-                attributes: ["username", "email", "admin", "creation"],
-                where: {
-                    id: userId
-                }
-            });
-
-            // Ha az adatbázisban nincs ilyen felhasználó, akkor hiba üzenetet küldünk
-            if (!user) {
-                res.status(401).json({
-                    error: true,
-                    message: "The token is missing or faulty!"
-                });
             }
             
             // Ha nem kapjuk meg a játék azonosítóját, akkor erre hiba üzenetet küldünk
