@@ -51,7 +51,7 @@
         <button class="optionbuttons" id="ratethegame" (click)="RateGame()">Rate the game!</button>
         </div>
 
-        <button class="optionbuttons" id="addtofavourites" (click)="AddtoFavourites()">Add to favourites! <img id="favouritehearth" src="./hearth.png" alt="hearth"></button>
+        <button class="optionbuttons" id="addtofavourites" (click)="AddtoFavourites()">Add to favourites!</button>
         <br>
         <div class="gallery" *ngIf="gameData.gallery.length > 0">
             <h3 id="gallery">Gallery</h3>
@@ -287,9 +287,9 @@
 
 <hr class="dividerline">
 
-<div class="eightsection">
+<div class="eightsection" *ngIf="gameData">
     <app-reviews
-    [gameId]="gameData.gameId"
+    [id]="gameId"
     [reviews]="gameData.reviews || []">
 </app-reviews>
 </div>

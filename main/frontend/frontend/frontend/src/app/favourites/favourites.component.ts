@@ -5,7 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { FavouritesService, IFavouriteGame } from '../../favourite.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { response } from 'express';
 
 @Component({
   selector: 'app-favourites',

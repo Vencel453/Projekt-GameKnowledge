@@ -2,6 +2,7 @@
     text-align: center;
     margin-bottom: 1rem;
     color: white;
+    padding: 0 1rem;
 }
 
 #altTitle{
@@ -9,8 +10,9 @@
 }
 
 .dividerline {
-    border-width: 5px;
-    color: black;
+    border: 3px solid black;
+    margin: 2rem auto;
+    width: 90%;
 }
 
 #gallery {
@@ -18,30 +20,23 @@
 }
 
 .firstsection{
-    display: flex;
+    display: grid;
     gap: 2rem;
     color: white;
-    flex-wrap: wrap;
+    padding: 0 1rem;
+    grid-template-columns: 1fr;
 }
 
 .leftpanel{
-    flex: 1 1 300px;
-    min-width: 250px;
-    .boxart {
-        max-width: 70%;
-        display: block;
-        margin: 0 auto 1rem;
-    }
+    display: grid;
+    place-items: center;
 }
-
-@media (max-width: 768px){
-    .firstsection{
-        flex-direction: column;
-    }
-
-    .leftpanel, .rightpanel {
-        flex: 1 1 auto;
-    }
+.boxart {
+     width: min(100%, 400px);
+     height: auto;
+     margin: 0 auto;
+     aspect-ratio: 2/3;
+     object-fit: cover;
 }
 
 .rategame {
@@ -53,13 +48,15 @@
     background-color: #A0B6F7;
     color: black;
     font-weight: bold;
-    padding: 0.5em 1em;
+    padding: 12px 24px;
     border: none;
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
     transition: backround-color 0.3s ease, transform 0.3s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    min-width: 120px;
+    touch-action: manipulation;
 }
 
 .optionbuttons:hover{
@@ -163,14 +160,10 @@
 }
 
 .secondsection{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    gap: 1em;
-    width: 100%;
-    text-align: center;
+    display: grid;
+    gap: 2rem;
+    padding: 1rem;
+    grid-template-columns: 1fr;
 }
 
 .genres{
@@ -222,9 +215,9 @@
 
 .controllericons{
     display: grid;
-    grid-template-columns: auto auto;
-    align-items: center;
-    row-gap: 0.2em;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    place-items: center;
+    gap: 1rem;
 }
 
 .controllericons img{
@@ -390,7 +383,9 @@
 
 #showmore1 {
     text-align: center;
-    margin-left: 47%;
+    margin: 1rem auto;
+    display: block;
+    width: fit-content;
 }
 
 .sixthsection{
@@ -459,13 +454,18 @@
 }
 
 .cast-container {
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(200px, 1fr);
     overflow-x: auto;
-    scroll-behavior: smooth;
-    gap: 1rem;
-    padding: 1rem;
-    scrollbar-width: none;
-    background: transparent;
+    gap: 4rem;
+    padding: 1rem 0;
+    scroll-snap-type: x mandatory;
+    > * {scroll-snap-align: start;}
+}
+
+.cast-container > * {
+    scroll-snap-align: start;
 }
 
 .cast-container::-webkit-scrollbar {
@@ -482,11 +482,11 @@
 }
 
 .photo {
-    width: 250px;
-    height: 350px;
+    width: min(100%, 250px);
+    height: auto;
+    aspect-ratio: 3/4;
     object-fit: cover;
     border-radius: 5px;
-    display: block;
     margin: 0 auto;
 }
 
@@ -512,8 +512,9 @@
 }
 
 .arrow img {
-    width: 30px;
-    height: auto;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
 }
 
 .modaloverlay {
@@ -533,6 +534,7 @@
     position: relative;
     max-width: 90%;
     max-height: 90%;
+    width: min(90vw, 1200px);
 }
 
 .modalcontent img {
@@ -554,4 +556,37 @@
     line-height: 30px;
     text-align: center;
     cursor: pointer;
+}
+
+h1 {font-size: clamp(1.5rem, 5vw, 2.5rem);}
+h2 {font-size: clamp(1.2rem, 3vw, 1.8rem);}
+h3 {font-size: clamp(1.1rem, 2.5vw, 1.5rem);}
+
+@media (min-width: 576px) {
+    .firstsection {
+        grid-template-columns: 1fr 2fr;
+    }
+
+    .secondsection {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(min-width: 992px){
+    .ageratings {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .description {
+        line-height: 1.6;
+        max-width: 80ch;
+        margin: 0 auto;
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
 }

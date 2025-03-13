@@ -9,7 +9,6 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
 import { FavouritesComponent } from './favourites/favourites.component';
 import { NotauthorizatedComponent } from './notauthorizated/notauthorizated.component';
 import { SocialmediaComponent } from './socialmedia/socialmedia.component';
-import { CopyrightComponent } from './copyright/copyright.component';
 import { DataprotectionComponent } from './dataprotection/dataprotection.component';
 import { UsertermsComponent } from './userterms/userterms.component';
 
@@ -23,7 +22,6 @@ export const routes: Routes = [
     {path: 'favourites', component: FavouritesComponent},
     {path: 'notauthorizated', component: NotauthorizatedComponent},
     {path: 'socialmedia', component: SocialmediaComponent},
-    {path: 'copyright', component: CopyrightComponent},
     {path: 'dataprotection', component: DataprotectionComponent},
     {path: 'userterms', component: UsertermsComponent},
     {path: '**', component: PageNotFoundComponent}

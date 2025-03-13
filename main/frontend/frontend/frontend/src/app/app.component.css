@@ -2,6 +2,10 @@
 
 .navbar {
     display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    position: relative;
     align-items: center;
     justify-content: flex-start;
     background-color: #A0B6F7;
@@ -10,11 +14,14 @@
 }
 
 .navbar-brand img {
-    width: 100px;
+    width: clamp(80px, 15vw, 100px);
 }
 
 .search-container {
     display: flex;
+    flex: 1 1 300px;
+    min-width: 250px;
+    position: relative;
     align-items: center;
     flex-grow: 1;
     justify-content: flex-start;
@@ -22,9 +29,9 @@
 }
 
 .search-input {
-    padding: 5px 10px;
-    font-size: 14px;
-    width: 200px;
+    padding: 0.8rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    width: 100%;
 }
 
 .container-fluid{
@@ -50,7 +57,7 @@ body{
     border: 1px solid black;
     border-top: none;
     z-index: 100;
-    max-height: 300px;
+    max-height: 50vh;
     overflow-y: auto;
 }
 
@@ -139,6 +146,8 @@ body{
     border: none;
     background: none;
     cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1000;
 }
 
 .menu i{
@@ -160,13 +169,16 @@ body{
 .menucontent{
     list-style-type: none;
     position: absolute;
-    top: 100px;
-    right: 10px;
+    top: 100%;
+    right: 0;
     background-color: #A0B6F7;
     border-radius: 5px;
     box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
     display: block;
     z-index: 9999;
+    width: 100%;
+    transition: transform 0.3s ease-out;
+    transform-origin: top right;
 }
 
 .menucontent li{
@@ -198,6 +210,9 @@ body{
 
 .menu-container {
     display: flex;
+    order: 3;
+    width: 100%;
+    justify-content: flex-end;
     align-items: center;
     gap: 20px;
     margin-left: 20px;
@@ -212,6 +227,7 @@ body{
 .divider{
     width: 1px;
     height: 100%;
+    display: none;
 }
 
 .flex-grow-1{
@@ -220,8 +236,8 @@ body{
 
 .socialmedia{
     display: flex;
-    height: 50px;
-    width: 50px;
+    height: clamp(30px, 8vw, 50px);
+    width: clamp(30px, 8vw, 50px);
 }
 
 .footer{
@@ -234,10 +250,7 @@ body{
     font-weight: bold;
     text-decoration: underline;
     color: black;
-}
-
-#copyright:hover{
-    color: white;
+    font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
 #footerdivider{
@@ -249,6 +262,9 @@ body{
     font-weight: bold;
     color: black;
     text-decoration: none;
+    display: block;
+    margin: 0.5rem 0;
+    font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
 .thirdpart:hover{
@@ -308,6 +324,38 @@ body{
     }
 }
 
+@media (max-width: 768px){
+    .navbar {
+        gap:0.5rem;
+        padding: 0.5rem;
+    }
+
+    .search-container{
+        order: 2;
+        margin: 0;
+    }
+
+    .myprofile{
+        padding-right: 0;
+        justify-content: center;
+    }
+
+    .menucontent li{
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+
+    #footerdivider{
+        height: 20px;
+    }
+}
+
+@media (min-width: 769px){
+    .menu{
+        display: none;
+    }
+}
+
 #notloggedinminimenu{
     font-size: larger;
     font-weight: bold;
@@ -315,4 +363,10 @@ body{
 
 .socialmedia {
     cursor: pointer;
+}
+
+.footer .row{
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
 }

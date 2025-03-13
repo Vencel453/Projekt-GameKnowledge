@@ -53,3 +53,9 @@
     background: transparent !important;
     box-shadow: none !important;
 }
+
+:root {
+    --phone-breakpoint: 576px;
+    --tablet-breakpoint: 768px;
+    --desktop-breakpoint: 992px;
+}

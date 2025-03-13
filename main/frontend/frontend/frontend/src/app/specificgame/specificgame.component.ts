@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { GameDetailsService } from "../../gamedetails.service";
-import { IGamesDetails } from "../../gamedetails.model";
+import { IGamesDetails, IReview } from "../../gamedetails.model";
 import { CommonModule } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
-import { Subject, takeUntil } from "rxjs";
+import { Subject, takeUntil, switchMap } from "rxjs";
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Authservice } from "../authservice";
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,6 +22,7 @@ import { FormsModule } from "@angular/forms";
 })
 export class SpecificgameComponent implements OnInit {
     gameData!: IGamesDetails;
+    gameId!: number;
 
     selectedImg: string | null = null;
 
@@ -131,32 +132,30 @@ export class SpecificgameComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.pipe(
-            takeUntil(this.destroy$)
-        ).subscribe(params => {
-            this.route.params.subscribe(params => {
+            takeUntil(this.destroy$),
+            switchMap(params => {
                 const gameId = +params['id'];
-                this.gameService.getGamesDetailsByID(gameId).subscribe({
-                    next: (response) => {
-                        console.log("Backend response: ", response);
-                        if (!response.error){
-                            this.gameData = response.datas;
-                            console.log("gamedata: ", this.gameData);
-                            if(this.gameData.languages?.length){
-                                this.voicesLanguages = this.gameData.languages
-                                .filter(lang => lang['Games.Gameslanguage.dub'] === 1)
-                                .map(lang => lang.language);
+                this.gameId = gameId;
+                return this.gameService.getGamesDetailsByID(gameId);
+            })
+        ).subscribe({
+            next: (response) => {
+                if (!response.error){
+                    this.gameData = response.datas;
+                    if(this.gameData.languages?.length){
+                        this.voicesLanguages = this.gameData.languages
+                        .filter(lang => lang['Games.Gameslanguage.dub'] === 1)
+                        .map(lang => lang.language);
 
-                                this.subtitlesLanguages = this.gameData.languages
-                                .filter(lang => lang['Games.Gameslanguage.dub'] === 0)
-                                .map(lang => lang.language);
-                            }
-                        }
-                    },
+                        this.subtitlesLanguages = this.gameData.languages
+                        .filter(lang => lang['Games.Gameslanguage.dub'] === 0)
+                        .map(lang => lang.language);
+                    }
+                }
+            },
                     error: (err) => {
                         console.error(err);
                     }
-        })
-            })
         });
     }
 

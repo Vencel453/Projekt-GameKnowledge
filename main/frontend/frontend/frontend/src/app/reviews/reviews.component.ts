@@ -23,7 +23,7 @@ export interface Review {
   styleUrl: './reviews.component.css'
 })
 export class ReviewsComponent implements OnInit {
-    @Input() gameId!: number;
+    @Input() id!: number;
     @Input() reviews: Review[] = [];
 
     showAllReviews: boolean = false;
@@ -80,7 +80,7 @@ export class ReviewsComponent implements OnInit {
         return;
       }
 
-      const backendurl = `http://localhost:3000/game/${this.gameId}/review`;
+      const backendurl = `http://localhost:3000/game/${this.id}/review`;
       const payload = {
         title: this.reviewTitle,
         content: this.reviewcontent
@@ -103,6 +103,7 @@ export class ReviewsComponent implements OnInit {
           this.reviewTitle = '';
           this.reviewcontent = '';
           this.isSubmitting = false;
+          window.location.reload();
         },
         error: (err) => {
           this.snackBar.open('Failed to submit the review!', 'Close', {duration: 10000, panelClass: 'custombar'});
@@ -116,7 +117,7 @@ export class ReviewsComponent implements OnInit {
         this.snackBar.open('You must be logged in to use this feature!', 'Close', {duration: 10000, panelClass: 'custombar'});
         return;
       }
-      const backendurl = `http://localhost:3000/game/${this.gameId}/review`;
+      const backendurl = `http://localhost:3000/game/${this.id}/review`;
         this.http.request<any>('delete', backendurl, {body: {reviewId}}).subscribe({
           next: (response) => {
             this.snackBar.open(response.message, 'Close', {duration: 10000, panelClass: 'custombar'});

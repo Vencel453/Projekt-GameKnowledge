@@ -39,7 +39,6 @@ export class Authservice {
 }
 
    login(token: string, username: string, isAdmin: boolean){
-    console.log("Token recieved: ", token);
     if (this.isLocalStorageAvailable()){
     localStorage.setItem('token', token);
     localStorage.setItem('username', username);

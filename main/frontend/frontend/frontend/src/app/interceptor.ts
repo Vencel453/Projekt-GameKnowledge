@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
-import {Injectable, Inject, PLATFORM_ID, inject} from "@angular/core";
+import {Injectable, PLATFORM_ID, inject} from "@angular/core";
 import { Authservice } from "./authservice";
 import { catchError, Observable, tap, throwError } from "rxjs";
 import { isPlatformBrowser } from "@angular/common";

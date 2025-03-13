@@ -1,6 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { BehaviorSubject, catchError, Observable, tap, throwError } from "rxjs";
+import { Authservice } from "./app/authservice";
 
 export interface IFavouriteGame {
     id: number;
@@ -17,12 +19,12 @@ export class FavouritesService {
 
     favourites$ = this.favouritesSubject.asObservable();
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private snackBar: MatSnackBar, private authservice: Authservice) {}
 
     fetchFavourites(): void {
         this.http.get<{error: boolean, message: string, favourites: IFavouriteGame[]}>(this.backendURL)
         .pipe(
-            catchError(this.handleError)
+            catchError(this.handleError.bind(this))
         )
         .subscribe(response => {
             if(!response.error){
@@ -42,7 +44,7 @@ export class FavouritesService {
                     this.fetchFavourites();
                 }
             }),
-            catchError(this.handleError)
+            catchError(this.handleError.bind(this))
         );
     }
 
@@ -58,13 +60,16 @@ export class FavouritesService {
               this.fetchFavourites();
             }
           }),
-          catchError(this.handleError)
+          catchError(this.handleError.bind(this))
         );
       }
 
     private handleError(error: HttpErrorResponse){
-        console.error(error);
-        return throwError(() => new Error('Something went wrong try again'));
+        if (error.status === 401) {
+            this.authservice.logout();
+            this.snackBar.open('Your session is over, please login again!', 'Close', {duration: 10000, panelClass: 'custombar'});
+        }
+        return throwError(() => new Error('Something went wrong'));
     }
 
 }
