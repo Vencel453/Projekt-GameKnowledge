@@ -43,8 +43,7 @@ export default {
             // Megnézzük hogy a token érvényes-e, ha nem, akkor nem cserélünk token-t
             let validToken = true;
             const decodedToken = await compactDecrypt(currentToken, securekey)
-                .catch((error) => {
-                    console.log(error);
+                .catch(() => {
                     validToken = false;
                 });
 

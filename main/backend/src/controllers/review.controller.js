@@ -272,7 +272,7 @@ export default {
     
             res.status(200).json({
                 error: false,
-                message: "There's review has been deleted!"
+                message: "The review has been deleted!"
             });
             return;
         }

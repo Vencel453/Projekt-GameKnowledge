@@ -56,14 +56,6 @@ export default {
                 return;
             }
 
-            // Ha az adatbázisban nincs ilyen felhasználó, akkor hiba üzenetet küldünk
-            if (!user) {
-                res.status(401).json({
-                    error: true,
-                    message: "The token is missing or faulty!"
-                });
-            }
-
             // Konstansként lementjük a req.body-ban lévő értékékeket, illetve létrehozunk egy objektumot, amely leköveti hogy
             // a felhasználó milyen adatokat változtat és hogy mire
             const {username, email, password, passwordAgain} = req.body;
@@ -79,7 +71,7 @@ export default {
                 // Ha a megadott felhasználó név ugyanaz mint az eredeti, akkor hiba üzenetet küldünk
                 if (username === user.username) {
                     res.status(409).json({
-                        error: "true",
+                        error: true,
                         message: "The username is the same as the original!"
                     });
                     return;
@@ -89,7 +81,7 @@ export default {
                 const conflictingUsername = await User.findOne({where: {username: username}});
                 if (conflictingUsername) {
                     res.status(409).json({
-                        error: "true",
+                        error: true,
                         message: "There's already an user with this username!"
                     });
                     return;
@@ -98,7 +90,7 @@ export default {
                     // Megnézzük hogy a felhasználónév formátuma helyes, ha nem akkor hiba üzenetet küldünk
                     if (validationMethods.CheckUsername(username) === false) {
                         res.status(400).json({
-                            error: "true",
+                            error: true,
                             message: "The username is not in the correct length or contains space!"
                         });
                         return;
@@ -106,7 +98,7 @@ export default {
                     // Megnézzük hogy a felhasználónév tartalmaz-e káromkodást, ha igen, akkor hiba üzenetet küldünk
                     if (validationMethods.CheckProfanity(username) === true) {
                         res.status(400).json({
-                            error: "true",
+                            error: true,
                             message: "The username contains profanity!"
                         });
                         return;
@@ -123,7 +115,7 @@ export default {
                 // Ellenőrizzük hogy az megadott új email nem-e egyezik a régivel, ha igen, erre hiba üzenetet küldünk
                 if (email === user.email) {
                     res.status(409).json({
-                        error: "true",
+                        error: true,
                         message: "The email is the same as the original!"
                     });
                     return;
@@ -134,7 +126,7 @@ export default {
                 const conflictingEmail = await User.findOne({where: {email: email}});
                 if (conflictingEmail) {
                     res.status(409).json({
-                        error: "true",
+                        error: true,
                         message: "There's already an user with this email address!"
                     });
                     return;
@@ -150,7 +142,7 @@ export default {
                 // Ha hiányzik a jelszó megerősítés, akkor hiba üzenetet küldünk
                 if (!passwordAgain) {
                     res.status(400).json({
-                        error: "true",
+                        error: true,
                         message: "The password confirmation is empty!"
                     });
                     return;
@@ -163,7 +155,7 @@ export default {
                             // Megnézzük hogy a új jelszó megegyezik-e a régi jelszóval, ha igen, akkor erre egy hibát küldünk
                             if (bcryptMethods.Comparing(password, user.password) === true) {
                                 res.status(400).json({
-                                    error: "true",
+                                    error: true,
                                     message: "The password is the same as the original!"
                                 });
                                 return;
@@ -177,7 +169,7 @@ export default {
                         } 
                         else {
                             res.status(400).json({
-                                error: "true",
+                                error: true,
                                 message: "The password is in incorrect form!"
                             });
                             return;
@@ -185,7 +177,7 @@ export default {
                     }
                     else {
                         res.status(400).json({
-                            error: "true",
+                            error: true,
                             message: "The passwords don't match!"
                         });
                         return;
@@ -196,7 +188,7 @@ export default {
                 // Ha a jelszó mező üres, de a megerősítésnek van tartalma akkor erre hibát adunk
                 if (passwordAgain) {
                     res.status(400).json({
-                        error: "true",
+                        error: true,
                         message: "The password field is empty!"
                     });
                     return;
@@ -228,7 +220,7 @@ export default {
             // tudjuk hogy az email cím formátumával van a gond, erre hiba üzenetet küldünk
             if (error.name === "SequelizeValidationError") {
                 res.status(400).json({
-                    error: "true",
+                    error: true,
                     message: "The email is in incorrect form!"
                 });
                 return;

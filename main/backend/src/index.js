@@ -135,7 +135,7 @@ await sequelize.authenticate()
     .then(() => {
         console.log("The test connection to the server was succesfull!");
         // Szinkronizáljuk a modeleket az adatbázissal
-        sequelize.sync({force: true, alter: true})
+        sequelize.sync()
         .then(() => {
             console.log("The database sync was succesfull!");
             app.listen(PORT, () => {

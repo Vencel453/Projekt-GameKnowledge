@@ -12,7 +12,7 @@ export default {
         // Ha bármelyik mező üres, akkor az ahhoz megfelelő hiba kódot és üzenetet küldük
             if (!loginUsername || !loginPassword) {
                 res.status(400).json({
-                    error: "true",
+                    error: true,
                     message: "Not every field was filled!"
                 });
                 return;
@@ -41,7 +41,7 @@ export default {
 
                 res.setHeader("Authorization", `Bearer ${token}`);
                 res.status(200).json({
-                    error: "false",
+                    error: false,
                     message: "Succefull login",
                     isAdmin: correctUser.admin,
                     token: token
@@ -50,7 +50,7 @@ export default {
             } 
             else {
                 res.status(400).json({
-                    error: "true",
+                    error: true,
                     message: "The username or password is incorrect!"
                 });
                 return;
@@ -61,7 +61,7 @@ export default {
         catch (error) {
             console.log(error);
             res.status(500).json({
-                error: "true",
+                error: true,
                 message: "Something went wrong during the login!"
             });
             return;

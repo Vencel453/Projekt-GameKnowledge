@@ -9,7 +9,6 @@ export default {
         try {
             // Konstansként elmentjük azokat az adatokat amelyeket bekérünk a felhasználótól, mert ezek nem változnak
             const { username: registUsername, password: registPassword, passwordAgain: registPasswordAgain, email: registEmail} = req.body;
-            console.log(req.body);
 
             // Ha a valamelyik mező nincs kitöltve akkor akkor 400-as hibával visszaküldi, hogy hiba történt, 
             // mert nem volt minden mező kitöltve és ezeket kötelező kitölteni

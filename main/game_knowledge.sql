@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 12. 19:57
+-- Létrehozás ideje: 2025. Már 14. 18:31
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -406,9 +406,10 @@ CREATE TABLE `favourites` (
 --
 
 INSERT INTO `favourites` (`id`, `GameId`, `UserId`) VALUES
-(4, 1, 1),
+(1, 1, 1),
 (5, 2, 1),
-(6, 3, 1);
+(6, 3, 1),
+(7, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -713,10 +714,61 @@ INSERT INTO `gamesplatforms` (`id`, `GameId`, `PlatformId`) VALUES
 (3, 1, 6),
 (4, 1, 9),
 (5, 1, 10),
+(10, 2, 1),
+(11, 2, 6),
+(16, 3, 1),
+(12, 3, 3),
+(13, 3, 4),
+(15, 3, 7),
+(14, 3, 8),
+(17, 4, 1),
+(20, 4, 2),
+(21, 4, 4),
+(18, 4, 12),
+(19, 4, 16),
+(22, 5, 1),
+(23, 5, 5),
+(24, 5, 9),
+(25, 5, 14),
+(26, 6, 7),
+(27, 7, 1),
+(28, 8, 1),
+(29, 8, 5),
+(30, 8, 6),
+(31, 8, 9),
+(32, 8, 10),
+(33, 9, 1),
+(34, 9, 6),
+(35, 9, 10),
+(36, 10, 1),
+(37, 10, 6),
+(38, 10, 10),
+(39, 11, 6),
+(40, 12, 1),
+(41, 12, 6),
+(42, 12, 10),
+(43, 13, 1),
+(44, 13, 6),
+(45, 13, 10),
 (9, 14, 1),
 (6, 14, 5),
 (7, 14, 6),
-(8, 14, 10);
+(8, 14, 10),
+(46, 15, 1),
+(47, 15, 6),
+(48, 16, 6),
+(49, 17, 1),
+(50, 17, 6),
+(51, 17, 10),
+(52, 18, 1),
+(54, 18, 5),
+(55, 18, 6),
+(56, 18, 9),
+(57, 18, 10),
+(53, 18, 14),
+(58, 19, 1),
+(59, 19, 6),
+(60, 19, 10);
 
 -- --------------------------------------------------------
 
@@ -952,9 +1004,10 @@ INSERT INTO `ratings` (`id`, `positive`, `GameId`, `UserId`) VALUES
 (9, 0, 2, 1),
 (10, 0, 1, 16),
 (11, 1, 1, 17),
-(12, 1, 1, 18),
+(12, 0, 1, 18),
 (13, 1, 1, 19),
-(14, 0, 1, 20);
+(14, 0, 1, 20),
+(21, 0, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -976,6 +1029,8 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `title`, `content`, `date`, `UserId`, `GameId`) VALUES
+(1, 'The Biggest Comeback of Gaming', 'The game was a mess when it came out, but now the CDPR finally fixed the game (for the most part) and it became one of the best experince.', '2025-02-11', 2, 1),
+(2, 'Doesn\'t live up to the hype', 'Even after the 2.0 update, it\'s not that good. The protagonist backstory don\'t amount too much, the gameplay is fine, but kind of janky, and easiy broken by melee builds. The story is pretty mid and having Johnny in our head is very annoying, I just don\'t understand who tought having a narcissit as our secondary protagnoist a good idea.', '2025-02-28', 12, 1),
 (10, 'Revisiting Cyberpunk in 2024', 'I have to say, the game has definitely improved. Less bugs and some QOL improvements. But I honestly still don\'t see it. The base game is still flawed. The game is still a basic action adventure game, that doesn\'t do a very good job at it. I am playing it on hard, yet the game feels incredibly easy. The AI is still as dumb as it was before. I was fighting an enemy camp, they all gathered in the same spot, where they were getting killed off one by one by me. It never tried to flank me, it never tried to change strategies. I was running around, flanking, yet the enemy was still there. This was every single fight. The upgrades are fun, but what\'s the point if your enemies just stand there and wait for you to shoot them? ', '2025-01-12', 16, 1),
 (11, 'Overrated but good', 'A little contrarian, but I think it was just good, not great. I had fun with it but it\'s kind of a bad RPG IMO. I did find it was more like a 75% Grand Theft Auto 25% Assassin\'s Creed mashup. I found the story is pretty overrated, but I had a ton of fun just driving around doing side stuff in the world. Some of the characters are really good and fun to interact with, but I found some to be a total drag. Stylistically it is incredible. Again, just existing in the world is very fun. It makes driving around checking off boxes across the map easy to sink time into. The skill tree is cool to experiment with, but I did find the combat generally underwhelming, but still better than serviceable. Again, good but not great. I think if you are considering buying it at a price point you are comfortable with, it is a safe buy for sure. I just disagree with the people who put it on their best of all time lists. The open world stuff is the only aspect I would consider awesome.', '2025-02-20', 17, 1),
 (12, 'A Must-Play Now', 'With the 2.0 update and the Phantom Liberty expansion, it’s easily one of the best AAA experiences on the market. It’s become one of my favourite games of all time after putting about 50 hours and still a lot more to go. It’s visually incredible, with an immersive, well-developed world, a dark and tragic story and great characters. The gameplay is really fun and you can approach it in a bunch of different ways. Must-play game imo. ', '2025-03-01', 18, 1),
@@ -1147,9 +1202,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `admin`, `creation`) VALUES
 (1, 'Vencel453', '$2b$10$lU.v7i55wiLeE7gAUh51VOU00LXy1FpLvPtBKMKYObZMLBiGoSM8i', 'email@address.com', 1, '2024-11-27'),
-(2, 'BunyósPityu', '$2b$10$jEhSTQxawR1FDJ74oKdhdOAL5WD2GglD32wAKNBYNShBhFdK79C92', 'pityu@lopo.com', 0, '2024-11-27'),
+(2, 'Péter23', '$2b$10$jEhSTQxawR1FDJ74oKdhdOAL5WD2GglD32wAKNBYNShBhFdK79C92', 'pityu@goko.com', 0, '2024-11-27'),
 (12, 'KKevin78', '$2b$10$cJSrcZYmx9n8J.UiIHVDaeYXZDCExSh8HhJGMmZEiLYH6oR00u83O', 'kkevin@gmail.com', 0, '2025-02-28'),
-(15, 'Test123', '$2b$10$WlLnarQfWJki1SKDEeU.k./JPV2H0aug15KQuE2574s7/hsfxAqwK', 'cmon@pleaseee.com', 0, '2025-03-10'),
 (16, 'mdude723', '$2b$10$.OwXGxgt5x4RWYdXDp72z.c4ALg99lVNObeFzg4Zjd61/GToYX5ci', 'cmon@pleaseesse.com', 0, '2025-03-10'),
 (17, 'WingleDingleFingle', '$2b$10$qj5QoWCRn3/1XO6C4oxzweHFuWS8sAXop6EQa9G5AWoPKRs6CPDWm', 'cmon@pleaseessae.com', 0, '2025-03-10'),
 (18, 'Monkey-on-the-couch', '$2b$10$4ML/HdHp2RqOdEXGOIDtS.dMu9JXLTn5JI9cu2Ylxp7GjKXmquv7S', 'cmon@pleaseessaea.com', 0, '2025-03-10'),
@@ -1372,7 +1426,7 @@ ALTER TABLE `creators`
 -- AUTO_INCREMENT a táblához `favourites`
 --
 ALTER TABLE `favourites`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT a táblához `gamepictures`
@@ -1384,7 +1438,7 @@ ALTER TABLE `gamepictures`
 -- AUTO_INCREMENT a táblához `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT a táblához `gamesageratings`
@@ -1408,7 +1462,7 @@ ALTER TABLE `gameslanguages`
 -- AUTO_INCREMENT a táblához `gamesplatforms`
 --
 ALTER TABLE `gamesplatforms`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT a táblához `gamestags`
@@ -1438,13 +1492,13 @@ ALTER TABLE `platforms`
 -- AUTO_INCREMENT a táblához `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT a táblához `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT a táblához `studios`
@@ -1468,7 +1522,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Megkötések a kiírt táblákhoz
