@@ -12,16 +12,19 @@ Creator.init ({
 
             firstName: {
                 type: DataTypes.STRING(100),
+                comment: "A készítő keresztneve"
             },
 
             lastName: {
                 type: DataTypes.STRING(100),
+                comment: "A készítő vezetékneve"
             },
 
         },
         {
             sequelize,
-            modelName: "Creator"
+            modelName: "Creator",
+            comment: "A játékokban részvevő készítőket tárolja"
         }
     );
 

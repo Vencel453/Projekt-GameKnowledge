@@ -12,19 +12,23 @@ Actor.init ({
 
             firstName: {
                 type: DataTypes.STRING(100),
+                comment: "A színész keresztneve"
             },
 
             lastName: {
                 type: DataTypes.STRING(100),
+                comment: "A színész vezetékneve",
             },
 
             profilePicture: {
-                type: DataTypes.STRING(100),
+                type: DataTypes.STRING,
+                comment: "A színészről tárolt kép elérési útvonala"
             },
         },
         {
             sequelize,
-            modelName: "Actor"
+            modelName: "Actor",
+            comment: "A színészek adatait tárolja"
         });
 
 export default Actor;

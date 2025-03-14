@@ -14,18 +14,21 @@ Studiosgame.init ({
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: 0,
+                comment: "A stúdió részt vett-e a játék fejlesztésében, a 0 nemet, az 1 igent jelent"
             },
 
             isPublisher: {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: 0,
+                comment: "A stúdió részt vett-e a játék kiadásában, a 0 nemet, az 1 igent jelent"
             },
 
         },
         {
             sequelize,
-            modelName: "Studiosgame"
+            modelName: "Studiosgame",
+            comment: "Összeköti a játékokat a hozzájuk tartozó stúdiókkal kiegészítve a stúdió szerepével"
         }
     );
 

@@ -14,11 +14,13 @@ Rating.init ({
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: 0,
+                comment: "Az értékelés, ha 0 az negatív értékelést jelent míg az 1 pozitívat"
             },
         },
         {
             sequelize,
-            modelName: "Rating"
+            modelName: "Rating",
+            comment: "A játékok felhasználói értékeléseit tárolja"
         }
     );
 

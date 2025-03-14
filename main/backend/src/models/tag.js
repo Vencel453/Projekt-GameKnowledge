@@ -11,14 +11,16 @@ Tag.init ({
             },
 
             tag: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(40),
                 allowNull: false,
-                unique: true
+                unique: true,
+                comment: "A címke neve"
             },
         },
         {
             sequelize,
-            modelName: "Tag"
+            modelName: "Tag",
+            comment: "Különböző címkéket tárol amivel a játékokat lehet besorolni"
         }
     );
 

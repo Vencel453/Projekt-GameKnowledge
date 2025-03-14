@@ -14,21 +14,25 @@ Review.init ({
     title: {
         type: DataTypes.STRING(100),
         allowNull: false,
+        comment: "A kritika címe"
     },
 
     content: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: false,
+        comment: "A kritika törzs szövege"
     },
 
     date: {
         type: DataTypes.DATEONLY,
-        allowNull: false
+        allowNull: false,
+        comment: "A kritika létrehozásának a dátuma"
     }
     },
     {
         sequelize,
-        modelName: "Review"
+        modelName: "Review",
+        comment: "A felhasználók által írt játék kritikákat tárolja"
     }
 );
 

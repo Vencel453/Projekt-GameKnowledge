@@ -263,6 +263,7 @@ export default {
                     release: game.release,
                     developers: developers,
                     publishers: publishers,
+                    allRatings: allRatings,
                     rating: rating,
                     agerating: agerating,
                     genres: genres,
@@ -389,7 +390,7 @@ export default {
             return;
         };
 
-         // Az URL-ben szereplő játék azonosított lementjük a megfelelő formátumban
+        // Az URL-ben szereplő játék azonosított lementjük a megfelelő formátumban
         const gameId = Number(req.params.gameId?.trim());
 
         // Ha a játék azonosító hiányzik vagy nem egy szám, akkor egy hiba üzenetet küldünk vissza
@@ -418,12 +419,15 @@ export default {
             return;
         };
 
-        // Lementjük a jelenlegi dátumot, majd megnézzük hogy az adott játék megjelent, ha nem, akkor a felhasználó nem tudja értékelni
+        // Először lementjük a játék megjelenési dátumot a megfelelő dátum formában, majd lementjük a jelenlegi dátumot, 
+        // utána megnézzük hogy az adott játék megjelent, ha nem, akkor a felhasználó nem tudja értékelni
         // és ez esetben egy hiba üzenetet adunk
-        const currentDate = new Date();
 
-        if (existingGame.release < currentDate) {
-            res.status(400).json({
+        const gamesReleaseDate = new Date(existingGame.release);
+        const currentDate = new Date();
+    
+        if (gamesReleaseDate > currentDate) {
+            res.status(401).json({
                 error: true,
                 message: "You can't rate a game when it's not released yet!"
             });

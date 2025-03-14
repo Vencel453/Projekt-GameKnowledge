@@ -12,11 +12,13 @@ Acting.init ({
 
             role: {
                 type: DataTypes.STRING(100),
+                comment: "A színész által eljátszott karakter"
             },
         },
         {
             sequelize, 
-            modelName: 'Acting'
+            modelName: "Acting",
+            comment: "A szénészek és játékokat kapcsolja össze kiegészítve a színész által eljátszott szereppel"
         }
     );
 

@@ -11,12 +11,14 @@ Creation.init ({
             },
 
             field: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(50),
+                comment: "A személy munkaterületét írja le"
             },
         },
         {
             sequelize,
-            modelName: "Creation"
+            modelName: "Creation",
+            comment: "Összeköti a készítőket az általuk részt vett játékokkal és hogy milyen téren vett részt"
         }
     );
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 10. 19:51
+-- Létrehozás ideje: 2025. Már 14. 18:31
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `actings` (
   `id` int(10) UNSIGNED NOT NULL,
-  `role` varchar(100) DEFAULT NULL,
+  `role` varchar(100) DEFAULT NULL COMMENT 'A színész által eljátszott karakter',
   `GameId` int(10) UNSIGNED DEFAULT NULL,
   `ActorId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A szénészek és játékokat kapcsolja össze kiegészítve a színész által eljátszott szereppel';
 
 --
 -- A tábla adatainak kiíratása `actings`
@@ -113,10 +113,10 @@ INSERT INTO `actings` (`id`, `role`, `GameId`, `ActorId`) VALUES
 
 CREATE TABLE `actors` (
   `id` int(10) UNSIGNED NOT NULL,
-  `firstName` varchar(100) DEFAULT NULL,
-  `lastName` varchar(100) DEFAULT NULL,
-  `profilePicture` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `firstName` varchar(100) DEFAULT NULL COMMENT 'A színész keresztneve',
+  `lastName` varchar(100) DEFAULT NULL COMMENT 'A színész vezetékneve',
+  `profilePicture` varchar(100) DEFAULT NULL COMMENT 'A színészről tárolt kép elérési útvonala'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A színészek adatait tárolja';
 
 --
 -- A tábla adatainak kiíratása `actors`
@@ -193,10 +193,10 @@ INSERT INTO `actors` (`id`, `firstName`, `lastName`, `profilePicture`) VALUES
 
 CREATE TABLE `ageratings` (
   `id` int(10) UNSIGNED NOT NULL,
-  `rating` varchar(10) NOT NULL,
-  `institution` varchar(4) NOT NULL,
-  `url` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `rating` varchar(10) NOT NULL COMMENT 'A korhatár besorolás',
+  `institution` varchar(4) NOT NULL COMMENT 'A korhatár besorolást intéző intézmény',
+  `url` varchar(255) NOT NULL COMMENT 'A korhatár besorolás képének az elérési útvonala'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Korhatár besorolások adatait tartalmazó tábla';
 
 --
 -- A tábla adatainak kiíratása `ageratings`
@@ -227,9 +227,9 @@ INSERT INTO `ageratings` (`id`, `rating`, `institution`, `url`) VALUES
 
 CREATE TABLE `awards` (
   `id` int(10) UNSIGNED NOT NULL,
-  `organizer` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `organizer` varchar(255) NOT NULL COMMENT 'A díj szervezője',
+  `name` varchar(100) NOT NULL COMMENT 'A díj kategóriája/neve'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Különböző intézmények díjak kategóriáját tartalmazza tartalmazza';
 
 --
 -- A tábla adatainak kiíratása `awards`
@@ -254,28 +254,15 @@ INSERT INTO `awards` (`id`, `organizer`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `blacklistedtokens`
---
-
-CREATE TABLE `blacklistedtokens` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `token` text NOT NULL,
-  `date` datetime NOT NULL,
-  `UserId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Tábla szerkezet ehhez a táblához `creations`
 --
 
 CREATE TABLE `creations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `field` varchar(255) DEFAULT NULL,
+  `field` varchar(50) DEFAULT NULL COMMENT 'A személy munkaterületét írja le',
   `GameId` int(10) UNSIGNED DEFAULT NULL,
   `CreatorId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Összeköti a készítőket az általuk részt vett játékokkal és hogy milyen téren vett részt';
 
 --
 -- A tábla adatainak kiíratása `creations`
@@ -341,9 +328,9 @@ INSERT INTO `creations` (`id`, `field`, `GameId`, `CreatorId`) VALUES
 
 CREATE TABLE `creators` (
   `id` int(10) UNSIGNED NOT NULL,
-  `firstName` varchar(100) DEFAULT NULL,
-  `lastName` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `firstName` varchar(100) DEFAULT NULL COMMENT 'A készítő keresztneve',
+  `lastName` varchar(100) DEFAULT NULL COMMENT 'A készítő vezetékneve'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A játékokban részvevő készítőket tárolja';
 
 --
 -- A tábla adatainak kiíratása `creators`
@@ -412,16 +399,17 @@ CREATE TABLE `favourites` (
   `id` int(10) UNSIGNED NOT NULL,
   `GameId` int(10) UNSIGNED DEFAULT NULL,
   `UserId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A felhasználók által a kedvencekbe mentett játékaikat tárolja';
 
 --
 -- A tábla adatainak kiíratása `favourites`
 --
 
 INSERT INTO `favourites` (`id`, `GameId`, `UserId`) VALUES
-(4, 1, 1),
+(1, 1, 1),
 (5, 2, 1),
-(6, 3, 1);
+(6, 3, 1),
+(7, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -431,9 +419,9 @@ INSERT INTO `favourites` (`id`, `GameId`, `UserId`) VALUES
 
 CREATE TABLE `gamepictures` (
   `id` int(10) UNSIGNED NOT NULL,
-  `url` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL COMMENT 'A képernyőkép elérési útvonala',
   `GameId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A játékok képernyőképeinek az elérési útvonalait tárolja';
 
 --
 -- A tábla adatainak kiíratása `gamepictures`
@@ -489,16 +477,16 @@ INSERT INTO `gamepictures` (`id`, `url`, `GameId`) VALUES
 
 CREATE TABLE `games` (
   `id` int(10) UNSIGNED NOT NULL,
-  `gameTitle` varchar(255) NOT NULL,
-  `altGameTitle` varchar(255) DEFAULT NULL,
-  `description` text NOT NULL,
-  `release` date NOT NULL,
-  `boxart` varchar(255) DEFAULT NULL,
-  `promoArt` varchar(255) DEFAULT NULL,
-  `controllerSupport` int(11) DEFAULT NULL,
-  `crossplatform` int(10) UNSIGNED DEFAULT NULL,
-  `crossPlatformException` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `gameTitle` varchar(350) NOT NULL COMMENT 'A játék címe',
+  `altGameTitle` varchar(350) DEFAULT NULL COMMENT 'A játék esetleges alternatív címe',
+  `description` varchar(255) NOT NULL COMMENT 'Rövid leírás a játékról',
+  `release` date NOT NULL COMMENT 'A játék legelső megjelenítési dátuma',
+  `boxart` varchar(255) DEFAULT NULL COMMENT 'A játék borító képének az elérési útvonala',
+  `promoArt` varchar(255) DEFAULT NULL COMMENT 'Egy olyan széles felbontású kép a játékról',
+  `controllerSupport` int(10) UNSIGNED DEFAULT NULL COMMENT 'A játék kontroller támogatásának száma, a NULL azt jelenti hogy nem releváns, a 0 hogy nincs támogatás, az 1 hogy csak xbox típusú kontrollert támogat, a 2 hogy az xbox mellet a playstation részleges támogatást kap, a 3 hogy xbox és playstation kontrollert is teljesen támogat',
+  `crossplatform` int(10) UNSIGNED DEFAULT NULL COMMENT 'A crossplay támogatás száma, a NULL azt jelenti hogy nem releváns, a 0 hogy nincs, az 1 hogy részleges támogatás, a 2 hogy teljes támogatás',
+  `crossPlatformException` varchar(255) DEFAULT NULL COMMENT 'Azt magyarázza hogy a részleges crossplay támogatást mit jelent az adott játék esetén'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A játékok egyedi adatait tárolja';
 
 --
 -- A tábla adatainak kiíratása `games`
@@ -514,13 +502,13 @@ INSERT INTO `games` (`id`, `gameTitle`, `altGameTitle`, `description`, `release`
 (7, 'StarCraft 2', NULL, 'Four years after the events of StarCraft: Brood War (1998), Jim Raynor fights against the Dominion and begins a search for artifacts when at the same time the Zerg attack once again.', '2010-07-27', 'pictures/boxarts/starcraft_2_2010_boxart.png', NULL, 0, NULL, NULL),
 (8, 'A Like a Dragon: Pirate Yakuza in Hawaii', NULL, 'Embark on an over-the-top, modern-day pirate adventure with an ex-yakuza, now pirate captain & his crew. Engage in exhilarating combat on land and sea in the hunt for lost memories and treasure.', '2025-06-23', 'pictures/boxarts/like_a_dragon_pirate_yakuza_in_hawaii_2025_boxart.png', 'pictures/promo/like_a_dragon_pirate_yakuza_in_hawaii_2025_promo.png', 3, NULL, NULL),
 (9, 'Metal Gear Solid Delta: Snake Eater', NULL, 'Discover the origin story of iconic military operative Snake and begin to unravel the plot of the legendary METAL GEAR series.', '2025-06-11', 'pictures/boxarts/metal_gear_solid_delta_snake_eater_2025_boxart.png', 'pictures/promo/metal_gear_solid_delta_2025_promo.png', NULL, NULL, NULL),
-(10, 'Doom: The Dark Ages', NULL, 'DOOM: The Dark Ages is the single-player, action FPS prequel to the critically acclaimed DOOM (2016) and DOOM Eternal. You are the DOOM Slayer, the legendary demon-killing warrior fighting endlessly against Hell. Experience the epic cinematic origin story of the DOOM Slayer\'s rage in 2025.', '2025-06-20', 'pictures/boxarts/doom_the_dark_ages_2025_boxart.png', 'pictures/promo/doom_dark_ages_2025_promo.png', 1, NULL, NULL),
-(11, 'Death Stranding 2: On The Beach', NULL, 'Embark on an inspiring mission of human connection beyond the UCA. Sam—with companions by his side—sets out on a new journey to save humanity from extinction. Join them as they traverse a world beset by otherworldly enemies, obstacles and a haunting question: should we have connected?', '2025-06-17', 'pictures/boxarts/death_stranding_2_on_the_beach_2025_boxart.png', 'pictures/promo/death_stranding_2_on_the_beach_2025_promo.png', NULL, NULL, NULL),
+(10, 'Doom: The Dark Ages', NULL, 'DOOM: The Dark Ages is the single-player, action FPS prequel to the critically acclaimed DOOM (2016) and DOOM Eternal. You are the DOOM Slayer, the legendary demon-killing warrior fighting endlessly against Hell. Experience the epic cinematic origin story', '2025-06-20', 'pictures/boxarts/doom_the_dark_ages_2025_boxart.png', 'pictures/promo/doom_dark_ages_2025_promo.png', 1, NULL, NULL),
+(11, 'Death Stranding 2: On The Beach', NULL, 'Embark on an inspiring mission of human connection beyond the UCA. Sam—with companions by his side—sets out on a new journey to save humanity from extinction. Join them as they traverse a world beset by otherworldly enemies, obstacles and a haunting quest', '2025-06-17', 'pictures/boxarts/death_stranding_2_on_the_beach_2025_boxart.png', 'pictures/promo/death_stranding_2_on_the_beach_2025_promo.png', NULL, NULL, NULL),
 (12, 'Clair Obscur: Expedition 33', NULL, 'Lead the members of Expedition 33 on their quest to destroy the Paintress so that she can never paint death again. Explore a world of wonders inspired by Belle Époque France and battle unique enemies in this turn-based RPG with real-time mechanics.', '2025-06-02', 'pictures/boxarts/clair_obscur_expedition_33_2025_boxart.png', 'pictures/promo/clair_obscur_expedition_33_2025_promo.png', 3, NULL, NULL),
-(13, 'Indiana Jones and the Great Circle', NULL, 'Uncover one of history’s greatest mysteries in a first-person, single-player adventure. The year is 1937, sinister forces are scouring the globe for the secret to an ancient power connected to the Great Circle, and only one person can stop them - Indiana Jones™', '2024-12-09', 'pictures/boxarts/indiana_jones_and_the_great_circle_2025_boxart.png', NULL, 3, NULL, NULL),
+(13, 'Indiana Jones and the Great Circle', NULL, 'Uncover one of history’s greatest mysteries in a first-person, single-player adventure. The year is 1937, sinister forces are scouring the globe for the secret to an ancient power connected to the Great Circle, and only one person can stop them - Indiana ', '2024-12-09', 'pictures/boxarts/indiana_jones_and_the_great_circle_2025_boxart.png', NULL, 3, NULL, NULL),
 (14, 'Metaphor: ReFantazio', NULL, 'The throne sits empty after the king’s assassination. With no heirs, the will of the late king decrees that the next monarch will be elected by the people, & thus begins your fight for the throne.. ', '2024-10-11', 'pictures/boxarts/metaphor_refantazio_2024_boxart.png', NULL, 3, NULL, NULL),
 (15, 'Until Dawn', 'Until Dawn Remake', 'Until Dawn invites you to relive the nightmare, and immerse yourself in a gripping slasher horror where every decision can make the difference between life and death. ', '2024-10-04', 'pictures/boxarts/until_dawn_2024_boxart.png', NULL, 3, NULL, NULL),
-(16, 'Astro Bot', NULL, 'JOIN ASTRO IN A BRAND-NEW, SUPERSIZED SPACE ADVENTURE! The PS5® mothership has been wrecked, leaving ASTRO and the bot crew scattered all over the galaxies. Time to ride your trusty Dual Speeder across more than 50 planets full of fun, danger and surprises. On your journey, make the most of ASTRO\'s new powers and reunite with many iconic heroes from the PlayStation universe!', '2024-09-09', 'pictures/boxarts/astro_bot_2024_boxart.png', NULL, NULL, NULL, NULL),
+(16, 'Astro Bot', NULL, 'JOIN ASTRO IN A BRAND-NEW, SUPERSIZED SPACE ADVENTURE! The PS5® mothership has been wrecked, leaving ASTRO and the bot crew scattered all over the galaxies. Time to ride your trusty Dual Speeder across more than 50 planets full of fun, danger and surprise', '2024-09-09', 'pictures/boxarts/astro_bot_2024_boxart.png', NULL, NULL, NULL, NULL),
 (17, 'Dragon Age™: The Veilguard', NULL, 'Unite the Veilguard and defy the gods in Dragon Age™: The Veilguard, an immersive single-player RPG.', '2024-10-31', '/pictures/boxarts/dragon_age_the_veilguard_2024_boxart.png', NULL, 3, NULL, NULL),
 (18, 'Prince of Persia The Lost Crown', NULL, 'Dash into a stylish and thrilling action-adventure platformer set in a mythological Persian world where the boundaries of time and space are yours to manipulate.', '2024-08-08', 'pictures/boxarts/prince_of_persia_the_lost_crown_2024_boxart.png', NULL, 3, NULL, NULL),
 (19, 'Warhammer 40,000: Space Marine 2', NULL, 'Embody the superhuman skill and brutality of a Space Marine. Unleash deadly abilities and devastating weaponry to obliterate the relentless Tyranid swarms. Defend the Imperium in spectacular third-person action in solo or multiplayer modes.', '2024-09-09', 'pictures/boxarts/warhammer_40000_space_marine_2_2024_boxart.png', NULL, 2, 1, 'Players across consoles and PC\'s can play in coop mode, but the PvP mode is only between PC players vs PC players, and console players between console players');
@@ -535,7 +523,7 @@ CREATE TABLE `gamesageratings` (
   `id` int(10) UNSIGNED NOT NULL,
   `GameId` int(10) UNSIGNED DEFAULT NULL,
   `AgeratingId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Összeköti a játékokat a hozzájuk tartozó korhatár besorolásaikkal';
 
 --
 -- A tábla adatainak kiíratása `gamesageratings`
@@ -585,11 +573,11 @@ INSERT INTO `gamesageratings` (`id`, `GameId`, `AgeratingId`) VALUES
 
 CREATE TABLE `gamesawards` (
   `id` int(10) UNSIGNED NOT NULL,
-  `year` int(10) UNSIGNED NOT NULL,
-  `result` tinyint(1) NOT NULL DEFAULT 0,
+  `year` int(10) UNSIGNED NOT NULL COMMENT 'Az év amikor a játékot a díjra jelölték',
+  `result` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Az eredmény, ahol a 0 azt jelenti hogy a játékot csak jelölték a díjra, az 1 hogy megnyerte a díjat',
   `GameId` int(10) UNSIGNED DEFAULT NULL,
   `AwardId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A játékokat köti össze azokkal a díjakkal amelyekre jeölték és az adott jelölésre specifikus adatokkal kiegészítve';
 
 --
 -- A tábla adatainak kiíratása `gamesawards`
@@ -623,10 +611,10 @@ INSERT INTO `gamesawards` (`id`, `year`, `result`, `GameId`, `AwardId`) VALUES
 
 CREATE TABLE `gameslanguages` (
   `id` int(10) UNSIGNED NOT NULL,
-  `dub` tinyint(1) NOT NULL DEFAULT 0,
+  `dub` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Az adott nyelvhez tartozik-e szinkron, a 0 nemet jelent, az 1 az igent',
   `GameId` int(10) UNSIGNED DEFAULT NULL,
   `LanguageId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A játékokat köti össze a játék által támogatott nyelvekkel kiegészítve hogy tartozik-e hozzá szinkron';
 
 --
 -- A tábla adatainak kiíratása `gameslanguages`
@@ -714,7 +702,7 @@ CREATE TABLE `gamesplatforms` (
   `id` int(10) UNSIGNED NOT NULL,
   `GameId` int(10) UNSIGNED DEFAULT NULL,
   `PlatformId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A játékokat köti össze azokkal a platformokkal amelyeken megjelentek';
 
 --
 -- A tábla adatainak kiíratása `gamesplatforms`
@@ -726,10 +714,61 @@ INSERT INTO `gamesplatforms` (`id`, `GameId`, `PlatformId`) VALUES
 (3, 1, 6),
 (4, 1, 9),
 (5, 1, 10),
+(10, 2, 1),
+(11, 2, 6),
+(16, 3, 1),
+(12, 3, 3),
+(13, 3, 4),
+(15, 3, 7),
+(14, 3, 8),
+(17, 4, 1),
+(20, 4, 2),
+(21, 4, 4),
+(18, 4, 12),
+(19, 4, 16),
+(22, 5, 1),
+(23, 5, 5),
+(24, 5, 9),
+(25, 5, 14),
+(26, 6, 7),
+(27, 7, 1),
+(28, 8, 1),
+(29, 8, 5),
+(30, 8, 6),
+(31, 8, 9),
+(32, 8, 10),
+(33, 9, 1),
+(34, 9, 6),
+(35, 9, 10),
+(36, 10, 1),
+(37, 10, 6),
+(38, 10, 10),
+(39, 11, 6),
+(40, 12, 1),
+(41, 12, 6),
+(42, 12, 10),
+(43, 13, 1),
+(44, 13, 6),
+(45, 13, 10),
 (9, 14, 1),
 (6, 14, 5),
 (7, 14, 6),
-(8, 14, 10);
+(8, 14, 10),
+(46, 15, 1),
+(47, 15, 6),
+(48, 16, 6),
+(49, 17, 1),
+(50, 17, 6),
+(51, 17, 10),
+(52, 18, 1),
+(54, 18, 5),
+(55, 18, 6),
+(56, 18, 9),
+(57, 18, 10),
+(53, 18, 14),
+(58, 19, 1),
+(59, 19, 6),
+(60, 19, 10);
 
 -- --------------------------------------------------------
 
@@ -741,7 +780,7 @@ CREATE TABLE `gamestags` (
   `id` int(10) UNSIGNED NOT NULL,
   `GameId` int(10) UNSIGNED DEFAULT NULL,
   `TagId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A játékokat köti azokkal a címkékkel amelyek a játékra illenek';
 
 --
 -- A tábla adatainak kiíratása `gamestags`
@@ -835,8 +874,8 @@ INSERT INTO `gamestags` (`id`, `GameId`, `TagId`) VALUES
 
 CREATE TABLE `languages` (
   `id` int(10) UNSIGNED NOT NULL,
-  `language` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `language` varchar(25) NOT NULL COMMENT 'A nyelv neve'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A játékokban előforduló nyelveket tárolja';
 
 --
 -- A tábla adatainak kiíratása `languages`
@@ -871,20 +910,20 @@ INSERT INTO `languages` (`id`, `language`) VALUES
 
 CREATE TABLE `pcspecs` (
   `id` int(10) UNSIGNED NOT NULL,
-  `minOp` varchar(50) NOT NULL,
-  `minCpu` varchar(100) NOT NULL,
-  `minRam` varchar(10) NOT NULL,
-  `minGpu` varchar(100) NOT NULL,
-  `minDirectx` varchar(20) DEFAULT NULL,
-  `op` varchar(50) DEFAULT NULL,
-  `cpu` varchar(100) DEFAULT NULL,
-  `ram` varchar(10) DEFAULT NULL,
-  `gpu` varchar(100) DEFAULT NULL,
-  `directx` varchar(20) DEFAULT NULL,
-  `storage` varchar(10) DEFAULT NULL,
-  `sidenote` varchar(255) DEFAULT NULL,
+  `minOp` varchar(50) NOT NULL COMMENT 'A minimum rendszer követelményben meghatározott operációs rendszer',
+  `minCpu` varchar(100) NOT NULL COMMENT 'A minimum rendszer követelményben meghatározott processzor',
+  `minRam` varchar(10) NOT NULL COMMENT 'A minimum rendszer követelményben meghatározott memória',
+  `minGpu` varchar(100) NOT NULL COMMENT 'A minimum rendszer követelményben meghatározott videókártya',
+  `minDirectx` varchar(20) DEFAULT NULL COMMENT 'A minimum rendszer követelményben meghatározott DirectX verziója',
+  `op` varchar(50) DEFAULT NULL COMMENT 'Az ajánlott rendszer követelményben meghatározott operációs rendszer',
+  `cpu` varchar(100) DEFAULT NULL COMMENT 'Az ajánlott rendszer követelményben meghatározott processzor',
+  `ram` varchar(10) DEFAULT NULL COMMENT 'Az ajánlott rendszer követelményben meghatározott memória',
+  `gpu` varchar(100) DEFAULT NULL COMMENT 'Az ajánlott rendszer követelményben meghatározott videókártya',
+  `directx` varchar(20) DEFAULT NULL COMMENT 'Az ajánlott rendszer követelményben meghatározott DirectX verzió',
+  `storage` varchar(10) DEFAULT NULL COMMENT 'Az rendszer követelményben meghatározott háttártáron szükséges szabad hely',
+  `sidenote` varchar(255) DEFAULT NULL COMMENT 'Egyéb rendszerkövetelmény',
   `GameId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A játékok rendszer követelményeit tárolja';
 
 --
 -- A tábla adatainak kiíratása `pcspecs`
@@ -916,8 +955,8 @@ INSERT INTO `pcspecs` (`id`, `minOp`, `minCpu`, `minRam`, `minGpu`, `minDirectx`
 
 CREATE TABLE `platforms` (
   `id` int(10) UNSIGNED NOT NULL,
-  `platform` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `platform` varchar(40) NOT NULL COMMENT 'A platform neve'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Különböző platformokat tárol amelyek hivatalosan támogatják a játékok futtatását';
 
 --
 -- A tábla adatainak kiíratása `platforms`
@@ -950,10 +989,10 @@ INSERT INTO `platforms` (`id`, `platform`) VALUES
 
 CREATE TABLE `ratings` (
   `id` int(10) UNSIGNED NOT NULL,
-  `positive` tinyint(1) NOT NULL DEFAULT 0,
+  `positive` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Az értékelés, ha 0 az negatív értékelést jelent míg az 1 pozitívat',
   `GameId` int(10) UNSIGNED DEFAULT NULL,
   `UserId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A játékok felhasználói értékeléseit tárolja';
 
 --
 -- A tábla adatainak kiíratása `ratings`
@@ -965,9 +1004,10 @@ INSERT INTO `ratings` (`id`, `positive`, `GameId`, `UserId`) VALUES
 (9, 0, 2, 1),
 (10, 0, 1, 16),
 (11, 1, 1, 17),
-(12, 1, 1, 18),
+(12, 0, 1, 18),
 (13, 1, 1, 19),
-(14, 0, 1, 20);
+(14, 0, 1, 20),
+(21, 0, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -977,23 +1017,25 @@ INSERT INTO `ratings` (`id`, `positive`, `GameId`, `UserId`) VALUES
 
 CREATE TABLE `reviews` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `content` text NOT NULL,
+  `title` varchar(100) NOT NULL COMMENT 'A kritika címe',
+  `content` text NOT NULL COMMENT 'A kritika törzs szövege',
+  `date` date NOT NULL COMMENT 'A kritika létrehozásának a dátuma',
   `UserId` int(10) UNSIGNED DEFAULT NULL,
-  `GameId` int(10) UNSIGNED DEFAULT NULL,
-  `date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `GameId` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A felhasználók által írt játék kritikákat tárolja';
 
 --
 -- A tábla adatainak kiíratása `reviews`
 --
 
-INSERT INTO `reviews` (`id`, `title`, `content`, `UserId`, `GameId`, `date`) VALUES
-(10, 'Revisiting Cyberpunk in 2024', 'I have to say, the game has definitely improved. Less bugs and some QOL improvements. But I honestly still don\'t see it. The base game is still flawed. The game is still a basic action adventure game, that doesn\'t do a very good job at it. I am playing it on hard, yet the game feels incredibly easy. The AI is still as dumb as it was before. I was fighting an enemy camp, they all gathered in the same spot, where they were getting killed off one by one by me. It never tried to flank me, it never tried to change strategies. I was running around, flanking, yet the enemy was still there. This was every single fight. The upgrades are fun, but what\'s the point if your enemies just stand there and wait for you to shoot them? ', 16, 1, '2025-01-12'),
-(11, 'Overrated but good', 'A little contrarian, but I think it was just good, not great. I had fun with it but it\'s kind of a bad RPG IMO. I did find it was more like a 75% Grand Theft Auto 25% Assassin\'s Creed mashup. I found the story is pretty overrated, but I had a ton of fun just driving around doing side stuff in the world. Some of the characters are really good and fun to interact with, but I found some to be a total drag. Stylistically it is incredible. Again, just existing in the world is very fun. It makes driving around checking off boxes across the map easy to sink time into. The skill tree is cool to experiment with, but I did find the combat generally underwhelming, but still better than serviceable. Again, good but not great. I think if you are considering buying it at a price point you are comfortable with, it is a safe buy for sure. I just disagree with the people who put it on their best of all time lists. The open world stuff is the only aspect I would consider awesome.', 17, 1, '2025-02-20'),
-(12, 'A Must-Play Now', 'With the 2.0 update and the Phantom Liberty expansion, it’s easily one of the best AAA experiences on the market. It’s become one of my favourite games of all time after putting about 50 hours and still a lot more to go. It’s visually incredible, with an immersive, well-developed world, a dark and tragic story and great characters. The gameplay is really fun and you can approach it in a bunch of different ways. Must-play game imo. ', 18, 1, '2025-03-01'),
-(13, 'Cyberpunk 2077 is an amazing experience', 'The characters and dialogue were the first things that hooked me. I wanted to learn more about them, I wanted to bond with them. Characters I disliked initially grew on me, especially Johnny Silverhand. The romance for the male V was one of the best romances I\'ve seen in a game, though I\'m a bit biased as features and personality traits of that character remind me of my own wife. I genuinely cared for a lot of these characters. It was cool how you get different dialogue based on your stats and your background too.', 19, 1, '2025-03-09'),
-(14, 'It\'s bad', ' it’s not a good fps, it’s not a good rpg, and it’s not a good action game. it’s trying to be too many things at once and not doing well in any of them. cdpr isn’t very good at making games that feel good to play imo. setting and writing do the heavy lifting for them. visuals too, in cyberpunk’s case. ', 20, 1, '2025-03-10');
+INSERT INTO `reviews` (`id`, `title`, `content`, `date`, `UserId`, `GameId`) VALUES
+(1, 'The Biggest Comeback of Gaming', 'The game was a mess when it came out, but now the CDPR finally fixed the game (for the most part) and it became one of the best experince.', '2025-02-11', 2, 1),
+(2, 'Doesn\'t live up to the hype', 'Even after the 2.0 update, it\'s not that good. The protagonist backstory don\'t amount too much, the gameplay is fine, but kind of janky, and easiy broken by melee builds. The story is pretty mid and having Johnny in our head is very annoying, I just don\'t understand who tought having a narcissit as our secondary protagnoist a good idea.', '2025-02-28', 12, 1),
+(10, 'Revisiting Cyberpunk in 2024', 'I have to say, the game has definitely improved. Less bugs and some QOL improvements. But I honestly still don\'t see it. The base game is still flawed. The game is still a basic action adventure game, that doesn\'t do a very good job at it. I am playing it on hard, yet the game feels incredibly easy. The AI is still as dumb as it was before. I was fighting an enemy camp, they all gathered in the same spot, where they were getting killed off one by one by me. It never tried to flank me, it never tried to change strategies. I was running around, flanking, yet the enemy was still there. This was every single fight. The upgrades are fun, but what\'s the point if your enemies just stand there and wait for you to shoot them? ', '2025-01-12', 16, 1),
+(11, 'Overrated but good', 'A little contrarian, but I think it was just good, not great. I had fun with it but it\'s kind of a bad RPG IMO. I did find it was more like a 75% Grand Theft Auto 25% Assassin\'s Creed mashup. I found the story is pretty overrated, but I had a ton of fun just driving around doing side stuff in the world. Some of the characters are really good and fun to interact with, but I found some to be a total drag. Stylistically it is incredible. Again, just existing in the world is very fun. It makes driving around checking off boxes across the map easy to sink time into. The skill tree is cool to experiment with, but I did find the combat generally underwhelming, but still better than serviceable. Again, good but not great. I think if you are considering buying it at a price point you are comfortable with, it is a safe buy for sure. I just disagree with the people who put it on their best of all time lists. The open world stuff is the only aspect I would consider awesome.', '2025-02-20', 17, 1),
+(12, 'A Must-Play Now', 'With the 2.0 update and the Phantom Liberty expansion, it’s easily one of the best AAA experiences on the market. It’s become one of my favourite games of all time after putting about 50 hours and still a lot more to go. It’s visually incredible, with an immersive, well-developed world, a dark and tragic story and great characters. The gameplay is really fun and you can approach it in a bunch of different ways. Must-play game imo. ', '2025-03-01', 18, 1),
+(13, 'Cyberpunk 2077 is an amazing experience', 'The characters and dialogue were the first things that hooked me. I wanted to learn more about them, I wanted to bond with them. Characters I disliked initially grew on me, especially Johnny Silverhand. The romance for the male V was one of the best romances I\'ve seen in a game, though I\'m a bit biased as features and personality traits of that character remind me of my own wife. I genuinely cared for a lot of these characters. It was cool how you get different dialogue based on your stats and your background too.', '2025-03-09', 19, 1),
+(14, 'It\'s bad', ' it’s not a good fps, it’s not a good rpg, and it’s not a good action game. it’s trying to be too many things at once and not doing well in any of them. cdpr isn’t very good at making games that feel good to play imo. setting and writing do the heavy lifting for them. visuals too, in cyberpunk’s case. ', '2025-03-10', 20, 1);
 
 -- --------------------------------------------------------
 
@@ -1003,8 +1045,8 @@ INSERT INTO `reviews` (`id`, `title`, `content`, `UserId`, `GameId`, `date`) VAL
 
 CREATE TABLE `studios` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `name` varchar(50) NOT NULL COMMENT 'A stúdió neve'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Különböző játék stúdiókat tárol';
 
 --
 -- A tábla adatainak kiíratása `studios`
@@ -1049,11 +1091,11 @@ INSERT INTO `studios` (`id`, `name`) VALUES
 
 CREATE TABLE `studiosgames` (
   `id` int(10) UNSIGNED NOT NULL,
-  `isDeveloper` tinyint(1) NOT NULL DEFAULT 0,
-  `isPublisher` tinyint(1) NOT NULL DEFAULT 0,
+  `isDeveloper` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'A stúdió részt vett-e a játék fejlesztésében, a 0 nemet, az 1 igent jelent',
+  `isPublisher` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'A stúdió részt vett-e a játék kiadásában, a 0 nemet, az 1 igent jelent',
   `GameId` int(10) UNSIGNED DEFAULT NULL,
   `StudioId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Összeköti a játékokat a hozzájuk tartozó stúdiókkal kiegészítve a stúdió szerepével';
 
 --
 -- A tábla adatainak kiíratása `studiosgames`
@@ -1103,8 +1145,8 @@ INSERT INTO `studiosgames` (`id`, `isDeveloper`, `isPublisher`, `GameId`, `Studi
 
 CREATE TABLE `tags` (
   `id` int(10) UNSIGNED NOT NULL,
-  `tag` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `tag` varchar(40) NOT NULL COMMENT 'A címke neve'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Különböző címkéket tárol amivel a játékokat lehet besorolni';
 
 --
 -- A tábla adatainak kiíratása `tags`
@@ -1147,12 +1189,12 @@ INSERT INTO `tags` (`id`, `tag`) VALUES
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `admin` tinyint(1) NOT NULL DEFAULT 0,
-  `creation` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `username` varchar(30) NOT NULL COMMENT 'A felhasználó által megadott becenév',
+  `password` varchar(255) NOT NULL COMMENT 'A felhasználó jelszava titkosítva',
+  `email` varchar(255) NOT NULL COMMENT 'A felhasználó email címe',
+  `admin` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'A felhasználó admin státusza, ahol a 0 azt jelenti hogy csak általános felhasználó, míg az 1 azt jelenti hogy admin',
+  `creation` date NOT NULL COMMENT 'A felhasználó fiókjának létrehozásának a dátuma'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A felhasználók adatait tárolja';
 
 --
 -- A tábla adatainak kiíratása `users`
@@ -1160,9 +1202,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `admin`, `creation`) VALUES
 (1, 'Vencel453', '$2b$10$lU.v7i55wiLeE7gAUh51VOU00LXy1FpLvPtBKMKYObZMLBiGoSM8i', 'email@address.com', 1, '2024-11-27'),
-(2, 'BunyósPityu', '$2b$10$jEhSTQxawR1FDJ74oKdhdOAL5WD2GglD32wAKNBYNShBhFdK79C92', 'pityu@lopo.com', 0, '2024-11-27'),
+(2, 'Péter23', '$2b$10$jEhSTQxawR1FDJ74oKdhdOAL5WD2GglD32wAKNBYNShBhFdK79C92', 'pityu@goko.com', 0, '2024-11-27'),
 (12, 'KKevin78', '$2b$10$cJSrcZYmx9n8J.UiIHVDaeYXZDCExSh8HhJGMmZEiLYH6oR00u83O', 'kkevin@gmail.com', 0, '2025-02-28'),
-(15, 'Test123', '$2b$10$WlLnarQfWJki1SKDEeU.k./JPV2H0aug15KQuE2574s7/hsfxAqwK', 'cmon@pleaseee.com', 0, '2025-03-10'),
 (16, 'mdude723', '$2b$10$.OwXGxgt5x4RWYdXDp72z.c4ALg99lVNObeFzg4Zjd61/GToYX5ci', 'cmon@pleaseesse.com', 0, '2025-03-10'),
 (17, 'WingleDingleFingle', '$2b$10$qj5QoWCRn3/1XO6C4oxzweHFuWS8sAXop6EQa9G5AWoPKRs6CPDWm', 'cmon@pleaseessae.com', 0, '2025-03-10'),
 (18, 'Monkey-on-the-couch', '$2b$10$4ML/HdHp2RqOdEXGOIDtS.dMu9JXLTn5JI9cu2Ylxp7GjKXmquv7S', 'cmon@pleaseessaea.com', 0, '2025-03-10'),
@@ -1198,13 +1239,6 @@ ALTER TABLE `ageratings`
 --
 ALTER TABLE `awards`
   ADD PRIMARY KEY (`id`);
-
---
--- A tábla indexei `blacklistedtokens`
---
-ALTER TABLE `blacklistedtokens`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `UserId` (`UserId`);
 
 --
 -- A tábla indexei `creations`
@@ -1286,18 +1320,7 @@ ALTER TABLE `gamestags`
 --
 ALTER TABLE `languages`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `language` (`language`),
-  ADD UNIQUE KEY `language_2` (`language`),
-  ADD UNIQUE KEY `language_3` (`language`),
-  ADD UNIQUE KEY `language_4` (`language`),
-  ADD UNIQUE KEY `language_5` (`language`),
-  ADD UNIQUE KEY `language_6` (`language`),
-  ADD UNIQUE KEY `language_7` (`language`),
-  ADD UNIQUE KEY `language_8` (`language`),
-  ADD UNIQUE KEY `language_9` (`language`),
-  ADD UNIQUE KEY `language_10` (`language`),
-  ADD UNIQUE KEY `language_11` (`language`),
-  ADD UNIQUE KEY `language_12` (`language`);
+  ADD UNIQUE KEY `language` (`language`);
 
 --
 -- A tábla indexei `pcspecs`
@@ -1311,18 +1334,7 @@ ALTER TABLE `pcspecs`
 --
 ALTER TABLE `platforms`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `platform` (`platform`),
-  ADD UNIQUE KEY `platform_2` (`platform`),
-  ADD UNIQUE KEY `platform_3` (`platform`),
-  ADD UNIQUE KEY `platform_4` (`platform`),
-  ADD UNIQUE KEY `platform_5` (`platform`),
-  ADD UNIQUE KEY `platform_6` (`platform`),
-  ADD UNIQUE KEY `platform_7` (`platform`),
-  ADD UNIQUE KEY `platform_8` (`platform`),
-  ADD UNIQUE KEY `platform_9` (`platform`),
-  ADD UNIQUE KEY `platform_10` (`platform`),
-  ADD UNIQUE KEY `platform_11` (`platform`),
-  ADD UNIQUE KEY `platform_12` (`platform`);
+  ADD UNIQUE KEY `platform` (`platform`);
 
 --
 -- A tábla indexei `ratings`
@@ -1345,18 +1357,7 @@ ALTER TABLE `reviews`
 --
 ALTER TABLE `studios`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD UNIQUE KEY `name_2` (`name`),
-  ADD UNIQUE KEY `name_3` (`name`),
-  ADD UNIQUE KEY `name_4` (`name`),
-  ADD UNIQUE KEY `name_5` (`name`),
-  ADD UNIQUE KEY `name_6` (`name`),
-  ADD UNIQUE KEY `name_7` (`name`),
-  ADD UNIQUE KEY `name_8` (`name`),
-  ADD UNIQUE KEY `name_9` (`name`),
-  ADD UNIQUE KEY `name_10` (`name`),
-  ADD UNIQUE KEY `name_11` (`name`),
-  ADD UNIQUE KEY `name_12` (`name`);
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- A tábla indexei `studiosgames`
@@ -1371,18 +1372,7 @@ ALTER TABLE `studiosgames`
 --
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `tag` (`tag`),
-  ADD UNIQUE KEY `tag_2` (`tag`),
-  ADD UNIQUE KEY `tag_3` (`tag`),
-  ADD UNIQUE KEY `tag_4` (`tag`),
-  ADD UNIQUE KEY `tag_5` (`tag`),
-  ADD UNIQUE KEY `tag_6` (`tag`),
-  ADD UNIQUE KEY `tag_7` (`tag`),
-  ADD UNIQUE KEY `tag_8` (`tag`),
-  ADD UNIQUE KEY `tag_9` (`tag`),
-  ADD UNIQUE KEY `tag_10` (`tag`),
-  ADD UNIQUE KEY `tag_11` (`tag`),
-  ADD UNIQUE KEY `tag_12` (`tag`);
+  ADD UNIQUE KEY `tag` (`tag`);
 
 --
 -- A tábla indexei `users`
@@ -1390,29 +1380,7 @@ ALTER TABLE `tags`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `username_2` (`username`),
-  ADD UNIQUE KEY `email_2` (`email`),
-  ADD UNIQUE KEY `username_3` (`username`),
-  ADD UNIQUE KEY `email_3` (`email`),
-  ADD UNIQUE KEY `username_4` (`username`),
-  ADD UNIQUE KEY `email_4` (`email`),
-  ADD UNIQUE KEY `username_5` (`username`),
-  ADD UNIQUE KEY `email_5` (`email`),
-  ADD UNIQUE KEY `username_6` (`username`),
-  ADD UNIQUE KEY `email_6` (`email`),
-  ADD UNIQUE KEY `username_7` (`username`),
-  ADD UNIQUE KEY `email_7` (`email`),
-  ADD UNIQUE KEY `username_8` (`username`),
-  ADD UNIQUE KEY `email_8` (`email`),
-  ADD UNIQUE KEY `username_9` (`username`),
-  ADD UNIQUE KEY `email_9` (`email`),
-  ADD UNIQUE KEY `username_10` (`username`),
-  ADD UNIQUE KEY `email_10` (`email`),
-  ADD UNIQUE KEY `username_11` (`username`),
-  ADD UNIQUE KEY `email_11` (`email`),
-  ADD UNIQUE KEY `username_12` (`username`),
-  ADD UNIQUE KEY `email_12` (`email`);
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- A kiírt táblák AUTO_INCREMENT értéke
@@ -1443,12 +1411,6 @@ ALTER TABLE `awards`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT a táblához `blacklistedtokens`
---
-ALTER TABLE `blacklistedtokens`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT a táblához `creations`
 --
 ALTER TABLE `creations`
@@ -1464,7 +1426,7 @@ ALTER TABLE `creators`
 -- AUTO_INCREMENT a táblához `favourites`
 --
 ALTER TABLE `favourites`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT a táblához `gamepictures`
@@ -1476,7 +1438,7 @@ ALTER TABLE `gamepictures`
 -- AUTO_INCREMENT a táblához `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT a táblához `gamesageratings`
@@ -1500,7 +1462,7 @@ ALTER TABLE `gameslanguages`
 -- AUTO_INCREMENT a táblához `gamesplatforms`
 --
 ALTER TABLE `gamesplatforms`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT a táblához `gamestags`
@@ -1530,13 +1492,13 @@ ALTER TABLE `platforms`
 -- AUTO_INCREMENT a táblához `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT a táblához `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT a táblához `studios`
@@ -1560,7 +1522,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -1571,358 +1533,89 @@ ALTER TABLE `users`
 --
 ALTER TABLE `actings`
   ADD CONSTRAINT `actings_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_10` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_11` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_12` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_13` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_14` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_15` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_16` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_17` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_18` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_19` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_2` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_20` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_21` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_22` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_23` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_24` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_4` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_6` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_8` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actings_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Megkötések a táblához `blacklistedtokens`
---
-ALTER TABLE `blacklistedtokens`
-  ADD CONSTRAINT `blacklistedtokens_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `blacklistedtokens_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `actings_ibfk_2` FOREIGN KEY (`ActorId`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `creations`
 --
 ALTER TABLE `creations`
   ADD CONSTRAINT `creations_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_10` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_11` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_12` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_13` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_14` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_15` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_16` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_17` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_18` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_19` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_2` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_20` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_21` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_22` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_23` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_24` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_4` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_6` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_8` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `creations_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `creations_ibfk_2` FOREIGN KEY (`CreatorId`) REFERENCES `creators` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `favourites`
 --
 ALTER TABLE `favourites`
   ADD CONSTRAINT `favourites_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_10` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_11` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_12` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_13` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_14` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_15` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_16` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_17` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_18` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_19` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_20` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_21` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_22` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_23` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_24` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_6` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_8` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `favourites_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamepictures`
 --
 ALTER TABLE `gamepictures`
-  ADD CONSTRAINT `gamepictures_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamepictures_ibfk_10` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamepictures_ibfk_11` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamepictures_ibfk_12` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamepictures_ibfk_2` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamepictures_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamepictures_ibfk_4` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamepictures_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamepictures_ibfk_6` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamepictures_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamepictures_ibfk_8` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamepictures_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamepictures_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamesageratings`
 --
 ALTER TABLE `gamesageratings`
   ADD CONSTRAINT `gamesageratings_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_10` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_11` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_12` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_13` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_14` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_15` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_16` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_17` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_18` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_19` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_2` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_20` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_21` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_22` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_23` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_24` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_4` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_6` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_8` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesageratings_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamesageratings_ibfk_2` FOREIGN KEY (`AgeratingId`) REFERENCES `ageratings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamesawards`
 --
 ALTER TABLE `gamesawards`
   ADD CONSTRAINT `gamesawards_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_10` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_11` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_12` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_13` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_14` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_15` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_16` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_17` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_18` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_19` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_2` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_20` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_21` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_22` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_23` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_24` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_4` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_6` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_8` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesawards_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamesawards_ibfk_2` FOREIGN KEY (`AwardId`) REFERENCES `awards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gameslanguages`
 --
 ALTER TABLE `gameslanguages`
   ADD CONSTRAINT `gameslanguages_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_10` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_11` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_12` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_13` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_14` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_15` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_16` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_17` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_18` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_19` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_2` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_20` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_21` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_22` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_23` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_24` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_4` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_6` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_8` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gameslanguages_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gameslanguages_ibfk_2` FOREIGN KEY (`LanguageId`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamesplatforms`
 --
 ALTER TABLE `gamesplatforms`
   ADD CONSTRAINT `gamesplatforms_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_10` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_11` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_12` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_13` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_14` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_15` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_16` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_17` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_18` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_19` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_2` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_20` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_21` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_22` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_23` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_24` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_4` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_6` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_8` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamesplatforms_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamesplatforms_ibfk_2` FOREIGN KEY (`PlatformId`) REFERENCES `platforms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamestags`
 --
 ALTER TABLE `gamestags`
   ADD CONSTRAINT `gamestags_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_10` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_11` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_12` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_13` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_14` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_15` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_16` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_17` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_18` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_19` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_2` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_20` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_21` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_22` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_23` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_24` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_4` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_6` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_8` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gamestags_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gamestags_ibfk_2` FOREIGN KEY (`TagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `pcspecs`
 --
 ALTER TABLE `pcspecs`
-  ADD CONSTRAINT `pcspecs_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `pcspecs_ibfk_10` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `pcspecs_ibfk_11` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `pcspecs_ibfk_12` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `pcspecs_ibfk_2` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `pcspecs_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `pcspecs_ibfk_4` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `pcspecs_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `pcspecs_ibfk_6` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `pcspecs_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `pcspecs_ibfk_8` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `pcspecs_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `pcspecs_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `ratings`
 --
 ALTER TABLE `ratings`
   ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_10` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_11` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_12` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_13` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_14` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_15` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_16` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_17` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_18` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_19` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_20` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_21` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_22` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_23` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_24` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_4` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_6` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_8` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `ratings_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `reviews`
 --
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_10` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_11` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_12` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_13` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_14` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_15` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_16` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_17` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_18` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_19` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_20` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_21` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_22` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_3` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_4` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_5` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_6` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_7` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_8` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_9` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `studiosgames`
 --
 ALTER TABLE `studiosgames`
   ADD CONSTRAINT `studiosgames_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_10` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_11` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_12` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_13` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_14` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_15` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_16` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_17` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_18` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_19` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_2` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_20` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_21` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_22` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_23` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_24` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_3` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_4` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_5` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_6` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_7` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_8` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `studiosgames_ibfk_9` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `studiosgames_ibfk_2` FOREIGN KEY (`StudioId`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

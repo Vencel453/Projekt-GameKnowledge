@@ -11,14 +11,16 @@ Platform.init ({
             },
 
             platform: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(40),
                 allowNull: false,
-                unique: true
+                unique: true,
+                comment: "A platform neve"
             },
         },
         {
             sequelize,
-            modelName: "Platform"
+            modelName: "Platform",
+            comment: "Különböző platformokat tárol amelyek hivatalosan támogatják a játékok futtatását"
         }
     );
     

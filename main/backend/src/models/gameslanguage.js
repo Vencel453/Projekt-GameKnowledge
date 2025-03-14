@@ -14,12 +14,14 @@ Gameslanguage.init ({
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: 0,
+                comment: "Az adott nyelvhez tartozik-e szinkron, a 0 nemet jelent, az 1 az igent"
             },
 
         },
         {
             sequelize,
-            modelName: "Gameslanguage"
+            modelName: "Gameslanguage",
+            comment: "A játékokat köti össze a játék által támogatott nyelvekkel kiegészítve hogy tartozik-e hozzá szinkron"
         }
     );
 

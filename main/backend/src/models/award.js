@@ -13,16 +13,19 @@ Award.init ({
             organizer: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                comment: "A díj szervezője"
             },
 
             name: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(100),
                 allowNull: false,
+                comment: "A díj kategóriája/neve"
             },
         },
         {
             sequelize,
-            modelName: "Award"
+            modelName: "Award",
+            comment: "Különböző intézmények díjak kategóriáját tartalmazza tartalmazza"
         }
     );
     

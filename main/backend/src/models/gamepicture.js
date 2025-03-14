@@ -13,11 +13,13 @@ Gamepicture.init ({
             url: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                comment: "A képernyőkép elérési útvonala"
             }
         },
         {
             sequelize,
-            modelName: "Gamepicture"
+            modelName: "Gamepicture",
+            comment: "A játékok képernyőképeinek az elérési útvonalait tárolja"
         }
     );
 

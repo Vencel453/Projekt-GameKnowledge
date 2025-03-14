@@ -12,7 +12,8 @@ Favourite.init ({
         },
         {
             sequelize,
-            modelName: "Favourite"
+            modelName: "Favourite",
+            comment: "A felhasználók által a kedvencekbe mentett játékaikat tárolja"
         }
     );
 

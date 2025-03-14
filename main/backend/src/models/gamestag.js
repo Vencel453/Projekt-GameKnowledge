@@ -12,7 +12,8 @@ Gamestag.init ({
         },
         {
             sequelize,
-            modelName: "Gamestag"
+            modelName: "Gamestag",
+            comment: "A játékokat köti azokkal a címkékkel amelyek a játékra illenek"
         }
     );
     

@@ -13,7 +13,8 @@ Gamesplatform.init ({
         },
         {
             sequelize,
-            modelName: "Gamesplatform"
+            modelName: "Gamesplatform",
+            comment: "A játékokat köti össze azokkal a platformokkal amelyeken megjelentek"
         }
     );
     

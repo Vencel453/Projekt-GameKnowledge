@@ -13,21 +13,25 @@ Agerating.init ({
             rating: {
                 type: DataTypes.STRING(10),
                 allowNull: false,
+                comment: "A korhatár besorolás"
             },
 
             institution: {
                 type: DataTypes.STRING(4),
                 allowNull: false,
+                comment: "A korhatár besorolást intéző intézmény"
             },
 
             url: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                comment: "A korhatár besorolás képének az elérési útvonala"
             }
         },
         {
             sequelize,
-            modelName: "Agerating"
+            modelName: "Agerating",
+            comment: "Korhatár besorolások adatait tartalmazó tábla"
         }
     );
 

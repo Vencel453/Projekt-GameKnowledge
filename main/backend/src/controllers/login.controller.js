@@ -26,7 +26,7 @@ export default {
             // Ha nincs teljes egyezés, akkor hiba üzenetet küldünk
             if (!correctUser) {
                 res.status(400).json({
-                    error: true,
+                    error: "true",
                     message: "The username or password is incorrect!"
                 });
                 return;
