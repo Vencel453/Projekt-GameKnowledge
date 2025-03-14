@@ -150,6 +150,7 @@ export class SpecificgameComponent implements OnInit {
                         this.subtitlesLanguages = this.gameData.languages
                         .filter(lang => lang['Games.Gameslanguage.dub'] === 0)
                         .map(lang => lang.language);
+                        window.scrollTo(0, 0);
                     }
                 }
             },

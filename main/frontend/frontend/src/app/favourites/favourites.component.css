@@ -1,0 +1,119 @@
+.favourite-container {
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.favourite-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    width: fit-content;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-left: 135px;
+    transition: transform 0.2s;
+}
+
+.favourite-item:hover {
+    transform: translateX(5px)
+}
+
+.gameinfo{
+    display: flex;
+    align-items: center;
+    flex: 1;
+    color: white;
+    gap: 1rem;
+}
+
+.boxart {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    margin-right: 16px;
+    border-radius: 4px;
+}
+
+.titles h3 {
+    margin: 0;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+button.mat-icon-button{
+    margin-left: 1rem;
+    flex-shrink: 0;
+}
+
+button.mat-icon-button img{
+    width: 24px;
+    height: 24px;
+}
+
+.titles
+button {margin-left: 8px}
+
+h2{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+#nofavourites{
+    text-align: center;
+    color: #A0B6F7;
+    font-weight: bold;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    padding: 2rem;
+}
+
+#divider{
+    border-width: 5px;
+    color: black;
+    margin: 1rem auto;
+    width: 80%;
+}
+
+@media (max-width: 768px){
+    .favourite-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.8rem;
+    }
+
+    .gameinfo {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .boxart{
+        max-width: 100px;
+    }
+
+    button.mat-icon-button{
+        align-self: flex-end;
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 480px){
+    .favourite-container {
+        padding: 0.5rem;
+    }
+
+    .boxart{
+        max-width: 80px;
+    }
+
+    .titles h3{
+        font-size: 1.1rem;
+    }
+
+    button.mat-icon-button img {
+        width: 20px;
+        height: 20px;
+    }
+}

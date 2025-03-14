@@ -325,6 +325,13 @@
     justify-content: center;
 }
 
+.languages ul li{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
 .languages > div {
     flex: 1 1 200px;
     text-align: center;
@@ -335,6 +342,21 @@
     list-style: none;
     padding: 0;
     margin: 0 auto;
+}
+
+.platforms ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.platforms ul li{
+    display: flex;
+    align-items: center;
+    padding: 0.4em 0.8em;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
 }
 
 .languages,
@@ -581,6 +603,18 @@ h3 {font-size: clamp(1.1rem, 2.5vw, 1.5rem);}
         line-height: 1.6;
         max-width: 80ch;
         margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px){
+    .thirdsection {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .thirdsection > div {
+        width: 100%;
+        box-sizing: border-box;
     }
 }
 

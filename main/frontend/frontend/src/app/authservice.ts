@@ -63,9 +63,7 @@ export class Authservice {
     this.username.next(null);
     this.isAdmin.next(false);
 
-    if (this.logouttimer){
-        clearTimeout(this.logouttimer);
-    }
+
    }
 
    getUsername(): string | null {

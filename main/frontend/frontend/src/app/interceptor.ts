@@ -34,7 +34,7 @@ export class AuthInterceptor implements HttpInterceptor {
                        this.authService.login(
                         newToken,
                         localStorage.getItem('username') || '',
-                        JSON.parse(localStorage.getItem('isadmin') || 'false')
+                        JSON.parse(localStorage.getItem('isAdmin') || 'false')
                        );
                     }
                 }}
