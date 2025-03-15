@@ -242,13 +242,16 @@ export default {
                     model: User,
                     attributes: ["username"],
                     include: {
+                        where: {
+                            GameId: gameId
+                        },
                         model: Rating,
                         attributes: ["positive"]
                     }
                 },
                 order: [["date", "DESC"]],
-                raw: true
-            })
+                raw: true,
+            });
 
             // Ha minden lekérdezés sikeres, akkor minden információt elküldünk egy válaszban
             res.status(200).json({
@@ -263,7 +266,6 @@ export default {
                     release: game.release,
                     developers: developers,
                     publishers: publishers,
-                    allRatings: allRatings,
                     rating: rating,
                     agerating: agerating,
                     genres: genres,

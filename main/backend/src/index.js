@@ -1,4 +1,4 @@
-import sequelize from "./config/config.js";
+import sequelize from "./config.js";
 import app from "./app.js";
 
 // Minden modelt be importálunk ide

@@ -1,3 +1,4 @@
+// Be importáljuk a szükséges csomagokat
 import express from "express";
 import cors from "cors"
 import jweMethods from "./utilities/jwe.methods.js";
@@ -12,7 +13,7 @@ import ReviewRouter from "./routes/review.router.js";
 // Létrehozzunk egy konstanst az express segítségével amivel a szervert fogjuk kezelni
 const app = express();
 
-// A frontend elérése a 4200-as porton
+// A frontend elérése a 4200-as porton és engedélyezzük hogy a frontend hozzá férjen az Authorization fejléchez
 app.use(cors({
     origin: "http://localhost:4200",
     allowedHeaders: ["Authorization", "Content-type"],
