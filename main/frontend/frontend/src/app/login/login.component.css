@@ -1,0 +1,41 @@
+/*login komponens stílus beállításai*/
+.LogContent{
+    text-align: center;
+    padding-top: 5%;
+}
+
+#Llogo{
+    width: 10%;
+    height: 10%;
+}
+
+.form-label{
+    font-weight: bold;
+    color: white;
+}
+
+#title{
+    font-weight: bold;
+    color: white;
+}
+
+.Logbutton{
+    background-color: #A0B6F7;
+    border-style: double;
+    font-weight: bold;
+}
+
+input::placeholder{
+    color: rgba(0, 0, 0, 0.551);
+}
+
+.form-control-sm{
+    background-color: #A0B6F7;
+}
+
+.error{
+    color: #A0B6F7;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5%;
+}

@@ -1,0 +1,33 @@
+<!--Login tartalom-->
+<div class="LogContent">
+    <h1 class="Llogo">
+        <!--Logo-->
+        <img id="Llogo" src="/logomain.png" alt="Logo">
+    </h1>
+    <h2 id="title">Login</h2>   <!--Alcím-->
+    <br>
+    <!--Beviteli mezők-->
+    <div class="form">
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <div class="mb-3">
+                <label for="Input1" class="form-label">Username</label><br>
+                <input class="form-control-sm" [(ngModel)]="username" name="username" form="Input1" type="text" placeholder="Grimlock55">
+            </div>
+
+            <div class="mb-3">
+                <label for="Input2" class="form-label">Password</label><br>
+                <input class="form-control-sm" [(ngModel)]="password" name="password" form="Input2" type="password" placeholder="Password">
+            </div>     
+            
+            <br>
+
+            <!--Login gomb a végrehajtáshoz-->
+            <div class="d-grid gap-2 d-md-block">
+                <button class="Logbutton btn btn-lg" type="submit">Login</button>
+            </div>
+            <br>
+        </form>
+        <!--Visszajelző üzenetek-->
+        <p *ngIf="errormess" class="error" #errorMess>{{errormess}}</p>
+        <p *ngIf="successmess" class="error" #successMess>{{successmess}}</p>
+    </div>

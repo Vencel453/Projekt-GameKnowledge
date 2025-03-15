@@ -1,0 +1,53 @@
+/*Use of terms komponensre vonatkozó stílus beállítások*/
+.title{
+    font-weight: bold;
+    font-size: 35px;
+    color: white;
+    text-align: center;
+}
+
+.divider{
+    border-width: 5px;
+    color: black;
+}
+
+.first{
+    text-align: justify;
+    color: #A0B6F7;
+    font-weight: bold;
+    font-size: larger;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.second{
+    text-align: justify;
+    color: white;
+    font-size: large;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.third{
+    text-align: justify;
+    color: white;
+    font-size: large;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.fourth{
+    text-align: justify;
+    color: white;
+    font-size: large;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.fifth{
+    text-align: justify;
+    color: white;
+    font-size: large;
+    margin-left: 30px;
+    margin-right: 30px;
+}

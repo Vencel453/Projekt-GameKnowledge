@@ -1,0 +1,126 @@
+<!--Általános dolgok, amik az összes oldalon látszanak-->
+
+<!--HTML alapszerkezet-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="windowicon" type="image/png" href="/logomain.png">           <!--Ablakban megjeleno logonk, egyenlore nem mukodik-->
+    <title>Homepage</title>
+</head>
+<!--Navigációs sáv-->
+<body>
+    <div class="container-fluid">           <!--Bootstrap osztályazonositok hasznalata a navigacios sávban-->
+        <nav #navBar class="navbar">
+            <a class="navbar-brand" href="" routerLinkActive="active">         <!--Link a logora ami a bal oldalon helyezkedik el és a Kezdőlapra vezet-->
+                <img id="logomain" src="/logomain.png" alt="logo">
+            </a>
+                <div class="search-container">                  <!--Keresősáv a nagyitó ikonnal-->
+                        <form class="search-form" role="search" (submit)="selectfirstresult()">
+                             <input class="search-input" type="search" placeholder="Search" aria-label="Search" [formControl]="searchControl">
+                        </form>
+                    <a (click)="selectfirstresult()">
+                        <img class="magnifiersearchglass" src="/magnifying-glass.png" alt="searchIcon">
+                    </a>
+                </div>
+
+                <div *ngIf="searchResults.length > 0" class="searchresults">
+                    <ul>
+                        <li *ngFor="let result of searchResults" (click)="selectresult(result)">
+                            <img [src]="result.boxart" alt="{{result.gameTitle}} cover" class="resultboxart">
+                            <div class="resultdetails">
+                                <div class="gametitle">{{result.gameTitle}}</div>
+                                <div class="alttitle" *ngIf="result.altGameTitle">{{result.altGameTitle}}</div>
+                                <div class="release">{{result.release}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+            <!--A nav sáv jobb oldali része ahol dinamikusan változnak az elérhető opciók a bejelentkezett/vendég felhasználók alalpján-->
+
+    <div class="menu-container">
+        
+        <ng-container *ngIf="!(isAuthenticated$ | async); else loggedInTemplate">       <!--Az oldal eldonti hogy az adott pillanatban van e bejelentkezve valaki-->
+        
+            <!--Ha nincs bejelentkezve senki, akkor ezek a kódok futnak le, tehát megjelennek a "Login" és "Registration" opciók a megfelelő ikonjukkal-->
+           
+            <a routerLink="/login"><img class="icon" src="/user.png" alt="loginIcon">
+            </a>
+        <a class="link" routerLink="/login">Login</a>
+
+        <a routerLink="/regist"><img class="icon" src="/registicon.png" alt="registIcon">
+        </a>
+            <a class="link" routerLink="/regist">Registration</a>
+    </ng-container>
+
+    <!--Ha van valaki bejelentkezve, akkor ez a kódrész fut le-->
+
+    <ng-template #loggedInTemplate>
+        <ng-container *ngIf="user$ | async as user">
+            <div class="myprofile">
+                <a routerLink="/myprofile" class="profile-link">
+                    <img class="profile-icon" [src]="user.isadmin ? '/lock.png' : '/user.png'" alt="loginIcon">         <!--Ellenőrzi hogy az adott felhasználónak van e admin joga, ha igen akkor egy különálló ikonnal jelenik meg-->
+                        <span>{{user.username}}</span>          <!--Megjelenik aza név amelyet a felhasználó megadott magának-->
+                </a>
+            </div>
+        </ng-container>
+    </ng-template>
+    </div>
+
+    <!--Minimenu ami a nav sáv jobb oldalán van(3 csik egymason)-->
+
+    <button class="menu" (click)="menutoggle()">            <!--A menu gombként funkcionál és kattintásra meghivja a "menutoggle" függvényt-->
+       <i class="fa fa-bars" [ngClass] = "{'rotate-icon': ismenuopen}"></i>         <!--Minimenu ikonja-->
+    </button>
+
+    <!--Minimenu tartalma-->
+
+    <ul class="menucontent" *ngIf="ismenuopen">         <!--Figyeli hogy a menu éppen levan e nyitva vagy sem, és nyitott menu-nél elfordul az ikon-->
+        <p id="notloggedinminimenu" *ngIf="!(isAuthenticated$ | async)">Features will be displayed, once you login with an account!</p>
+        <li *ngIf="isAuthenticated$ | async"> <img class="menucontenticons" src="./hearth.png" alt="Hearth"> <a class="link" routerLink="/favourites">Favourites</a></li>
+        <li *ngIf="isAuthenticated$ | async"> <img class="menucontenticons" (click)="deleteAccount()" src="./trashcanblack.png" alt="trash"> <a class="link" (click)="deleteAccount()">Delete Account</a></li>
+        <li *ngIf="isAuthenticated$ | async">           <!--Figyeli hogyha a felhasználó bevan jelentkezve, akkor megjelenjen a Kijelentkezés funckió-->
+            <img class="menucontenticons" src="./logout.png" alt="Logout" (click)="logout()">
+            <a class="link" (click)="logout()">Log out</a>
+        </li>
+    </ul>
+</nav>
+</div>
+
+<router-outlet></router-outlet>         <!--FONTOS, ezkell hogy benne legyen hogyha azt akarod hogy bármi is megjelenjen az oldalon-->
+
+<!--Az oldal alja-->
+
+<hr id="footerdivider">
+<footer class="footer text-black py-3">
+    <div class="container">
+        <div class="row align-items-center">            <!--Boostrap-es osztalyazonosítókkal létrehozott szerkezet-->
+            <div class="col-3 text-center d-flex justify-content-center align-items-center gap-4">         <!--3 részre vágás-->
+                <!--Első bal oldali rész-->
+               <a routerLink="/socialmedia" class="socialmedialink"> <img class="socialmedia" src="/facebook.png" alt="facebook logo"></a>
+               <a routerLink="/socialmedia" class="socialmedialink"> <img class="socialmedia" src="/instagram.png" alt="instagram logo"></a>
+               <a routerLink="/socialmedia" class="socialmedialink"> <img class="socialmedia" src="/discord.png" alt="discord logo"></a>
+            </div>
+            <div class="col-1 d-flex justify-content-center">           <!--Láthatatlan elválasztók a részek között-->
+                <div class="divider"></div>
+            </div>
+            <!--Második középső rész-->
+            <div class="col-4 text-center">
+                <p id="copyright">&copy; 2024-2025 Copyright</p>
+            </div>
+            <div class="col-1 d-flex justify-content-center">
+                <div class="divider"></div>
+            </div>
+            <!--Harmadik jobb oldali rész-->
+            <div class="col-3 text-center">
+              <a routerLink="/dataprotection" class="thirdpart"><p class="thirdpart">Data Protection</p></a>
+              <a routerLink="/userterms" class="thirdpart"><p class="thirdpart">User Terms</p></a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+
+</html>

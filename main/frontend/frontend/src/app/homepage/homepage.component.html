@@ -1,0 +1,156 @@
+<!--Felirat-->
+<h3 id="Coming">Coming soon...</h3>
+<!--Carousel slider (Bootstrap) amiben a carousel template referenciát biztosít a komponens számára-->
+<div #carousel id="slideshow" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-indicators">
+        <!--Carousel indikátorok, jelzik hogy mikor éppen melyiken van-->
+        <button *ngFor="let item of slideshow; let i = index"
+        type="button"
+        [attr.data-bs-slide-to] = "i"
+        [class.active]="i === activeSlideIndex"
+        [attr.aria-current]="i === activeSlideIndex ? 'true': null"
+        [attr.aria-label]="'Slide '+ (i + 1)">
+    </button>
+    </div>
+    <!--Carousel inner ahol a képek és a megjelenés dátuma jelenik meg-->
+    <div class="carousel-inner">
+            <div *ngFor="let item of slideshow; let i = index"
+            class="carousel-item"
+            [class.active]="i === activeSlideIndex">
+            <!--A képek az adott játék oldalára vezetnek-->
+                <a [routerLink]="['/game', item.id]">
+                    <img [src]="item.promoArt" class="d-block w-50" [alt]="item.title">
+                </a>
+                <!--Megjelenés dátuma-->
+            <div class="carousel-caption d-none d-md-block">
+                <p>{{item.release}}</p>
+            </div>
+            </div>
+    </div>
+
+    <!--Carousel nyíl váltás az előzőre-->
+    <button class="carousel-control-prev" type="button" data-bs-target="#slideshow" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+
+    <!--Carousel nyíl váltás a következőre-->
+    <button class="carousel-control-next" type="button" data-bs-target="#slideshow" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<br>
+<hr class="splitter1"> <!--Választóvonal-->
+<br>
+
+<!--Első vízszintes lista a már megjelent új játékokról-->
+<p class="titles">New releases</p>
+<hr class="splitter2">  <!--Másodlagos választóvonal-->
+<div class="gamelist-container position-relative">
+    <!--Lista tartalma-->
+    <!--Baloldali navigációs nyíl-->
+    <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(0)"></button>
+    <!--Játékok borítóképei és nevük-->
+    <div class="gamelist" id="gamelist" #gamelist>
+        <div class="item" *ngFor="let game of gamescategories['newReleaseGames']">
+            <a [routerLink]="['/game', game.id]">
+                <img [src]="game.boxart" [alt]="game.name" />
+            </a>
+            <p id="gamename">{{game.name}}</p>
+        </div>
+    </div>
+    <!--Jobb oldali navigációs nyíl-->
+    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(0)"></button>
+</div>
+
+<hr class="splitter1">  <!--Választóvonal-->
+<br>
+<!--Második vízszintes lista ugyanazzal a felépítéssel-->
+<p class="titles">Shooters</p>
+<hr class="splitter2">  <!--Másodlagos választóvonal-->
+<div class="gamelist-container position-relative">
+    <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(1)"></button>
+    <div class="gamelist" id="gamelist1" #gamelist>
+        <div class="item" *ngFor="let game of gamescategories['shooters']">
+            <a [routerLink]="['/game', game.id]">
+                <img [src]="game.boxart" [alt]="game.name" />
+            </a>
+            <p id="gamename">{{game.name}}</p>
+        </div>
+    </div>
+    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(1)"></button>
+</div>
+
+<hr class="splitter1">  <!--Választóvonal-->
+<br>
+<!--Harmadik vízszintes lista ugyanazzal a felépítéssel-->
+<p class="titles">Adventures</p>
+<hr class="splitter2">  <!--Másodlagos választóvonal-->
+<div class="gamelist-container position-relative">
+    <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(2)"></button>
+    <div class="gamelist" id="gamelist2" #gamelist>
+        <div class="item" *ngFor="let game of gamescategories['adventures']">
+            <a [routerLink]="['/game', game.id]">
+                <img [src]="game.boxart" [alt]="game.name" />
+            </a>
+            <p id="gamename">{{game.name}}</p>
+        </div>
+    </div>
+    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(2)"></button>
+</div>
+
+<hr class="splitter1">  <!--Választóvonal-->
+<br>
+<!--Negyedik vízszintes lista ugyanazzal a felépítéssel-->
+<p class="titles">RPG's</p>
+<hr class="splitter2">  <!--Másodlagos választóvonal-->
+<div class="gamelist-container position-relative">
+    <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(3)"></button>
+    <div class="gamelist" id="gamelist3" #gamelist>
+        <div class="item" *ngFor="let game of gamescategories['rpgs']">
+            <a [routerLink]="['/game', game.id]">
+                <img [src]="game.boxart" [alt]="game.name" />
+            </a>
+            <p id="gamename">{{game.name}}</p>
+        </div>
+    </div>
+    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(3)"></button>
+</div>
+
+<hr class="splitter1">  <!--Választóvonal-->
+<br>
+<!--Ötödik vízszintes lista ugyanazzal a felépítéssel-->
+<p class="titles">Racings</p>
+<hr class="splitter2">  <!--Másodlagos választóvonal-->
+<div class="gamelist-container position-relative">
+    <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(4)"></button>
+    <div class="gamelist" id="gamelist4" #gamelist>
+        <div class="item" *ngFor="let game of gamescategories['racings']">
+            <a [routerLink]="['/game', game.id]">
+                <img [src]="game.boxart" [alt]="game.name" />
+            </a>
+            <p id="gamename">{{game.name}}</p>
+        </div>
+    </div>
+    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(4)"></button>
+</div>
+
+<hr class="splitter1">  <!--Választóvonal-->
+<br>
+<!--Hatodik vízszintes lista ugyanazzal a felépítéssel-->
+<p class="titles">Strategies</p>
+<hr class="splitter2">  <!--Másodlagos választóvonal-->
+<div class="gamelist-container position-relative">
+    <button class="custom-arrow custom-arrow-left" type="button" (click)="leftscroll(5)"></button>
+    <div class="gamelist" id="gamelist5" #gamelist>
+        <div class="item" *ngFor="let game of gamescategories['strategies']">
+            <a [routerLink]="['/game', game.id]">
+                <img [src]="game.boxart" [alt]="game.name" />
+            </a>
+            <p id="gamename">{{game.name}}</p>
+        </div>
+    </div>
+    <button class="custom-arrow custom-arrow-right" type="button" (click)="rightscroll(5)"></button>
+</div>

@@ -1,0 +1,69 @@
+/*ratingwindow komponenshez tartozó stílusok beállításai*/
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-width: 300px !important;
+    position: relative !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+::ng-deep .cdk-overlay-pane {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 1000 !important;
+}
+
+.ratingcontainer{
+    text-align: center;
+    padding: 2rem;
+    min-width: 300px;
+}
+
+.options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.options button{
+    padding: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.options button:hover{
+    transform: scale(1.1);
+}
+
+.options button:active{
+    transform: scale(0.95);
+}
+
+.options img{
+    width: 74px;
+    height: 74px;
+    display: block;
+}
+
+#close {
+    font-weight: bold;
+    font-size: larger;
+    color: black;
+}
+
+#close:hover {
+    transform: scale(1.1);
+    color: white
+}
+
+.closesection{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

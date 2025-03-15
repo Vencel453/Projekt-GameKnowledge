@@ -1,0 +1,50 @@
+<!--Cím-->
+<title>My Profile</title>
+<div class="myprofile-container">
+    <!--Alcím és tartalom-->
+        <h2 class="titles">My Profile</h2>
+        <hr>
+        <br>
+ 
+        <!--Saját adatok-->
+    <div class="details">
+        <p><strong>Username: </strong> {{user?.username}} </p>
+        <p><strong>E-mail: </strong> {{user?.email}} </p>
+        <p><strong>Created: </strong> {{user?.creation}} </p>
+    </div>
+
+    <hr>
+    <!--Saját adatok megváltoztatása-->
+<h2 class="titles">Change my datas</h2>
+<br>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+            <!--Felhasználónév-->
+            <label for="username">Username: </label>
+            <input id="username" type="text" formControlName="username">
+        </div>
+
+        <!--E-mail cím-->
+        <div class="form-field">
+            <label for="email">E-mail: </label>
+            <input id="email" type="email" formControlName="email">
+        </div>
+
+        <!--Új jelszó-->
+        <div class="form-field">
+            <label for="password">New password: </label>
+            <input id="password" type="password" formControlName="password">
+        </div>
+
+        <!--Új jelszó ismét-->
+        <div class="form-field">
+            <label for="passwordAgain">New password confirmation: </label>
+            <input id="passwordAgain" type="password" formControlName="passwordAgain">
+        </div>
+        <br>
+
+        <!--Módosítás gomb a végrehajtáshoz-->
+        <button type="submit">Modify</button>
+       <div class="form-field"></div> 
+    </form>
+</div>

@@ -1,0 +1,63 @@
+/*Globális CSS stílus beállítások melyek minden egyes oldalon érvényesek az adott elemekre*/
+.custombar {
+    background-color: black !important;
+    color: #A0B6F7 !important;
+    font-size: 16px !important;
+    width: fit-content;
+    height: fit-content;
+    top: 50% !important;
+    left: 50% !important;
+    position: fixed !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+}
+
+.custombar:hover{
+    background-color: #A0B6F7;
+    color: white;
+}
+
+.dark-backdrop{
+    background: #A0B6F7;
+}
+
+.ratingcontainer {
+    padding: 20px;
+    text-align: center;
+}
+
+.options{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.custom-backdrop{
+    background-color: #A0B6F7 !important;
+    opacity: 0.5 !important;
+}
+
+.mat-mdc-dialog-container {
+    --mdc-dialog-container-color: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+    background: transparent !important;
+    box-shadow: none !important;
+    background-color: #A0B6F7 !important;
+}
+
+.transparent-dialog{
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/*Reszponzív beállítások*/
+:root {
+    --phone-breakpoint: 576px;
+    --tablet-breakpoint: 768px;
+    --desktop-breakpoint: 992px;
+}

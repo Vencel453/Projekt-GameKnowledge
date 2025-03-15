@@ -1,0 +1,4971 @@
+{
+	"info": {
+		"_postman_id": "0008faab-77a4-43b0-859c-77315935762d",
+		"name": "Game Knwoledge",
+		"description": "Ez a gyűjtemény a Game Knowledge weboldal backend szerver tesztejeit tartalmazza. Az backend URL: [http://localhost:3000](http://localhost:3000/) címen található. A tesztek a backend fájlok szerint vannak mappába sorolva, ezeken belül további mappákba vannak sorolva funkciók alapján.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38373925"
+	},
+	"item": [
+		{
+			"name": "regist",
+			"item": [
+				{
+					"name": "Registration",
+					"item": [
+						{
+							"name": "Correct/Already Exist",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock\",\r\n    \"email\": \"citadel.gd@olal.co\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New User for Test",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Test123\",\r\n    \"email\": \"cmon@pleaseee.com\",\r\n    \"password\": \"Jelszócska123\",\r\n    \"passwordAgain\": \"Jelszócska123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty Body",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Missing Username",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"citadel.gd@olal.co\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Missing Email",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock2\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Missing Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock2\",\r\n    \"email\": \"citadel.gd@olal.coq\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Missing Password Confirmation",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock2\",\r\n    \"email\": \"citadel.gd@olal.coq\",\r\n    \"password\": \"RedMajomRedemption1986\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Too Long",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"TransformersGrimlockTheKingOfDinobots\",\r\n    \"email\": \"citadel.gd@olal.com\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Too Short",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Gri\",\r\n    \"email\": \"citadel.gd@olal.col\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Contains Space",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grim Lock\",\r\n    \"email\": \"citadel.gd@olal.col\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Is a Profanity",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Fucking\",\r\n    \"email\": \"citadel.gd@olal.col\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email is Missing: @",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock2\",\r\n    \"email\": \"citadel.gdolal.col\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email Missing: dot .",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "// Erre 400-as hibakódot kapunk, mert az email címből hiányzik a . karakter\r\n{\r\n    \"username\": \"Grimlock2\",\r\n    \"email\": \"citadel.gd@olalcol\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Passwords Don't Match",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock2\",\r\n    \"email\": \"citadel.gd@olal.coq\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986Q\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Too Short",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock2\",\r\n    \"email\": \"citadel.gd@olal.coq\",\r\n    \"password\": \"Red12\",\r\n    \"passwordAgain\": \"Red12\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Too Long",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock2\",\r\n    \"email\": \"citadel.gd@olal.coq\",\r\n    \"password\": \"RedMajomRedemption1986FromRockstarGamesButActually\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986FromRockstarGamesButActually\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "No Uppercase In The Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock2\",\r\n    \"email\": \"citadel.gd@olal.coq\",\r\n    \"password\": \"redmajomredemption1986\",\r\n    \"passwordAgain\": \"redmajomredemption1986\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "No Number In The Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock2\",\r\n    \"email\": \"citadel.gd@olal.coq\",\r\n    \"password\": \"RedMajomRedemption\",\r\n    \"passwordAgain\": \"RedMajomRedemption\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty Datas",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"\",\r\n    \"passwordAgain\": \"\",\r\n    \"email\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Is Empty",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"\",\r\n    \"email\": \"citadel.gd@olal.coé\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email Is Empty",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock3\",\r\n    \"email\": \"\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password is Empty",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "// Erre 400-as hibakódot kapunk, mert nincs kitöltve a jelszó\r\n{\r\n    \"username\": \"Grimlock3\",\r\n    \"email\": \"citadel.gd@olal.coé\",\r\n    \"password\": \"\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Confirmation Is Empty",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock3\",\r\n    \"email\": \"citadel.gd@olal.coé\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Is Null",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": null,\r\n    \"email\": \"citadel.gd@olal.comm\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email Is Null",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock3\",\r\n    \"email\": null,\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Is Null",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock3\",\r\n    \"email\": \"citadel.gd@olal.comm\",\r\n    \"password\": null,\r\n    \"passwordAgain\": \"RedMajomRedemption1986\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Confirmation Is Null",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Grimlock3\",\r\n    \"email\": \"citadel.gd@olal.comm\",\r\n    \"password\": \"RedMajomRedemption1986\",\r\n    \"passwordAgain\": null\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A mappa a regisztrációs teszteket tartalmazza."
+				},
+				{
+					"name": "Method Not Allowed",
+					"item": [
+						{
+							"name": "PUT",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A regiszrációs címhez tartozó teszteket tartalmaz amelyek nem támogatott metódussal küldi el."
+				}
+			],
+			"description": "Ebben a regist.js fájlban lévő metódus tesztjeit tartalmazza. A mappa tartalmazza a regisztrációs teszteket, illetve a nem megfelelő metódus használat tesztjeit."
+		},
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "Successfull Login With Admin User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Vencel453\",\r\n    \"password\": \"VerySecret123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successfull Login With General User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Péter23\",\r\n    \"password\": \"Babfőzelék1932\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successfull Login For Test User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Test123\",\r\n    \"password\": \"Jelszócska123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Is Missing",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"VerySecret123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Is Missing",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Vencel453\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Is Empty",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"VerySecret123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Is Empty",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Vencel453\",\r\n    \"password\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Is Null",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": null,\r\n    \"password\": \"VerySecret123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Is Null",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Vencel453\",\r\n    \"password\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Is Incorrect",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Pityu32\",\r\n    \"password\": \"Babfőzelék1932\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Is Incorrect",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Péter23\",\r\n    \"password\": \"Babfőzelék1899\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A bejelelentkezés funckió tesztjeit tartalmazza."
+				},
+				{
+					"name": "Method Not Allowed",
+					"item": [
+						{
+							"name": "GET",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Ebben a mappában a bejelentkezéshez tartozó teszteket tartalmazza."
+		},
+		{
+			"name": "mainpage",
+			"item": [
+				{
+					"name": "Mainpage Fetch",
+					"item": [
+						{
+							"name": "Fetching Games On Mainpage",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A weboldal kezdőlapjára tartozó lekérdezést tartalmazza."
+				},
+				{
+					"name": "Search",
+					"item": [
+						{
+							"name": "Valid Search",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search\": \"hill\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Text Is Missing",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "No Text",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A keresésmező teszt eseteit tartalmazza."
+				},
+				{
+					"name": "Method Not Allowed",
+					"item": [
+						{
+							"name": "POST",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A nem támogatott metúdusok tesztjei találhatóak itt."
+				}
+			],
+			"description": "Ebben a mappában a főoldalhoz tartozó lekéréseket tartalmazza. A szükséges token megszerezhető a \"login\" mappa \"CorrectAdmin\" vagy \"CorrectDefault\" lekérdezés eredményében, de minden szerver újraindítás után új tokenekre van szükség, illetve a tokenek 1 óra múlva lejárnak."
+		},
+		{
+			"name": "gamepage",
+			"item": [
+				{
+					"name": "Gamepage Fetching",
+					"item": [
+						{
+							"name": "Successfull Fetch",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Game With This Id Does Not Exist",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/100",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"100"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A játékok adatlekéréséhez tartozó tesztek."
+				},
+				{
+					"name": "Rating",
+					"item": [
+						{
+							"name": "Successfull Positive Rating / Conflict",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isPositive\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successfull Negative Rating / Conflict",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "// Ebben az esetben a felhasználó egy negatív értékelést ad ha be van jelentkezve, illetve egy 403 http kódot ha a felhasználó értékelte már az adott játékott\r\n{\r\n    \"isPositive\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "The Game's Not Released Yet",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isPositive\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "No Token Provided",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isPositive\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Faulty Token",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBaMjU2R0NNIn0..8r35worjPCFr0Wmb.FzXdMLsSbKq50SXrmnkjkIo0ALKyzfVXK1iu1OXqheFmerQYe4ZJbUI4P_UpvWSYrCqTfucS5d_zjAL4aw9q2BxM0RVyNyzDNEKegw.Hd-jcH-aQCUQkN5SjTkveg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isPositive\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "No Rating Value",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isPositive\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Missing Value",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rating's Value Is Not a Boolean",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "// Ebben az esetben 400 hiba kódot kapunk, mert hiányzik az értékelés\r\n{\r\n    \"isPositive\": \"karalábé\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Game With This Id Does Not Exist",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "// Ebben az esetben a felhasználó egy negatív értékelést ad ha be van jelentkezve, illetve egy 403 http kódot ha a felhasználó értékelte már az adott játékott\r\n{\r\n    \"isPositive\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/100",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"100"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Egy adott játék értékeléséhez tartozó tesztek."
+				},
+				{
+					"name": "Add To Favourites",
+					"item": [
+						{
+							"name": "Successfully Added To Favourites / Conflict",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/game/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Game Does Not Exist",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/game/100",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"100"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "No Token Provided",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/game/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Faulty Token",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "bihhhhhhhhhhhkbhkbzibb8zzbuibibiubbbbkbbubuibbbubbui",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/game/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A játékok kedvencekhez adásának a teszteit tartalmazza."
+				},
+				{
+					"name": "Method Not Allowed",
+					"item": [
+						{
+							"name": "PATCH",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A nem engedélyezett metódus teszteket tartalmazza."
+				}
+			],
+			"description": "Az url-ben meghatározott játéknak a tesztjeit tartalmazza."
+		},
+		{
+			"name": "myprofile",
+			"item": [
+				{
+					"name": "Fetch User Data",
+					"item": [
+						{
+							"name": "Successfull Fetch",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "No Token Provided",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Faulty Token",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..OjDk7QVu6k4wA8rP.WnclvRKKXnzeupYs8c_1SRMmu8kyUmwDfxek2hXhW5eWLnMMfi9O8RRxl0HlpK99A7U7Z08fksHeEGTcPeLuWE6IxyKIrogkdNAf.7Vy5KiVb1G1ogngGzaXKiw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A felhasználó adatainak lekérdezéséhez tartozó teszteket tartalmazza."
+				},
+				{
+					"name": "Change User Data",
+					"item": [
+						{
+							"name": "Username Is a Profanity",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"fucking\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"passwordAgain\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Is Too Short",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Tes\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"passwordAgain\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Is Too Long",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"TestingForMyWebpageIfItsUsernameTooLong\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"passwordAgain\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Contains a Space",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Test 123\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"passwordAgain\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Is Same as Before",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Test123\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"passwordAgain\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Username Is Already Taken",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Vencel453\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"passwordAgain\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email Is Missing: @",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": null,\r\n    \"email\": \"masemail.com\",\r\n    \"password\": null,\r\n    \"passwordAgain\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email Is Missing: Dot .",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": null,\r\n    \"email\": \"mas@emailcom\",\r\n    \"password\": null,\r\n    \"passwordAgain\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email Is The Same As Before",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": null,\r\n    \"email\": \"cmon@pleaseee.com\",\r\n    \"password\": null,\r\n    \"passwordAgain\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email Is Already Taken",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": null,\r\n    \"email\": \"email@address.com\",\r\n    \"password\": null,\r\n    \"passwordAgain\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Passwords Don't Match",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"MásJelszó456\",\r\n    \"passwordAgain\": \"MásJelszó4567\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Same As Before",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"Jelszócska123\",\r\n    \"passwordAgain\": \"Jelszócska123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Does Not Contain a Number",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"Jelszócska\",\r\n    \"passwordAgain\": \"Jelszócska\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Does Not Contain Uppercase Letter",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"másjelszó456\",\r\n    \"passwordAgain\": \"másjelszó456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Is Too Short",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"Jel123\",\r\n    \"passwordAgain\": \"Jel123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Is Too Long",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"RegényMéretűJelszóTesztelésiSzempontbólÉsASzámok1től9ig123456789\",\r\n    \"passwordAgain\": \"RegényMéretűJelszóTesztelésiSzempontbólÉsASzámok1től9ig123456789\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password's Missing Confirmation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"MásJelszó456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Only Password Confirmation Given",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"passwordAgain\": \"MásJelszó456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successfull Username Change",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Test456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successfull Email Change Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"goodenough@email.gog\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successfull Password Change",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"MásJelszó456\",\r\n    \"passwordAgain\": \"MásJelszó456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successfull Change Every Data",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Test789\",\r\n    \"email\": \"anothergood@email.lol\",\r\n    \"password\": \"MásJelszó789\",\r\n    \"passwordAgain\": \"MásJelszó789\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A felhasználó adatainak a változtatásához tartozó teszteket tartalmazza."
+				},
+				{
+					"name": "Delete User",
+					"item": [
+						{
+							"name": "Login For Changed Test User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Test789\",\r\n    \"password\": \"MásJelszó789\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successfull Deleting User / User Doesn't Exist",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Faulty Token",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGiOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..HqN8eYFOBu3EJlif.Q1qlWnXU7iDp5kD_nhj8uWlECEutgzdtJP4WyZE5BUovwPNu-8mB9QJmPmY7LiqvPLU7-JsPtnCYM6vlkjivNetid8Zwe-vdyGy8.x7lO5HO2F8gckiVvzjEGDQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "No Token Provided",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Ebben a mappában a felhasználó törléseivel kapcsolatos tesztek vannak."
+				},
+				{
+					"name": "Method Not Allowed",
+					"item": [
+						{
+							"name": "PUT",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A nem támogatott metódus teszteket tartalmazza."
+				}
+			]
+		},
+		{
+			"name": "favourites",
+			"item": [
+				{
+					"name": "Fetch Favourites",
+					"item": [
+						{
+							"name": "Fetch User's Favourites",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Faulty Token",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..9du1Vct3cbmUuIcz.jz__gY649X4LtTbfDVMM9b1QEBN_vLs-Tc8-nfhDZ8mNCitQBVmTpdb156zmYa89pysv9l0HLNSa0ZsTfakOmeyYPwTZWnXqkZI0FA.OjoWr_mIPUjGzYp7E7GCEA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "No Token Provided",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A kedvencek lekérdezését kezelő teszteket tartalmazza."
+				},
+				{
+					"name": "Delete Favourite",
+					"item": [
+						{
+							"name": "Game Is Not a Favourite",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"gameId\": 19\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GameId Is Not a Number",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"gameId\": \"kovacs\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty GameId",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"gameId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GameId Is Null",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"gameId\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Missing GameId",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successfull Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"gameId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Faulty Token",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..9du1Vct3cbmUuIcz.jz__gY649X4LtTbfDVMM9b1QEBN_vLs-Tc8-nfhDZ8mNCitQBVmTpdb156zmYa89pysv9l0HLNSa0ZsTfakOmeyYPwTZWnXqkZI0FA.OjoWr_mIPUjGzYp7E7GCEA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"gameId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "No Token Provided",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"gameId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Kedvencek törlését kezelő teszteket tartalmazza."
+				},
+				{
+					"name": "Method Not Allowed",
+					"item": [
+						{
+							"name": "POST",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/favourites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"favourites"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A nem támogatott metódusok tesztjeit tartalmazza."
+				}
+			],
+			"description": "Egy felhasználó kedvencekbe mentett játékait kezelő teszteket tartalmazza."
+		},
+		{
+			"name": "review",
+			"item": [
+				{
+					"name": "Create Review",
+					"item": [
+						{
+							"name": "Content Contains Profanity",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Phantom Liberty Driving Mission pet\",\r\n    \"content\": \"Fuck, finally getting back into Cyberpunk after a year off and picked up Phantom Liberty. I am loving everything about it, they really found a way to integrate the area into the main game in the perfect way. There are 2 generated events I never fail to stop what I am doing when I see them occur. The supply drop and car theft missions. They are relatively fun and challenging and give great rewards. The car thefts are basically a steering wheel icon on the map (they even occur outside of Dog Town I think), you kill one or two enemies that are guarding it, get in and take off to a point on the map miles away. There seems to be a RNG for how each are handled. Just drive (most rare) Drive but the game throws waves of enemies at you to kill you during the trip. 3, Deliver the car in great condition. 4. Deliver the car under a certain time limit. 5. A combo of numbers 2-4. My pet peeve is with #4. Most of the time, the time given to deliver is super unrealistic. A route where if you drove perfectly at full speed, would take you 5 minutes, the game gives you like 3. It doesn't make any sense to me and seems like a bug. The worst part is the fixer calling you and admonishing you for how bad you are. I would love if the game gave you the option to tell the fixer to pound salt with that time limit. Is there a way to cancel out of the mission? The cars seem pretty indestructible. I do find that if you save before getting in the car and reload, the RNG changes.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Title Contains Profanity",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Fuck Phantom Liberty Driving Mission\",\r\n    \"content\": \"Finally getting back into Cyberpunk after a year off and picked up Phantom Liberty. I am loving everything about it, they really found a way to integrate the area into the main game in the perfect way. There are 2 generated events I never fail to stop what I am doing when I see them occur. The supply drop and car theft missions. They are relatively fun and challenging and give great rewards. The car thefts are basically a steering wheel icon on the map (they even occur outside of Dog Town I think), you kill one or two enemies that are guarding it, get in and take off to a point on the map miles away. There seems to be a RNG for how each are handled. Just drive (most rare) Drive but the game throws waves of enemies at you to kill you during the trip. 3, Deliver the car in great condition. 4. Deliver the car under a certain time limit. 5. A combo of numbers 2-4. My pet peeve is with #4. Most of the time, the time given to deliver is super unrealistic. A route where if you drove perfectly at full speed, would take you 5 minutes, the game gives you like 3. It doesn't make any sense to me and seems like a bug. The worst part is the fixer calling you and admonishing you for how bad you are. I would love if the game gave you the option to tell the fixer to pound salt with that time limit. Is there a way to cancel out of the mission? The cars seem pretty indestructible. I do find that if you save before getting in the car and reload, the RNG changes.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Content Is Null",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Phantom Liberty Driving Mission pet\",\r\n    \"content\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Content Is Empty",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Phantom Liberty Driving Mission pet\",\r\n    \"content\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Content Is Missing",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Phantom Liberty Driving Mission pet\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Content Is Too Short",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Phantom Liberty Driving Mission pet\",\r\n    \"content\": \"Finally\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Content Is Too Long",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Phantom Liberty Driving Mission pet\",\r\n    \"content\": \"Finally getting back into Cyberpunk after a year off and picked up Phantom Liberty. I am loving everything about it, they really found a way to integrate the area into the main game in the perfect way. There are 2 generated events I never fail to stop what I am doing when I see them occur. The supply drop and car theft missions. They are relatively fun and challenging and give great rewards. The car thefts are basically a steering wheel icon on the map (they even occur outside of Dog Town I think), you kill one or two enemies that are guarding it, get in and take off to a point on the map miles away. There seems to be a RNG for how each are handled. Just drive (most rare) Drive but the game throws waves of enemies at you to kill you during the trip. 3, Deliver the car in great condition. 4. Deliver the car under a certain time limit. 5. A combo of numbers 2-4. My pet peeve is with #4. Most of the time, the time given to deliver is super unrealistic. A route where if you drove perfectly at full speed, would take you 5 minutes, the game gives you like 3. It doesn't make any sense to me and seems like a bug. The worst part is the fixer calling you and admonishing you for how bad you are. I would love if the game gave you the option to tell the fixer to pound salt with that time limit. Is there a way to cancel out of the mission? The cars seem pretty indestructible. I do find that if you save before getting in the car and reload, the RNG changes.Finally getting back into Cyberpunk after a year off and picked up Phantom Liberty. I am loving everything about it, they really found a way to integrate the area into the main game in the perfect way. There are 2 generated events I never fail to stop what I am doing when I see them occur. The supply drop and car theft missions. They are relatively fun and challenging and give great rewards. The car thefts are basically a steering wheel icon on the map (they even occur outside of Dog Town I think), you kill one or two enemies that are guarding it, get in and take off to a point on the map miles away. There seems to be a RNG for how each are handled. Just drive (most rare) Drive but the game throws waves of enemies at you to kill you during the trip. 3, Deliver the car in great condition. 4. Deliver the car under a certain time limit. 5. A combo of numbers 2-4. My pet peeve is with #4. Most of the time, the time given to deliver is super unrealistic. A route where if you drove perfectly at full speed, would take you 5 minutes, the game gives you like 3. It doesn't make any sense to me and seems like a bug. The worst part is the fixer calling you and admonishing you for how bad you are. I would love if the game gave you the option to tell the fixer to pound salt with that time limit. Is there a way to cancel out of the mission? The cars seem pretty indestructible. I do find that if you save before getting in the car and reload, the RNG changes.Finally getting back into Cyberpunk after a year off and picked up Phantom Liberty. I am loving everything about it, they really found a way to integrate the area into the main game in the perfect way. There are 2 generated events I never fail to stop what I am doing when I see them occur. The supply drop and car theft missions. They are relatively fun and challenging and give great rewards. The car thefts are basically a steering wheel icon on the map (they even occur outside of Dog Town I think), you kill one or two enemies that are guarding it, get in and take off to a point on the map miles away. There seems to be a RNG for how each are handled. Just drive (most rare) Drive but the game throws waves of enemies at you to kill you during the trip. 3, Deliver the car in great condition. 4. Deliver the car under a certain time limit. 5. A combo of numbers 2-4. My pet peeve is with #4. Most of the time, the time given to deliver is super unrealistic. A route where if you drove perfectly at full speed, would take you 5 minutes, the game gives you like 3. It doesn't make any sense to me and seems like a bug. The worst part is the fixer calling you and admonishing you for how bad you are. I would love if the game gave you the option to tell the fixer to pound salt with that time limit. Is there a way to cancel out of the mission? The cars seem pretty indestructible. I do find that if you save before getting in the car and reload, the RNG changes.Finally getting back into Cyberpunk after a year off and picked up Phantom Liberty. I am loving everything about it, they really found a way to integrate the area into the main game in the perfect way. There are 2 generated events I never fail to stop what I am doing when I see them occur. The supply drop and car theft missions. They are relatively fun and challenging and give great rewards. The car thefts are basically a steering wheel icon on the map (they even occur outside of Dog Town I think), you kill one or two enemies that are guarding it, get in and take off to a point on the map miles away. There seems to be a RNG for how each are handled. Just drive (most rare) Drive but the game throws waves of enemies at you to kill you during the trip. 3, Deliver the car in great condition. 4. Deliver the car under a certain time limit. 5. A combo of numbers 2-4. My pet peeve is with #4. Most of the time, the time given to deliver is super unrealistic. A route where if you drove perfectly at full speed, would take you 5 minutes, the game gives you like 3. It doesn't make any sense to me and seems like a bug. The worst part is the fixer calling you and admonishing you for how bad you are. I would love if the game gave you the option to tell the fixer to pound salt with that time limit. Is there a way to cancel out of the mission? The cars seem pretty indestructible. I do find that if you save before getting in the car and reload, the RNG changes.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Title Is Null",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": null,\r\n    \"content\": \"Finally getting back into Cyberpunk after a year off and picked up Phantom Liberty. I am loving everything about it, they really found a way to integrate the area into the main game in the perfect way. There are 2 generated events I never fail to stop what I am doing when I see them occur. The supply drop and car theft missions. They are relatively fun and challenging and give great rewards. The car thefts are basically a steering wheel icon on the map (they even occur outside of Dog Town I think), you kill one or two enemies that are guarding it, get in and take off to a point on the map miles away. There seems to be a RNG for how each are handled. Just drive (most rare) Drive but the game throws waves of enemies at you to kill you during the trip. 3, Deliver the car in great condition. 4. Deliver the car under a certain time limit. 5. A combo of numbers 2-4. My pet peeve is with #4. Most of the time, the time given to deliver is super unrealistic. A route where if you drove perfectly at full speed, would take you 5 minutes, the game gives you like 3. It doesn't make any sense to me and seems like a bug. The worst part is the fixer calling you and admonishing you for how bad you are. I would love if the game gave you the option to tell the fixer to pound salt with that time limit. Is there a way to cancel out of the mission? The cars seem pretty indestructible. I do find that if you save before getting in the car and reload, the RNG changes.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Title is Empty",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"\",\r\n    \"content\": \"Finally getting back into Cyberpunk after a year off and picked up Phantom Liberty. I am loving everything about it, they really found a way to integrate the area into the main game in the perfect way. There are 2 generated events I never fail to stop what I am doing when I see them occur. The supply drop and car theft missions. They are relatively fun and challenging and give great rewards. The car thefts are basically a steering wheel icon on the map (they even occur outside of Dog Town I think), you kill one or two enemies that are guarding it, get in and take off to a point on the map miles away. There seems to be a RNG for how each are handled. Just drive (most rare) Drive but the game throws waves of enemies at you to kill you during the trip. 3, Deliver the car in great condition. 4. Deliver the car under a certain time limit. 5. A combo of numbers 2-4. My pet peeve is with #4. Most of the time, the time given to deliver is super unrealistic. A route where if you drove perfectly at full speed, would take you 5 minutes, the game gives you like 3. It doesn't make any sense to me and seems like a bug. The worst part is the fixer calling you and admonishing you for how bad you are. I would love if the game gave you the option to tell the fixer to pound salt with that time limit. Is there a way to cancel out of the mission? The cars seem pretty indestructible. I do find that if you save before getting in the car and reload, the RNG changes.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Title Is Missing",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"Finally getting back into Cyberpunk after a year off and picked up Phantom Liberty. I am loving everything about it, they really found a way to integrate the area into the main game in the perfect way. There are 2 generated events I never fail to stop what I am doing when I see them occur. The supply drop and car theft missions. They are relatively fun and challenging and give great rewards. The car thefts are basically a steering wheel icon on the map (they even occur outside of Dog Town I think), you kill one or two enemies that are guarding it, get in and take off to a point on the map miles away. There seems to be a RNG for how each are handled. Just drive (most rare) Drive but the game throws waves of enemies at you to kill you during the trip. 3, Deliver the car in great condition. 4. Deliver the car under a certain time limit. 5. A combo of numbers 2-4. My pet peeve is with #4. Most of the time, the time given to deliver is super unrealistic. A route where if you drove perfectly at full speed, would take you 5 minutes, the game gives you like 3. It doesn't make any sense to me and seems like a bug. The worst part is the fixer calling you and admonishing you for how bad you are. I would love if the game gave you the option to tell the fixer to pound salt with that time limit. Is there a way to cancel out of the mission? The cars seem pretty indestructible. I do find that if you save before getting in the car and reload, the RNG changes.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Title Is Too Long",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Phantom Liberty Driving Mission petaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\r\n    \"content\": \"Finally getting back into Cyberpunk after a year off and picked up Phantom Liberty. I am loving everything about it, they really found a way to integrate the area into the main game in the perfect way. There are 2 generated events I never fail to stop what I am doing when I see them occur. The supply drop and car theft missions. They are relatively fun and challenging and give great rewards. The car thefts are basically a steering wheel icon on the map (they even occur outside of Dog Town I think), you kill one or two enemies that are guarding it, get in and take off to a point on the map miles away. There seems to be a RNG for how each are handled. Just drive (most rare) Drive but the game throws waves of enemies at you to kill you during the trip. 3, Deliver the car in great condition. 4. Deliver the car under a certain time limit. 5. A combo of numbers 2-4. My pet peeve is with #4. Most of the time, the time given to deliver is super unrealistic. A route where if you drove perfectly at full speed, would take you 5 minutes, the game gives you like 3. It doesn't make any sense to me and seems like a bug. The worst part is the fixer calling you and admonishing you for how bad you are. I would love if the game gave you the option to tell the fixer to pound salt with that time limit. Is there a way to cancel out of the mission? The cars seem pretty indestructible. I do find that if you save before getting in the car and reload, the RNG changes.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Title Is Too Short",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Ph\",\r\n    \"content\": \"Finally getting back into Cyberpunk after a year off and picked up Phantom Liberty. I am loving everything about it, they really found a way to integrate the area into the main game in the perfect way. There are 2 generated events I never fail to stop what I am doing when I see them occur. The supply drop and car theft missions. They are relatively fun and challenging and give great rewards. The car thefts are basically a steering wheel icon on the map (they even occur outside of Dog Town I think), you kill one or two enemies that are guarding it, get in and take off to a point on the map miles away. There seems to be a RNG for how each are handled. Just drive (most rare) Drive but the game throws waves of enemies at you to kill you during the trip. 3, Deliver the car in great condition. 4. Deliver the car under a certain time limit. 5. A combo of numbers 2-4. My pet peeve is with #4. Most of the time, the time given to deliver is super unrealistic. A route where if you drove perfectly at full speed, would take you 5 minutes, the game gives you like 3. It doesn't make any sense to me and seems like a bug. The worst part is the fixer calling you and admonishing you for how bad you are. I would love if the game gave you the option to tell the fixer to pound salt with that time limit. Is there a way to cancel out of the mission? The cars seem pretty indestructible. I do find that if you save before getting in the car and reload, the RNG changes.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Faulty Token",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..TkfRuUa2_Mnxhi4c.s82w8dqtE3rwFcopJGuKT25L5JPDrutSAJKBFCAWptRJwrsEYjG-SAW_L-8ScitjguHDjWib60D1DWjcAWZEUNDthCcOFLk4YoCyRg.u9RFMZiFh5SHVfpMT7z-zA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Phantom Liberty Driving Mission pet\",\r\n    \"content\": \"Finally getting back into Cyberpunk after a year off and picked up Phantom Liberty. I am loving everything about it, they really found a way to integrate the area into the main game in the perfect way. There are 2 generated events I never fail to stop what I am doing when I see them occur. The supply drop and car theft missions. They are relatively fun and challenging and give great rewards. The car thefts are basically a steering wheel icon on the map (they even occur outside of Dog Town I think), you kill one or two enemies that are guarding it, get in and take off to a point on the map miles away. There seems to be a RNG for how each are handled. Just drive (most rare) Drive but the game throws waves of enemies at you to kill you during the trip. 3, Deliver the car in great condition. 4. Deliver the car under a certain time limit. 5. A combo of numbers 2-4. My pet peeve is with #4. Most of the time, the time given to deliver is super unrealistic. A route where if you drove perfectly at full speed, would take you 5 minutes, the game gives you like 3. It doesn't make any sense to me and seems like a bug. The worst part is the fixer calling you and admonishing you for how bad you are. I would love if the game gave you the option to tell the fixer to pound salt with that time limit. Is there a way to cancel out of the mission? The cars seem pretty indestructible. I do find that if you save before getting in the car and reload, the RNG changes.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "No Token Provided",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Phantom Liberty Driving Mission pet\",\r\n    \"content\": \"Finally getting back into Cyberpunk after a year off and picked up Phantom Liberty. I am loving everything about it, they really found a way to integrate the area into the main game in the perfect way. There are 2 generated events I never fail to stop what I am doing when I see them occur. The supply drop and car theft missions. They are relatively fun and challenging and give great rewards. The car thefts are basically a steering wheel icon on the map (they even occur outside of Dog Town I think), you kill one or two enemies that are guarding it, get in and take off to a point on the map miles away. There seems to be a RNG for how each are handled. Just drive (most rare) Drive but the game throws waves of enemies at you to kill you during the trip. 3, Deliver the car in great condition. 4. Deliver the car under a certain time limit. 5. A combo of numbers 2-4. My pet peeve is with #4. Most of the time, the time given to deliver is super unrealistic. A route where if you drove perfectly at full speed, would take you 5 minutes, the game gives you like 3. It doesn't make any sense to me and seems like a bug. The worst part is the fixer calling you and admonishing you for how bad you are. I would love if the game gave you the option to tell the fixer to pound salt with that time limit. Is there a way to cancel out of the mission? The cars seem pretty indestructible. I do find that if you save before getting in the car and reload, the RNG changes.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "There's No Game With This Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"I just played The Last Guardian for the first time.\",\r\n    \"content\": \"And my god, it's one of the best games I've ever played. Coming from a gamer of decades with several hundred titles played.Sure, a bit wonky camera and platforming, but everything else just comes toghether so perfectly. The simplicity in design and puzzles contradicted in the complexity of the Nest and game world. How little you're allowed to interact with the world vs how much impact your story has. The mysteries presentet in a way that only team ICO can do. And of course the big doofus that accompany you in your journey. Trico is absolutely adorable, and despite a 15 hr first playthrough I almost felt as much for the beast as I do for my own pets. 10/10, will play again, right now.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1000/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1000",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successfull Creation / Already Reviewed",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"It's bad\",\r\n    \"content\": \" it’s not a good fps, it’s not a good rpg, and it’s not a good action game. it’s trying to be too many things at once and not doing well in any of them. cdpr isn’t very good at making games that feel good to play imo. setting and writing do the heavy lifting for them. visuals too, in cyberpunk’s case. \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "The User Did Not Rate The Game",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"It's bad\",\r\n    \"content\": \" it’s not a good fps, it’s not a good rpg, and it’s not a good action game. it’s trying to be too many things at once and not doing well in any of them. cdpr isn’t very good at making games that feel good to play imo. setting and writing do the heavy lifting for them. visuals too, in cyberpunk’s case. \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/19/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"19",
+										"review"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A kritika létrehozását ellenőrző teszteket tartalmazza."
+				},
+				{
+					"name": "Delete Review",
+					"item": [
+						{
+							"name": "ReviewId Is Missing",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ReviewId Is Null",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reviewId\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ReviewId Is Empty",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reviewId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "There's No Review With This Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reviewId\": 1000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "There's No Game Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reviewId\": 8\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/k/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"k",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "There's No Game With This Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reviewId\": 10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1000/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1000",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Token Is Faulty",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "yJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..oo8DzYBXYMpyLM7b.dUNWJtKqtpUXCQu3EYvCmS7fkGEE_-LDQMs9hnYlBAm6ADaHl88V56hH2Py9R18qO2ipqDI6en5HkRgsRJzXTVojcwKLkEVFxvOcuA._p4EKdxu6_3SXErctEIHcA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reviewId\": 8\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "No Token Provided",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reviewId\": 8\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Delete With Admin / No Review With This Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reviewId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Delete By The Author / No Review With This Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reviewId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Is Not Authorized",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reviewId\": 10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A kritika törlését ellenőrző teszteket tartalmazza."
+				},
+				{
+					"name": "Method Not Allowed",
+					"item": [
+						{
+							"name": "GET",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/game/1/review",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"game",
+										"1",
+										"review"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "A nem támogatott metúdusok tesztjeit tartalmazza."
+				}
+			],
+			"description": "A kritika kezelését ellenőrző teszteket tartalmazza."
+		}
+	]
+}
