@@ -1,4 +1,5 @@
 
+/*homepage komponens stílus beállításai*/
 .carousel-item img{
     height: auto;
     object-fit: cover;
@@ -44,6 +45,33 @@
     display: inline-block;
     white-space: nowrap;
     margin-left: 160px;
+}
+
+.carousel-indicators{
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 8px;
+}
+
+.carousel-indicators button{
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    background-color: #A0B6F7;
+    transition: backround-color 0.3s ease;
+}
+
+.carousel-indicators .active{
+    background-color: white !important;
+    transform: scale(1.3);
 }
 
 #Coming{
@@ -182,6 +210,18 @@
     }
     .arrow{
         padding: 8px;
+    }
+    .gamelist{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .custom-arrow{
+        width: 40px;
+        height: 40px;
+    }
+    .titles{
+        font-size: large;
+        padding-left: 5%;
     }
 }
 

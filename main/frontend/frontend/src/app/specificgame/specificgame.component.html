@@ -1,16 +1,22 @@
-<div *ngIf="gameData" class="title">
-    <h1>{{gameData.title}}</h1>
-    <h2 id="altTitle" *ngIf="gameData.altTitle">{{gameData.altTitle}}</h2>
+<div *ngIf="gameData" class="title">    <!--Címszekció, ellenőrzi hogy van e cím-->
+    <h1>{{gameData.title}}</h1> <!--Megjeleníti a címet-->
+    <h2 id="altTitle" *ngIf="gameData.altTitle">{{gameData.altTitle}}</h2>  <!--Alternatív címet jeleníti meg és ellenőrzi-->
 </div>
+<!--Elválasztó vonal-->
 <hr class="dividerline">
 
+<!--Első tartalmi szekció-->
 <div class="firstsection">
+    <!--Bal oldali panel elemei-->
     <div *ngIf="gameData" class="leftpanel">
+        <!--Borítókép-->
         <img *ngIf="gameData" [src]="gameData.boxart" alt="{{gameData.title}}" class="boxart"/>
+        <!--Megjelenési dátum-->
         <p class="release">
             Release: {{gameData.release}}
         </p>
 
+        <!--Fejlesztő stúdiók és kiadók-->
         <div class="studios">
             <span *ngIf="gameData.developers?.length">
                <strong>Developer(s): {{developerslist}}</strong>
@@ -21,6 +27,7 @@
             </span>
         </div>
 
+        <!--Korhatár besorolások-->
         <div class="ageratings">
             <div *ngFor="let agerating of gameData.agerating">
                 <img class="icon" [src]="agerating.url" alt="{{agerating.institution}} {{agerating.rating}}"/>
@@ -28,34 +35,45 @@
         </div>
     </div>
 
+    <!--Jobb oldali panel elemei-->
     <div *ngIf="gameData" class="rightpanel">
+        <!--Játék leírása-->
         <p class="description">{{gameData.description}}</p>
         <br>
+        <!--Értékelői szekció-->
         <div class="ratingsection">
             <div class="progress">
+                <!--Értékelősáv ha van a játék értékelve-->
                 <ng-container *ngIf="ratingProgress; else noRating">
                 <div class="progress-bar bg-danger" [style.width]="ratingProgress.negative">{{ratingProgress.negative}}</div>
                 <div class="progress-bar bg-success" [style.width]="ratingProgress.positive">{{ratingProgress.positive}}</div>
             </ng-container>
+            <!--Értékelősáv ha nincs értékelve a játék-->
             <ng-template #noRating>
                 <div class="progress-bar bg-secondary
-                d-felx justify-content-center
-                align-itmes-center" style="width: 100%;">
+                d-felx 
+                justify-content-center
+                align-itmes-center" 
+                style="width: 100%;">
                     No ratings yet
                 </div>
             </ng-template>
             </div>
         </div>
             <br>
+            <!--Értékelő gomb-->
         <div class="rategame">
         <button class="optionbuttons" id="ratethegame" (click)="RateGame()">Rate the game!</button>
         </div>
 
+        <!--Kedvencekhez adás gomb-->
         <button class="optionbuttons" id="addtofavourites" (click)="AddtoFavourites()">Add to favourites!</button>
         <br>
+        <!--Galléria részleg-->
         <div class="gallery" *ngIf="gameData.gallery.length > 0">
             <h3 id="gallery">Gallery</h3>
-            <hr class="dividerline">
+            <hr class="dividerline"> <!--Választóvonal-->
+            <!--Galléria tartalma-->
             <div class="images">
                 <div class="item" *ngFor="let img of gameData.gallery">
                     <img apppicturenotfound [src]="img.url" alt="Gallery image" (click)="openIMG(img.url)" />
@@ -63,6 +81,7 @@
             </div>
         </div>
 
+        <!--Galléria képeinek megnyitása nagy méretben-->
         <div class="modaloverlay" *ngIf="selectedImg" (click)="closeIMG()">
             <div class="modalcontent" (click)="$event.stopPropagation()">
                 <img [src]="selectedImg" alt="Larged IMG" />
@@ -72,9 +91,12 @@
 
     </div>
 </div>
-    <hr class="dividerline">
+    <!--Választóvonal ha van következő információs szekció-->
+    <hr *ngIf="gameData.genres" class="dividerline">
 
+    <!--Második információs szekció-->
     <div class="secondsection">
+        <!--Műfajok-->
     <div class="genres">
         <h3>Genres</h3>
         <br>
@@ -85,24 +107,29 @@
         </div>
     </div>
 
+    <!--Játék vezérlő támogatásoko-->
     <div class="controllersupport">
         <h3>Controller Support(PC)</h3>
         <br>
         <div class="controllers">
             <ng-container [ngSwitch]="gameData.controllerSupport">
+                <!--Teljes támogatás-->
                 <div *ngSwitchCase="3" class="controllericons">
                     <img src="./XBox.png" alt="Xbox"><p class="controllertext">Xbox controller</p>
                     <img src="./PSdualsense.png" alt="dualsense"><p class="controllertext">Playstation Dualsense(USB)</p>
                     <img src="./PSdualshock.png" alt="dualshock"><p class="controllertext">Playstation Dualshock(USB)</p>
                 </div>
+                <!--Csak Xbox támogatás-->
                 <div *ngSwitchCase="1" class="controllericons">
                     <img src="./XBox.png" alt="Xbox"><p class="controllertext">Xbox controller</p>
                 </div>
+                <!--Xbox valamint részleges PlayStation vezérlő támogatások-->
                 <div *ngSwitchCase="2" class="controllericons">
                     <img src="./XBox.png" alt="Xbox"><p class="controllertext">Xbox controller</p>
                     <img src="./PSdualsensehalf.png" alt="dualsensehalf"><p class="controllertext">Partial playstation dualsense controller support</p>
                     <img src="./PSdualshockhalf.png" alt="dualshockhalf"><p class="controllertext">Partial playstation dualshock controller support</p>
                 </div>
+                <!--Nincs játékvezérlő támogatás-->
                 <div *ngSwitchDefault>
                     <p id="noCsupport">No controller support or console exclusive.</p>
                 </div>
@@ -111,9 +138,12 @@
     </div>
 </div>
 
-<hr class="dividerline">
+<!--Választóvonal ha van következő információs szekció-->
+<hr *ngIf="gameData.awards.nominations?.length" class="dividerline">
 
+<!--Harmadik információs szekció-->
 <div class="thirdsection" *ngIf="gameData?.awards">
+    <!--Díj jelölések-->
     <div class="nominations" *ngIf="gameData.awards.nominations?.length">
         <h3>Nominations</h3>
         <br>
@@ -125,6 +155,7 @@
         </div>
     </div>
 
+    <!--Elnyert díjak-->
     <div class="wins" *ngIf="gameData.awards.wins?.length">
         <h3>Wins</h3>
         <br>
@@ -137,37 +168,45 @@
     </div>
 </div>
 
-<hr class="dividerline">
+<!--Választóvonal ha van következő információs szekció-->
+<hr *ngIf="gameData.languages" class="dividerline">
 
+<!--Negyedik információs szekció-->
 <div class="fourthsection">
+    <!--Támogatott nyelvek az adott játékhoz-->
     <div class="languages" *ngIf="voicesLanguages.length || subtitlesLanguages.length">
         <h3>Supported Languages</h3>
         <div class="Vlanguages" *ngIf="voicesLanguages.length">
             <h4>Voice</h4>
+            <!--Hang-->
             <ul>
                 <li *ngFor="let lang of displayedVlanguages">
                     <img [src]="languageFlagMap[lang.toLowerCase()]" [alt]="lang + ' flag'" class="flagicon">
                     {{lang | titlecase}}
                 </li>
             </ul>
+            <!--Ha több elérhető mint amennyi alapvetően megjelenhet akkor showmore-->
             <div class="dot3" *ngIf="!showFullFourthSection && voicesLanguages.length > visibleVlanguages">
                 ...
             </div>
         </div>
         <div class="Slanguages" *ngIf="subtitlesLanguages.length">
             <h4>Subtitles</h4>
+            <!--Feliratok-->
             <ul>
                 <li *ngFor="let lang of displayedSlanguages">
                     <img [src]="languageFlagMap[lang.toLowerCase()]" [alt]="lang + ' flag'" class="flagicon">
                     {{lang | titlecase}}
                 </li>
             </ul>
+            <!--Ha több elérhető mint amennyi alapvetően megjelenhet akkor showmore-->
             <div class="dot3" *ngIf="!showFullFourthSection && subtitlesLanguages.length > visibleSlanguages">
                 ...
             </div>
         </div>
     </div>
 
+    <!--Platformok-->
     <div class="platforms" *ngIf="gameData?.platforms?.length">
         <h3>Platforms</h3>
         <ul>
@@ -175,21 +214,27 @@
                 {{p.platform}}
             </li>
         </ul>
+        <!--Ha több elérhető mint amennyi alapvetően megjelenhet akkor showmore-->
         <div class="dot3" *ngIf="!showFullFourthSection && platformsCount > visiblePlatforms">
             ...
         </div>
     </div>
 
+    <!--Keresztplatformok-->
     <div class="cross" *ngIf="gameData">
       <h3>Crossplay</h3>
       <ng-container [ngSwitch]="gameData.crossplatform">
         <strong>
+            <!--Vagy nincs-->
         <p *ngSwitchCase="0">No cross-platform support.</p>
 
+        <!--Vagy részleges van-->
         <p *ngSwitchCase="1">Partial cross-platform support</p>
 
+        <!--Vagy teljes van-->
         <p *ngSwitchCase="2">Full cross-platform avaliable.</p>
 
+        <!--Egyéb esetekben a játék csak egyjátékos módu-->
         <p *ngSwitchDefault>Singleplayer only.</p>
         </strong>
       </ng-container>
@@ -199,6 +244,7 @@
     </div>
 </div>
 
+<!--Showmore gomb ha a negyedik szekció elemei között szerepel a megadottnál több-->
 <button id="showmore1" class="optionbuttons" (click)="toggleFourthSection()" *ngIf="
 (voicesLanguages.length > visibleVlanguages) ||
 (voicesLanguages.length > visibleSlanguages) ||
@@ -206,12 +252,16 @@
     {{showFullFourthSection ? 'Show Less' : 'Show More'}}
 </button>
 
-<hr class="dividerline">
+<!--Választóvonal ha van következő információs szekció-->
+<hr *ngIf="gameData.pcspec" class="dividerline">
 
+<!--Ötödik információs szekció-->
 <div class="fifthsection" *ngIf="gameData.pcspec">
+    <!--PC követelmények-->
     <h3>PC System Requirements</h3>
     <div class="specs">
         <div class="minimum">
+            <!--Minimum követelmények-->
             <h4>Minimum</h4>
             <ul>
                 <li><strong>OS: </strong>{{gameData.pcspec.minop}}</li>
@@ -226,6 +276,7 @@
 
         <div class="recommended" *ngIf="hasRecommendedSpecs">
             <h4>Recommended</h4>
+            <!--Ajánlott követelmények ha elérhető-->
             <ul>
                 <li><strong>OS: </strong>{{gameData.pcspec.op}}</li>
                 <li><strong>CPU: </strong>{{gameData.pcspec.cpu}}</li>
@@ -233,16 +284,20 @@
                 <li><strong>GPU: </strong>{{gameData.pcspec.gpu}}</li>
                 <li><strong>DirectX: </strong>{{gameData.pcspec.directx}}</li>
                 <li><strong>Storage: </strong>{{gameData.pcspec.storage}}</li>
+                <!--Megjegyzés ha van (pl.: SSD Required)-->
                 <li *ngIf="gameData.pcspec?.sidenote"><strong>Note: </strong>{{gameData.pcspec.sidenote}}</li>
             </ul>
         </div>
     </div>
 </div>
 
-<hr class="dividerline">
+<!--Választóvonal ha van következő információs szekció-->
+<hr *ngIf="gameData?.creators?.length" class="dividerline">
 
+<!--Hatodik információs szekció-->
 <div class="sixthsection" *ngIf="gameData?.creators?.length">
         <h3>Crew</h3>
+        <!--Fejlesztők-->
         <div class="crewtable">
         <div class="crewrow header">
             <div class="name" id="Tname">Name</div>
@@ -253,25 +308,33 @@
             <div class="role">{{member["Games.Creation.field"]}}</div>
         </div>
     </div>
+    <!--Ha több elérhető mint amennyi alapvetően megjelenhet akkor showmore-->
     <div class="dot3" *ngIf="!showAllCrew && (gameData?.creators?.length ?? 0) > visibleCrew">
         ...
     </div>
     <br>
+    <!--Showmore gomb-->
     <button class="optionbuttons" (click)="toggleCrew()" *ngIf="(gameData?.creators?.length ?? 0) > visibleCrew">
         {{showAllCrew ? 'Show less' : 'Show More'}}
     </button>
 </div>
 
-<hr class="dividerline">
+<!--Választóvonal ha van következő információs szekció-->
+<hr *ngIf="gameData?.actors?.length" class="dividerline">
 
+<!--Hetedik információs szekció-->
 <div class="seventhsection" *ngIf="gameData?.actors?.length">
     <h3>Cast</h3>
+    <!--Színészek-->
     <br>
+    <!--Színészek vízszintes listája-->
     <div class="castwrapper">
+        <!--Bal navigációs nyíl-->
         <button class="arrow left-arrow" (click)="scrollCast('left')">
             <img src="./left-arrow.png" alt="Left Arrow" />
         </button>
 
+        <!--Színész képe, neve és szerepe-->
         <div class="cast-container" #castContainer>
             <div class="card" *ngFor="let actor of gameData.actors">
                 <img apppicturenotfound class="photo" [src]="actor.profilePicture" alt="{{actor.firstName}} {{actor.lastName}}"/>
@@ -279,16 +342,21 @@
               <p class="charactername">{{actor["Games.Acting.role"]}}</p>
             </div>
         </div>
+        <!--Jobb navigációs nyíl-->
         <button class="arrow right-arrow" (click)="scrollCast('right')">
             <img src="./right-arrow.png" alt="Right Arrow"/>
         </button>
     </div>
 </div>
 
+<!--Választóvonal-->
 <hr class="dividerline">
 
+<!--Nyolcadik információs szekció-->
 <div class="eightsection" *ngIf="gameData">
-    <app-reviews
+    <!--Megfogalmazott kritikák-->
+    <!--Egy külön standalone komponensbe lett létrehozva és itt került beágyazásra az oldalra a könnyebb átláthatóság miatt-->
+    <app-reviews    
     [id]="gameId"
     [reviews]="gameData.reviews || []">
 </app-reviews>

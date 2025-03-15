@@ -1,3 +1,4 @@
+//Szükséges importok
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { GameDetailsService } from "../../gamedetails.service";
 import { IGamesDetails, IReview } from "../../gamedetails.model";
@@ -12,20 +13,26 @@ import { FavouritesService } from "../../favourite.service";
 import { PictureNotFoundDirective } from "../../picturenotfound.directive";
 import { ReviewsComponent } from "../reviews/reviews.component";
 import { FormsModule } from "@angular/forms";
+import { Title } from "@angular/platform-browser";
 
+//Standalone komponens definiálása
 @Component({
     selector: 'app-game-details',
     standalone: true,
+    //Szükséges importok
     imports: [CommonModule, MatDialogModule, PictureNotFoundDirective, ReviewsComponent, FormsModule],
     templateUrl: './specificgame.component.html',
     styleUrl: './specificgame.component.css'
 })
 export class SpecificgameComponent implements OnInit {
+    //Változok deklarálása
     gameData!: IGamesDetails;
     gameId!: number;
 
+    //Kivalasztott kép URL-je a modal-hoz
     selectedImg: string | null = null;
 
+    //UI állapotváltozók
     showFullFourthSection = false;
     visibleVlanguages = 5;
     visibleSlanguages = 5;
@@ -34,6 +41,7 @@ export class SpecificgameComponent implements OnInit {
     showAllCrew = false;
     visibleCrew = 5;
 
+    //Nyelv zászló képek leképezése
     languageFlagMap: {[key: string]: string} = {
         'english': './united-kingdom.png',
         'french': './france.png',
@@ -56,12 +64,14 @@ export class SpecificgameComponent implements OnInit {
         'traditional chinese': './china.png'
     };
 
+    //Értékelés
     userRating: number = 0;
 
+    //Nyelvi listák
     voicesLanguages: string[] = [];
     subtitlesLanguages: string[] = [];
 
-
+// Getterek a template szamara
     get developerslist(): string {
         return this.gameData?.developers?.map(dev => dev.name).join(', ') || '';
     }
@@ -70,6 +80,7 @@ export class SpecificgameComponent implements OnInit {
         return this.gameData?.publishers?.map(pub => pub.name).join(', ') || '';
     }
 
+    //Megjelenitett elemek kezelése
     get displayedVlanguages() {
         return this.showFullFourthSection ? this.voicesLanguages : this.voicesLanguages.slice(0, this.visibleVlanguages);
     }
@@ -110,6 +121,7 @@ export class SpecificgameComponent implements OnInit {
         !!this.gameData.pcspec.directx;
     }
 
+    //UI interakciók
     toggleFourthSection(): void {
         this.showFullFourthSection = !this.showFullFourthSection;
     }
@@ -126,22 +138,38 @@ export class SpecificgameComponent implements OnInit {
         this.selectedImg = null;
     }
 
+    //Observable-ek leállításához
     private destroy$ = new Subject<void>();
 
-    constructor(private gameService: GameDetailsService, private route: ActivatedRoute, private ratewindow: MatDialog, private authservice: Authservice, private snackBar: MatSnackBar, private favouriteService: FavouritesService){}
+    //Szolgáltatások injektálása
+    constructor(private gameService: GameDetailsService, 
+        private route: ActivatedRoute, 
+        private ratewindow: MatDialog,
+         private authservice: Authservice, 
+         private snackBar: MatSnackBar, 
+         private favouriteService: FavouritesService, 
+         private title: Title){}
 
     ngOnInit(): void {
+        //Útvonal paraméter figyelés
         this.route.params.pipe(
             takeUntil(this.destroy$),
             switchMap(params => {
+                //Játék ID kinyerés
                 const gameId = +params['id'];
                 this.gameId = gameId;
+                //Adatok lekérdezése
                 return this.gameService.getGamesDetailsByID(gameId);
             })
         ).subscribe({
             next: (response) => {
+                //Sikeres válasz feldolgozása
                 if (!response.error){
                     this.gameData = response.datas;
+                    if(this.gameData?.title){
+                        this.title.setTitle(`${this.gameData.title}`);
+                    }
+                    //Nyelvek szűrése és kinyerése
                     if(this.gameData.languages?.length){
                         this.voicesLanguages = this.gameData.languages
                         .filter(lang => lang['Games.Gameslanguage.dub'] === 1)
@@ -150,16 +178,19 @@ export class SpecificgameComponent implements OnInit {
                         this.subtitlesLanguages = this.gameData.languages
                         .filter(lang => lang['Games.Gameslanguage.dub'] === 0)
                         .map(lang => lang.language);
+                        //Görgetés az oldal tetejére
                         window.scrollTo(0, 0);
                     }
                 }
             },
+            //Hibakezelés
                     error: (err) => {
                         console.error(err);
                     }
         });
     }
 
+    //Színészek listájának görgetése
     @ViewChild('castContainer', {read: ElementRef}) castContainer!: ElementRef;
 
     scrollCast(direction: string): void {
@@ -172,11 +203,13 @@ export class SpecificgameComponent implements OnInit {
         }
     }
 
+    //Memória kezelés, observable-ek leállítása
     ngOnDestroy(): void {
         this.destroy$.next();
         this.destroy$.complete();
     }
 
+    //Értékelési sáv
     get ratingProgress() {
         if (this.gameData.rating == null) return null;
         return {
@@ -185,20 +218,23 @@ export class SpecificgameComponent implements OnInit {
         };
     }
 
+    //Értékelési ablak
     isRatingWindowOpen = false;
 
+    //Értékelés
     RateGame(): void {
+        //Hitelesítés ellenőrzés
         if (!this.authservice.isLoggedIn()) {
             this.snackBar.open('You must be logged in to use this feature!', 'Close', {duration: 10000, panelClass: 'custombar'});
             return;
         }
         if (this.isRatingWindowOpen) return;
 
+        //Rating ablak megnyitása
         this.isRatingWindowOpen = true;
 
         const URL = this.route.snapshot.paramMap.get('id');
         if (!URL){
-            console.error('NO ID');
             return;
         }
 
@@ -211,29 +247,32 @@ export class SpecificgameComponent implements OnInit {
             panelClass: 'transparent-dialog'
         });
 
+        //Rating ablak bezárása
             dialogRef.afterClosed().subscribe(() => {
                 this.isRatingWindowOpen = false;
             });
     }
 
+    //Kedvencekhez adás
     AddtoFavourites(): void {
+        //Hitelesítés ellenőrzés
         if(!this.authservice.isLoggedIn()) {
             this.snackBar.open('You must be logged in with an account to use this feature!', 'Close', {duration: 10000, panelClass: 'custombar'});
             return;
         }
         if(!this.gameData) return;
 
+        //ID validálás
         const idString = this.route.snapshot.paramMap.get('id');
         if(!idString) {
-            console.log('NO ID');
-            return
+            return;
         }
         const id = Number(idString);
         if(isNaN(id)){
-            console.log('NOT VALID ID');
             return;
         }
 
+        //Szolgáltatás meghívása
         this.favouriteService.addtoFavourite(id).subscribe({
             next: (response) => {
                 this.snackBar.open(response.message, 'Close', {duration: 10000, panelClass: 'custombar'});

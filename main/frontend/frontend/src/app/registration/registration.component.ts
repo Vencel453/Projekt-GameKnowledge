@@ -1,3 +1,4 @@
+//Szükséges modulok
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -6,14 +7,17 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 
+//Standalone komponens definiálása
 @Component({
   selector: 'app-registration',
   standalone: true,
+  //Szükséges importok
   imports: [CommonModule, RouterModule,ReactiveFormsModule, HttpClientModule],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss'
 })
 export class RegistrationComponent {
+  //Állapotváltozók és formGroup
   registForm: FormGroup;
   success: string | null = null;
   failure: string | null = null;
@@ -23,7 +27,9 @@ export class RegistrationComponent {
     private http: HttpClient,
     private router: Router,
     private title: Title){
+      //Oldalcím beállítása
     this.title.setTitle('Registration');
+    //Regisztrációs form inicializálása
     this.registForm = this.fb.group({
       username: [''],
       email: [''],
@@ -32,26 +38,31 @@ export class RegistrationComponent {
     });
   }
 
+  //Beküldés
   onSubmit(){
-    console.log('Form adatok:', this.registForm.value);
+    //Csak ha valid akkor
     if (this.registForm.valid){
       this.http.post('http://localhost:3000/registration', this.registForm.value, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
+      //Teljes HTTP válasz fogadása
       observe: 'response' as 'body'
       })
       .subscribe({
         next: (response: any) =>{
+          //Sikeres válasz
           if(response.status === 201){
             this.success = response.message;
             this.failure === null;
             
+            //Átirányítás a bejelentkező oldalra
             setTimeout(() =>{
               this.router.navigate(['/login']);
             }, 2000);
           }
         },
+        //Hibák kezelése és a felhasználó értesítése
         error:(err: HttpErrorResponse) =>{
             this.success = null;
     if(err.status === 400){
@@ -84,6 +95,7 @@ export class RegistrationComponent {
     }else{
       this.failure = "An unexpected error occured.";
     }
+    //Legörgetés a hibaüzenethez
     setTimeout(() => {
       if (this.failure) {
         window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});

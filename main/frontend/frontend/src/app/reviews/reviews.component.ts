@@ -48,6 +48,18 @@ export class ReviewsComponent implements OnInit {
           review => review['User.username'] === this.currentUser
         );
       }
+      this.authservice.username$.subscribe(newUsername => {
+        if(this.currentUser && newUsername && this.currentUser !== newUsername){
+          this.reviews = this.reviews.map(review => {
+            if(review['User.username'] === this.currentUser) {
+              return { ...review, 'User.username': newUsername};
+            }
+            return review;
+          });
+          this.currentUser = newUsername;
+          this.UserReviewed = this.reviews.some(review => review['User.username'] === this.currentUser);
+        }
+      });
     }
 
     get displayedReviews(): Review[] {
@@ -59,6 +71,11 @@ export class ReviewsComponent implements OnInit {
     }
 
     submit(): void {
+
+      if(this.isSubmitting){
+        return;
+      }
+
       if (!this.authservice.isLoggedIn()) {
         this.snackBar.open('You must be logged in with an account to use this feature!', 'Close', {duration: 10000, panelClass: 'custombar'});
         return;
@@ -103,10 +120,9 @@ export class ReviewsComponent implements OnInit {
           this.reviewTitle = '';
           this.reviewcontent = '';
           this.isSubmitting = false;
-          window.location.reload();
         },
         error: (err) => {
-          this.snackBar.open('Failed to submit the review!', 'Close', {duration: 10000, panelClass: 'custombar'});
+          this.snackBar.open('Failed to submit the review! You must rate the game first!', 'Close', {duration: 10000, panelClass: 'custombar'});
           this.isSubmitting = false;
         }
       });

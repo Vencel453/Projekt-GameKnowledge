@@ -1,43 +1,57 @@
+<!--Kritikák részlege-->
 <div class="reviewssection">
-    <h3>Reviews</h3>
-    <hr class="dividerline">
+    <h3>Reviews</h3> <!--Alcím-->
+    <hr class="dividerline">    <!--Elválasztó vonal-->
+    <!--Kritikák listája ha vannak-->
     <div *ngIf="reviews && reviews.length > 0; else noReviews">
         <div *ngFor="let review of displayedReviews" class="reviewcard">
-            <h4>{{review.title}}</h4>
-            <p>{{review.content}}</p>
-            <p class="reviewdate">{{review.date | date: 'mediumDate'}}</p>
+            <h4>{{review.title}}</h4>   <!--Kritika címe-->
+            <p>{{review.content}}</p>   <!--Kritika tartalma-->
+            <p class="reviewdate">{{review.date | date: 'mediumDate'}}</p>  <!--Kritika közzétételi dátuma-->
+            <!--Kritika részleg lába-->
             <div class="reviewfooter">
+                <!--Kritikát megírt felhasználó neve-->
                 <span class="reviewuser">{{review['User.username']}}</span>
+                <!--Pozitív vagy negatív kritika (like vagy dislike)-->
                 <img [src]="review['User.Ratings.positive'] === 1 ? like : dislike" alt="RatingIcon" class="ratingicon">
+                <!--Kuka ikon mely csak a felhasználó saját kritikája mellett jelenik meg. Admin esetén mindenhol-->
                 <button *ngIf="canDelete(review)" (click)="deleteReview(review.id)" class="deletereview">
                     <img src="./trashcan.png" alt="Delete">
                 </button>
             </div>
         </div>
+        <!--Showmore gomb, ha több kritika van mint 5-->
         <button *ngIf="reviews.length > 5" (click)="toggleShowAll()" class="showmore">
             {{showAllReviews ? 'Show Less' : 'Show More'}}
         </button>
     </div>
 
+    <!--Ha egyáltalán nincs még kritika a játékról-->
     <ng-template #noReviews>
         <p id="noreviews">No reviews available yet.</p>
     </ng-template>
 
-    <hr class="dividerline">
+    <hr class="dividerline">    <!--Választóvonal-->
 
+    <!--Kritikaíró beviteli mezők hitelesítő ellenőrzéssel-->
     <div class="reviewform" *ngIf="authservice.isLoggedIn() && !UserReviewed">
         <h4 id="title">Write a review!</h4>
+        <!--Cím és tartalom-->
         <input type="text" placeholder="Title" [(ngModel)]="reviewTitle" maxlength="100">
         <textarea placeholder="Content" [(ngModel)]="reviewcontent" maxlength="5000"></textarea>
+        <!--Feltöltő gomb mely kikapcsol amikor feltöltés zajlik-->
         <button (click)="submit()" [disabled]="isSubmitting">
             Submit Review
         </button>
     </div>
 
+    <!--Informáló szövegek-->
+    <!--Ha már írt az adott játékhoz kritikát-->
     <div *ngIf="authservice.isLoggedIn() && UserReviewed">
         <p class="notifier">You already wrote a review for this game!</p>
     </div>
 
+    <!--Ha nincs bejelentkezve-->
     <div *ngIf="!authservice.isLoggedIn()">
         <p class="notifier">You must be logged in to write a review!</p>
     </div>

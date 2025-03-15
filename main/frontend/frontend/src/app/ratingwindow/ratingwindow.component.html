@@ -1,13 +1,16 @@
+<!--Értékelő ablak-->
 <div class="ratingcontainer">
-    <h2>Do you like this game?</h2>
+    <h2>Do you like this game?</h2>     <!--Cím-->
     <div class="options">
         <div class="buttons">
+            <!--Választási opciók (like vagy dislike)-->
         <button mat-flat-button color="primary" (click)="rate(true)">
             <img src="./like.png" alt="like">
         </button>
         <button mat-flat-button color="warn" (click)="rate(false)">
             <img src="./dislike.png" alt="dislike">
         </button>
+        <!--Ablakot bezáró opció-->
         <div class="closesection">
         <button class="closebutton" mat-flat-button color="primary" (click)="dialogRef.close()">
             <p id="close">Close</p>

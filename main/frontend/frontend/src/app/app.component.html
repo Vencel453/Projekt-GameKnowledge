@@ -12,7 +12,7 @@
 <!--Navigációs sáv-->
 <body>
     <div class="container-fluid">           <!--Bootstrap osztályazonositok hasznalata a navigacios sávban-->
-        <nav class="navbar">
+        <nav #navBar class="navbar">
             <a class="navbar-brand" href="" routerLinkActive="active">         <!--Link a logora ami a bal oldalon helyezkedik el és a Kezdőlapra vezet-->
                 <img id="logomain" src="/logomain.png" alt="logo">
             </a>
@@ -80,6 +80,7 @@
     <ul class="menucontent" *ngIf="ismenuopen">         <!--Figyeli hogy a menu éppen levan e nyitva vagy sem, és nyitott menu-nél elfordul az ikon-->
         <p id="notloggedinminimenu" *ngIf="!(isAuthenticated$ | async)">Features will be displayed, once you login with an account!</p>
         <li *ngIf="isAuthenticated$ | async"> <img class="menucontenticons" src="./hearth.png" alt="Hearth"> <a class="link" routerLink="/favourites">Favourites</a></li>
+        <li *ngIf="isAuthenticated$ | async"> <img class="menucontenticons" (click)="deleteAccount()" src="./trashcanblack.png" alt="trash"> <a class="link" (click)="deleteAccount()">Delete Account</a></li>
         <li *ngIf="isAuthenticated$ | async">           <!--Figyeli hogyha a felhasználó bevan jelentkezve, akkor megjelenjen a Kijelentkezés funckió-->
             <img class="menucontenticons" src="./logout.png" alt="Logout" (click)="logout()">
             <a class="link" (click)="logout()">Log out</a>

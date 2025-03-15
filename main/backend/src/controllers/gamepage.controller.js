@@ -242,6 +242,9 @@ export default {
                     model: User,
                     attributes: ["username"],
                     include: {
+                        where: {
+                            GameId: gameId
+                        },
                         model: Rating,
                         attributes: ["positive"]
                     }

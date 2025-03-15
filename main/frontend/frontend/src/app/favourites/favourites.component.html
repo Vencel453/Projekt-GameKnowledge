@@ -1,17 +1,23 @@
+<!--Kedvencek tartalma-->
 <div class="favourite-container">
-    <h2>Favourites</h2>
-    <hr id="divider">
+    <h2>Favourites</h2> <!--Alcím-->
+    <hr id="divider">      <!--Elválasztó-->
     <br>
+    <!--Ha a kedvencek lista hossza 0-->
     <div *ngIf="favourites.length === 0">
         <p id="nofavourites">No favourites added yet!</p>
     </div>
+    <!--Ha nem 0 akkor végigmegyünk rajta és betöltjük az adatokat-->
     <div class="favourite-item" *ngFor="let game of favourites">
+        <!--Az elem rákattintásakor elvezet az adott játék oldalára-->
         <div class="gameinfo" (click)="toGame(game.id)">
+            <!--Játék adatai (borítókép, cím)-->
             <img [src]="game.boxart" alt="{{game.gameTitle}}" class="boxart">
             <div class="titles">
                 <h3>{{game.gameTitle}}</h3>
             </div>
         </div>
+        <!--Kuka ikon a játék kedvencekből való eltávolításhoz-->
         <button mat-icon-button (click)="removeGame(game.id); $event.stopPropagation()">
             <img src="./trashcan.png" alt="trashcan">
         </button>

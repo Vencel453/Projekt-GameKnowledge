@@ -1,3 +1,4 @@
+/*Globális CSS stílus beállítások melyek minden egyes oldalon érvényesek az adott elemekre*/
 .custombar {
     background-color: black !important;
     color: #A0B6F7 !important;
@@ -54,6 +55,7 @@
     box-shadow: none !important;
 }
 
+/*Reszponzív beállítások*/
 :root {
     --phone-breakpoint: 576px;
     --tablet-breakpoint: 768px;

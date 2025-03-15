@@ -1,26 +1,33 @@
+<!--Regisztrációs felület-->
 <div class="RegContent">
+    <!--Az oldal logo-ja-->
 <h1 class="Rlogo">
     <img id="Rlogo" src="/logomain.png" alt="Logo">
 </h1>
-<h2 id="title">Registration</h2>
+<h2 id="title">Registration</h2>    <!--Alcím-->
 <br>
 <div class="form">
+    <!--Beviteli mezők-->
 <form [formGroup]="registForm" (ngSubmit)="onSubmit()">
+    <!--Felhasználónév-->
     <div class="mb-3">
         <label for="username" class="form-label">Username</label><br>
         <input id="username" class="form-control-sm" formControlName="username" type="text" placeholder="Grimlock55">
     </div>
 
+    <!--Jelszó-->
     <div class="mb-3">
         <label for="password" class="form-label">Password</label><br>
         <input id="password" class="form-control-sm" formControlName="password" type="password" placeholder="Password">
     </div>
 
+    <!--Jelszó újra-->
     <div class="mb-3">
         <label for="passwordAgain" class="form-label">Password again</label><br>
         <input id="passwordAgain" class="form-control-sm" formControlName="passwordAgain" type="password" placeholder="Password again">
     </div>
 
+    <!--E-mail cím-->
     <div class="mb-3">
         <label for="email" class="form-label">E-mail</label><br>
         <input id="email" class="form-control-sm" formControlName="email" type="email" placeholder="grimlock341@gmail.com">
@@ -28,16 +35,20 @@
 
     <br>
 
+    <!--Regisztráció gomb a végrehajtáshoz-->
     <div class="d-grid gap-2 d-md-block">
             <button class="Regbutton btn btn-lg" type="submit">Registration</button>
     </div>
 </form>
 </div>
 
+<!--Visszajelző üzenetek az oldalon-->
+<!--Sikeres-->
 <div *ngIf="success" class="success">
     <p class="reportmess">{{success}}</p>
 </div>
 
+<!--Valamilyen hiba történt-->
 <div *ngIf="failure" class="failure">
     <p class="reportmess">{{failure}}</p>
 </div>

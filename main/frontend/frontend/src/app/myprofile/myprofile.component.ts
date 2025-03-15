@@ -1,3 +1,4 @@
+//Szükséges importok
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -7,6 +8,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { Authservice } from '../authservice';
 
+//Adatok interface-e
 interface UserResponse {
   error: boolean;
   message: string;
@@ -18,6 +20,7 @@ interface UserResponse {
   
 }
 
+//Standalone komponens definíció
 @Component({
   selector: 'app-myprofile',
   standalone: true,
@@ -26,8 +29,8 @@ interface UserResponse {
   styleUrl: './myprofile.component.css'
 })
 export class MyprofileComponent implements OnInit {
-   user: any;
-   profileForm: FormGroup;
+   user: any; //Adatok tárolása
+   profileForm: FormGroup;  //Profil űrlap konténer
 
    constructor(
     private profileService: MyprofileService,
@@ -37,7 +40,9 @@ export class MyprofileComponent implements OnInit {
     private authservice: Authservice,
     @Inject(PLATFORM_ID) private platformid: Object
    ) {
-    this.title.setTitle('My Profile');
+    this.title.setTitle('My Profile');  //Oldal cím beállítása
+    
+    //Űrlap inicializálása egyéni validátorokkal
     this.profileForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', Validators.required],
@@ -47,10 +52,14 @@ export class MyprofileComponent implements OnInit {
    }
 
    ngOnInit(): void {
+
+    //Session ellenőrzés
     if (!this.authservice.isLoggedIn()){
       this.snackBar.open('Your session is over, please login again!', 'Close', {duration: 10000, panelClass: 'custombar'});
       this.authservice.logout();
     }
+
+    //Csak böngészőben fut a kód?
     if (isPlatformBrowser(this.platformid)){
       setTimeout(() => {
         this.fetchTheData();
@@ -58,14 +67,14 @@ export class MyprofileComponent implements OnInit {
     }
    }
 
+   //Felhasználói adatok lekérése
    fetchTheData() {
     this.profileService.getUser().subscribe({
       next: (response: UserResponse) =>{
         if (!response.error) {
           this.user = response.user;
           this.profileForm.patchValue({
-            username: this.user.username,
-            email: this.user.email
+            username: this.user.username
           });
         }else {
           this.snackBar.open(response.message, 'Close', {duration: 10000, panelClass: ['custombar']});
@@ -78,6 +87,7 @@ export class MyprofileComponent implements OnInit {
     });
    }
 
+   //Jelszó egyező ellenörző
    passwordMatchDetector(form: FormGroup) {
     const password = form.get('password')?.value;
     const passwordAgain = form.get('passwordAgain')?.value;
@@ -93,6 +103,7 @@ export class MyprofileComponent implements OnInit {
     return null;
    }
 
+   //Űrlap beküldése, jelszó egyezés és jelszó mező üresen hagyása ellenőrzés
    onSubmit() {
     if (this.profileForm.hasError('passwordRequired')) {
       this.snackBar.open('Please, fill correctly the form!', 'Close', {duration: 10000, panelClass: ['custombar']});
@@ -107,12 +118,15 @@ export class MyprofileComponent implements OnInit {
     this.profileService.updateData(this.profileForm.value).subscribe({
       next: (response: UserResponse) => {
         if (!response.error) {
+          this.authservice.setUsername(this.profileForm.get('username')?.value);
           this.snackBar.open(response.message, 'Close', {duration: 10000, panelClass: ['custombar']});
           this.fetchTheData();
         }else{
           this.snackBar.open(response.message, 'Close', {duration: 10000, panelClass: ['custombar']});
         }
       },
+
+      //Hibák kezelése
       error: (error) => {
         let message = "There's an error with updating your datas!";
 

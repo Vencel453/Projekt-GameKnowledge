@@ -1,3 +1,4 @@
+//Szükséges importok és komponensnek hozzáadása
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -12,7 +13,7 @@ import { SocialmediaComponent } from './socialmedia/socialmedia.component';
 import { DataprotectionComponent } from './dataprotection/dataprotection.component';
 import { UsertermsComponent } from './userterms/userterms.component';
 
-
+//Útvonalak definiálása
 export const routes: Routes = [
     {path: '', component: HomepageComponent},
     {path: 'regist', component: RegistrationComponent},
@@ -24,9 +25,10 @@ export const routes: Routes = [
     {path: 'socialmedia', component: SocialmediaComponent},
     {path: 'dataprotection', component: DataprotectionComponent},
     {path: 'userterms', component: UsertermsComponent},
-    {path: '**', component: PageNotFoundComponent}
+    {path: '**', component: PageNotFoundComponent} //404-es oldal, ha az oldal nem található
 ];
 
+//Az útvonalakat tartalmazó modul deklarálása és exportálása
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]

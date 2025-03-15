@@ -1,3 +1,4 @@
+/*ratingwindow komponenshez tartozó stílusok beállításai*/
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
     display: flex !important;
     justify-content: center !important;
