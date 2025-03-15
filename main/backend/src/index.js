@@ -61,10 +61,14 @@ Creator.belongsToMany(Game, {
 });
 
 // Kedvencek Felhasználók - Játékok kapcsolat
-Game.hasMany(Favourite);
+Game.hasMany(Favourite, {
+    onDelete: 'CASCADE'
+});
 Favourite.belongsTo(Game);
 
-User.hasMany(Favourite);
+User.hasMany(Favourite, {
+    onDelete: 'CASCADE'
+});
 Favourite.belongsTo(User);
 
 // Játék - Játék képek kapcsolat
@@ -82,7 +86,9 @@ Language.belongsToMany(Game, {
 });
 
 // Gépigény - Játék kapcsolat
-Game.hasOne(Pcspec);
+Game.hasOne(Pcspec, {
+    onDelete: 'CASCADE'
+});
 Pcspec.belongsTo(Game);
 
 // Platform - Játék kapcsolat
@@ -94,11 +100,15 @@ Platform.belongsToMany(Game, {
 });
 
 // Értékelések - Játékok kapcsolat
-Game.hasMany(Rating);
+Game.hasMany(Rating, {
+    onDelete: 'CASCADE'
+});
 Rating.belongsTo(Game);
 
 // Értékelések - Felhasználók kapcsolat
-User.hasMany(Rating);
+User.hasMany(Rating, {
+    onDelete: 'CASCADE'
+});
 Rating.belongsTo(User);
 
 // Studió - Játék kapcsolat
@@ -120,17 +130,21 @@ Tag.belongsToMany(Game, {
 });
 
 // Kritika - Felhasználó kapcsolat
-User.hasMany(Review);
+User.hasMany(Review, {
+    onDelete: 'CASCADE'
+});
 Review.belongsTo(User);
 
 // Kritika - Játék kapcsolat
-Game.hasMany(Review);
+Game.hasMany(Review, {
+    onDelete: 'CASCADE'
+});
 Review.belongsTo(Game); 
 
 // Konstansként elmentjük a backend port számát
 const PORT = 3000;
 
-// Egy csatkalozás kisérlet után ha sikeres akkor elindítjuk a szervert
+// Egy csatkalozás kisérlet után, ha sikeres akkor elindítjuk a szervert
 await sequelize.authenticate()
     .then(() => {
         console.log("The test connection to the server was succesfull!");

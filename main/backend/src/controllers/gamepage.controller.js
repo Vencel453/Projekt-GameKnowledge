@@ -63,7 +63,7 @@ export default {
                 }
             });
 
-            // Meg keressük hogy az adott játékhoz milyen stúdiók vettek részt a fejlesztésben
+            // Megkeressük hogy az adott játékhoz milyen stúdiók vettek részt a fejlesztésben
             const developers = await Studio.findAll({
                 attributes: ["id", "name"],
                 include: {
@@ -79,7 +79,7 @@ export default {
                 raw: true
             });
 
-            // Meg keressük hogy az adott játékhoz milyen stúdiók vettek részt a kiadásában
+            // Megkeressük hogy az adott játékhoz milyen stúdiók vettek részt a kiadásában
             const publishers = await Studio.findAll({
                 attributes: ["id", "name"],
                 include: {
@@ -95,7 +95,7 @@ export default {
                 raw: true
             });
 
-            // Megkeressük és kiszámoljuk hogy a játék értékelése hány százalékban pozitív
+            // Megkeressük és kiszámoljuk, hogy a játék értékelése hány százalékban pozitív
             const positiveRatings = await Rating.count({where: {GameId: gameId, positive: true}});
             const allRatings = await Rating.count({where: {GameId: gameId}});
 
@@ -131,7 +131,7 @@ export default {
                 raw: true
             });
             
-            // Megkeressük hogy az adott játékot milyen díjakra jelölték amiket nem nyert el végül
+            // Megkeressük, hogy az adott játékot milyen díjakra jelölték, amiket nem nyert el végül
             const nominations = await Award.findAll({
                 attributes: ["organizer", "name"],
                 include: {
@@ -147,7 +147,7 @@ export default {
                 raw: true
             });
 
-            // Megkeressük hogy az adott játékot milyen díjakra jelölték amiket végül megnyert
+            // Megkeressük, hogy az adott játékot milyen díjakra jelölték, amiket végül megnyert
             const wins = await Award.findAll({
                 attributes: ["organizer", "name"],
                 include: {
@@ -163,7 +163,7 @@ export default {
                 raw: true
             });
 
-            // Megkeressük hogy az adott játék milyen nyelveket támogat
+            // Megkeressük, hogy az adott játék milyen nyelveket támogat
             const languages = await Language.findAll({
                 attributes: ["language"],
                 include: {
@@ -178,7 +178,7 @@ export default {
                 raw: true
             });
 
-            // Megkeressük hogy az adott játék milyen platformokon elérhető
+            // Megkeressük, hogy az adott játék milyen platformokon elérhető
             const platforms = await Platform.findAll({
                 attributes: ["platform"],
                 include: {
@@ -208,7 +208,7 @@ export default {
                 raw: true
             });
 
-            // Megkeressük hogy az adott játék fejlesztésében kik vettek részt és milyen szerepben
+            // Megkeressük, hogy az adott játék fejlesztésében kik vettek részt és milyen szerepben
             const creators = await Creator.findAll({
                 attributes: ["firstName", "lastName"],
                 include: {
@@ -223,7 +223,7 @@ export default {
                 raw: true
             });
 
-            // Megkeressük hogy az adott játék gépigényét
+            // Megkeressük, hogy az adott játék gépigényét
             const pcspec = await Pcspec.findOne({
                 attributes: ["minop", "mincpu", "minram", "mingpu", "mindirectx", "op", "cpu", "ram", "gpu", "directx", "storage", "sidenote"],
                 where: {
@@ -231,7 +231,7 @@ export default {
                 }
             });
 
-            // Megkeressük hogy az adott játékhoz az oldal felhasználói milyen kritikákat írtak, illetve azt is hogy milyen értékelést
+            // Megkeressük, hogy az adott játékhoz az oldal felhasználói milyen kritikákat írtak, illetve azt is hogy milyen értékelést
             // adtak a játékra
             const reviews = await Review.findAll({
                 attributes: ["id", "title", "content", "date"],
@@ -283,7 +283,8 @@ export default {
                     pcspec: pcspec,
                     reviews: reviews
                 }
-            })
+            });
+            return;
         }
         catch(error) {
             console.log(error);
@@ -291,6 +292,7 @@ export default {
                 error: true,
                 message: "Something went wrong fetching the datas!"
             });
+            return;
         }
 
     },
@@ -322,7 +324,7 @@ export default {
                 return;
             }
 
-            // Megnézzük hogy az URL-ben megadott számhoz tartozik-e játék, ha nem akkor egy hiba üzenetet adunk vissza
+            // Megnézzük, hogy az URL-ben megadott számhoz tartozik-e játék, ha nem akkor egy hiba üzenetet adunk vissza
             const gameExist = await Game.findOne({
                 where: {
                     id: gameId
@@ -337,7 +339,7 @@ export default {
                 return;
             }
 
-            // Ellenőrizzük hogy a felhasználó hozzá adta-e már a játékot a kedvencekbe,
+            // Ellenőrizzük, hogy a felhasználó hozzá adta-e már a játékot a kedvencekbe,
             // ha igen, akkor egy hiba üzenetet küldünk vissza
             const conflict = await Favourite.findOne({
                 where: {
@@ -377,7 +379,7 @@ export default {
         }
     },
 
-    // Ez a metódus egy bejelentkezett felhasználónál teszi lehetővé hogy értékelje a játékot, ehhez a kérés body-ban lévő
+    // Ez a metódus egy bejelentkezett felhasználónál teszi lehetővé, hogy értékelje a játékot, ehhez a kérés body-ban lévő
     // logikai értéket veszi alapul, ahol a false negatív értékelést, míg a true pozitív értékelést jelent
     GamepagePutController: async (req, res) => {
         // Lekérjük a felhasználó azonosítóját a további műveletekhez
@@ -422,7 +424,7 @@ export default {
         };
 
         // Először lementjük a játék megjelenési dátumot a megfelelő dátum formában, majd lementjük a jelenlegi dátumot, 
-        // utána megnézzük hogy az adott játék megjelent, ha nem, akkor a felhasználó nem tudja értékelni
+        // utána megnézzük, hogy az adott játék megjelent, ha nem, akkor a felhasználó nem tudja értékelni
         // és ez esetben egy hiba üzenetet adunk
 
         const gamesReleaseDate = new Date(existingGame.release);
@@ -436,7 +438,7 @@ export default {
             return;
         }
 
-        // Ellenőrizzük hogy a felhasználó értékelte-e már a játékot, ha igen, akkor ne tudja ezt megismételni és erre hiba üzenetet
+        // Ellenőrizzük, hogy a felhasználó értékelte-e már a játékot, ha igen, akkor ne tudja ezt megismételni és erre hiba üzenetet
         // adunk
         const conflict = await Rating.findOne({
             where: {
@@ -464,7 +466,7 @@ export default {
             return;
         }
 
-        // Ellenőrizzük hogy a body-ban lévő érték ténylegesen logikai érték, ha nem, akkor egy hiba üzenetet küldünk
+        // Ellenőrizzük, hogy a body-ban lévő érték ténylegesen logikai érték, ha nem, akkor egy hiba üzenetet küldünk
         if (isPositive !== true && isPositive !== false) {
             res.status(400).json({
                 error: true,
@@ -473,7 +475,7 @@ export default {
             return;
         }
 
-        // Ha minden ellenőrzésen átment, akkor elemtjük a felhasználó értékelését, és egy megerősítő választ adunk
+        // Ha minden ellenőrzésen átment, akkor elmentjük a felhasználó értékelését, és egy megerősítő választ adunk
         await Rating.create({
             GameId: gameId,
             positive: isPositive,

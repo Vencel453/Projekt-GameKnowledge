@@ -6,6 +6,7 @@ import jweMethods from "../utilities/jwe.methods.js";
 import validationMethods from "../utilities/validation.methods.js";
 
 export default {
+    // Felhasználó kritika írását kezeli
     ReviewPutController: async (req, res) => {
         try {
             // Lekérjük a bejelentkezett felhasználó azonosítóját, ha nincs, akkor hiba üzenetet küldünk
@@ -30,7 +31,7 @@ export default {
                 return;
             }
 
-            // Ellenőrizzük hogy az URL-ben megadott számhoz ténylegesen tartozik egy játék, ha nem akkor egy hiba üzenetet küldünk
+            // Ellenőrizzük, hogy az URL-ben megadott számhoz ténylegesen tartozik egy játék, ha nem akkor egy hiba üzenetet küldünk
             const game = await Game.findOne({
                 attributes: ["id"],
                 where: {
@@ -46,7 +47,7 @@ export default {
                 return;
             }
 
-            // Ellenőrizzük hogy a felhasználó írt-e már egy kritikát a játékról, ha igen, akkor hiba üzenetet küldünk
+            // Ellenőrizzük, hogy a felhasználó írt-e már egy kritikát a játékról, ha igen, akkor hiba üzenetet küldünk
             const reviewExist = await Review.findOne({
                 attributes: ["id"],
                 where: {
@@ -63,7 +64,7 @@ export default {
                 return;
             }
 
-            // Ellenőrizzük hogy a felhasználó értékelte-e a játékot már, ha nem, akkor hiba üzenetet küldünk
+            // Ellenőrizzük, hogy a felhasználó értékelte-e a játékot már, ha nem, akkor hiba üzenetet küldünk
             const userRated = await Rating.findOne({
                 where: {
                     UserId: userId,
@@ -157,7 +158,7 @@ export default {
                 UserId: userId
             });
 
-            // Vissza küldjük hogy a metódus sikeresen lefutott
+            // Visszaküldjük, hogy a metódus sikeresen lefutott
             res.status(201).json({
                 error: false,
                 message: "Review has been shared!"
@@ -173,6 +174,7 @@ export default {
             return;
         }
     },
+    // A felhasználó kritika törlését kezeli
     ReviewDeleteController: async (req, res) => {
         try {
             // Lekérjük a bejelentkezett felhasználó azonosítóját, ha nincs, akkor hiba üzenetet küldünk

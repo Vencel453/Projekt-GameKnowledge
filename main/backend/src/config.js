@@ -1,5 +1,4 @@
 // Az adatbázist külön konstansként mentjük majd exportáljuk, mert sok különböző fájlban fel van használva
-
 import { Sequelize } from "sequelize";
 
 // Megadjuk az adatbázis adatait az eléréséhez

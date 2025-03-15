@@ -3,7 +3,7 @@ import crypto from "crypto";
 import User from "../models/user.js";
 
 // A token titkosításához használt kulcs egy random szám, Uint8Array típusú, mert a titkosításhoz ilyen típusú objektum kell
-// Ez a kulcs minden szerver indításnál új, amely tovább növeli a bztonságot
+// Ez a kulcs minden szerver indításnál új, amely tovább növeli a biztonságot
 const securekey = new Uint8Array(32);
 crypto.randomFillSync(securekey);
 
@@ -16,11 +16,10 @@ export default {
             username: loginUsername,
             email: loginEmail,
         };
-        console.log(payload);
 
         // Itt jön létre a token, a payload a felhasználó adatokat használja, 1 óráig érvényes a token, titkosított fejléce van,
         // a titkosítás a fájl elején létrehozott kulccsal történik
-        // Végül vissza adja a token-t
+        // Végül visszaadja a token-t
         const token = await new EncryptJWT(payload)
             .setExpirationTime("1 hour")
             .setProtectedHeader({ alg: "dir", enc: "A256GCM"})

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 14. 18:31
+-- Létrehozás ideje: 2025. Már 15. 22:28
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -20,7 +20,11 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `game_knowledge`
 --
+CREATE DATABASE IF NOT EXISTS game_knowledge 
+CHARACTER SET utf8mb4 
+COLLATE utf8mb4_general_ci;
 
+USE game_knowledge;
 -- --------------------------------------------------------
 
 --
@@ -115,7 +119,7 @@ CREATE TABLE `actors` (
   `id` int(10) UNSIGNED NOT NULL,
   `firstName` varchar(100) DEFAULT NULL COMMENT 'A színész keresztneve',
   `lastName` varchar(100) DEFAULT NULL COMMENT 'A színész vezetékneve',
-  `profilePicture` varchar(100) DEFAULT NULL COMMENT 'A színészről tárolt kép elérési útvonala'
+  `profilePicture` varchar(255) DEFAULT NULL COMMENT 'A színészről tárolt kép elérési útvonala'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A színészek adatait tárolja';
 
 --
@@ -1007,7 +1011,9 @@ INSERT INTO `ratings` (`id`, `positive`, `GameId`, `UserId`) VALUES
 (12, 0, 1, 18),
 (13, 1, 1, 19),
 (14, 0, 1, 20),
-(21, 0, 1, 12);
+(21, 0, 1, 12),
+(22, 1, 2, 23),
+(23, 0, 4, 23);
 
 -- --------------------------------------------------------
 
@@ -1035,7 +1041,8 @@ INSERT INTO `reviews` (`id`, `title`, `content`, `date`, `UserId`, `GameId`) VAL
 (11, 'Overrated but good', 'A little contrarian, but I think it was just good, not great. I had fun with it but it\'s kind of a bad RPG IMO. I did find it was more like a 75% Grand Theft Auto 25% Assassin\'s Creed mashup. I found the story is pretty overrated, but I had a ton of fun just driving around doing side stuff in the world. Some of the characters are really good and fun to interact with, but I found some to be a total drag. Stylistically it is incredible. Again, just existing in the world is very fun. It makes driving around checking off boxes across the map easy to sink time into. The skill tree is cool to experiment with, but I did find the combat generally underwhelming, but still better than serviceable. Again, good but not great. I think if you are considering buying it at a price point you are comfortable with, it is a safe buy for sure. I just disagree with the people who put it on their best of all time lists. The open world stuff is the only aspect I would consider awesome.', '2025-02-20', 17, 1),
 (12, 'A Must-Play Now', 'With the 2.0 update and the Phantom Liberty expansion, it’s easily one of the best AAA experiences on the market. It’s become one of my favourite games of all time after putting about 50 hours and still a lot more to go. It’s visually incredible, with an immersive, well-developed world, a dark and tragic story and great characters. The gameplay is really fun and you can approach it in a bunch of different ways. Must-play game imo. ', '2025-03-01', 18, 1),
 (13, 'Cyberpunk 2077 is an amazing experience', 'The characters and dialogue were the first things that hooked me. I wanted to learn more about them, I wanted to bond with them. Characters I disliked initially grew on me, especially Johnny Silverhand. The romance for the male V was one of the best romances I\'ve seen in a game, though I\'m a bit biased as features and personality traits of that character remind me of my own wife. I genuinely cared for a lot of these characters. It was cool how you get different dialogue based on your stats and your background too.', '2025-03-09', 19, 1),
-(14, 'It\'s bad', ' it’s not a good fps, it’s not a good rpg, and it’s not a good action game. it’s trying to be too many things at once and not doing well in any of them. cdpr isn’t very good at making games that feel good to play imo. setting and writing do the heavy lifting for them. visuals too, in cyberpunk’s case. ', '2025-03-10', 20, 1);
+(14, 'It\'s bad', ' it’s not a good fps, it’s not a good rpg, and it’s not a good action game. it’s trying to be too many things at once and not doing well in any of them. cdpr isn’t very good at making games that feel good to play imo. setting and writing do the heavy lifting for them. visuals too, in cyberpunk’s case. ', '2025-03-10', 20, 1),
+(21, 'It\'s bad', ' it’s not a good fps, it’s not a good rpg, and it’s not a good action game. it’s trying to be too many things at once and not doing well in any of them. cdpr isn’t very good at making games that feel good to play imo. setting and writing do the heavy lifting for them. visuals too, in cyberpunk’s case. ', '2025-03-15', 23, 2);
 
 -- --------------------------------------------------------
 
@@ -1208,7 +1215,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `admin`, `creation`)
 (17, 'WingleDingleFingle', '$2b$10$qj5QoWCRn3/1XO6C4oxzweHFuWS8sAXop6EQa9G5AWoPKRs6CPDWm', 'cmon@pleaseessae.com', 0, '2025-03-10'),
 (18, 'Monkey-on-the-couch', '$2b$10$4ML/HdHp2RqOdEXGOIDtS.dMu9JXLTn5JI9cu2Ylxp7GjKXmquv7S', 'cmon@pleaseessaea.com', 0, '2025-03-10'),
 (19, 'Forhaver', '$2b$10$Ez2urXvFVowja7XiISZhJeUAox68RcDq9QPt486SPZEw2Sg.EjItC', 'cmon@pleaseessaeaa.com', 0, '2025-03-10'),
-(20, 'mightbebeaux', '$2b$10$gfVpTYrSd3VMdZ7B3wd/deGHf1/u9TjuFf0SyOaXlXZHo2e19Ygc6', 'cmon@pleaseessaaeaa.com', 0, '2025-03-10');
+(20, 'mightbebeaux', '$2b$10$gfVpTYrSd3VMdZ7B3wd/deGHf1/u9TjuFf0SyOaXlXZHo2e19Ygc6', 'cmon@pleaseessaaeaa.com', 0, '2025-03-10'),
+(23, 'Test123', '$2b$10$Ld8Zikn6GcuJY4ZC0tSPPOGVQGZhp5HtGvOYlFhhajDH7w6qQ60xy', 'cmon@pleaseee.com', 0, '2025-03-15');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -1438,7 +1446,7 @@ ALTER TABLE `gamepictures`
 -- AUTO_INCREMENT a táblához `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT a táblához `gamesageratings`
@@ -1492,13 +1500,13 @@ ALTER TABLE `platforms`
 -- AUTO_INCREMENT a táblához `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT a táblához `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT a táblához `studios`
@@ -1522,7 +1530,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -1546,8 +1554,8 @@ ALTER TABLE `creations`
 -- Megkötések a táblához `favourites`
 --
 ALTER TABLE `favourites`
-  ADD CONSTRAINT `favourites_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `favourites_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `favourites_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `favourites_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `gamepictures`
@@ -1594,21 +1602,21 @@ ALTER TABLE `gamestags`
 -- Megkötések a táblához `pcspecs`
 --
 ALTER TABLE `pcspecs`
-  ADD CONSTRAINT `pcspecs_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `pcspecs_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `ratings`
 --
 ALTER TABLE `ratings`
-  ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ratings_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `reviews`
 --
 ALTER TABLE `reviews`
-  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`GameId`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `studiosgames`
