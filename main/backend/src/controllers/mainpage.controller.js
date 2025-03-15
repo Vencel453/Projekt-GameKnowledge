@@ -7,34 +7,34 @@ export default {
     MainpageGetController: async(req, res) => {
         // Ez a főoldalhoz kéri le az adatbázisból az adatokat, így egyből try catch párban kezdjük a kódot
         try {
-            // Először azokat a játékokat kérjük le amelyek az elkövetkező 12 hónapban megjelennek
+            // Először azokat a játékokat kérjük le, amelyek az elkövetkező 12 hónapban megjelennek
             const currentDate = new Date();
-            const oneMonthForward = new Date();
-            oneMonthForward.setMonth(currentDate.getMonth() + 12);
+            const oneYearForward = new Date();
+            oneYearForward.setMonth(currentDate.getMonth() + 12);
 
             const upcomingGames = await Game.findAll({
                 attributes: ["id", "promoArt", "release"],
                 where: {
                     release: {
-                        [Op.between]: [currentDate, oneMonthForward]
+                        [Op.between]: [currentDate, oneYearForward]
                     }
                 }
             });
 
-            // Most azokat a játékokat kérjük le amelyek 12 hónapon belül jelentek meg
-            const oneMonthBack = new Date();
-            oneMonthBack.setMonth(currentDate.getMonth() - 12);
+            // Most azokat a játékokat kérjük le, amelyek 12 hónapon belül jelentek meg
+            const oneYearBack = new Date();
+            oneYearBack.setMonth(currentDate.getMonth() - 12);
 
             const newReleaseGames = await Game.findAll({
                 attributes: ["id", "gameTitle", "boxart"],
                 where: {
                     release: {
-                        [Op.between]: [oneMonthBack, currentDate]
+                        [Op.between]: [oneYearBack, currentDate]
                     }
                 }
             });
 
-            // Itt 5 játék kategóriát küldünk le amik: Shooter, Adventure, RPG, Racing, Strategy
+            // Itt 5 játék kategóriát küldünk le, amik: Shooter, Adventure, RPG, Racing, Strategy
             // Egy kategóriához maximum 15 játék tartozik és ABC sorrendben jelennek meg, képpekkel együtt
 
             // 15 Shooter/lövöldözős játék
@@ -117,7 +117,7 @@ export default {
                     }],
             });
 
-            // Ha minden rendben futtot le, akkor a válaszban megadjuk a lementett értékeket
+            // Ha minden rendben futtott le, akkor a válaszban megadjuk a lementett értékeket
             res.status(200).json({
                 error: false,
                 message: "Game datas successfully fetched!",
@@ -161,7 +161,7 @@ export default {
             const formattedSearch = "%" + String(search).toLowerCase() + "%";
 
             // A szükséges információkat kérjük le csak, a lekérdezés érvényes a játék alternatív nevére is, ezután 200-as kóddal
-            // vissza adjuk az eredményt/eredményeket
+            // visszaadjuk az eredményt/eredményeket
             const game = await Game.findAll({
                 attributes: ["id", "gameTitle", "altGameTitle", "release", "boxart"],
                 where: {[Op.or]:
@@ -172,7 +172,7 @@ export default {
                 }
             });
 
-            // Ha minden helyesen futott le, akkor vissza adjuk a talált eredményeket
+            // Ha minden helyesen futott le, akkor visszaadjuk a talált eredményeket
             res.status(200).json({
                 error: false,
                 message: "Successful search!",

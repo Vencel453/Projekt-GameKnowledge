@@ -9,7 +9,7 @@ export default {
             // Mivel ezeknek az értéke nem változik, konstansként mentjük el hogy tovább dolgozzunk vele
             const {username: loginUsername, password: loginPassword} = req.body;
 
-        // Ha bármelyik mező üres, akkor az ahhoz megfelelő hiba kódot és üzenetet küldük
+        // Ha bármelyik mező üres, akkor az ahhoz megfelelő hiba kódot és üzenetet küldjük
             if (!loginUsername || !loginPassword) {
                 res.status(400).json({
                     error: "true",
@@ -31,7 +31,7 @@ export default {
                 });
                 return;
             }
-            // Itt ellenőrizzük hogy a felhasználó titkosított jelszava visszafejtve megegyezik-e a felhasználóval megadott jelszóva
+            // Itt ellenőrizzük, hogy a felhasználó titkosított jelszava visszafejtve megegyezik-e a felhasználóval megadott jelszóval
             const correctPassword = bcryptMethods.Comparing(loginPassword, correctUser.password);
 
             // Ha a jelszó helyesen van megadva akkor a felhasználóhoz készül egy token és beengedi az oldalra

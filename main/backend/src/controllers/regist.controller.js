@@ -5,12 +5,12 @@ import validationMethods from '../utilities/validation.methods.js';
 
 export default {
     RegistPostController: async (req, res) => {
-        // Try catch párban vannak írva a következő kódok hogy az esetleges adatbázis csatlakozási hibákat kezelni tudjuk
+        // Try catch párban vannak írva a következő kódok, hogy az esetleges adatbázis csatlakozási hibákat kezelni tudjuk
         try {
-            // Konstansként elmentjük azokat az adatokat amelyeket bekérünk a felhasználótól, mert ezek nem változnak
+            // Konstansként elmentjük azokat az adatokat, amelyeket bekérünk a felhasználótól, mert ezek nem változnak
             const { username: registUsername, password: registPassword, passwordAgain: registPasswordAgain, email: registEmail} = req.body;
 
-            // Ha a valamelyik mező nincs kitöltve akkor akkor 400-as hibával visszaküldi, hogy hiba történt, 
+            // Ha a valamelyik mező nincs kitöltve akkor 400-as hibával visszaküldi, hogy hiba történt, 
             // mert nem volt minden mező kitöltve és ezeket kötelező kitölteni
             if (!registUsername || !registPassword || !registEmail || !registPasswordAgain) {
                 res.status(400).json({
@@ -20,7 +20,7 @@ export default {
                 return;
             }
         
-            // Ellenőrzi hogy a bekért adatoknál van-e már egyező az adatbázisban
+            // Ellenőrzi, hogy a bekért adatoknál van-e már egyező az adatbázisban
             const conflictingDatas = await User.findOne({
                 where: {[Op.or]:
                     [

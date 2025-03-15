@@ -1,4 +1,4 @@
-import sequelize from "../config/config.js";
+import sequelize from "../config.js";
 import { Model, DataTypes } from "sequelize";
 
 class Creator extends Model {};
