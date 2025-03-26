@@ -1,5 +1,8 @@
 # Szent István Katolikus Technikum és Gimnázium
-<img src="main/logo_keri.jpg" alt="Szent István Katolikus Technikum és Gimnázium logója" style="display: block; margin-left: auto; margin-right: auto; height: 20%; width:20%;">
+<p align="center">
+  <img src="main/logo_keri.jpg" alt="Szent István Katolikus Technikum és Gimnázium logója" style="height: 20%; width:20%;">
+</p>
+
 # GameKnowledge
 
 ## Készítői
@@ -40,3 +43,11 @@ között található game_knowledge.sql fájlt. Így minden rendelkezésünkre �
 Ha futtattni szeretnénk akkor a XAMPP Control Panel-ban indítsuk el az Apache és MySQL-t, a Visual Studio Code-al nyissuk meg a backned mappát, majd terminal-ba
 írjuk be hogy npm run dev, ezután Visual Studio Code-al nyissuk meg a frontend mappán belül található frontend mappát és terminal-ba írjuk bele hogy ng serve.
 A weboldal így a http://localhost/4200 címen fog futni.
+
+Admin felhasználóhoz bejelentkezési adatok:
+- Felhasználónév: Vencel453
+- Jelszó: VerySecret123
+
+Általános felhasználóhoz bejelentkezési adatok:
+- Felhasználónév: Péter23
+- Jelszó: Babfőzelék1932
