@@ -1,6 +1,5 @@
 # Szent István Katolikus Technikum és Gimnázium
-![Szent István Katolikus Technikum és Gimnázium logója](main/logo_keri.jpg)
-
+<img src="main/logo_keri.jpg" alt="Szent István Katolikus Technikum és Gimnázium logója" style="display: block; margin-left: auto; margin-right: auto; height: 20%; width:20%;">
 # GameKnowledge
 
 ## Készítői
