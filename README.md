@@ -9,6 +9,9 @@
 - Földházi Zsolt, frontend és dizájn
 - Vicickó Vencel, backend és adatbázis
 
+## Trello
+https://trello.com/w/projektgameknowledge
+
 ## Leírás
 Ez a API architektúrára épülő projekt egy videójátékos adatbázis weboldalt valósít meg. A célunk hogy az oldalunkon gyakran keresett általános
 információkat könnyen kereshető formátumban jelenítsünk meg. Minden információt helyileg tárolunk a gyors és független működés érdekében.
